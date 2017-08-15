@@ -52,3 +52,8 @@ local.properties
 /docs/sql/*.sql
 env
 /src/main/resources/env
+/sunvalley-parent/.idea
+/sunvalley-domain-product/target
+/sunvalley-domain-product/*.iml
+/sunvalley-api-product/target
+/sunvalley-api-product/*.iml
