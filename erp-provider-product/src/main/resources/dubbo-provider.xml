@@ -14,5 +14,5 @@
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" />
     <bean id="itemService" class="com.sunvalley.provider.product.service.ItemServiceImpl"/>
 
-    <dubbo:service interface="com.sunvalley.api.product.IItemService" ref="itemService" />
+    <dubbo:service interface="com.sunvalley.erp.api.product.IItemService" ref="itemService" />
 </beans>

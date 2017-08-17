@@ -1,5 +1,5 @@
 package com.sunvalley.provider.product.service;
-import com.sunvalley.api.product.IItemService;
+import com.sunvalley.erp.api.product.IItemService;
 import org.springframework.stereotype.Service;
 
 
