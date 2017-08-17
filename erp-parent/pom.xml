@@ -1,0 +1,232 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sunvalley</groupId>
+  <artifactId>erp-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>sunvalley-parent</name>
+  <url>http://maven.apache.org</url>
+
+  <modules>
+    <module>../erp-provider-consume</module>
+    <module>../erp-service-product</module>
+    <module>../erp-provider-product</module>
+    <module>../erp-api-product</module>
+    <module>../erp-domain-product</module>
+    <module>../erp-common</module>
+  </modules>
+
+  <!--<repositories>-->
+    <!--<repository>-->
+      <!--<id>nexus</id>-->
+      <!--<name>Team Nexus Repository</name>-->
+      <!--<url>http://10.20.0.134:8083/nexus/content/groups/public/</url>-->
+      <!--<releases>-->
+        <!--<enabled>true</enabled>-->
+      <!--</releases>-->
+      <!--<snapshots>-->
+        <!--<enabled>true</enabled>-->
+      <!--</snapshots>-->
+    <!--</repository>-->
+  <!--</repositories>-->
+  <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+      <!--<id>nexus</id>-->
+      <!--<name>Team Nexus Repository</name>-->
+      <!--<url>http://10.20.0.134:8083/nexus/content/groups/public/</url>-->
+      <!--<releases>-->
+        <!--<enabled>true</enabled>-->
+      <!--</releases>-->
+      <!--<snapshots>-->
+        <!--<enabled>true</enabled>-->
+      <!--</snapshots>-->
+    <!--</pluginRepository>-->
+  <!--</pluginRepositories>-->
+
+  <properties>
+    <mybatis.version>3.1.1</mybatis.version>
+    <commons-lang3.version>3.3.1</commons-lang3.version>
+    <commons-lang.version>2.6</commons-lang.version>
+    <spring.version>4.3.9.RELEASE</spring.version>
+    <dubbo.version>2.5.3</dubbo.version>
+    <zookeeper.version>3.3.3</zookeeper.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencyManagement>
+
+    <dependencies>
+
+      <dependency>
+        <groupId>com.sunvalley</groupId>
+        <artifactId>erp-common</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sunvalley</groupId>
+        <artifactId>erp-api-product</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sunvalley</groupId>
+        <artifactId>erp-domain-product</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>dubbo</artifactId>
+        <version>${dubbo.version}</version>
+        <!--<exclusions>-->
+          <!--<exclusion>-->
+            <!--<artifactId>spring</artifactId>-->
+            <!--<groupId>org.springframework</groupId>-->
+          <!--</exclusion>-->
+        <!--</exclusions>-->
+      </dependency>
+
+      <dependency>
+        <groupId>com.101tec</groupId>
+        <artifactId>zkclient</artifactId>
+        <version>0.10</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.zookeeper</groupId>
+        <artifactId>zookeeper</artifactId>
+        <version>${zookeeper.version}</version>
+        <!--<exclusions>-->
+          <!--<exclusion>-->
+            <!--<groupId>com.sun.jmx</groupId>-->
+            <!--<artifactId>jmxri</artifactId>-->
+          <!--</exclusion>-->
+          <!--<exclusion>-->
+            <!--<groupId>javax.jms</groupId>-->
+            <!--<artifactId>jms</artifactId>-->
+          <!--</exclusion>-->
+          <!--<exclusion>-->
+            <!--<groupId>com.sun.jmx</groupId>-->
+            <!--<artifactId>jmxri</artifactId>-->
+          <!--</exclusion>-->
+          <!--<exclusion>-->
+            <!--<groupId>com.sun.jdmk</groupId>-->
+            <!--<artifactId>jmxtools</artifactId>-->
+          <!--</exclusion>-->
+          <!--<exclusion>-->
+            <!--<artifactId>jline</artifactId>-->
+            <!--<groupId>jline</groupId>-->
+          <!--</exclusion>-->
+          <!--<exclusion>-->
+            <!--<artifactId>log4j</artifactId>-->
+            <!--<groupId>log4j</groupId>-->
+          <!--</exclusion>-->
+        <!--</exclusions>-->
+      </dependency>
+
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>1.0.1</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>${commons-lang.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!--
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-web</artifactId>
+          <version>3.1.3.RELEASE</version>
+      </dependency>
+       -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>org.springframework.transaction</artifactId>
+        <version>3.2.5.RELEASE</version>
+      </dependency>
+
+
+      <!-- spring boot-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+  <pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.2</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+    </plugins>
+  </pluginManagement>
+</build>
+</project>
