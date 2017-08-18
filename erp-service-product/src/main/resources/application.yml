@@ -1,0 +1,50 @@
+server:
+       port: 8081
+dubbo:
+      application:
+              name : product
+      registry:
+              protocol : zookeeper
+              address : 10.20.0.137:2181
+      protocol:
+              name : dubbo
+              port : 2281
+
+spring:
+      profiles:
+        active: dev
+      datasource:
+         driverClassName : com.mysql.jdbc.Driver
+         url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+         username : dev_express
+         password : Devdb201707
+         type : com.alibaba.druid.pool.DruidDataSource
+         initialSize : 20
+         minIdle : 1
+         maxActive : 500
+         maxWait : 60000
+         timeBetweenEvictionRunsMillis : 60000
+         timeBetweenLogStatsMillis : 300000
+         minEvictableIdleTimeMillis : 300000
+         validationQuery : SELECT 'x'
+         testWhileIdle : true
+         testOnBorrow : false
+         testOnReturn : false
+         poolPreparedStatements : false
+         maxPoolPreparedStatementPerConnectionSize : 20
+         filters : stat
+      dubbo.scan : com.sunvalley.erp.service.product
+mybatis:
+     typeAliasesPackage : com.sunvalley.erp.model.product
+     mapperLocations : classpath:mapper/erp/product/*.xml
+      #config-location: classpath:/mybatis-config.xml
+
+logging:
+    config: classpath:logback-spring.xml
+
+
+
+
+#barker.url:tcp://10.20.0.137:61616
+#dubbo.url:zookeeper://10.20.0.137:2181
+#sserver.name:ERPBS

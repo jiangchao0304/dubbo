@@ -12,7 +12,7 @@
 
     <!-- 暴露服务 -->
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" />
-    <bean id="itemService" class="com.sunvalley.provider.product.service.ItemServiceImpl"/>
+    <bean id="itemService" class="com.sunvalley.erp.product.service.ItemServiceImpl"/>
 
-    <dubbo:service interface="com.sunvalley.erp.api.product.IItemService" ref="itemService" />
+    <dubbo:service interface="mapper.erp.api.product.IItemService" ref="itemService" />
 </beans>

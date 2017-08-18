@@ -6,17 +6,50 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 
-  <name>sunvalley-parent</name>
+  <name>erp-parent</name>
   <url>http://maven.apache.org</url>
 
   <modules>
     <module>../erp-provider-consume</module>
     <module>../erp-service-product</module>
-    <module>../erp-provider-product</module>
     <module>../erp-api-product</module>
     <module>../erp-domain-product</module>
     <module>../erp-common</module>
   </modules>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <env>dev</env>
+        <profiles.active>dev</profiles.active>
+        <activeByDefault>true</activeByDefault>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>test</id>
+      <properties>
+        <env>test</env>
+        <profiles.active>test</profiles.active>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>demo</id>
+      <properties>
+        <env>demo</env>
+        <profiles.active>demo</profiles.active>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>pro</id>
+      <properties>
+        <env>pro</env>
+        <profiles.active>pro</profiles.active>
+      </properties>
+    </profile>
+  </profiles>
 
   <!--<repositories>-->
     <!--<repository>-->
@@ -60,6 +93,22 @@
     <dependencies>
 
       <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.25</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>1.7.25</version>
+      </dependency>
+
+      <dependency>
         <groupId>com.sunvalley</groupId>
         <artifactId>erp-common</artifactId>
         <version>1.0-SNAPSHOT</version>
@@ -81,12 +130,22 @@
         <groupId>com.alibaba</groupId>
         <artifactId>dubbo</artifactId>
         <version>${dubbo.version}</version>
-        <!--<exclusions>-->
-          <!--<exclusion>-->
-            <!--<artifactId>spring</artifactId>-->
-            <!--<groupId>org.springframework</groupId>-->
-          <!--</exclusion>-->
-        <!--</exclusions>-->
+        <exclusions>
+          <exclusion>
+            <artifactId>spring</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+          <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.0.27</version>
       </dependency>
 
       <dependency>
@@ -213,6 +272,24 @@
   </dependencyManagement>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <!--<exclude>env/**/*.*</exclude>-->
+          <exclude>env/dev/*</exclude>
+        </excludes>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources/env/${env}</directory>
+        <filtering>true</filtering>
+      </resource>
+      <!--<resource>-->
+        <!--<directory>src/main/resources/env/${profiles.active}</directory>-->
+      <!--</resource>-->
+    </resources>
+
   <pluginManagement>
     <plugins>
       <plugin>

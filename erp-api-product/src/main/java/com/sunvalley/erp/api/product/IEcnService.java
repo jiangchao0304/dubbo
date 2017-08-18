@@ -3,7 +3,7 @@
 */
 package com.sunvalley.erp.api.product;
 
-import com.sunvalley.domain.erp.product.dto.EcnReasonDto;
+import com.sunvalley.erp.domain.product.dto.EcnReasonDto;
 
 /**
  * 类或方法的功能描述 :TODO

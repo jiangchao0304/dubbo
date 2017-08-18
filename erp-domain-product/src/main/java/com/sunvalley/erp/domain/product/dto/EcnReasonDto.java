@@ -1,7 +1,9 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.domain.erp.product.dto;
+package com.sunvalley.erp.domain.product.dto;
+
+import java.io.Serializable;
 
 /**
  * 类或方法的功能描述 :TODO
@@ -9,7 +11,7 @@ package com.sunvalley.domain.erp.product.dto;
  * @Author: douglas.jiang
  * @Date: 2017-08-17 18:22
  */
-public class EcnReasonDto {
+public class EcnReasonDto implements Serializable{
 
     private String reasonName;
 
