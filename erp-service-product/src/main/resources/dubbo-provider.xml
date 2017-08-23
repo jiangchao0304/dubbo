@@ -13,5 +13,5 @@
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" />
     <bean id="ecnService" class="com.sunvalley.erp.service.product.EcnService"/>
 
-    <dubbo:service interface="com.sunvalley.erp.api.product.IEcnService" ref="ecnService" />
+    <dubbo:service interface="com.sunvalley.erp.faced.product.IEcnService" ref="ecnService" />
 </beans>

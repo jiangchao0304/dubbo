@@ -12,7 +12,7 @@
   <modules>
     <module>../erp-provider-consume</module>
     <module>../erp-service-product</module>
-    <module>../erp-api-product</module>
+    <module>../erp-faced-product</module>
     <module>../erp-domain-product</module>
     <module>../erp-common</module>
   </modules>

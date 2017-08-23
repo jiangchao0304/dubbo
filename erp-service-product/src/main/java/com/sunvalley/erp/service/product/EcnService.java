@@ -3,7 +3,7 @@
 */
 package com.sunvalley.erp.service.product;
 
-import com.sunvalley.erp.api.product.IEcnService;
+import com.sunvalley.erp.faced.product.IEcnService;
 import com.sunvalley.erp.domain.product.dto.EcnReasonDto;
 
 /**

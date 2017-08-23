@@ -11,8 +11,10 @@ import org.springframework.context.annotation.ImportResource;
 public class ProductServiceApplication {
 	private static Logger logger = LoggerFactory.getLogger(ProductServiceApplication.class);
 	public static void main(String[] args) {
-		logger.info("11111111111111111111111111111");
+
 		SpringApplication.run(ProductServiceApplication.class, args);
+
+		logger.info("server start");
 
 	}
 }

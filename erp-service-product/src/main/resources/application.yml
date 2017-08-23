@@ -39,8 +39,8 @@ mybatis:
      mapperLocations : classpath:mapper/erp/product/*.xml
       #config-location: classpath:/mybatis-config.xml
 
-logging:
-    config: classpath:logback-spring.xml
+#logging:
+#    config: classpath:logback.xml
 
 
 
