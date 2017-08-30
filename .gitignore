@@ -42,15 +42,7 @@ local.properties
 .settings/
 .loadpath
 
-
-
-
-/generator_config
 /.svn
-/src/main/webapp/vod-student
-/docs/~$像回放白名单.docx
-/docs/sql/*.sql
-env
 /src/main/resources/env
 /sunvalley-parent/.idea
 /sunvalley-domain-product/target
