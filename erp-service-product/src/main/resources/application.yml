@@ -12,7 +12,7 @@ dubbo:
 
 spring:
       profiles:
-        active: dev
+        active: @profiles.active@
       datasource:
          driverClassName : com.mysql.jdbc.Driver
          url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
