@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.faced.product;
+package com.sunvalley.faced.erp.product;
 
 import com.sunvalley.erp.domain.product.dto.EcnReasonDto;
 
