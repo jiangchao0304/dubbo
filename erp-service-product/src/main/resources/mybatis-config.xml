@@ -6,12 +6,12 @@
 <!--<configuration>-->
 	<!--<typeAliases>-->
 		<!--&lt;!&ndash; product &ndash;&gt;-->
-		<!--<typeAlias alias="EcnReason" type="com.sunvalley.erp.model.product.EcnReason" />-->
+		<!--<typeAlias alias="Item" type="com.sunvalley.erp.model.product.Item" />-->
 	<!--</typeAliases>-->
 
 	<!--<mappers>-->
-		<!--<mapper resource="mapper/erp/product/EcnReasonMapper.xml"/>-->
+		<!--<mapper resource="mapper/com/sunvalley/erp/dao/product/ItemMapper.xml"/>-->
 	<!--</mappers>-->
 <!--</configuration>-->
-    <!---->
+
   

@@ -10,6 +10,8 @@ import com.sunvalley.faced.erp.product.ISkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * SKU service
  *
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class SkuService implements ISkuService {
 
 
-    @Autowired
+    @Resource
     private ItemMapper itemMapper;
 
     @Override
