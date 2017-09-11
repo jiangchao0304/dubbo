@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ImportResource(value = {"classpath:dubbo-provider.xml"})
-@MapperScan(basePackages={"com.sunvalley.erp.dao.product"})
+@MapperScan("com.sunvalley.erp.dao.product")
 public class ProductServiceApplication {
 	private static Logger logger = LoggerFactory.getLogger(ProductServiceApplication.class);
 	public static void main(String[] args) {
