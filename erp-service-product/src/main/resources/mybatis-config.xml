@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE configuration-->
+		<!--PUBLIC "-//mybatis.org//DTD Config 3.0//EN"-->
+		<!--"http://mybatis.org/dtd/mybatis-3-config.dtd">-->
 
-<configuration>
-	<typeAliases>
-		<!-- product -->
-		<typeAlias alias="EcnReason" type="com.sunvalley.erp.model.product.EcnReason" />
-	</typeAliases>
+<!--<configuration>-->
+	<!--<typeAliases>-->
+		<!--&lt;!&ndash; product &ndash;&gt;-->
+		<!--<typeAlias alias="EcnReason" type="com.sunvalley.erp.model.product.EcnReason" />-->
+	<!--</typeAliases>-->
 
-	<mappers>
-		<mapper resource="mapper/erp/product/EcnReasonMapper.xml"/>
-	</mappers>
-</configuration>
-    
+	<!--<mappers>-->
+		<!--<mapper resource="mapper/erp/product/EcnReasonMapper.xml"/>-->
+	<!--</mappers>-->
+<!--</configuration>-->
+    <!---->
   

@@ -1,3 +1,4 @@
+
 server:
        port: 8081
 dubbo:
@@ -36,7 +37,8 @@ spring:
       dubbo.scan : com.sunvalley.erp.service.product
 mybatis:
      typeAliasesPackage : com.sunvalley.erp.model.product
-     mapperLocations : classpath:mapper/erp/product/*.xml
+     mapperLocations : classpath*:mapper/com/sunvalley/erp/**/*Mapper.xml
+debug: true
       #config-location: classpath:/mybatis-config.xml
 
 #logging:

@@ -11,7 +11,7 @@
     <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" />
 
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"  />
-    <bean id="ecnService" class="com.sunvalley.erp.service.product.EcnService"/>
+    <bean id="skuService" class="com.sunvalley.erp.service.product.SkuService"/>
 
-    <dubbo:service interface="com.sunvalley.faced.erp.product.IEcnService" ref="ecnService" />
+    <dubbo:service interface="com.sunvalley.faced.erp.product.ISkuService" ref="skuService" />
 </beans>

@@ -14,6 +14,7 @@
     <module>../erp-service-product</module>
     <module>../erp-faced-product</module>
     <module>../erp-domain-product</module>
+    <module>../erp-dao</module>
     <module>../erp-common</module>
     <module>../erp-util</module>
   </modules>
@@ -124,6 +125,12 @@
       <dependency>
         <groupId>com.sunvalley</groupId>
         <artifactId>erp-faced-product</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sunvalley</groupId>
+        <artifactId>erp-dao</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
 

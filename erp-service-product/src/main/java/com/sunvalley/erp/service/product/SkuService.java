@@ -3,10 +3,12 @@
 */
 package com.sunvalley.erp.service.product;
 
+import com.sunvalley.erp.dao.product.ItemMapper;
+import com.sunvalley.erp.model.product.Item;
 import com.sunvalley.faced.base.ResponseBean;
 import com.sunvalley.faced.erp.product.ISkuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sunvalley.erp.util.redis.RedisUtil;
 
 /**
  * SKU service
@@ -18,11 +20,15 @@ import com.sunvalley.erp.util.redis.RedisUtil;
 public class SkuService implements ISkuService {
 
 
+    @Autowired
+    private ItemMapper itemMapper;
 
     @Override
     public ResponseBean getSkuBaseInfo(String sku) {
         ResponseBean responseBean = new ResponseBean();
-        return null;
+        Item item = itemMapper.selectByPrimaryKey(1000);
+        responseBean.setJsonContent(item.getSku());
+        return responseBean;
     }
 }
 
