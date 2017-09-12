@@ -27,8 +27,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.sunvalley</groupId>
-			<artifactId>erp-faced-product</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>sunvalley-face</artifactId>
 		</dependency>
 
 		<dependency>

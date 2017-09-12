@@ -11,7 +11,8 @@
     <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" />
 
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"  />
-    <bean id="skuService" class="com.sunvalley.erp.service.product.SkuService"/>
 
-    <dubbo:service interface="com.sunvalley.faced.erp.product.ISkuService" ref="skuService" />
+    <bean id="skuService" class="com.sunvalley.erp.service.product.faced.SkuService"/>
+
+    <dubbo:service interface="com.sunvalley.face.erp.product.SkuService" ref="skuService" />
 </beans>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunvalley.erp.daoEX.product.ItemExMapper">
+
+	<select id="searchSkuCategoryName" parameterType="Map" resultType="ItemLocale">
+		SELECT
+		ItemLocale.skuid,
+		ItemLocale.lang_id,
+		ItemLocale.sku,
+		ItemLocale.description,
+		Item.len,
+		IFNULL(Item.purspec,'') purspec,
+		IFNULL(Item.purdesc,'') purdesc,
+		Item.weight,
+		Item.width,
+		Item.height,
+		icustom.category_name_id,
+		icustom.commodityunit unit,
+		cname.category_name categoryName,
+		Item.haspic,
+		Item.brand_id,
+		CONCAT(IFNULL(Item.purspec,''),IFNULL(Item.purdesc,'')) as model
+		FROM bs_item_locale ItemLocale
+		<choose>
+			<when test="isdrop != null">
+				inner JOIN bs_item Item ON Item.skuid = ItemLocale.skuid and Item.isdrop=#{isdrop}
+				LEFT JOIN (
+				select
+				*
+				from (
+				select
+				a.skuid,
+				a.seller_id,
+				a.isdrop
+				from bs_item_drop_category a
+				left join sys_company_bu b on b.companyid=#{seller_id,jdbcType=INTEGER}
+				where a.seller_id=b.categoryid
+				or a.seller_id=#{seller_id,jdbcType=INTEGER}
+				order by a.skuid,a.seller_id desc
+				) ItemDrop
+				group by ItemDrop.skuid
+				) ItemDrop ON ItemDrop.skuid=Item.skuid
+			</when>
+			<otherwise>
+				inner JOIN bs_item Item ON Item.skuid = ItemLocale.skuid
+				LEFT JOIN bs_item_custom  icustom ON icustom.skuid = Item.skuid AND icustom.stateid = 'CN'
+				LEFT JOIN scm_customs_category_name cname ON cname.id = icustom.category_name_id
+			</otherwise>
+		</choose>
+		WHERE
+		ItemLocale.lang_id = #{lang_id}
+		<if test="categoryid != null">
+			AND Item.categoryid IN
+			<foreach item="item" index="index" collection="categoryid" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<choose>
+			<when test="description != null">
+				AND (ItemLocale.sku LIKE #{sku} OR ItemLocale.description LIKE #{description})
+			</when>
+			<otherwise>
+				AND ItemLocale.sku LIKE #{sku}
+			</otherwise>
+		</choose>
+		<if test="isdrop != null">
+			AND (ItemDrop.isdrop is null or ItemDrop.isdrop=#{isdrop})
+		</if>
+		<if test="limit >0 ">
+			limit #{limit,jdbcType=INTEGER}
+		</if>
+	</select>
+
+</mapper>

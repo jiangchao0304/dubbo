@@ -10,6 +10,6 @@
 
     <dubbo:registry  address="${dubbo.registry.address}" />
 
-    <dubbo:reference id="itemService" interface="com.sunvalley.faced.erp.product.IEcnService" />
+    <dubbo:reference id="iSkuService" interface="com.sunvalley.face.erp.product.SkuService" />
 
 </beans>

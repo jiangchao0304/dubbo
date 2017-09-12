@@ -21,8 +21,16 @@ public class ResponseBean {
 	/**
 	 * 响应JSON格式字符串
 	 * */
-	private String jsonContent;
-	
+	private Object jsonContent;
+
+	public Object getJsonContent() {
+		return jsonContent;
+	}
+
+	public void setJsonContent(Object jsonContent) {
+		this.jsonContent = jsonContent;
+	}
+
 	/**
 	 * 请求处理时间
 	 * */
@@ -41,13 +49,7 @@ public class ResponseBean {
 		this.responseCode = responseCode;
 	}
 
-	public String getJsonContent() {
-		return jsonContent;
-	}
 
-	public void setJsonContent(String jsonContent) {
-		this.jsonContent = jsonContent;
-	}
 	
 	public String getProcessTime() {
 		return processTime;

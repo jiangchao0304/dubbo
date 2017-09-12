@@ -13,6 +13,8 @@ import com.sunvalley.faced.base.ResponseBean;
  */
 public interface ISkuService {
 
-    ResponseBean getSkuBaseInfo(String sku);
+    String getSkuBaseInfo(String sku);
+
+    String searchSku(String q,int langId, int limit,Integer companyId);
 }
 
