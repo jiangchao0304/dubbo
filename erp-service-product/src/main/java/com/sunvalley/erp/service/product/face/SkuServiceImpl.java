@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.service.product.faced;
+package com.sunvalley.erp.service.product.face;
 
 import com.sunvalley.erp.dao.product.ItemMapper;
 import com.sunvalley.erp.model.product.Item;
@@ -21,7 +21,7 @@ import java.util.List;
  * @Date: 2017-09-04 10:56
  */
 @Service
-public class SkuService implements com.sunvalley.face.erp.product.SkuService {
+public class SkuServiceImpl implements com.sunvalley.face.erp.product.SkuService {
 
 
     @Autowired

@@ -1,0 +1,656 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunvalley.erp.daoEX.salesplan.PrepareSkuExMapper" >
+	 <select id = "queryGridCount" parameterType="map" resultType="int">
+		SELECT
+			COUNT(DISTINCT (ps.id))
+		FROM
+			bs_prepare_sku ps
+		LEFT JOIN bs_item_basic_data bd ON ps.color = bd.`value`
+		LEFT JOIN bs_item_brand br ON ps.brand_id = br.brand_id
+		LEFT JOIN sys_user u ON ps.pm_id = u.userid
+		LEFT JOIN sys_user u1 ON ps.create_user_id = u1.userid
+		LEFT JOIN bs_item_basic_data safety ON safety.value  = ps.anrule  and safety.type = 2
+		LEFT JOIN bs_item_basic_data department ON department.id  = ps.sale_dept 
+		LEFT JOIN bs_item_basic_data color  ON color.value = ps.color and color.type = 1
+		<if test="type ==1">
+		LEFT JOIN bs_item_basic_data safetyCountry  ON safetyCountry.value = ps.anrule and safetyCountry.type = 4
+		LEFT JOIN bs_item_basic_data airFreight  ON airFreight.type = 3 and  airFreight.country = safetyCountry.country and airFreight.attribute=ps.shipping_type
+		LEFT JOIN bs_item_basic_data seaFreight  ON seaFreight.type = 3 and  seaFreight.country = safetyCountry.country and seaFreight.attribute=ps.shipping_type
+		LEFT JOIN bs_item_basic_data lanFreight  ON lanFreight.type = 3 and  lanFreight.country = safetyCountry.country and lanFreight.attribute=ps.shipping_type
+		</if>
+		WHERE
+			(1 = 1)
+		<if test="filtersql != null">
+			${filtersql}
+		</if>
+	 </select>
+	 <select id="selectItemInfo" parameterType="map" resultType="item">
+		SELECT
+		    DISTINCT
+			m.main_category_id categoryid,
+			m.sub_category_id subcategoryid,
+			maincategory.product_line_name categoryStr,
+			subcategory.product_line_name subCategoryStr,
+			m.model_id,
+			m.model_name model,
+			m.pm_id pmid,
+			m.brand_id,
+			s.region,
+			s.product_name purdesc,
+			s.product_name purspec
+		    <if test="preskuId!=null">
+				,s.color,
+				anrule.anrule attribute,
+				country.country country,
+				s.pre_sku preSkus
+			 </if>
+		FROM
+			bs_item_model m
+		LEFT JOIN bs_prepare_sku s ON m.model_id = s.model_id
+		LEFT JOIN bs_item_mapping a ON a.skuid = s.id
+		AND a.data_type = 1
+		AND a.data_origin = 2
+		LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				group_concat(basic.attribute) anruleStr,
+				group_concat(basic. VALUE) anrule
+			FROM
+				bs_item_mapping mapping
+			LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+			WHERE
+				mapping.data_type = 1
+			AND basic.type = 2
+			<if test="preskuId!=null">
+				and mapping.skuid =  #{preskuId}
+			 </if>
+			GROUP BY
+				mapping.skuid
+		) anrule ON s.id = anrule.skuid
+		LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				group_concat(mapping.maping) country
+			FROM
+				bs_item_mapping mapping
+			WHERE
+				mapping.data_type = 2
+			<if test="preskuId!=null">
+				and mapping.skuid =  #{preskuId}
+			 </if>
+			GROUP BY
+				mapping.skuid
+		) country ON country.skuid = s.id
+		LEFT JOIN bs_product_line maincategory ON maincategory.id = m.main_category_id
+		LEFT JOIN bs_product_line subcategory ON subcategory.id = m.sub_category_id
+		WHERE
+			1 = 1
+	 <if test="preskuId!=null">
+	 	and s.id = #{preskuId}
+	 </if>
+	 <if test="modelId!=null">
+	 	 and m.model_id =#{modelId}
+	 </if>
+	 </select>
+	 
+	 <select id = "queryGrid" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+		SELECT
+		    DISTINCT 
+			ps.id,
+			ps.pre_sku preSku,
+			ps.pre_sku_name preSkuName,
+			ps.sku sku,
+			ps.`status` STATUS,
+			case ps.`status`
+			when 1 then '新建'
+			when 2 then '转正'
+			else "" end as statuStr,
+			
+			ps.brand_id brandId,
+			br.brand_desc brandDesc,
+			ps.main_desc mainDesc,
+			ps.model model,
+			ps.main_brand_code mainBrandCode,
+			ps.main_category_id mainCategoryId,
+			ps.sub_desc subDesc,
+			ps.sub_brand_code subBrandCode,
+			ps.sub_category_id subCategoryId,
+			ps.sale_price salePrice,
+			ps.sale_qty saleQty,
+			ps.market_capacity marketCapacity,
+			DATE_FORMAT(ps.mp_date,'%Y-%m-%d') mpDate,
+			DATE_FORMAT(ps.setup_date,'%Y-%m-%d') setupDate,
+			CONCAT(
+				u1.firstname,
+				".",
+				u1.lastname
+			) createUserIdStr,
+			ps.create_date createDate,
+			CONCAT(u.firstname, ".", u.lastname) pmName,
+			safety.attribute safety,
+			color.attribute colorStr,
+			department.attribute department,
+			ps.weight,
+			ps.standard_size standardSize,
+			case ps.standard_size
+			when 1 then 'Standard'
+			when 2 then 'Over'
+			else "" end as standardSizeStr,
+			ps.shipping_type shippingType,
+			case ps.shipping_type
+			when 1 then '空运'
+			when 2 then '海运'
+			when 3 then '陆运'
+			else "" end as shippingTypeStr,
+			
+			ps.purchase_price 
+			<if test="type ==1">
+			,safetyCountry.country safetyCountry,
+			round(ps.purchase_price*airFreight.VALUE2,4)  airFreight,
+			round((ps.purchase_price*airFreight.VALUE2+ps.purchase_price)*1.03,4)  airMc,
+			
+			round(ps.purchase_price*seaFreight.VALUE2,4)  seaFreight,
+			round((ps.purchase_price*seaFreight.VALUE2+ps.purchase_price)*1.03,4)  seaMc,
+			
+			round(ps.purchase_price*lanFreight.VALUE2,4)  landFreight,
+			round((ps.purchase_price*lanFreight.VALUE2+ps.purchase_price)*1.03,4)  landMc
+			</if>
+		FROM
+			bs_prepare_sku ps
+		LEFT JOIN bs_item_basic_data bd ON ps.color = bd.`value`
+		LEFT JOIN bs_item_brand br ON ps.brand_id = br.brand_id
+		LEFT JOIN sys_user u ON ps.pm_id = u.userid
+		LEFT JOIN sys_user u1 ON ps.create_user_id = u1.userid
+		LEFT JOIN bs_item_basic_data safety ON safety.value  = ps.anrule  and safety.type = 2
+		LEFT JOIN bs_item_basic_data department ON department.id  = ps.sale_dept 
+		LEFT JOIN bs_item_basic_data color  ON color.value = ps.color and color.type = 1
+		<if test="type ==1">
+		LEFT JOIN bs_item_basic_data safetyCountry  ON safetyCountry.value = ps.anrule and safetyCountry.type = 4
+		LEFT JOIN bs_item_basic_data airFreight  ON airFreight.type = 3 and  airFreight.country = safetyCountry.country and airFreight.attribute=1
+		LEFT JOIN bs_item_basic_data seaFreight  ON seaFreight.type = 3 and  seaFreight.country = safetyCountry.country and seaFreight.attribute=2
+		LEFT JOIN bs_item_basic_data lanFreight  ON lanFreight.type = 3 and  lanFreight.country = safetyCountry.country and lanFreight.attribute=3
+		</if>
+		WHERE
+			(1 = 1)
+		<if test="filtersql != null">
+			${filtersql}
+		</if>
+		order by ps.create_date desc 
+		LIMIT ${offset},${pageSize}
+	 </select>
+	 
+	 <select id="getSysEmailReceiverList" parameterType="Map" resultType="SysEmailReceiver">
+		SELECT 
+		    id,
+			type,
+			email_addr,
+			status,
+			createuserid,
+			create_date,
+			updateuserid,
+			update_date 			 
+		FROM sys_email_receiver
+		WHERE (1=1)
+		<if test="filtersql.length() != 0">
+			${filtersql}
+		</if>
+	</select>
+	
+	<select id = "querySkuStatus" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+		SELECT
+			id,
+			pre_sku preSku,
+			sku,
+			`status`
+		FROM
+			bs_prepare_sku
+		WHERE
+			(1 = 1)
+	   	<if test="filtersql.length() != 0">
+			${filtersql}
+		</if>
+	</select>
+	
+	<update id="updatePreSkuStatus" parameterType="map">
+		UPDATE bs_prepare_sku
+		SET `status` = '2',skuid = #{skuid,jdbcType=INTEGER},sku = #{sku}
+		WHERE (1=1)
+        <if test="filtersql.length() != 0">
+			${filtersql}
+		</if>
+	</update>
+	
+	<select id="initShipping" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+	    SELECT DISTINCT
+			  a2.country country,
+			  ROUND(a3.VALUE2*100,4) seaRatio,
+			  ROUND(IFNULL(sku.purchase_price*a3.VALUE2,0),4) seaFreight,
+			  ROUND(IFNULL((sku.purchase_price*(1+a3.VALUE2))*1.03,0),4) seaMc,
+			  ROUND(a3.VALUE2*100,4) ratio,
+			  ROUND(IFNULL(sku.purchase_price*a3.VALUE2,0),4) freight,
+			  ROUND(IFNULL((sku.purchase_price*(1+a3.VALUE2))*1.03,0),4) mc
+		FROM
+			bs_prepare_sku sku 
+		LEFT JOIN bs_item_basic_data a1 ON a1.`value` = sku.anrule
+		AND a1.type = 2
+		LEFT JOIN bs_item_basic_data a2 ON a1.attribute = a2.attribute
+		AND a1.`value` = a2.`value`
+		AND a2.type = 4
+		LEFT JOIN bs_item_basic_data a3 ON a2.country = a3.country
+		AND a3.type = 3 and  a3.attribute = #{shippingType}
+		WHERE sku.pre_sku = #{sku}
+	</select>
+	
+	<select id = "viewSku" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+	    SELECT
+			sku.id id,
+			sku.pre_sku preSku,
+			sku.formal_sku formalSku,
+			sku.model model,
+			sku.purchase_price purchasePrice,
+			sku.brand_id brandId,
+			brand.brand_desc brandDesc,
+			sku.pm_id pmId,
+			CONCAT(
+				su.firstname,
+				'.',
+				su.lastname
+			) pmName,
+			sku.category_id categoryId,
+			sku.rma_ratio rmaRatio,
+			sku.skuid skuid,
+			sku.purspec purspec,
+			sku.brand_code brandCode,
+			sku.main_desc mainDesc,
+			sku.main_brand_code mainBrandCode,
+			sku.main_category_id mainCategoryId,
+			sku.sub_desc subDesc,
+			sku.sub_brand_code subBrandCode,
+			sku.sub_category_id subCategoryId,
+			sku.STATUS status,
+			sku.pre_sku_name preSkuName,
+			sku.sale_price salePrice,
+			sku.sale_qty saleQty,
+			sku.market_capacity marketCapacity,
+			sku.mp_date mpDate,
+			sku.setup_date setupDate,
+			sku.sku sku,
+			sku.anrule anrule,
+			sku.color color,
+			sku.sku_no skuNo,
+			sku.remark remark,
+			sku.create_user_id createUserId,
+			sku.create_date createDate,
+			sku.pre_sku_no preSkuNo,
+			sku.shipping_type shippingType,
+			sku.standard_size standardSize,
+			sku.weight weight,
+			sku.sale_dept saleDept,
+			sku.model_id modelId,
+			bplM.id mainProLineId,
+			bplS.id subProLineId
+		FROM
+			bs_prepare_sku sku
+		LEFT JOIN bs_item_model model ON sku.model_id = model.id
+		LEFT JOIN bs_item_brand brand ON sku.brand_id = brand.brand_id
+		LEFT JOIN sys_user su ON sku.pm_id = su.userid
+		LEFT JOIN bs_product_line bplM ON sku.main_desc = bplM.product_line_name
+		and sku.main_brand_code = bplM.model_no
+		and sku.main_category_id = bplM.product_code
+		and bplM.product_type=2
+		LEFT JOIN bs_product_line bplS ON sku.sub_desc = bplS.product_line_name
+		and sku.sub_brand_code = bplS.model_no
+		and sku.sub_category_id = bplS.product_code
+		and bplS.product_type=3
+		WHERE
+			(1 = 1)
+		<if test="id != null">
+			and sku.id = #{id}
+		</if>
+		<if test="preSku != null">
+			and sku.pre_sku = #{preSku}
+		</if>
+	</select>
+	
+	<select id="initByModel" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+		SELECT
+			model.model_id modelId,
+			model.model_name model,
+			model.brand_id brandId,
+			brand.brand_desc brandDesc,
+			model.pm_id pmId,
+			CONCAT(
+				sysu.firstname,
+				'.',
+				sysu.lastname
+			) pmName,
+			mianline.product_code mainBrandCode,
+			mianline.id mainCategoryId,
+			brand.brand_code mainModelNo,
+			subline.model_no subModelNo,
+			subline.id subCategoryId,
+			subline.product_code subBrandCode,
+			common.custom_name customName,
+			common.sale_dept saleDept,
+			common.standard_size standardSize,
+			common.weight weight,
+			common.shipping_type shippingType,
+			common.mc mc,
+			common.sale_price salePrice,
+			common.setup_date setupDate,
+            model.remark model_remark
+		FROM
+			bs_item_model model
+		INNER JOIN bs_item_brand brand ON model.brand_id = brand.brand_id
+		LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
+		LEFT JOIN bs_item_pre_commom common ON model.model_id = common.model_id
+		LEFT JOIN bs_product_line mianline ON model.main_category_id = mianline.id
+		AND mianline.product_type = 2
+		LEFT JOIN bs_product_line subline ON model.sub_category_id = subline.id
+		AND subline.product_type = 3
+		WHERE
+			model.model_name = #{model}
+	</select>
+	<select id="selectmodelAndPreSku" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+SELECT
+	anruleStr safety,
+	country.country safetyCountry,
+	country.skuid,
+	b.create_date createDate,
+	model.create_date modelCreateDate,
+	CONCAT(
+		users.firstname,
+		'.',
+		users.lastname
+	)createUserIdStr,
+	model.model_name model,
+	brand.brand_desc brandDesc,
+	b.pre_sku preSku,
+	b.sku sku,
+	b.`status` STATUS,
+	line.product_line_name mainProLineName,
+	l.product_line_name subProLineName,
+	concat(u.firstname, '.', u.lastname)pmName,
+	d.attribute colorStr,
+	model.model_id modelId
+	FROM
+		bs_item_model model
+	LEFT JOIN bs_prepare_sku b ON model.model_id = b.model_id
+	LEFT JOIN(
+	SELECT
+		a.skuid skuid,
+		group_concat(basic.attribute)anruleStr,
+		group_concat(basic. VALUE)anrule
+	FROM
+		bs_item_mapping a
+	LEFT JOIN(
+		SELECT
+			maping.skuid skuid
+		FROM
+			bs_item_mapping maping
+		WHERE
+			maping.data_type = 1
+		<if test="sql!=null">
+		${sql}
+		</if>
+		GROUP BY
+			maping.skuid
+	)b ON b.skuid = a.skuid
+	LEFT JOIN bs_item_basic_data basic ON a.maping = basic.`value`
+	WHERE
+		a.data_type = 1
+	AND basic.type = 2
+	GROUP BY
+		b.skuid
+	)anrule ON b.id = anrule.skuid
+	
+	
+	
+	left join (SELECT
+	 a.skuid skuid,
+	 group_concat(a.maping) country
+	FROM
+	 bs_item_mapping a
+	LEFT JOIN (
+	 SELECT
+	  mapping.skuid skuid
+	 FROM
+	  bs_item_mapping mapping
+	 WHERE
+	  mapping.data_type = 2
+	  <if test="filsql!=null">
+			${filsql}
+		</if>
+	 GROUP BY
+	  mapping.skuid
+	) b ON a.skuid = b.skuid
+	AND a.data_type = 2 
+	 where a.data_type = 2 
+	GROUP BY a.skuid)country on country.skuid=b.id
+
+
+	LEFT JOIN bs_item_basic_data d ON d.`value` = b.color
+	AND d.type = 1
+	LEFT JOIN sys_user users ON users.userid = b.create_user_id
+	LEFT JOIN bs_item_brand brand ON brand.brand_id = model.brand_id
+	LEFT JOIN bs_product_line line ON line.id = model.main_category_id
+	AND line.product_type = 2
+	LEFT JOIN bs_product_line l ON l.id = model.sub_category_id
+	AND l.product_type = 3
+	LEFT JOIN sys_user u ON u.userid = model.pm_id
+	WHERE
+		1 = 1
+	<if test="filtersql != null">
+			${filtersql}
+		</if>
+		<if test="sql!=null">
+		 and anruleStr is NOT null
+		</if>
+		<if test="filsql!=null">
+		 and country.country is NOT null
+		</if>
+		order by model.create_date desc
+		LIMIT ${offset},${pageSize}
+	</select>
+	<select id="selectmodelAndPreSkuCount" parameterType="map" resultType="int">
+	select 
+		count(model.model_id)id
+	FROM
+		bs_item_model model
+	LEFT JOIN bs_prepare_sku b ON model.model_id = b.model_id
+	LEFT JOIN(
+	SELECT
+		a.skuid skuid,
+		group_concat(basic.attribute)anruleStr,
+		group_concat(basic. VALUE)anrule
+	FROM
+		bs_item_mapping a
+	LEFT JOIN(
+		SELECT
+			maping.skuid skuid
+		FROM
+			bs_item_mapping maping
+		WHERE
+			maping.data_type = 1
+		<if test="sql!=null">
+		${sql}
+		</if>
+		GROUP BY
+			maping.skuid
+	)b ON b.skuid = a.skuid
+	LEFT JOIN bs_item_basic_data basic ON a.maping = basic.`value`
+	WHERE
+		a.data_type = 1
+	AND basic.type = 2
+	GROUP BY
+		b.skuid
+	)anrule ON b.id = anrule.skuid
+	left join (SELECT
+	 a.skuid skuid,
+	 group_concat(a.maping) country
+	FROM
+	 bs_item_mapping a
+	LEFT JOIN (
+	 SELECT
+	  mapping.skuid skuid
+	 FROM
+	  bs_item_mapping mapping
+	 WHERE
+	  mapping.data_type = 2
+	  <if test="filsql!=null">
+			${filsql}
+		</if>
+	 GROUP BY
+	  mapping.skuid
+	) b ON a.skuid = b.skuid
+	AND a.data_type = 2 
+	 where a.data_type = 2 
+	GROUP BY a.skuid)country on country.skuid=b.id
+	LEFT JOIN bs_item_basic_data d ON d.`value` = b.color
+	AND d.type = 1
+	LEFT JOIN sys_user users ON users.userid = b.create_user_id
+	LEFT JOIN bs_item_brand brand ON brand.brand_id = model.brand_id
+	LEFT JOIN bs_product_line line ON line.id = model.main_category_id
+	AND line.product_type = 2
+	LEFT JOIN bs_product_line l ON l.id = model.sub_category_id
+	AND l.product_type = 3
+	LEFT JOIN sys_user u ON u.userid = model.pm_id
+	WHERE
+		1 = 1
+	<if test="filtersql != null">
+			${filtersql}
+	</if>
+	<if test="sql!=null">
+		 and anruleStr is NOT null 
+	</if>
+	<if test="filsql!=null">
+	and country.country is NOT null
+	</if>
+	</select>
+	<select id="isExistSku" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+		select 
+			pre_sku preSku,
+			sku,
+			skuid,
+			`status`,
+			id
+		from bs_prepare_sku where (1=1)
+		<if test="preSkuId != null">
+			and id=#{preSkuId}
+	    </if> 
+	    <if test="modelId != null">
+			and model_id=#{modelId}
+	    </if> 
+	</select>
+	<select id="preSkuGrid" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+		SELECT
+			pre.id id,
+			pre.pre_sku preSku,
+			pre.product_name productName,
+			pre.sku sku,
+			anrule.anruleStr anruleStr,
+			anrule.anrule anrule,
+			pre.color color,
+			basic.attribute colorStr,
+			country.country country,
+			pre.sale_qty saleQty,
+			pre.market_capacity marketCapacity,
+			pre.rma_ratio rmaRatio,
+			pre.mp_date mpDate,
+			pre.region saleZone,
+			pre.`status` STATUS,
+			pre.remark remark
+		FROM
+			bs_prepare_sku pre
+		LEFT JOIN bs_item_basic_data basic ON basic.`value` = pre.color
+		AND basic.type = 1
+		LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				group_concat(basic.attribute) anruleStr,
+				group_concat(basic. VALUE) anrule
+			FROM
+				bs_item_mapping mapping
+			LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+			WHERE
+				mapping.data_type = 1
+			AND basic.type = 2
+			GROUP BY
+				mapping.skuid
+		) anrule ON pre.id = anrule.skuid
+		LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				group_concat(mapping.maping) country
+			FROM
+				bs_item_mapping mapping
+			WHERE
+				mapping.data_type = 2
+			GROUP BY
+				mapping.skuid
+		) country ON country.skuid = pre.id
+		WHERE (1=1)
+		<if test="model_id != null">
+			and model_id =  #{model_id}
+	    </if>
+		<if test="status != null">
+			and pre.status =  #{status}
+	    </if>
+	    <if test="id != null">
+			and pre.id =  #{id}
+	    </if>
+	    <if test="preSku != null">
+			and pre.pre_sku =  #{preSku}
+	    </if>
+	</select>
+	
+	<select id="packageSkuList" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+		SELECT
+			item.sku sku,
+			anrule.anruleStr anruleStr,
+			anrule.anrule anrule,
+			basic.attribute colorStr
+		FROM
+			bs_item item
+		LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				group_concat(basic.attribute) anruleStr,
+				group_concat(basic. VALUE) anrule
+			FROM
+				bs_item_mapping mapping
+			LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+			WHERE
+				mapping.data_type = 1
+			AND basic.type = 2
+			GROUP BY
+				mapping.skuid
+		) anrule ON item.skuid = anrule.skuid
+		LEFT JOIN bs_item_basic_data basic ON item.color = basic.`value`
+		AND basic.type = 1
+		WHERE
+			item.is_package = 2
+		AND item.model = #{model}
+	</select>
+	
+	<!-- 通过model，颜色，安规判断预备sku是否存在 -->
+	<select id ="getPreSkuByModelColorAnrule" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+			SELECT DISTINCT
+				preSku.id,
+				preSku.pre_sku
+			FROM
+				bs_prepare_sku preSku
+			LEFT JOIN bs_item_mapping mapping ON preSku.id = mapping.skuid
+			AND mapping.data_type = 1
+			LEFT JOIN bs_item_basic_data basic ON basic.`value` = mapping.maping
+			AND basic.type = 2
+			LEFT JOIN bs_item_basic_data basic2 ON basic2.`value` = preSku.color
+			AND basic2.type = 1
+			WHERE
+				(1 = 1)
+			AND preSku.model = #{model}
+			AND basic2.`value` = #{color}
+			AND basic.`value` = #{anrule}
+	</select>
+	 
+</mapper>
