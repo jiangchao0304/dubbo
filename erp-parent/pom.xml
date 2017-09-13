@@ -12,8 +12,7 @@
   <modules>
     <module>../erp-provider-consume</module>
     <module>../erp-service-product</module>
-    <module>../erp-faced-product</module>
-    <module>../erp-domain-product</module>
+    <module>../erp-domain</module>
     <module>../erp-dao</module>
     <module>../erp-common</module>
     <module>../erp-util</module>
@@ -140,7 +139,7 @@
 
       <dependency>
         <groupId>com.sunvalley</groupId>
-        <artifactId>erp-domain-product</artifactId>
+        <artifactId>erp-domain</artifactId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
 
@@ -221,6 +220,12 @@
         <groupId>org.mybatis</groupId>
         <artifactId>mybatis</artifactId>
         <version>${mybatis.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.3</version>
       </dependency>
 
       <dependency>

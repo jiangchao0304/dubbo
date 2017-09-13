@@ -21,7 +21,7 @@ import java.util.List;
  * @Date: 2017-09-04 10:56
  */
 @Service
-public class SkuServiceImpl implements com.sunvalley.face.erp.product.SkuService {
+public class SkuServiceImpl implements com.sunvalley.face.erp.product.ISkuService {
 
 
     @Autowired

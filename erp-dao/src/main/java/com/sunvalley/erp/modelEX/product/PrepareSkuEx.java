@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.sunvalley.erp.model.salesplan.PrepareSku;
+import com.sunvalley.erp.model.product.PrepareSku;
 
 public class PrepareSkuEx extends PrepareSku {
 	

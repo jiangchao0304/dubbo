@@ -8,6 +8,7 @@ import com.sunvalley.erp.model.product.PrepareSku;
 import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.erp.util.json.JsonParse;
 import com.sunvalley.face.base.ResponseBean;
+import com.sunvalley.face.erp.product.IPrepareSkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.HashMap;
  * @Author: douglas.jiang
  * @Date: 2017-09-13 13:06
  */
-public class PrepareSkuService implements com.sunvalley.face.erp.product.PrepareSkuService {
+public class PrepareSkuServiceImpl implements IPrepareSkuService {
 
     @Autowired
     private PrepareService prepareService;

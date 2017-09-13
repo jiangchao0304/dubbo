@@ -1,4 +1,4 @@
-package com.sunvalley.erp.model.salesplan;
+package com.sunvalley.erp.model.product;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

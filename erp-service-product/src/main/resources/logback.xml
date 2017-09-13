@@ -149,13 +149,13 @@
     <!-- project default level -->
     <logger name="com.sunvalley" level="ALL"/>
 
-    <logger name="org.springframework.web.context.ContextLoader" level="info"/>
+    <logger name="org.springframework.web.context.ContextLoader" level="ERROR"/>
 
     <logger name="org.springframework.jdbc" level="ALL" />
 
-    <logger name="org.apache.zookeeper" level="info"/>
+    <logger name="org.apache.zookeeper" level="ERROR"/>
 
-    <logger name="org.apache.catalina" level="info"/>
+    <logger name="org.apache.catalina" level="ERROR"/>
 
     <logger name="org.I0Itec.zkclient" level="ERROR"/>
 
@@ -164,7 +164,7 @@
     <!--log4jdbc -->
     <logger name="jdbc.sqltiming" level="INFO"/>
 
-    <logger name="com.mchange"  level="DEBUG" />
+    <logger name="com.mchange"  level="ERROR" />
     <!-- log detail configuration -->
     <logger name="org.acegisecurity" level="ERROR"/>
 

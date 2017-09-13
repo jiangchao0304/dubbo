@@ -8,10 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>erp-domain-product</artifactId>
+    <artifactId>erp-domain</artifactId>
     <packaging>jar</packaging>
 
-    <name>erp-domain-product</name>
+    <name>erp-domain</name>
     <url>http://maven.apache.org</url>
 
     <properties>
