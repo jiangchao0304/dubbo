@@ -12,7 +12,11 @@
 
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"  />
 
-    <bean id="skuService" class="com.sunvalley.erp.service.product.faced.SkuService"/>
+    <bean id="skuService" class="com.sunvalley.erp.service.product.face.SkuServiceImpl"/>
+    <bean id="prepareSkuService" class="com.sunvalley.erp.service.product.face.PrepareSkuServiceImpl"/>
 
-    <dubbo:service interface="com.sunvalley.face.erp.product.SkuService" ref="skuService" />
+    <dubbo:service interface="com.sunvalley.face.erp.product.ISkuService" ref="skuService" />
+
+    <dubbo:service interface="com.sunvalley.face.erp.product.IPrepareSkuService" ref="prepareSkuService" />
+
 </beans>

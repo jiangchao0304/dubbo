@@ -49,3 +49,6 @@ local.properties
 /sunvalley-domain-product/*.iml
 /sunvalley-api-product/target
 /sunvalley-api-product/*.iml
+/erp-parent/logs/*.log
+/erp-domain/*.iml
+/erp-parent/*.iml
