@@ -3,13 +3,15 @@ server:
        port: 8081
 dubbo:
       application:
-              name : product
+              name : erp-service-product-sku
       registry:
               protocol : zookeeper
               address : 10.20.0.137:2181
       protocol:
               name : dubbo
               port : 2281
+      owner :
+              douglas.jiang
 
 spring:
       profiles:
@@ -19,7 +21,7 @@ spring:
          url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
          username : dev_express
          password : Devdb201707
-         #type : com.alibaba.druid.pool.DruidDataSource
+         type : com.alibaba.druid.pool.DruidDataSource
          initialSize : 20
          minIdle : 1
          maxActive : 500
@@ -33,7 +35,7 @@ spring:
          testOnReturn : false
          poolPreparedStatements : false
          maxPoolPreparedStatementPerConnectionSize : 20
-         filters : stat
+         filters : stat,slf4j
       dubbo.scan : com.sunvalley.erp.service.product
 mybatis:
      type-aliases-package : com.sunvalley.erp.model.product
