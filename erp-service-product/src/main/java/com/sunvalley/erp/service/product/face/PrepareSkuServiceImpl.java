@@ -3,8 +3,7 @@
 */
 package com.sunvalley.erp.service.product.face;
 
-import com.sunvalley.erp.domain.product.vo.PrepareSkuBaseInfoVO;
-import com.sunvalley.erp.model.product.PrepareSku;
+import com.sunvalley.erp.domain.product.vo.PreSkuVO;
 import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.erp.util.json.JsonParse;
 import com.sunvalley.face.base.ResponseBean;
@@ -12,6 +11,7 @@ import com.sunvalley.face.erp.product.IPrepareSkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 类或方法的功能描述 :TODO
@@ -28,15 +28,21 @@ public class PrepareSkuServiceImpl implements IPrepareSkuService {
     public String getByModel(String modelName, Integer status) {
 
         ResponseBean responseBean = new ResponseBean();
-        PrepareSkuBaseInfoVO vo;
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("responseCode",1);
+
+
+        PreSkuVO vo;
         try {
              vo = prepareService.getByModel(modelName,status);
+            result.put("jsonContent",vo);
             responseBean.setJsonContent(JsonParse.toJson(vo));
         }catch (Exception ex){
             responseBean.setJsonContent(ex.getMessage());
         }
 
-        return JsonParse.toJson(responseBean);
+        return JsonParse.toJson(result);
 
     }
 
