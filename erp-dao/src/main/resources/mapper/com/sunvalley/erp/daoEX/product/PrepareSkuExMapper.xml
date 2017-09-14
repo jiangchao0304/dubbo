@@ -41,7 +41,7 @@
 			model.model_name = #{model}
 	</select>
 
-	<select id="preSkuGrid" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+	<select id="preSkuGrid" parameterType="map" resultType="com.sunvalley.erp.domain.product.dto.PreSkuGridDTO">
 		SELECT
 			pre.id id,
 			pre.pre_sku preSku,
@@ -103,7 +103,7 @@
 	    </if>
 	</select>
 	
-	<select id="packageSkuList" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+	<select id="packageSkuList" parameterType="map" resultType="com.sunvalley.erp.domain.product.dto.PackageSkuDTO">
 		SELECT
 			item.sku sku,
 			anrule.anruleStr anruleStr,

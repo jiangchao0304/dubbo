@@ -13,8 +13,9 @@ import java.util.List;
  * @Author: douglas.jiang
  * @Date: 2017-09-13 13:17
  */
-public class PrepareSkuBaseInfoVO {
+public class PreSkuVO {
 
+    private String sku;
     private String model;
     private Integer modelId;
     private Integer brandId;
@@ -36,8 +37,33 @@ public class PrepareSkuBaseInfoVO {
     private BigDecimal salePrice;
     private Date setupDate;
     private String modelRemark; //model备注
-    private List<PrepareSkuBaseInfoVO> packageSkuList;
-    private List<PrepareSkuBaseInfoVO> preSkuList;   //sku列表
+    private List<PackageSkuVO> packageSkuList;
+
+    public List<PackageSkuVO> getPackageSkuList() {
+        return packageSkuList;
+    }
+
+    private List<PreSkuGridVO> preSkuList;   //sku列表
+
+    public void setPackageSkuList(List<PackageSkuVO> packageSkuList) {
+        this.packageSkuList = packageSkuList;
+    }
+
+    public List<PreSkuGridVO> getPreSkuList() {
+        return preSkuList;
+    }
+
+    public void setPreSkuList(List<PreSkuGridVO> preSkuList) {
+        this.preSkuList = preSkuList;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
     public String getModel() {
         return model;
@@ -207,20 +233,9 @@ public class PrepareSkuBaseInfoVO {
         this.modelRemark = modelRemark;
     }
 
-    public List<PrepareSkuBaseInfoVO> getPackageSkuList() {
-        return packageSkuList;
-    }
 
-    public void setPackageSkuList(List<PrepareSkuBaseInfoVO> packageSkuList) {
-        this.packageSkuList = packageSkuList;
-    }
 
-    public List<PrepareSkuBaseInfoVO> getPreSkuList() {
-        return preSkuList;
-    }
 
-    public void setPreSkuList(List<PrepareSkuBaseInfoVO> preSkuList) {
-        this.preSkuList = preSkuList;
-    }
+
 }
 
