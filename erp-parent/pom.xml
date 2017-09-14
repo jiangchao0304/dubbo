@@ -15,7 +15,6 @@
     <module>../erp-domain</module>
     <module>../erp-dao</module>
     <module>../erp-common</module>
-    <module>../erp-util</module>
   </modules>
   <profiles>
     <profile>
