@@ -22,7 +22,7 @@
 # .gitignore foridea
 /.idea
 .idea/
-/*.iml
+*.iml
 .svn/
 
 # .gitignore for eclipse
@@ -43,13 +43,4 @@ local.properties
 .loadpath
 
 /.svn
-/src/main/resources/env
-/sunvalley-parent/.idea
-/sunvalley-domain-product/target
-/sunvalley-domain-product/*.iml
-/sunvalley-api-product/target
-/sunvalley-api-product/*.iml
-/erp-parent/logs/*.log
-/erp-domain/*.iml
-/erp-parent/*.iml
-*.iml
+
