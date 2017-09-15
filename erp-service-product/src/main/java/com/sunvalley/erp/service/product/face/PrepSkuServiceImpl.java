@@ -3,11 +3,13 @@
 */
 package com.sunvalley.erp.service.product.face;
 
+import com.sunvalley.erp.domain.product.vo.PreSkuSaveVO;
 import com.sunvalley.erp.domain.product.vo.PreSkuVO;
 import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.erp.util.json.JsonParse;
 import com.sunvalley.face.base.ResponseBean;
-import com.sunvalley.face.erp.product.IPrepareSkuService;
+import com.sunvalley.face.erp.product.IPreSkuService;
+import com.sunvalley.face.erp.product.IPreSkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -19,7 +21,7 @@ import java.util.Map;
  * @Author: douglas.jiang
  * @Date: 2017-09-13 13:06
  */
-public class PrepareSkuServiceImpl implements IPrepareSkuService {
+public class PrepSkuServiceImpl implements IPreSkuService {
 
     @Autowired
     private PrepareService prepareService;
@@ -43,6 +45,16 @@ public class PrepareSkuServiceImpl implements IPrepareSkuService {
         }
 
         return JsonParse.toJson(result);
+
+    }
+
+    @Override
+    public String saveModel(String jsonData) {
+
+      PreSkuSaveVO preSkuSaveVO = (PreSkuSaveVO)JsonParse.fromJson(jsonData, PreSkuSaveVO.class);
+      prepareService.save(preSkuSaveVO);
+
+      return "1";
 
     }
 

@@ -44,6 +44,10 @@
 			<groupId>com.sunvalley</groupId>
 			<artifactId>erp-domain</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
