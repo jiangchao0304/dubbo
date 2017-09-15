@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.domain.product.vo;
+package com.sunvalley.erp.domain.product.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.List;
  * @Author: douglas.jiang
  * @Date: 2017-09-13 13:17
  */
-public class PreSkuVO {
+public class PreSkuDTO {
 
     private String sku;
     private String model;
@@ -37,23 +37,23 @@ public class PreSkuVO {
     private BigDecimal salePrice;
     private Date setupDate;
     private String modelRemark; //model备注
-    private List<PackageSkuVO> packageSkuList;
+    private List<PackageSkuDTO> packageSkuList;
 
-    public List<PackageSkuVO> getPackageSkuList() {
+    public List<PackageSkuDTO> getPackageSkuList() {
         return packageSkuList;
     }
 
-    private List<PreSkuGridVO> preSkuList;   //sku列表
+    private List<PreSkuGridDTO> preSkuList;   //sku列表
 
-    public void setPackageSkuList(List<PackageSkuVO> packageSkuList) {
+    public void setPackageSkuList(List<PackageSkuDTO> packageSkuList) {
         this.packageSkuList = packageSkuList;
     }
 
-    public List<PreSkuGridVO> getPreSkuList() {
+    public List<PreSkuGridDTO> getPreSkuList() {
         return preSkuList;
     }
 
-    public void setPreSkuList(List<PreSkuGridVO> preSkuList) {
+    public void setPreSkuList(List<PreSkuGridDTO> preSkuList) {
         this.preSkuList = preSkuList;
     }
 

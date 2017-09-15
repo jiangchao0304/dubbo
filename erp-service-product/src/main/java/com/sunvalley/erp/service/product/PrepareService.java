@@ -6,20 +6,17 @@ package com.sunvalley.erp.service.product;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.dao.product.*;
 import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
-import com.sunvalley.erp.domain.product.dto.PackageSkuDTO;
-import com.sunvalley.erp.domain.product.dto.PreSkuGridDTO;
-import com.sunvalley.erp.domain.product.vo.PackageSkuVO;
-import com.sunvalley.erp.domain.product.vo.PreSkuGridVO;
-import com.sunvalley.erp.domain.product.vo.PreSkuSaveVO;
-import com.sunvalley.erp.domain.product.vo.PreSkuVO;
+import com.sunvalley.erp.domain.product.dto.*;
+import com.sunvalley.erp.entity.FilterModel;
+import com.sunvalley.erp.entity.FilterOP;
+import com.sunvalley.erp.entity.Pager;
 import com.sunvalley.erp.model.product.*;
 import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
 import com.sunvalley.erp.util.TimeUtil;
 import com.sunvalley.erp.util.exception.UniteException;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -69,13 +66,13 @@ public class PrepareService {
      *         [modelName]
      * @param status
      *         [status]
-     * @return com.sunvalley.erp.domain.product.vo.PreSkuVO
+     * @return com.sunvalley.erp.domain.product.dto.PreSkuDTO
      * @throws
      * @author: douglas.jiang
      * @date : 2017/9/14:16:23
      */
 
-    public PreSkuVO getByModel(String modelName, Integer status ) throws Exception{
+    public PreSkuDTO getByModel(String modelName, Integer status ) throws Exception{
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("model", modelName);
         if(status == 0){
@@ -87,16 +84,16 @@ public class PrepareService {
         List<PrepareSkuEx> list = prepareSkuExMapper.initByModel(map);
         if(list != null && list.size()>0){
             PrepareSkuEx prepareSkuEx = list.get(0);
-            PreSkuVO vo = new PreSkuVO();
+            PreSkuDTO vo = new PreSkuDTO();
             PropertyUtils.copyProperties(vo, prepareSkuEx);
             vo.setModelRemark(prepareSkuEx.getModel_remark());
 
             map.put("model_id", prepareSkuEx.getModelId());
             List<PreSkuGridDTO> preSkuList = prepareSkuExMapper.preSkuGrid(map);
 
-            List<PreSkuGridVO> preSkuVOList = new ArrayList<>(preSkuList.size());
+            List<PreSkuGridDTO> preSkuVOList = new ArrayList<>(preSkuList.size());
             for (int i = 0; i < preSkuList.size(); i++) {
-                PreSkuGridVO preSkuGridVO = new PreSkuGridVO();
+                PreSkuGridDTO preSkuGridVO = new PreSkuGridDTO();
                 PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
                 preSkuVOList.add(preSkuGridVO);
             }
@@ -104,9 +101,9 @@ public class PrepareService {
 
             List<PackageSkuDTO> packageSkuList = prepareSkuExMapper.packageSkuList(map);
 
-            List<PackageSkuVO> packageSkuVOList = new ArrayList<>(packageSkuList.size());
+            List<PackageSkuDTO> packageSkuVOList = new ArrayList<>(packageSkuList.size());
             for (int i = 0; i < packageSkuList.size(); i++) {
-                PackageSkuVO packageSkuVO = new PackageSkuVO();
+                PackageSkuDTO packageSkuVO = new PackageSkuDTO();
                 PropertyUtils.copyProperties(packageSkuVO, packageSkuList.get(i));
                 packageSkuVOList.add(packageSkuVO);
             }
@@ -124,13 +121,74 @@ public class PrepareService {
 
 
 
-    public void listModelAndPreSku(){
+    /**
+     * model&预备SKU列表查询.
+     * @param [filterModels, offset, pageSize]
+     * @return com.sunvalley.erp.entity.Pager<com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO>
+     * @exception
+     * @author: PXMWJCH
+     * @since : 2017-09-15:23:42
+     */
+    public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) throws Exception{
+        HashMap<String,Object> map= new HashMap<String,Object>();
+        String filtersql = "";
+        String[] ListArray={};
+        List<FilterModel> removeFileModelList = new ArrayList<FilterModel>();
+        for(FilterModel filterModel: filterModels){
+            if(filterModel.getFiled().equals("mapping.maping")){//安规适用国家
+                removeFileModelList.add(filterModel);
+                String modelList=filterModel.getValue();
+                modelList = modelList.replace(" ",",").replace("，", ",").replace(";", ",").replace("；", ",").replace("\n", ",").replace("\t", ",").replace("\r\n", ",");
+                ListArray=modelList.split(",");
+                if(modelList!=null &&!modelList.equals("")&& ListArray.length!=0){
+                    int count=0;
+                    String filter="";
+                    for(int j=0; j<ListArray.length;j++){
+                        if(ListArray[j]!=null&& !ListArray[j].equals("")&&ListArray[j].length()!=0){
+                            if(count==0){
+                                filter= " and "+filterModel.getFiled()+" "+filterModel.getOper()+" "+"(" +"'"+ListArray[j]+"'";
+                            }else{
+                                filter=filter+","+"'"+ListArray[j]+"'";
+                            }
+                            count++;
+                        }
+                    }
+                    filter=filter+")";
+                    filtersql+=filter;
+                    map.put("filsql", filter);
 
+                }
+
+            }
+            if(filterModel.getFiled().equals("maping.maping")){//安规
+                removeFileModelList.add(filterModel);
+                String filter=" and "+filterModel.getFiled()+" "+filterModel.getOper()+"("+filterModel.getValue()+")";
+                //String filter =new FilterOP().getFilterSQL(removeFileModelList);
+                map.put("sql",filter);
+                filtersql+=filter;
+            }
+        }
+        for(FilterModel filter :removeFileModelList){
+            filterModels.remove(filter);
+        }
+        filtersql= new FilterOP().getFilterSQL(filterModels);
+        map.put("filtersql", filtersql);
+        map.put("offset", offset);
+        map.put("pageSize", pageSize);
+        Pager<ModelAndPreSkuDTO> pager=new Pager<ModelAndPreSkuDTO>();
+        pager.setFilterSql(filtersql);
+        pager.setPageNo(offset / pageSize+1);
+        pager.setPageSize(pageSize);
+        int rowCount= prepareSkuExMapper.countModelAndPreSku(map);
+        pager.setRowCount(rowCount);
+        List<ModelAndPreSkuDTO> list=prepareSkuExMapper.listModelAndPreSku(map);
+        pager.setList(list);
+        return pager;
     }
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void save(PreSkuSaveVO prepareSkuEx){
+    public void save(PreSkuSaveDTO prepareSkuEx){
 
         ItemModel model = new ItemModel();
         model.setBrandId(prepareSkuEx.getBrandId());
@@ -176,7 +234,7 @@ public class PrepareService {
      * @param
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void savePreSkuAttr(PreSkuSaveVO prepareSkuEx){
+    public void savePreSkuAttr(PreSkuSaveDTO prepareSkuEx){
         ItemPreCommomExample preCommon = new ItemPreCommomExample();
         preCommon.createCriteria().andModelIdEqualTo(prepareSkuEx.getModelId());
         List<ItemPreCommom> list = itemPreCommomMapper.selectByExample(preCommon);

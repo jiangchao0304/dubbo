@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.domain.product.vo;
+package com.sunvalley.erp.domain.product.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Date;
  * @Author: douglas.jiang
  * @Date: 2017-09-14 16:11
  */
-public class PreSkuSaveVO {
+public class PreSkuSaveDTO {
 
 
     private int brandId;

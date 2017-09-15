@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.domain.product.vo;
+package com.sunvalley.erp.domain.product.dto;
 
 /**
  * 类或方法的功能描述 :TODO
@@ -9,7 +9,7 @@ package com.sunvalley.erp.domain.product.vo;
  * @Author: douglas.jiang
  * @Date: 2017-09-15 18:21
  */
-public class ModelAndPreSkuSearchVO {
+public class PageListQueryDTO {
 
 }
 

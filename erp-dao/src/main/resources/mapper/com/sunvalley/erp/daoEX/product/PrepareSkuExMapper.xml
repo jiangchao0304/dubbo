@@ -132,5 +132,187 @@
 		AND item.model = #{model}
 	</select>
 
+	<select id="listModelAndPreSku" parameterType="map" resultType="com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO">
+		SELECT
+		anruleStr safety,
+		country.country safetyCountry,
+		country.skuid,
+		b.create_date createDate,
+		model.create_date modelCreateDate,
+		CONCAT(
+		users.firstname,
+		'.',
+		users.lastname
+		)createUserIdStr,
+		model.model_name model,
+		brand.brand_desc brandDesc,
+		b.pre_sku preSku,
+		b.sku sku,
+		b.`status` STATUS,
+		line.product_line_name mainProLineName,
+		l.product_line_name subProLineName,
+		concat(u.firstname, '.', u.lastname)pmName,
+		d.attribute colorStr,
+		model.model_id modelId,
+		model.battery,
+		model.warranty,
+		model.rmacategoryid,
+		model.magnetic
+		FROM
+		bs_item_model model
+		LEFT JOIN bs_prepare_sku b ON model.model_id = b.model_id
+		LEFT JOIN(
+		SELECT
+		a.skuid skuid,
+		group_concat(basic.attribute)anruleStr,
+		group_concat(basic. VALUE)anrule
+		FROM
+		bs_item_mapping a
+		LEFT JOIN(
+		SELECT
+		maping.skuid skuid
+		FROM
+		bs_item_mapping maping
+		WHERE
+		maping.data_type = 1
+		<if test="sql!=null">
+			${sql}
+		</if>
+		GROUP BY
+		maping.skuid
+		)b ON b.skuid = a.skuid
+		LEFT JOIN bs_item_basic_data basic ON a.maping = basic.`value`
+		WHERE
+		a.data_type = 1
+		AND basic.type = 2
+		GROUP BY
+		b.skuid
+		)anrule ON b.id = anrule.skuid
+
+
+
+		left join (SELECT
+		a.skuid skuid,
+		group_concat(a.maping) country
+		FROM
+		bs_item_mapping a
+		LEFT JOIN (
+		SELECT
+		mapping.skuid skuid
+		FROM
+		bs_item_mapping mapping
+		WHERE
+		mapping.data_type = 2
+		<if test="filsql!=null">
+			${filsql}
+		</if>
+		GROUP BY
+		mapping.skuid
+		) b ON a.skuid = b.skuid
+		AND a.data_type = 2
+		where a.data_type = 2
+		GROUP BY a.skuid)country on country.skuid=b.id
+
+
+		LEFT JOIN bs_item_basic_data d ON d.`value` = b.color
+		AND d.type = 1
+		LEFT JOIN sys_user users ON users.userid = b.create_user_id
+		LEFT JOIN bs_item_brand brand ON brand.brand_id = model.brand_id
+		LEFT JOIN bs_product_line line ON line.id = model.main_category_id
+		AND line.product_type = 2
+		LEFT JOIN bs_product_line l ON l.id = model.sub_category_id
+		AND l.product_type = 3
+		LEFT JOIN sys_user u ON u.userid = model.pm_id
+		WHERE
+		1 = 1
+		<if test="filtersql != null">
+			${filtersql}
+		</if>
+		<if test="sql!=null">
+			and anruleStr is NOT null
+		</if>
+		<if test="filsql!=null">
+			and country.country is NOT null
+		</if>
+		order by model.create_date desc
+		LIMIT ${offset},${pageSize}
+	</select>
+
+	<select id="countModelAndPreSku" parameterType="map" resultType="int">
+		select
+		count(model.model_id)id
+		FROM
+		bs_item_model model
+		LEFT JOIN bs_prepare_sku b ON model.model_id = b.model_id
+		LEFT JOIN(
+		SELECT
+		a.skuid skuid,
+		group_concat(basic.attribute)anruleStr,
+		group_concat(basic. VALUE)anrule
+		FROM
+		bs_item_mapping a
+		LEFT JOIN(
+		SELECT
+		maping.skuid skuid
+		FROM
+		bs_item_mapping maping
+		WHERE
+		maping.data_type = 1
+		<if test="sql!=null">
+			${sql}
+		</if>
+		GROUP BY
+		maping.skuid
+		)b ON b.skuid = a.skuid
+		LEFT JOIN bs_item_basic_data basic ON a.maping = basic.`value`
+		WHERE
+		a.data_type = 1
+		AND basic.type = 2
+		GROUP BY
+		b.skuid
+		)anrule ON b.id = anrule.skuid
+		left join (SELECT
+		a.skuid skuid,
+		group_concat(a.maping) country
+		FROM
+		bs_item_mapping a
+		LEFT JOIN (
+		SELECT
+		mapping.skuid skuid
+		FROM
+		bs_item_mapping mapping
+		WHERE
+		mapping.data_type = 2
+		<if test="filsql!=null">
+			${filsql}
+		</if>
+		GROUP BY
+		mapping.skuid
+		) b ON a.skuid = b.skuid
+		AND a.data_type = 2
+		where a.data_type = 2
+		GROUP BY a.skuid)country on country.skuid=b.id
+		LEFT JOIN bs_item_basic_data d ON d.`value` = b.color
+		AND d.type = 1
+		LEFT JOIN sys_user users ON users.userid = b.create_user_id
+		LEFT JOIN bs_item_brand brand ON brand.brand_id = model.brand_id
+		LEFT JOIN bs_product_line line ON line.id = model.main_category_id
+		AND line.product_type = 2
+		LEFT JOIN bs_product_line l ON l.id = model.sub_category_id
+		AND l.product_type = 3
+		LEFT JOIN sys_user u ON u.userid = model.pm_id
+		WHERE
+		1 = 1
+		<if test="filtersql != null">
+			${filtersql}
+		</if>
+		<if test="sql!=null">
+			and anruleStr is NOT null
+		</if>
+		<if test="filsql!=null">
+			and country.country is NOT null
+		</if>
+	</select>
+
 	 
 </mapper>

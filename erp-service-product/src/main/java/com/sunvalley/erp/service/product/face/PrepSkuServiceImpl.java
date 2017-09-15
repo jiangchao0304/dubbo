@@ -3,12 +3,11 @@
 */
 package com.sunvalley.erp.service.product.face;
 
-import com.sunvalley.erp.domain.product.vo.PreSkuSaveVO;
-import com.sunvalley.erp.domain.product.vo.PreSkuVO;
+import com.sunvalley.erp.domain.product.dto.PreSkuSaveDTO;
+import com.sunvalley.erp.domain.product.dto.PreSkuDTO;
 import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.erp.util.json.JsonParse;
 import com.sunvalley.face.base.ResponseBean;
-import com.sunvalley.face.erp.product.IPreSkuService;
 import com.sunvalley.face.erp.product.IPreSkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,7 +34,7 @@ public class PrepSkuServiceImpl implements IPreSkuService {
         result.put("responseCode",1);
 
 
-        PreSkuVO vo;
+        PreSkuDTO vo;
         try {
              vo = prepareService.getByModel(modelName,status);
             result.put("jsonContent",vo);
@@ -51,7 +50,7 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     @Override
     public String saveModel(String jsonData) {
 
-      PreSkuSaveVO preSkuSaveVO = (PreSkuSaveVO)JsonParse.fromJson(jsonData, PreSkuSaveVO.class);
+      PreSkuSaveDTO preSkuSaveVO = (PreSkuSaveDTO)JsonParse.fromJson(jsonData, PreSkuSaveDTO.class);
       prepareService.save(preSkuSaveVO);
 
       return "1";
