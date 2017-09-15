@@ -3,7 +3,7 @@ package com.sunvalley.erp.model.product;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.math.BigDecimal;
 public class ItemExample {
     protected String orderByClause;
 
@@ -278,53 +278,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andLenEqualTo(Integer value) {
+        public Criteria andLenEqualTo(short value) {
             addCriterion("len =", value, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenNotEqualTo(Integer value) {
+        public Criteria andLenNotEqualTo(short value) {
             addCriterion("len <>", value, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenGreaterThan(Integer value) {
+        public Criteria andLenGreaterThan(short value) {
             addCriterion("len >", value, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenGreaterThanOrEqualTo(Integer value) {
+        public Criteria andLenGreaterThanOrEqualTo(short value) {
             addCriterion("len >=", value, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenLessThan(Integer value) {
+        public Criteria andLenLessThan(short value) {
             addCriterion("len <", value, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenLessThanOrEqualTo(Integer value) {
+        public Criteria andLenLessThanOrEqualTo(short value) {
             addCriterion("len <=", value, "len");
             return (Criteria) this;
         }
 
 
-        public Criteria andLenIn(List<Integer > values) {
+        public Criteria andLenIn(List<short > values) {
             addCriterion("len in", values, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenNotIn(List<Integer> values) {
+        public Criteria andLenNotIn(List<short> values) {
             addCriterion("len not in", values, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenBetween(Integer value1, Integer value2) {
+        public Criteria andLenBetween(short value1, short value2) {
             addCriterion("len between", value1, value2, "len");
             return (Criteria) this;
         }
 
-        public Criteria andLenNotBetween(Integer value1, Integer value2) {
+        public Criteria andLenNotBetween(short value1, short value2) {
             addCriterion("len not between", value1, value2, "len");
             return (Criteria) this;
         }
@@ -342,53 +342,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andWidthEqualTo(Integer value) {
+        public Criteria andWidthEqualTo(short value) {
             addCriterion("width =", value, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthNotEqualTo(Integer value) {
+        public Criteria andWidthNotEqualTo(short value) {
             addCriterion("width <>", value, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthGreaterThan(Integer value) {
+        public Criteria andWidthGreaterThan(short value) {
             addCriterion("width >", value, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthGreaterThanOrEqualTo(Integer value) {
+        public Criteria andWidthGreaterThanOrEqualTo(short value) {
             addCriterion("width >=", value, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthLessThan(Integer value) {
+        public Criteria andWidthLessThan(short value) {
             addCriterion("width <", value, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthLessThanOrEqualTo(Integer value) {
+        public Criteria andWidthLessThanOrEqualTo(short value) {
             addCriterion("width <=", value, "width");
             return (Criteria) this;
         }
 
 
-        public Criteria andWidthIn(List<Integer > values) {
+        public Criteria andWidthIn(List<short > values) {
             addCriterion("width in", values, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthNotIn(List<Integer> values) {
+        public Criteria andWidthNotIn(List<short> values) {
             addCriterion("width not in", values, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthBetween(Integer value1, Integer value2) {
+        public Criteria andWidthBetween(short value1, short value2) {
             addCriterion("width between", value1, value2, "width");
             return (Criteria) this;
         }
 
-        public Criteria andWidthNotBetween(Integer value1, Integer value2) {
+        public Criteria andWidthNotBetween(short value1, short value2) {
             addCriterion("width not between", value1, value2, "width");
             return (Criteria) this;
         }
@@ -406,53 +406,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andHeightEqualTo(Integer value) {
+        public Criteria andHeightEqualTo(short value) {
             addCriterion("height =", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightNotEqualTo(Integer value) {
+        public Criteria andHeightNotEqualTo(short value) {
             addCriterion("height <>", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightGreaterThan(Integer value) {
+        public Criteria andHeightGreaterThan(short value) {
             addCriterion("height >", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andHeightGreaterThanOrEqualTo(short value) {
             addCriterion("height >=", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightLessThan(Integer value) {
+        public Criteria andHeightLessThan(short value) {
             addCriterion("height <", value, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightLessThanOrEqualTo(Integer value) {
+        public Criteria andHeightLessThanOrEqualTo(short value) {
             addCriterion("height <=", value, "height");
             return (Criteria) this;
         }
 
 
-        public Criteria andHeightIn(List<Integer > values) {
+        public Criteria andHeightIn(List<short > values) {
             addCriterion("height in", values, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightNotIn(List<Integer> values) {
+        public Criteria andHeightNotIn(List<short> values) {
             addCriterion("height not in", values, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightBetween(Integer value1, Integer value2) {
+        public Criteria andHeightBetween(short value1, short value2) {
             addCriterion("height between", value1, value2, "height");
             return (Criteria) this;
         }
 
-        public Criteria andHeightNotBetween(Integer value1, Integer value2) {
+        public Criteria andHeightNotBetween(short value1, short value2) {
             addCriterion("height not between", value1, value2, "height");
             return (Criteria) this;
         }
@@ -470,53 +470,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andWeightEqualTo(Integer value) {
+        public Criteria andWeightEqualTo(short value) {
             addCriterion("weight =", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightNotEqualTo(Integer value) {
+        public Criteria andWeightNotEqualTo(short value) {
             addCriterion("weight <>", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightGreaterThan(Integer value) {
+        public Criteria andWeightGreaterThan(short value) {
             addCriterion("weight >", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andWeightGreaterThanOrEqualTo(short value) {
             addCriterion("weight >=", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightLessThan(Integer value) {
+        public Criteria andWeightLessThan(short value) {
             addCriterion("weight <", value, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightLessThanOrEqualTo(Integer value) {
+        public Criteria andWeightLessThanOrEqualTo(short value) {
             addCriterion("weight <=", value, "weight");
             return (Criteria) this;
         }
 
 
-        public Criteria andWeightIn(List<Integer > values) {
+        public Criteria andWeightIn(List<short > values) {
             addCriterion("weight in", values, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightNotIn(List<Integer> values) {
+        public Criteria andWeightNotIn(List<short> values) {
             addCriterion("weight not in", values, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightBetween(Integer value1, Integer value2) {
+        public Criteria andWeightBetween(short value1, short value2) {
             addCriterion("weight between", value1, value2, "weight");
             return (Criteria) this;
         }
 
-        public Criteria andWeightNotBetween(Integer value1, Integer value2) {
+        public Criteria andWeightNotBetween(short value1, short value2) {
             addCriterion("weight not between", value1, value2, "weight");
             return (Criteria) this;
         }
@@ -534,53 +534,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andVolweightEqualTo(Integer value) {
+        public Criteria andVolweightEqualTo(short value) {
             addCriterion("volweight =", value, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightNotEqualTo(Integer value) {
+        public Criteria andVolweightNotEqualTo(short value) {
             addCriterion("volweight <>", value, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightGreaterThan(Integer value) {
+        public Criteria andVolweightGreaterThan(short value) {
             addCriterion("volweight >", value, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andVolweightGreaterThanOrEqualTo(short value) {
             addCriterion("volweight >=", value, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightLessThan(Integer value) {
+        public Criteria andVolweightLessThan(short value) {
             addCriterion("volweight <", value, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightLessThanOrEqualTo(Integer value) {
+        public Criteria andVolweightLessThanOrEqualTo(short value) {
             addCriterion("volweight <=", value, "volweight");
             return (Criteria) this;
         }
 
 
-        public Criteria andVolweightIn(List<Integer > values) {
+        public Criteria andVolweightIn(List<short > values) {
             addCriterion("volweight in", values, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightNotIn(List<Integer> values) {
+        public Criteria andVolweightNotIn(List<short> values) {
             addCriterion("volweight not in", values, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightBetween(Integer value1, Integer value2) {
+        public Criteria andVolweightBetween(short value1, short value2) {
             addCriterion("volweight between", value1, value2, "volweight");
             return (Criteria) this;
         }
 
-        public Criteria andVolweightNotBetween(Integer value1, Integer value2) {
+        public Criteria andVolweightNotBetween(short value1, short value2) {
             addCriterion("volweight not between", value1, value2, "volweight");
             return (Criteria) this;
         }
@@ -662,53 +662,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andActiveEqualTo(Integer value) {
+        public Criteria andActiveEqualTo(short value) {
             addCriterion("active =", value, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveNotEqualTo(Integer value) {
+        public Criteria andActiveNotEqualTo(short value) {
             addCriterion("active <>", value, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveGreaterThan(Integer value) {
+        public Criteria andActiveGreaterThan(short value) {
             addCriterion("active >", value, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveGreaterThanOrEqualTo(Integer value) {
+        public Criteria andActiveGreaterThanOrEqualTo(short value) {
             addCriterion("active >=", value, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveLessThan(Integer value) {
+        public Criteria andActiveLessThan(short value) {
             addCriterion("active <", value, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveLessThanOrEqualTo(Integer value) {
+        public Criteria andActiveLessThanOrEqualTo(short value) {
             addCriterion("active <=", value, "active");
             return (Criteria) this;
         }
 
 
-        public Criteria andActiveIn(List<Integer > values) {
+        public Criteria andActiveIn(List<short > values) {
             addCriterion("active in", values, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveNotIn(List<Integer> values) {
+        public Criteria andActiveNotIn(List<short> values) {
             addCriterion("active not in", values, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveBetween(Integer value1, Integer value2) {
+        public Criteria andActiveBetween(short value1, short value2) {
             addCriterion("active between", value1, value2, "active");
             return (Criteria) this;
         }
 
-        public Criteria andActiveNotBetween(Integer value1, Integer value2) {
+        public Criteria andActiveNotBetween(short value1, short value2) {
             addCriterion("active not between", value1, value2, "active");
             return (Criteria) this;
         }
@@ -1174,53 +1174,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidEqualTo(Integer value) {
+        public Criteria andZeroWhidEqualTo(short value) {
             addCriterion("zero_whid =", value, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidNotEqualTo(Integer value) {
+        public Criteria andZeroWhidNotEqualTo(short value) {
             addCriterion("zero_whid <>", value, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidGreaterThan(Integer value) {
+        public Criteria andZeroWhidGreaterThan(short value) {
             addCriterion("zero_whid >", value, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andZeroWhidGreaterThanOrEqualTo(short value) {
             addCriterion("zero_whid >=", value, "zero_whid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidLessThan(Integer value) {
+        public Criteria andZeroWhidLessThan(short value) {
             addCriterion("zero_whid <", value, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidLessThanOrEqualTo(Integer value) {
+        public Criteria andZeroWhidLessThanOrEqualTo(short value) {
             addCriterion("zero_whid <=", value, "zeroWhid");
             return (Criteria) this;
         }
 
 
-        public Criteria andZeroWhidIn(List<Integer > values) {
+        public Criteria andZeroWhidIn(List<short > values) {
             addCriterion("zero_whid in", values, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidNotIn(List<Integer> values) {
+        public Criteria andZeroWhidNotIn(List<short> values) {
             addCriterion("zero_whid not in", values, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidBetween(Integer value1, Integer value2) {
+        public Criteria andZeroWhidBetween(short value1, short value2) {
             addCriterion("zero_whid between", value1, value2, "zeroWhid");
             return (Criteria) this;
         }
 
-        public Criteria andZeroWhidNotBetween(Integer value1, Integer value2) {
+        public Criteria andZeroWhidNotBetween(short value1, short value2) {
             addCriterion("zero_whid not between", value1, value2, "zeroWhid");
             return (Criteria) this;
         }
@@ -1238,53 +1238,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyEqualTo(Integer value) {
+        public Criteria andZeroQtyEqualTo(short value) {
             addCriterion("zero_qty =", value, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyNotEqualTo(Integer value) {
+        public Criteria andZeroQtyNotEqualTo(short value) {
             addCriterion("zero_qty <>", value, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyGreaterThan(Integer value) {
+        public Criteria andZeroQtyGreaterThan(short value) {
             addCriterion("zero_qty >", value, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyGreaterThanOrEqualTo(Integer value) {
+        public Criteria andZeroQtyGreaterThanOrEqualTo(short value) {
             addCriterion("zero_qty >=", value, "zero_qty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyLessThan(Integer value) {
+        public Criteria andZeroQtyLessThan(short value) {
             addCriterion("zero_qty <", value, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyLessThanOrEqualTo(Integer value) {
+        public Criteria andZeroQtyLessThanOrEqualTo(short value) {
             addCriterion("zero_qty <=", value, "zeroQty");
             return (Criteria) this;
         }
 
 
-        public Criteria andZeroQtyIn(List<Integer > values) {
+        public Criteria andZeroQtyIn(List<short > values) {
             addCriterion("zero_qty in", values, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyNotIn(List<Integer> values) {
+        public Criteria andZeroQtyNotIn(List<short> values) {
             addCriterion("zero_qty not in", values, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyBetween(Integer value1, Integer value2) {
+        public Criteria andZeroQtyBetween(short value1, short value2) {
             addCriterion("zero_qty between", value1, value2, "zeroQty");
             return (Criteria) this;
         }
 
-        public Criteria andZeroQtyNotBetween(Integer value1, Integer value2) {
+        public Criteria andZeroQtyNotBetween(short value1, short value2) {
             addCriterion("zero_qty not between", value1, value2, "zeroQty");
             return (Criteria) this;
         }
@@ -1942,53 +1942,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightEqualTo(Integer value) {
+        public Criteria andPkgweightEqualTo(short value) {
             addCriterion("pkgweight =", value, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightNotEqualTo(Integer value) {
+        public Criteria andPkgweightNotEqualTo(short value) {
             addCriterion("pkgweight <>", value, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightGreaterThan(Integer value) {
+        public Criteria andPkgweightGreaterThan(short value) {
             addCriterion("pkgweight >", value, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPkgweightGreaterThanOrEqualTo(short value) {
             addCriterion("pkgweight >=", value, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightLessThan(Integer value) {
+        public Criteria andPkgweightLessThan(short value) {
             addCriterion("pkgweight <", value, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightLessThanOrEqualTo(Integer value) {
+        public Criteria andPkgweightLessThanOrEqualTo(short value) {
             addCriterion("pkgweight <=", value, "pkgweight");
             return (Criteria) this;
         }
 
 
-        public Criteria andPkgweightIn(List<Integer > values) {
+        public Criteria andPkgweightIn(List<short > values) {
             addCriterion("pkgweight in", values, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightNotIn(List<Integer> values) {
+        public Criteria andPkgweightNotIn(List<short> values) {
             addCriterion("pkgweight not in", values, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightBetween(Integer value1, Integer value2) {
+        public Criteria andPkgweightBetween(short value1, short value2) {
             addCriterion("pkgweight between", value1, value2, "pkgweight");
             return (Criteria) this;
         }
 
-        public Criteria andPkgweightNotBetween(Integer value1, Integer value2) {
+        public Criteria andPkgweightNotBetween(short value1, short value2) {
             addCriterion("pkgweight not between", value1, value2, "pkgweight");
             return (Criteria) this;
         }
@@ -2006,53 +2006,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateEqualTo(Integer value) {
+        public Criteria andPkgrateEqualTo(short value) {
             addCriterion("pkgrate =", value, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateNotEqualTo(Integer value) {
+        public Criteria andPkgrateNotEqualTo(short value) {
             addCriterion("pkgrate <>", value, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateGreaterThan(Integer value) {
+        public Criteria andPkgrateGreaterThan(short value) {
             addCriterion("pkgrate >", value, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPkgrateGreaterThanOrEqualTo(short value) {
             addCriterion("pkgrate >=", value, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateLessThan(Integer value) {
+        public Criteria andPkgrateLessThan(short value) {
             addCriterion("pkgrate <", value, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateLessThanOrEqualTo(Integer value) {
+        public Criteria andPkgrateLessThanOrEqualTo(short value) {
             addCriterion("pkgrate <=", value, "pkgrate");
             return (Criteria) this;
         }
 
 
-        public Criteria andPkgrateIn(List<Integer > values) {
+        public Criteria andPkgrateIn(List<short > values) {
             addCriterion("pkgrate in", values, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateNotIn(List<Integer> values) {
+        public Criteria andPkgrateNotIn(List<short> values) {
             addCriterion("pkgrate not in", values, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateBetween(Integer value1, Integer value2) {
+        public Criteria andPkgrateBetween(short value1, short value2) {
             addCriterion("pkgrate between", value1, value2, "pkgrate");
             return (Criteria) this;
         }
 
-        public Criteria andPkgrateNotBetween(Integer value1, Integer value2) {
+        public Criteria andPkgrateNotBetween(short value1, short value2) {
             addCriterion("pkgrate not between", value1, value2, "pkgrate");
             return (Criteria) this;
         }
@@ -2262,53 +2262,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoEqualTo(Integer value) {
+        public Criteria andVersionnoEqualTo(short value) {
             addCriterion("versionno =", value, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoNotEqualTo(Integer value) {
+        public Criteria andVersionnoNotEqualTo(short value) {
             addCriterion("versionno <>", value, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoGreaterThan(Integer value) {
+        public Criteria andVersionnoGreaterThan(short value) {
             addCriterion("versionno >", value, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoGreaterThanOrEqualTo(Integer value) {
+        public Criteria andVersionnoGreaterThanOrEqualTo(short value) {
             addCriterion("versionno >=", value, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoLessThan(Integer value) {
+        public Criteria andVersionnoLessThan(short value) {
             addCriterion("versionno <", value, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoLessThanOrEqualTo(Integer value) {
+        public Criteria andVersionnoLessThanOrEqualTo(short value) {
             addCriterion("versionno <=", value, "versionno");
             return (Criteria) this;
         }
 
 
-        public Criteria andVersionnoIn(List<Integer > values) {
+        public Criteria andVersionnoIn(List<short > values) {
             addCriterion("versionno in", values, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoNotIn(List<Integer> values) {
+        public Criteria andVersionnoNotIn(List<short> values) {
             addCriterion("versionno not in", values, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoBetween(Integer value1, Integer value2) {
+        public Criteria andVersionnoBetween(short value1, short value2) {
             addCriterion("versionno between", value1, value2, "versionno");
             return (Criteria) this;
         }
 
-        public Criteria andVersionnoNotBetween(Integer value1, Integer value2) {
+        public Criteria andVersionnoNotBetween(short value1, short value2) {
             addCriterion("versionno not between", value1, value2, "versionno");
             return (Criteria) this;
         }
@@ -2966,53 +2966,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductLenEqualTo(Integer value) {
+        public Criteria andProductLenEqualTo(short value) {
             addCriterion("product_len =", value, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenNotEqualTo(Integer value) {
+        public Criteria andProductLenNotEqualTo(short value) {
             addCriterion("product_len <>", value, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenGreaterThan(Integer value) {
+        public Criteria andProductLenGreaterThan(short value) {
             addCriterion("product_len >", value, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenGreaterThanOrEqualTo(Integer value) {
+        public Criteria andProductLenGreaterThanOrEqualTo(short value) {
             addCriterion("product_len >=", value, "product_len");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenLessThan(Integer value) {
+        public Criteria andProductLenLessThan(short value) {
             addCriterion("product_len <", value, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenLessThanOrEqualTo(Integer value) {
+        public Criteria andProductLenLessThanOrEqualTo(short value) {
             addCriterion("product_len <=", value, "productLen");
             return (Criteria) this;
         }
 
 
-        public Criteria andProductLenIn(List<Integer > values) {
+        public Criteria andProductLenIn(List<short > values) {
             addCriterion("product_len in", values, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenNotIn(List<Integer> values) {
+        public Criteria andProductLenNotIn(List<short> values) {
             addCriterion("product_len not in", values, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenBetween(Integer value1, Integer value2) {
+        public Criteria andProductLenBetween(short value1, short value2) {
             addCriterion("product_len between", value1, value2, "productLen");
             return (Criteria) this;
         }
 
-        public Criteria andProductLenNotBetween(Integer value1, Integer value2) {
+        public Criteria andProductLenNotBetween(short value1, short value2) {
             addCriterion("product_len not between", value1, value2, "productLen");
             return (Criteria) this;
         }
@@ -3030,53 +3030,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthEqualTo(Integer value) {
+        public Criteria andProductWidthEqualTo(short value) {
             addCriterion("product_width =", value, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthNotEqualTo(Integer value) {
+        public Criteria andProductWidthNotEqualTo(short value) {
             addCriterion("product_width <>", value, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthGreaterThan(Integer value) {
+        public Criteria andProductWidthGreaterThan(short value) {
             addCriterion("product_width >", value, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthGreaterThanOrEqualTo(Integer value) {
+        public Criteria andProductWidthGreaterThanOrEqualTo(short value) {
             addCriterion("product_width >=", value, "product_width");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthLessThan(Integer value) {
+        public Criteria andProductWidthLessThan(short value) {
             addCriterion("product_width <", value, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthLessThanOrEqualTo(Integer value) {
+        public Criteria andProductWidthLessThanOrEqualTo(short value) {
             addCriterion("product_width <=", value, "productWidth");
             return (Criteria) this;
         }
 
 
-        public Criteria andProductWidthIn(List<Integer > values) {
+        public Criteria andProductWidthIn(List<short > values) {
             addCriterion("product_width in", values, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthNotIn(List<Integer> values) {
+        public Criteria andProductWidthNotIn(List<short> values) {
             addCriterion("product_width not in", values, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthBetween(Integer value1, Integer value2) {
+        public Criteria andProductWidthBetween(short value1, short value2) {
             addCriterion("product_width between", value1, value2, "productWidth");
             return (Criteria) this;
         }
 
-        public Criteria andProductWidthNotBetween(Integer value1, Integer value2) {
+        public Criteria andProductWidthNotBetween(short value1, short value2) {
             addCriterion("product_width not between", value1, value2, "productWidth");
             return (Criteria) this;
         }
@@ -3094,53 +3094,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightEqualTo(Integer value) {
+        public Criteria andProductHeightEqualTo(short value) {
             addCriterion("product_height =", value, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightNotEqualTo(Integer value) {
+        public Criteria andProductHeightNotEqualTo(short value) {
             addCriterion("product_height <>", value, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightGreaterThan(Integer value) {
+        public Criteria andProductHeightGreaterThan(short value) {
             addCriterion("product_height >", value, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andProductHeightGreaterThanOrEqualTo(short value) {
             addCriterion("product_height >=", value, "product_height");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightLessThan(Integer value) {
+        public Criteria andProductHeightLessThan(short value) {
             addCriterion("product_height <", value, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightLessThanOrEqualTo(Integer value) {
+        public Criteria andProductHeightLessThanOrEqualTo(short value) {
             addCriterion("product_height <=", value, "productHeight");
             return (Criteria) this;
         }
 
 
-        public Criteria andProductHeightIn(List<Integer > values) {
+        public Criteria andProductHeightIn(List<short > values) {
             addCriterion("product_height in", values, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightNotIn(List<Integer> values) {
+        public Criteria andProductHeightNotIn(List<short> values) {
             addCriterion("product_height not in", values, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightBetween(Integer value1, Integer value2) {
+        public Criteria andProductHeightBetween(short value1, short value2) {
             addCriterion("product_height between", value1, value2, "productHeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductHeightNotBetween(Integer value1, Integer value2) {
+        public Criteria andProductHeightNotBetween(short value1, short value2) {
             addCriterion("product_height not between", value1, value2, "productHeight");
             return (Criteria) this;
         }
@@ -3158,53 +3158,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightEqualTo(Integer value) {
+        public Criteria andProductWeightEqualTo(short value) {
             addCriterion("product_weight =", value, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightNotEqualTo(Integer value) {
+        public Criteria andProductWeightNotEqualTo(short value) {
             addCriterion("product_weight <>", value, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightGreaterThan(Integer value) {
+        public Criteria andProductWeightGreaterThan(short value) {
             addCriterion("product_weight >", value, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andProductWeightGreaterThanOrEqualTo(short value) {
             addCriterion("product_weight >=", value, "product_weight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightLessThan(Integer value) {
+        public Criteria andProductWeightLessThan(short value) {
             addCriterion("product_weight <", value, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightLessThanOrEqualTo(Integer value) {
+        public Criteria andProductWeightLessThanOrEqualTo(short value) {
             addCriterion("product_weight <=", value, "productWeight");
             return (Criteria) this;
         }
 
 
-        public Criteria andProductWeightIn(List<Integer > values) {
+        public Criteria andProductWeightIn(List<short > values) {
             addCriterion("product_weight in", values, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightNotIn(List<Integer> values) {
+        public Criteria andProductWeightNotIn(List<short> values) {
             addCriterion("product_weight not in", values, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightBetween(Integer value1, Integer value2) {
+        public Criteria andProductWeightBetween(short value1, short value2) {
             addCriterion("product_weight between", value1, value2, "productWeight");
             return (Criteria) this;
         }
 
-        public Criteria andProductWeightNotBetween(Integer value1, Integer value2) {
+        public Criteria andProductWeightNotBetween(short value1, short value2) {
             addCriterion("product_weight not between", value1, value2, "productWeight");
             return (Criteria) this;
         }
@@ -3222,53 +3222,53 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightEqualTo(Integer value) {
+        public Criteria andProductVolweightEqualTo(short value) {
             addCriterion("product_volweight =", value, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightNotEqualTo(Integer value) {
+        public Criteria andProductVolweightNotEqualTo(short value) {
             addCriterion("product_volweight <>", value, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightGreaterThan(Integer value) {
+        public Criteria andProductVolweightGreaterThan(short value) {
             addCriterion("product_volweight >", value, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightGreaterThanOrEqualTo(Integer value) {
+        public Criteria andProductVolweightGreaterThanOrEqualTo(short value) {
             addCriterion("product_volweight >=", value, "product_volweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightLessThan(Integer value) {
+        public Criteria andProductVolweightLessThan(short value) {
             addCriterion("product_volweight <", value, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightLessThanOrEqualTo(Integer value) {
+        public Criteria andProductVolweightLessThanOrEqualTo(short value) {
             addCriterion("product_volweight <=", value, "productVolweight");
             return (Criteria) this;
         }
 
 
-        public Criteria andProductVolweightIn(List<Integer > values) {
+        public Criteria andProductVolweightIn(List<short > values) {
             addCriterion("product_volweight in", values, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightNotIn(List<Integer> values) {
+        public Criteria andProductVolweightNotIn(List<short> values) {
             addCriterion("product_volweight not in", values, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightBetween(Integer value1, Integer value2) {
+        public Criteria andProductVolweightBetween(short value1, short value2) {
             addCriterion("product_volweight between", value1, value2, "productVolweight");
             return (Criteria) this;
         }
 
-        public Criteria andProductVolweightNotBetween(Integer value1, Integer value2) {
+        public Criteria andProductVolweightNotBetween(short value1, short value2) {
             addCriterion("product_volweight not between", value1, value2, "productVolweight");
             return (Criteria) this;
         }

@@ -2,13 +2,13 @@ package com.sunvalley.erp.model.product;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+import java.math.BigDecimal;
 import java.io.Serializable;
 
 /**
 * @Description: table:Item
 * @author
-* @date 2017-09-15 10:39:28
+* @date 2017-09-16 01:04:09
 */
 public class Item implements Serializable{
 
@@ -17,13 +17,13 @@ public class Item implements Serializable{
     //columns 开始
     private java.lang.Integer skuid;//
     private java.lang.String sku;//
-    private Integer len;//
-    private Integer width;//
-    private Integer height;//
-    private Integer weight;//
-    private Integer volweight;//
+    private short len;//
+    private short width;//
+    private short height;//
+    private short weight;//
+    private short volweight;//
     private java.util.Date createDate;//
-    private Integer active;//
+    private short active;//
     private java.lang.Boolean isdrop;//
     private java.lang.Boolean dropDef;//
     private Integer isvirtual;//
@@ -31,8 +31,8 @@ public class Item implements Serializable{
     private java.lang.String remark;//
     private java.lang.Boolean issale;//
     private java.lang.Boolean zeroStock;//
-    private Integer zeroWhid;//
-    private Integer zeroQty;//
+    private short zeroWhid;//
+    private short zeroQty;//
     private Integer boxtype;//
     private java.lang.Integer pmid;//
     private java.lang.Integer peid;//
@@ -43,12 +43,12 @@ public class Item implements Serializable{
     private java.lang.String skulable;//
     private java.lang.Integer innerskuId;//
     private java.lang.Integer outerskuId;//
-    private Integer pkgweight;//
-    private Integer pkgrate;//
+    private short pkgweight;//
+    private short pkgrate;//
     private java.lang.String purpkg;//
     private java.lang.String stopkg;//
     private java.lang.Integer standard;//
-    private Integer versionno;//
+    private short versionno;//
     private java.lang.Integer updateuserid;//
     private java.util.Date updatedate;//
     private java.lang.Boolean haspic;//
@@ -59,11 +59,11 @@ public class Item implements Serializable{
     private java.lang.String purtitle;//
     private java.lang.Integer brandId;//
     private java.lang.Integer purchaserId;//é‡‡è´­å‘˜ID
-    private Integer productLen;//裸机长
-    private Integer productWidth;//裸机宽
-    private Integer productHeight;//裸机高
-    private Integer productWeight;//裸机重
-    private Integer productVolweight;//裸机材积重
+    private short productLen;//裸机长
+    private short productWidth;//裸机宽
+    private short productHeight;//裸机高
+    private short productWeight;//裸机重
+    private short productVolweight;//裸机材积重
     private java.lang.Integer battery;//电池
     private java.lang.String model;//模型
     private java.lang.Integer psid;//
@@ -119,14 +119,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setLen(Integer value) {
+	public void setLen(short value) {
 		this.len = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getLen() {
+	public short getLen() {
 		return this.len;
 	}
 
@@ -135,14 +135,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setWidth(Integer value) {
+	public void setWidth(short value) {
 		this.width = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getWidth() {
+	public short getWidth() {
 		return this.width;
 	}
 
@@ -151,14 +151,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setHeight(Integer value) {
+	public void setHeight(short value) {
 		this.height = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getHeight() {
+	public short getHeight() {
 		return this.height;
 	}
 
@@ -167,14 +167,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setWeight(Integer value) {
+	public void setWeight(short value) {
 		this.weight = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getWeight() {
+	public short getWeight() {
 		return this.weight;
 	}
 
@@ -183,14 +183,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setVolweight(Integer value) {
+	public void setVolweight(short value) {
 		this.volweight = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getVolweight() {
+	public short getVolweight() {
 		return this.volweight;
 	}
 
@@ -215,14 +215,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setActive(Integer value) {
+	public void setActive(short value) {
 		this.active = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getActive() {
+	public short getActive() {
 		return this.active;
 	}
 
@@ -343,14 +343,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setZeroWhid(Integer value) {
+	public void setZeroWhid(short value) {
 		this.zeroWhid = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getZeroWhid() {
+	public short getZeroWhid() {
 		return this.zeroWhid;
 	}
 
@@ -359,14 +359,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setZeroQty(Integer value) {
+	public void setZeroQty(short value) {
 		this.zeroQty = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getZeroQty() {
+	public short getZeroQty() {
 		return this.zeroQty;
 	}
 
@@ -535,14 +535,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setPkgweight(Integer value) {
+	public void setPkgweight(short value) {
 		this.pkgweight = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getPkgweight() {
+	public short getPkgweight() {
 		return this.pkgweight;
 	}
 
@@ -551,14 +551,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setPkgrate(Integer value) {
+	public void setPkgrate(short value) {
 		this.pkgrate = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getPkgrate() {
+	public short getPkgrate() {
 		return this.pkgrate;
 	}
 
@@ -615,14 +615,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setVersionno(Integer value) {
+	public void setVersionno(short value) {
 		this.versionno = value;
 	}
 	
 	/**
      * 
      */
-	public Integer getVersionno() {
+	public short getVersionno() {
 		return this.versionno;
 	}
 
@@ -791,14 +791,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setProductLen(Integer value) {
+	public void setProductLen(short value) {
 		this.productLen = value;
 	}
 	
 	/**
      * 裸机长
      */
-	public Integer getProductLen() {
+	public short getProductLen() {
 		return this.productLen;
 	}
 
@@ -807,14 +807,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setProductWidth(Integer value) {
+	public void setProductWidth(short value) {
 		this.productWidth = value;
 	}
 	
 	/**
      * 裸机宽
      */
-	public Integer getProductWidth() {
+	public short getProductWidth() {
 		return this.productWidth;
 	}
 
@@ -823,14 +823,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setProductHeight(Integer value) {
+	public void setProductHeight(short value) {
 		this.productHeight = value;
 	}
 	
 	/**
      * 裸机高
      */
-	public Integer getProductHeight() {
+	public short getProductHeight() {
 		return this.productHeight;
 	}
 
@@ -839,14 +839,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setProductWeight(Integer value) {
+	public void setProductWeight(short value) {
 		this.productWeight = value;
 	}
 	
 	/**
      * 裸机重
      */
-	public Integer getProductWeight() {
+	public short getProductWeight() {
 		return this.productWeight;
 	}
 
@@ -855,14 +855,14 @@ public class Item implements Serializable{
      *
      * @param value
      */
-	public void setProductVolweight(Integer value) {
+	public void setProductVolweight(short value) {
 		this.productVolweight = value;
 	}
 	
 	/**
      * 裸机材积重
      */
-	public Integer getProductVolweight() {
+	public short getProductVolweight() {
 		return this.productVolweight;
 	}
 

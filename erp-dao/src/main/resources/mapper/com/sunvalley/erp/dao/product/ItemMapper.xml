@@ -552,7 +552,7 @@
     </update>
 
 
-    <update id="update" parameterType="Item">
+    <update id="updateByPrimaryKey" parameterType="Item">
         UPDATE bs_item
         <set>
             <include refid="Set"></include>
@@ -586,6 +586,11 @@
             ( <include refid="ValuesBatch"></include> )
         </foreach>
     </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  bs_item
+        WHERE skuid = #{skuid,jdbcType=INTEGER}
+    </delete>
 
 
 
