@@ -1,4 +1,4 @@
-package com.sunvalley.erp.entity;
+package com.sunvalley.domain;
 
 import java.util.HashMap;
 import java.util.List;

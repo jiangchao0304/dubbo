@@ -3,9 +3,9 @@ package com.sunvalley.erp.daoEX.product;
 import java.util.HashMap;
 import java.util.List;
 
-import com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO;
-import com.sunvalley.erp.domain.product.dto.PackageSkuDTO;
-import com.sunvalley.erp.domain.product.dto.PreSkuGridDTO;
+import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PackageSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PreSkuGridDTO;
 import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
 
 public interface PrepareSkuExMapper {

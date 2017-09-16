@@ -41,7 +41,7 @@
 			model.model_name = #{model}
 	</select>
 
-	<select id="preSkuGrid" parameterType="map" resultType="com.sunvalley.erp.domain.product.dto.PreSkuGridDTO">
+	<select id="preSkuGrid" parameterType="map" resultType="com.sunvalley.domain.erp.product.dto.PreSkuGridDTO">
 		SELECT
 			pre.id id,
 			pre.pre_sku preSku,
@@ -103,7 +103,7 @@
 	    </if>
 	</select>
 	
-	<select id="packageSkuList" parameterType="map" resultType="com.sunvalley.erp.domain.product.dto.PackageSkuDTO">
+	<select id="packageSkuList" parameterType="map" resultType="com.sunvalley.domain.erp.product.dto.PackageSkuDTO">
 		SELECT
 			item.sku sku,
 			anrule.anruleStr anruleStr,
@@ -132,7 +132,7 @@
 		AND item.model = #{model}
 	</select>
 
-	<select id="listModelAndPreSku" parameterType="map" resultType="com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO">
+	<select id="listModelAndPreSku" parameterType="map" resultType="com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO">
 		SELECT
 		anruleStr safety,
 		country.country safetyCountry,

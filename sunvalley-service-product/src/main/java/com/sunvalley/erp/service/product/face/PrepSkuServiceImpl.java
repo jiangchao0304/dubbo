@@ -3,11 +3,11 @@
 */
 package com.sunvalley.erp.service.product.face;
 
-import com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO;
-import com.sunvalley.erp.domain.product.dto.PreSkuSaveDTO;
-import com.sunvalley.erp.domain.product.dto.PreSkuDTO;
-import com.sunvalley.erp.entity.FilterModel;
-import com.sunvalley.erp.entity.Pager;
+import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PreSkuSaveDTO;
+import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
+import com.sunvalley.domain.FilterModel;
+import com.sunvalley.domain.Pager;
 import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.common.util.JsonUtil;
 import com.sunvalley.face.base.ResponseBean;

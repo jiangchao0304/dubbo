@@ -42,6 +42,7 @@
 			<groupId>com.sunvalley</groupId>
 			<artifactId>sunvalley-dao</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.sunvalley</groupId>
 			<artifactId>sunvalley-domain</artifactId>

@@ -1,4 +1,4 @@
-package com.sunvalley.erp.entity;
+package com.sunvalley.domain;
 
 public class FilterCondition {
 	

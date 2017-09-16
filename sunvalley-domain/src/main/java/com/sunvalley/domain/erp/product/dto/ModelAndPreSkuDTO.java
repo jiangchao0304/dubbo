@@ -1,4 +1,4 @@
-package com.sunvalley.erp.domain.product.dto;
+package com.sunvalley.domain.erp.product.dto;
 
 /**
  * Created by jcgh on 2017-09-15.

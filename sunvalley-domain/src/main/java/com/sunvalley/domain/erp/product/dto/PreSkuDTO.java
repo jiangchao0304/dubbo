@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.domain.product.dto;
+package com.sunvalley.domain.erp.product.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;

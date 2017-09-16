@@ -5,11 +5,11 @@ package com.sunvalley.erp.service.product;
 
 import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.common.constants.Constants;
+import com.sunvalley.domain.erp.product.dto.*;
 import com.sunvalley.erp.dao.product.*;
 import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
-import com.sunvalley.erp.domain.product.dto.*;
-import com.sunvalley.erp.entity.FilterModel;
-import com.sunvalley.erp.entity.Pager;
+import com.sunvalley.domain.FilterModel;
+import com.sunvalley.domain.Pager;
 import com.sunvalley.erp.model.product.*;
 import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
 import com.sunvalley.common.util.TimeUtil;
@@ -66,7 +66,7 @@ public class PrepareService {
      *         [modelName]
      * @param status
      *         [status]
-     * @return com.sunvalley.erp.domain.product.dto.PreSkuDTO
+     * @return com.sunvalley.domain.erp.product.dto.PreSkuDTO
      * @throws
      * @author: douglas.jiang
      * @date : 2017/9/14:16:23
@@ -89,7 +89,7 @@ public class PrepareService {
             vo.setModelRemark(prepareSkuEx.getModel_remark());
 
             map.put("model_id", prepareSkuEx.getModelId());
-            List<PreSkuGridDTO> preSkuList = prepareSkuExMapper.preSkuGrid(map);
+            List<PreSkuGridDTO> preSkuList =  prepareSkuExMapper.preSkuGrid(map);
 
             List<PreSkuGridDTO> preSkuVOList = new ArrayList<>(preSkuList.size());
             for (int i = 0; i < preSkuList.size(); i++) {
@@ -127,9 +127,9 @@ public class PrepareService {
     /**
      * model&预备SKU列表查询.
      * @param [filterModels, offset, pageSize]
-     * @return com.sunvalley.erp.entity.Pager<com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO>
+     * @return com.sunvalley.domain.Pager<com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO>
      * @exception
-     * @author: PXMWJCH
+     * @author:
      * @since : 2017-09-15:23:42
      */
     public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) throws Exception{
