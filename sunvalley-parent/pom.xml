@@ -4,9 +4,9 @@
   <groupId>com.sunvalley</groupId>
   <artifactId>sunvalley-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1</version>
 
-  <name>erp-parent</name>
+  <name>sunvalley-parent</name>
   <url>http://maven.apache.org</url>
 
   <modules>
@@ -111,17 +111,6 @@
         <version>1.7.25</version>
       </dependency>
 
-      <dependency>
-        <groupId>com.sunvalley</groupId>
-        <artifactId>erp-common</artifactId>
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.sunvalley</groupId>
-        <artifactId>erp-util</artifactId>
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
 
       <dependency>
         <groupId>com.sunvalley</groupId>
@@ -137,13 +126,19 @@
 
       <dependency>
         <groupId>com.sunvalley</groupId>
-        <artifactId>erp-dao</artifactId>
+        <artifactId>sunvalley-dao</artifactId>
         <version>0.0.1</version>
       </dependency>
 
       <dependency>
         <groupId>com.sunvalley</groupId>
         <artifactId>sunvalley-domain</artifactId>
+        <version>0.0.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sunvalley</groupId>
+        <artifactId>sunvalley-service-product</artifactId>
         <version>0.0.1</version>
       </dependency>
 
