@@ -17,25 +17,34 @@ spring:
       profiles:
         active: @profiles.active@
       datasource:
-         driverClassName : com.mysql.jdbc.Driver
+         driver-class-name : com.mysql.jdbc.Driver
          url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
          username : dev_express
          password : Devdb201707
          type : com.alibaba.druid.pool.DruidDataSource
-         initialSize : 20
-         minIdle : 1
-         maxActive : 500
-         maxWait : 60000
-         timeBetweenEvictionRunsMillis : 60000
-         timeBetweenLogStatsMillis : 300000
-         minEvictableIdleTimeMillis : 300000
-         validationQuery : SELECT 'x'
-         testWhileIdle : true
-         testOnBorrow : false
-         testOnReturn : false
-         poolPreparedStatements : false
-         maxPoolPreparedStatementPerConnectionSize : 20
-         filters : stat,slf4j
+         druid:
+              initial-size : 20
+              min-idle : 1
+              max-active : 500
+              max-wait : 60000
+              time-between-eviction-runs-millis : 60000
+              min-evictable-idle-time-millis : 300000
+              max-evictable-idle-time-millis : 300000
+              validation-query : SELECT 1
+              validation-query-timeout : 30000
+              test-while-idle : true
+              test-on-borrow : false
+              test-on-return : false
+              pool-prepared-statements : false
+              max-pool-prepared-statement-per-connection-size : 20
+              max-open-prepared-statements : 20
+              filters : stat,slf4j
+              filter:
+                slf4j:
+                  enabled: true
+                  statement-executable-sql-log-enable: true
+
+
       dubbo.scan : com.sunvalley.erp.service.product
 mybatis:
      type-aliases-package : com.sunvalley.erp.model.product
