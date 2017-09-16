@@ -3,7 +3,7 @@
 */
 package com.sunvalley.erp.service.product;
 
-import com.sunvalley.erp.common.constants.Constants;
+import com.sunvalley.common.constants.Constants;
 import com.sunvalley.erp.dao.product.ItemMapper;
 import com.sunvalley.erp.daoEX.product.ItemExMapper;
 import com.sunvalley.erp.model.product.ItemLocale;

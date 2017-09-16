@@ -9,7 +9,7 @@ import com.sunvalley.erp.domain.product.dto.PreSkuDTO;
 import com.sunvalley.erp.entity.FilterModel;
 import com.sunvalley.erp.entity.Pager;
 import com.sunvalley.erp.service.product.PrepareService;
-import com.sunvalley.erp.util.json.JsonParse;
+import com.sunvalley.common.util.JsonUtil;
 import com.sunvalley.face.base.ResponseBean;
 import com.sunvalley.face.base.ResponseObj;
 import com.sunvalley.face.erp.product.IPreSkuService;
@@ -43,19 +43,19 @@ public class PrepSkuServiceImpl implements IPreSkuService {
         try {
              vo = prepareService.getByModel(modelName,status);
             result.put("jsonContent",vo);
-            responseBean.setJsonContent(JsonParse.toJson(vo));
+            responseBean.setJsonContent(JsonUtil.toJson(vo));
         }catch (Exception ex){
             responseBean.setJsonContent(ex.getMessage());
         }
 
-        return JsonParse.toJson(result);
+        return JsonUtil.toJson(result);
 
     }
 
     @Override
     public String saveModel(String jsonData) {
 
-      PreSkuSaveDTO preSkuSaveVO = (PreSkuSaveDTO)JsonParse.fromJson(jsonData, PreSkuSaveDTO.class);
+      PreSkuSaveDTO preSkuSaveVO = (PreSkuSaveDTO)JsonUtil.fromJson(jsonData, PreSkuSaveDTO.class);
       prepareService.save(preSkuSaveVO);
 
       return "1";

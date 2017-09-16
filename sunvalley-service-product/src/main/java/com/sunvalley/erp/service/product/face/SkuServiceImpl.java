@@ -3,11 +3,12 @@
 */
 package com.sunvalley.erp.service.product.face;
 
+import com.sunvalley.common.util.JsonUtil;
 import com.sunvalley.erp.dao.product.ItemMapper;
 import com.sunvalley.erp.model.product.Item;
 import com.sunvalley.erp.model.product.ItemLocale;
 import com.sunvalley.erp.service.product.ItemService;
-import com.sunvalley.erp.util.json.JsonParse;
+import com.sunvalley.common.util.JsonUtil;
 import com.sunvalley.face.base.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,16 +35,16 @@ public class SkuServiceImpl implements com.sunvalley.face.erp.product.ISkuServic
     public String getSkuBaseInfo(String sku) {
         ResponseBean responseBean = new ResponseBean();
         Item item = itemMapper.selectByPrimaryKey(4624);
-        responseBean.setJsonContent(JsonParse.toJson(item));
-        return JsonParse.toJson(responseBean);
+        responseBean.setJsonContent(JsonUtil.toJson(item));
+        return JsonUtil.toJson(responseBean);
     }
 
     @Override
     public String searchSku(String q,int langId, int limit,Integer companyId){
         ResponseBean responseBean = new ResponseBean();
         List<ItemLocale> list = itemService.searchSkuCategoryName(q, langId,new int[]{},limit,companyId);
-        responseBean.setJsonContent(JsonParse.toJson(list));
-        return JsonParse.toJson(responseBean);
+        responseBean.setJsonContent(JsonUtil.toJson(list));
+        return JsonUtil.toJson(responseBean);
     }
 }
 

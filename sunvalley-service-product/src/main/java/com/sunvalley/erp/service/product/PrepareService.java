@@ -4,7 +4,7 @@
 package com.sunvalley.erp.service.product;
 
 import com.sunvalley.common.util.FilterOP;
-import com.sunvalley.erp.common.constants.Constants;
+import com.sunvalley.common.constants.Constants;
 import com.sunvalley.erp.dao.product.*;
 import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
 import com.sunvalley.erp.domain.product.dto.*;
@@ -12,8 +12,8 @@ import com.sunvalley.erp.entity.FilterModel;
 import com.sunvalley.erp.entity.Pager;
 import com.sunvalley.erp.model.product.*;
 import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
-import com.sunvalley.erp.util.TimeUtil;
-import com.sunvalley.erp.util.exception.UniteException;
+import com.sunvalley.common.util.TimeUtil;
+import com.sunvalley.common.exception.UniteException;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
