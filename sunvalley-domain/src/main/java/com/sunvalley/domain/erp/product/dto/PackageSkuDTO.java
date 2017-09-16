@@ -3,13 +3,16 @@
 */
 package com.sunvalley.domain.erp.product.dto;
 
+import java.io.Serializable;
+
 /**
  * 类或方法的功能描述 :TODO
  *
  * @Author: douglas.jiang
  * @Date: 2017-09-14 14:57
  */
-public class PackageSkuDTO {
+public class PackageSkuDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String sku;
     private String anruleStr;

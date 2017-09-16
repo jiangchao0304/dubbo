@@ -3,6 +3,7 @@
 */
 package com.sunvalley.domain.erp.product.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
  * @Author: douglas.jiang
  * @Date: 2017-09-13 13:17
  */
-public class PreSkuDTO {
+public class PreSkuDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String sku;
     private String model;
@@ -29,21 +31,74 @@ public class PreSkuDTO {
     private Integer subCategoryId;
     private String subBrandCode; //小类编码
     private String customName;
-    private String saleDept;
+    private Integer saleDept;
     private Integer standardSize;
     private String weight;
     private String shippingType;
     private BigDecimal mc;
     private BigDecimal salePrice;
     private Date setupDate;
-    private String modelRemark; //model备注
+    private String remark; //model备注
+    private Integer battery;
+    private Integer warranty;
+    private Integer rmacategoryid;
+    private Integer magnetic;
+    private Integer sessionId;
+    private List<PreSkuGridDTO> preSkuList;   //sku列表
     private List<PackageSkuDTO> packageSkuList;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public Integer getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(Integer sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getBattery() {
+        return battery;
+    }
+
+    public void setBattery(Integer battery) {
+        this.battery = battery;
+    }
+
+    public Integer getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(Integer warranty) {
+        this.warranty = warranty;
+    }
+
+    public Integer getRmacategoryid() {
+        return rmacategoryid;
+    }
+
+    public void setRmacategoryid(Integer rmacategoryid) {
+        this.rmacategoryid = rmacategoryid;
+    }
+
+    public Integer getMagnetic() {
+        return magnetic;
+    }
+
+    public void setMagnetic(Integer magnetic) {
+        this.magnetic = magnetic;
+    }
 
     public List<PackageSkuDTO> getPackageSkuList() {
         return packageSkuList;
     }
 
-    private List<PreSkuGridDTO> preSkuList;   //sku列表
 
     public void setPackageSkuList(List<PackageSkuDTO> packageSkuList) {
         this.packageSkuList = packageSkuList;
@@ -169,11 +224,11 @@ public class PreSkuDTO {
         this.customName = customName;
     }
 
-    public String getSaleDept() {
+    public Integer getSaleDept() {
         return saleDept;
     }
 
-    public void setSaleDept(String saleDept) {
+    public void setSaleDept(Integer saleDept) {
         this.saleDept = saleDept;
     }
 
@@ -225,13 +280,6 @@ public class PreSkuDTO {
         this.setupDate = setupDate;
     }
 
-    public String getModelRemark() {
-        return modelRemark;
-    }
-
-    public void setModelRemark(String modelRemark) {
-        this.modelRemark = modelRemark;
-    }
 
 
 

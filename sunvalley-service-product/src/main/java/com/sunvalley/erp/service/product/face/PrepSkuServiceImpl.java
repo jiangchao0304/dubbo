@@ -31,34 +31,35 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     private PrepareService prepareService;
 
     @Override
-    public String getByModel(String modelName, Integer status) {
+    public ResponseObj<PreSkuDTO> getByModel(String modelName, Integer status) {
 
-        ResponseBean responseBean = new ResponseBean();
+        ResponseObj<PreSkuDTO> result = new ResponseObj<>();
 
-        Map<String,Object> result = new HashMap<>();
-        result.put("responseCode",1);
-
-
-        PreSkuDTO vo;
         try {
-             vo = prepareService.getByModel(modelName,status);
-            result.put("jsonContent",vo);
-            responseBean.setJsonContent(JsonUtil.toJson(vo));
+            PreSkuDTO  dto = prepareService.getByModel(modelName,status);
+            result.setData(dto);
+            result.setResponseCode(0);
         }catch (Exception ex){
-            responseBean.setJsonContent(ex.getMessage());
+            result.setResponseCode(-1);
+            result.setErrorMessage(ex.getMessage());
         }
-
-        return JsonUtil.toJson(result);
+        return result;
 
     }
 
     @Override
-    public String saveModel(String jsonData) {
+    public ResponseObj<PreSkuDTO> saveModel(PreSkuDTO preSkuDTO) {
 
-      PreSkuSaveDTO preSkuSaveVO = (PreSkuSaveDTO)JsonUtil.fromJson(jsonData, PreSkuSaveDTO.class);
-      prepareService.save(preSkuSaveVO);
-
-      return "1";
+        ResponseObj<PreSkuDTO> result = new ResponseObj<>();
+        try{
+            PreSkuDTO dto = prepareService.saveModel(preSkuDTO);
+            result.setData(dto);
+            result.setResponseCode(0);
+        }catch (Exception ex){
+            result.setResponseCode(-1);
+            result.setErrorMessage(ex.getMessage());
+        }
+      return result;
 
     }
 

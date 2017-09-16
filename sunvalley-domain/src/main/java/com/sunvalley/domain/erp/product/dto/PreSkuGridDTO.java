@@ -3,6 +3,7 @@
 */
 package com.sunvalley.domain.erp.product.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,7 +13,8 @@ import java.util.Date;
  * @Author: douglas.jiang
  * @Date: 2017-09-14 14:50
  */
-public class PreSkuGridDTO {
+public class PreSkuGridDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Integer  id;
     private String  preSku;

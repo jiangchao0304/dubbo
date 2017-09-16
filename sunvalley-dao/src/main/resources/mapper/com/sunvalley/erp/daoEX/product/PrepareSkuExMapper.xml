@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sunvalley.erp.daoEX.product.PrepareSkuExMapper" >
 	
-	<select id="initByModel" parameterType="map" resultType="com.sunvalley.erp.modelEX.product.PrepareSkuEx">
+	<select id="initByModel" parameterType="map" resultType="com.sunvalley.domain.erp.product.dto.PreSkuDTO">
 		SELECT
 			model.model_id modelId,
 			model.model_name model,
@@ -27,7 +27,11 @@
 			common.mc mc,
 			common.sale_price salePrice,
 			common.setup_date setupDate,
-            model.remark model_remark
+            model.remark,
+            model.magnetic,
+            model.battery,
+            model.warranty,
+            model.rmacategoryid
 		FROM
 			bs_item_model model
 		INNER JOIN bs_item_brand brand ON model.brand_id = brand.brand_id
@@ -157,9 +161,11 @@
 		model.battery,
 		model.warranty,
 		model.rmacategoryid,
-		model.magnetic
+		model.magnetic,
+		rma.rma_name rmaName
 		FROM
 		bs_item_model model
+		LEFT JOIN  so_rma_reason_category AS rma on rma.id=model.rmacategoryid
 		LEFT JOIN bs_prepare_sku b ON model.model_id = b.model_id
 		LEFT JOIN(
 		SELECT

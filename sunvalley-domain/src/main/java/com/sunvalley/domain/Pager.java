@@ -1,5 +1,6 @@
 package com.sunvalley.domain;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +9,10 @@ import java.util.Map;
  * @author Cheng Liangwei
  * @version 1.0
  * @date 2010-03-23
- * @see 分页信息的实体类，其中的模板T是指查询分页结果时的实体的类型
+ * @see "分页信息的实体类"，其中的模板T是指查询分页结果时的实体的类型
  * */
-public class Pager<T>{
+public class Pager<T> implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private int pageSize=20;//页的大小
 	private int rowCount=0;//行数

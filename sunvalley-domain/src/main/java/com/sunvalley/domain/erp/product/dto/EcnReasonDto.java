@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @Date: 2017-08-17 18:22
  */
 public class EcnReasonDto implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private String reasonName;
 

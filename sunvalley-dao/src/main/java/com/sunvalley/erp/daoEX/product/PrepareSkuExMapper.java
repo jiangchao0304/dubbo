@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
 import com.sunvalley.domain.erp.product.dto.PackageSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
 import com.sunvalley.domain.erp.product.dto.PreSkuGridDTO;
 import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
 
 public interface PrepareSkuExMapper {
 
 	
-	List<PrepareSkuEx> initByModel(HashMap<String, Object> map);
+	List<PreSkuDTO> initByModel(HashMap<String, Object> map);
 
 	List<PreSkuGridDTO> preSkuGrid(HashMap<String, Object> map);
 

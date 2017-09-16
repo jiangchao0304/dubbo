@@ -81,14 +81,10 @@ public class PrepareService {
             map.put("status", status);
         }
 
-        List<PrepareSkuEx> list = prepareSkuExMapper.initByModel(map);
+        List<PreSkuDTO> list = prepareSkuExMapper.initByModel(map);
         if(list != null && list.size()>0){
-            PrepareSkuEx prepareSkuEx = list.get(0);
-            PreSkuDTO vo = new PreSkuDTO();
-            PropertyUtils.copyProperties(vo, prepareSkuEx);
-            vo.setModelRemark(prepareSkuEx.getModel_remark());
-
-            map.put("model_id", prepareSkuEx.getModelId());
+            PreSkuDTO vo = list.get(0);
+            map.put("model_id", vo.getModelId());
             List<PreSkuGridDTO> preSkuList =  prepareSkuExMapper.preSkuGrid(map);
 
             List<PreSkuGridDTO> preSkuVOList = new ArrayList<>(preSkuList.size());
@@ -97,10 +93,6 @@ public class PrepareService {
                 PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
                 preSkuVOList.add(preSkuGridVO);
             }
-
-            itemModelMapper.selectByPrimaryKey(1);
-
-
 
             List<PackageSkuDTO> packageSkuList = prepareSkuExMapper.packageSkuList(map);
 
@@ -191,7 +183,7 @@ public class PrepareService {
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void save(PreSkuSaveDTO prepareSkuEx){
+    public PreSkuDTO saveModel(PreSkuDTO prepareSkuEx){
 
         ItemModel model = new ItemModel();
         model.setBrandId(prepareSkuEx.getBrandId());
@@ -200,10 +192,10 @@ public class PrepareService {
         model.setPmId(prepareSkuEx.getPmId());
         model.setCreateUser(prepareSkuEx.getSessionId());
         model.setCreateDate(TimeUtil.BeiJingTimeNow());
-        model.setRemark(prepareSkuEx.getModelRemark());
+        model.setRemark(prepareSkuEx.getRemark());
         model.setBattery(prepareSkuEx.getBattery());
         model.setWarranty(prepareSkuEx.getWarranty());
-        model.setRmacategoryid(prepareSkuEx.getRmaCategoryId());
+        model.setRmacategoryid(prepareSkuEx.getRmacategoryid());
         model.setMagnetic(prepareSkuEx.getMagnetic());
         model.setUpdateDate(TimeUtil.BeiJingTimeNow());
         model.setUpdateUser(prepareSkuEx.getSessionId());
@@ -229,6 +221,8 @@ public class PrepareService {
         }
         savePreSkuAttr(prepareSkuEx);
 
+        return  prepareSkuEx;
+
     }
 
 
@@ -237,7 +231,7 @@ public class PrepareService {
      * @param
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void savePreSkuAttr(PreSkuSaveDTO prepareSkuEx){
+    public void savePreSkuAttr(PreSkuDTO prepareSkuEx){
         ItemPreCommomExample preCommon = new ItemPreCommomExample();
         preCommon.createCriteria().andModelIdEqualTo(prepareSkuEx.getModelId());
         List<ItemPreCommom> list = itemPreCommomMapper.selectByExample(preCommon);
@@ -245,7 +239,7 @@ public class PrepareService {
         ItemPreCommom itemCommon = new ItemPreCommom();
         itemCommon.setModelId(prepareSkuEx.getModelId());
         //itemCommon.setCustomName(prepareSkuEx.getCustomName());
-        itemCommon.setSaleDept(prepareSkuEx.getSalesDept());
+        itemCommon.setSaleDept(prepareSkuEx.getSaleDept());
         itemCommon.setStandardSize(prepareSkuEx.getStandardSize());
         itemCommon.setWeight(new BigDecimal(prepareSkuEx.getWeight()));
         itemCommon.setShippingType(Integer.parseInt(prepareSkuEx.getShippingType()));

@@ -1,6 +1,9 @@
 package com.sunvalley.domain;
 
-public class FilterModel {
+import java.io.Serializable;
+
+public class FilterModel implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private String value;
 	private String datatype;

@@ -1,29 +1,40 @@
 package com.sunvalley.domain.erp.product.dto;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * Created by jcgh on 2017-09-15.
  */
-public class ModelAndPreSkuDTO {
+public class ModelAndPreSkuDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String safety;
     private String safetyCountry;
-    private String skuid;
-    private String createDate;
-    private String modelCreateDate;
+    private Integer skuid;
+    private Date createDate;
+    private Date modelCreateDate;
     private String createUserIdStr;
     private String model;
     private String brandDesc;
     private String preSku;
     private String sku;
-    private String status;
+    private Integer status;
     private String mainProLineName;
     private String subProLineName;
     private String pmName;
     private String colorStr;
-    private String modelId;
-    private String battery;
-    private String warranty;
-    private String rmacategoryid;
-    private String magnetic;
+    private Integer modelId;
+    private Integer battery;
+    private Integer warranty;
+    private Integer rmacategoryid;
+    private Integer magnetic;
+    private String rmaName;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public String getSafety() {
         return safety;
@@ -41,27 +52,27 @@ public class ModelAndPreSkuDTO {
         this.safetyCountry = safetyCountry;
     }
 
-    public String getSkuid() {
+    public Integer getSkuid() {
         return skuid;
     }
 
-    public void setSkuid(String skuid) {
+    public void setSkuid(Integer skuid) {
         this.skuid = skuid;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public String getModelCreateDate() {
+    public Date getModelCreateDate() {
         return modelCreateDate;
     }
 
-    public void setModelCreateDate(String modelCreateDate) {
+    public void setModelCreateDate(Date modelCreateDate) {
         this.modelCreateDate = modelCreateDate;
     }
 
@@ -105,11 +116,11 @@ public class ModelAndPreSkuDTO {
         this.sku = sku;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -145,43 +156,51 @@ public class ModelAndPreSkuDTO {
         this.colorStr = colorStr;
     }
 
-    public String getModelId() {
+    public Integer getModelId() {
         return modelId;
     }
 
-    public void setModelId(String modelId) {
+    public void setModelId(Integer modelId) {
         this.modelId = modelId;
     }
 
-    public String getBattery() {
+    public Integer getBattery() {
         return battery;
     }
 
-    public void setBattery(String battery) {
+    public void setBattery(Integer battery) {
         this.battery = battery;
     }
 
-    public String getWarranty() {
+    public Integer getWarranty() {
         return warranty;
     }
 
-    public void setWarranty(String warranty) {
+    public void setWarranty(Integer warranty) {
         this.warranty = warranty;
     }
 
-    public String getRmacategoryid() {
+    public Integer getRmacategoryid() {
         return rmacategoryid;
     }
 
-    public void setRmacategoryid(String rmacategoryid) {
+    public void setRmacategoryid(Integer rmacategoryid) {
         this.rmacategoryid = rmacategoryid;
     }
 
-    public String getMagnetic() {
+    public Integer getMagnetic() {
         return magnetic;
     }
 
-    public void setMagnetic(String magnetic) {
+    public void setMagnetic(Integer magnetic) {
         this.magnetic = magnetic;
+    }
+
+    public String getRmaName() {
+        return rmaName;
+    }
+
+    public void setRmaName(String rmaName) {
+        this.rmaName = rmaName;
     }
 }
