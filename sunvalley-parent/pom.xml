@@ -10,8 +10,7 @@
   <url>http://maven.apache.org</url>
 
   <modules>
-    <module>../erp-provider-consume</module>
-    <module>../erp-service-product</module>
+    <module>../sunvalley-service-product</module>
     <module>../sunvalley-domain</module>
     <module>../sunvalley-dao</module>
   </modules>
