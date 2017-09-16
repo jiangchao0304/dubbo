@@ -21,6 +21,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.sunvalley</groupId>
+            <artifactId>erp-domain</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
