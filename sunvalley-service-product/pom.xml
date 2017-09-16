@@ -14,8 +14,8 @@
 	<parent>
 		<artifactId>sunvalley-parent</artifactId>
 		<groupId>com.sunvalley</groupId>
-		<version>1.0-SNAPSHOT</version>
-		<relativePath>../erp-parent/pom.xml</relativePath>
+		<version>0.0.1</version>
+		<relativePath>../sunvalley-parent/pom.xml</relativePath>
 	</parent>
 
 	<properties>
