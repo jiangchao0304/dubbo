@@ -10,7 +10,7 @@ import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
 import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.face.base.ResponseObj;
 import com.sunvalley.face.erp.product.IPreSkuService;
-import com.sunvalley.face.exception.BusinessException;
+import com.sunvalley.face.exception.FaceException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -30,7 +30,8 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     @Override
     public PreSkuDTO getByModel(String modelName, Integer status) {
 
-        return  prepareService.getByModel(modelName,status);
+        throw  new FaceException("exception test");
+        //return  prepareService.getByModel(modelName,status);
 
 
     }
