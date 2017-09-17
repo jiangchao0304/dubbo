@@ -3,17 +3,19 @@
 */
 package com.sunvalley.erp.service.product;
 
-import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.common.constants.Constants;
-import com.sunvalley.domain.erp.product.dto.*;
-import com.sunvalley.erp.dao.product.*;
-import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
+import com.sunvalley.common.util.FilterOP;
+import com.sunvalley.common.util.TimeUtil;
 import com.sunvalley.domain.FilterModel;
 import com.sunvalley.domain.Pager;
+import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PackageSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.PreSkuGridDTO;
+import com.sunvalley.erp.dao.product.*;
+import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
 import com.sunvalley.erp.model.product.*;
-import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
-import com.sunvalley.common.util.TimeUtil;
-import com.sunvalley.common.exception.UniteException;
+import com.sunvalley.face.exception.BusinessException;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,7 +74,7 @@ public class PrepareService {
      * @date : 2017/9/14:16:23
      */
 
-    public PreSkuDTO getByModel(String modelName, Integer status ) throws Exception{
+    public PreSkuDTO getByModel(String modelName, Integer status ){
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("model", modelName);
         if(status == 0){
@@ -90,7 +92,12 @@ public class PrepareService {
             List<PreSkuGridDTO> preSkuVOList = new ArrayList<>(preSkuList.size());
             for (int i = 0; i < preSkuList.size(); i++) {
                 PreSkuGridDTO preSkuGridVO = new PreSkuGridDTO();
-                PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
+                try {
+                    PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
+                }catch (Exception ex){
+                    throw  new BusinessException(ex.getMessage());
+                }
+
                 preSkuVOList.add(preSkuGridVO);
             }
 
@@ -99,18 +106,18 @@ public class PrepareService {
             List<PackageSkuDTO> packageSkuVOList = new ArrayList<>(packageSkuList.size());
             for (int i = 0; i < packageSkuList.size(); i++) {
                 PackageSkuDTO packageSkuVO = new PackageSkuDTO();
+                try {
                 PropertyUtils.copyProperties(packageSkuVO, packageSkuList.get(i));
+                }catch (Exception ex){
+                    throw  new BusinessException(ex.getMessage());
+                }
                 packageSkuVOList.add(packageSkuVO);
             }
-
-
-
             vo.setPreSkuList(preSkuVOList);
             vo.setPackageSkuList(packageSkuVOList);
-
             return vo;
         }else{
-            throw new UniteException("请输入系统存在的Model号！");
+            throw new BusinessException("请输入系统存在的Model号！");
         }
     }
 
@@ -118,7 +125,7 @@ public class PrepareService {
 
     /**
      * model&预备SKU列表查询.
-     * @param [filterModels, offset, pageSize]
+     * @param filterModels
      * @return com.sunvalley.domain.Pager<com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO>
      * @exception
      * @author:
@@ -306,7 +313,7 @@ public class PrepareService {
             //查询model编码 预备sku规则 :model编码-三位流水号
             ItemModel itemModel = itemModelMapper.selectByPrimaryKey(modelId);
             if(itemModel==null){
-                throw new UniteException("Model不存在，请检查数据！");
+                throw new BusinessException("Model不存在，请检查数据！");
             }
             do {
                 skuCode = sequenceService.getNextIdSkuCodeY3(itemModel.getModelName()+"-");
@@ -327,10 +334,10 @@ public class PrepareService {
             //小类型号
             ProductLine productLine = productLineMapper.selectByPrimaryKey(subCategoryId);
             if(itemBrand==null){
-                throw new UniteException("品牌信息不存在，请检查数据！");
+                throw new BusinessException("品牌信息不存在，请检查数据！");
             }
             if(productLine==null){
-                throw new UniteException("小类产品线不存在，请检查数据！");
+                throw new BusinessException("小类产品线不存在，请检查数据！");
             }
             do {
                 skuCode = itemBrand.getBrandCode()+"-"+productLine.getModelNo();
