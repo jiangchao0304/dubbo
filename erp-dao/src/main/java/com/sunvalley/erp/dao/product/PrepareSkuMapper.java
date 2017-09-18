@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 /**
 * @Description: PrepareSkuMapper
 * @author
-* @date 2017-09-18 12:26:10
+* @date 2017-09-18 12:24:14
 */
 public interface PrepareSkuMapper {
 

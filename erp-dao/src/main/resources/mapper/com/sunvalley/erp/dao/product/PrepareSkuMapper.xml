@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.dao.product.PrepareSkuMapper">
-<!-- ================================代码生成开始=2017-09-18 12:26:10=========================================== -->
+<!-- ================================代码生成开始=2017-09-18 12:24:14=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.model.product.PrepareSku">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -333,5 +333,5 @@
         DELETE FROM  bs_prepare_sku
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-18 12:26:10=========================================== -->
+    <!-- ================================代码生成结束=2017-09-18 12:24:14=========================================== -->
 </mapper>

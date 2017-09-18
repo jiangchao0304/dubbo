@@ -71,4 +71,87 @@
 		</if>
 	</select>
 
+	<select id="getSkuBaseInfo" parameterType="Map" resultType="com.sunvalley.domain.erp.product.dto.SkuBaseInfoDTO">
+SELECT
+pre.sku,
+item.skuid skuId,
+item.line_state AS lineState,
+model.main_category_id mainCategoryId,
+model.sub_category_id subCategortId,
+lc.product_line_name categoryStr,
+ls.product_line_name subCategoryStr,
+model.brand_id brandId,
+model.model_name model,
+model.pm_id pmId,
+CONCAT(sysu.firstname,'.',sysu.lastname) pmName,
+model.battery,
+model.rmacategoryid,
+pre.region,
+pre.pre_sku preSku,
+pre.color color,
+anrule.anruleStr anruleStr,
+anrule.anrule anrule,
+country.country country,
+item.is_package isPackage,
+model.magnetic,
+bom.combine_unit combineUnit,
+model.warranty,
+bom.purchase_property  purchaseProperty,
+pre.purspec,
+IFNULL(item.purdesc,'') purDese,
+bom.bom_desc bomDesc,
+item.width,
+item.height,
+item.weight,
+item.len,
+item.product_len productLen,
+item.product_width productWidth,
+item.product_height productHeight,
+item.product_weight productWeight
+
+FROM   `bs_prepare_sku` AS pre
+JOIN bs_item_model AS model ON pre.model_id=model.model_id
+JOIN bs_item AS item  ON item.skuid =pre.skuid
+LEFT JOIN bs_product_line_mapping mc ON mc.mapping_id = item.skuid AND mc.product_line_id = item.categoryid AND mc.type = 1
+LEFT JOIN bs_product_line_mapping sc ON sc.mapping_id = item.skuid AND sc.product_line_id = item.subcategoryid AND sc.type = 1
+LEFT JOIN bs_product_line lc ON lc.id = mc.product_line_id
+LEFT JOIN bs_product_line ls ON ls.id = sc.product_line_id
+LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
+LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				GROUP_CONCAT(basic.attribute) anruleStr,
+				GROUP_CONCAT(basic. VALUE) anrule
+			FROM
+				bs_item_mapping mapping
+			LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+			WHERE
+				mapping.data_type = 1
+			AND basic.type = 2
+			GROUP BY
+				mapping.skuid
+		) anrule ON pre.id = anrule.skuid
+LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				GROUP_CONCAT(mapping.maping) country
+			FROM
+				bs_item_mapping mapping
+			WHERE
+				mapping.data_type = 2
+			GROUP BY
+				mapping.skuid
+		) country ON country.skuid = pre.id
+LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
+		<if test="sku != null">
+			WHERE  item.sku=#{sku}
+		</if>
+
+		<if test="skuId != null">
+			WHERE  item.skuid=#{skuId}
+		</if>
+
+
+	</select>
+
 </mapper>

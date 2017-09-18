@@ -4,11 +4,14 @@
 package com.sunvalley.erp.service.product.face;
 
 import com.sunvalley.common.util.JsonUtil;
+import com.sunvalley.domain.erp.product.dto.SkuBaseInfoDTO;
+import com.sunvalley.domain.erp.product.dto.UpdateSkuBaseInfoDTO;
 import com.sunvalley.erp.dao.product.ItemMapper;
 import com.sunvalley.erp.model.product.Item;
 import com.sunvalley.erp.model.product.ItemLocale;
 import com.sunvalley.erp.service.product.ItemService;
 import com.sunvalley.common.util.JsonUtil;
+import com.sunvalley.erp.service.product.PrepareService;
 import com.sunvalley.face.base.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +34,11 @@ public class SkuServiceImpl implements com.sunvalley.face.erp.product.ISkuServic
     @Autowired
     private ItemService itemService;
 
-    @Override
-    public String getSkuBaseInfo(String sku) {
-        ResponseBean responseBean = new ResponseBean();
-        Item item = itemMapper.selectByPrimaryKey(4624);
-        responseBean.setJsonContent(JsonUtil.toJson(item));
-        return JsonUtil.toJson(responseBean);
-    }
+    @Autowired
+    private PrepareService prepareService;
+
+
+
 
     @Override
     public String searchSku(String q,int langId, int limit,Integer companyId){
@@ -45,6 +46,22 @@ public class SkuServiceImpl implements com.sunvalley.face.erp.product.ISkuServic
         List<ItemLocale> list = itemService.searchSkuCategoryName(q, langId,new int[]{},limit,companyId);
         responseBean.setJsonContent(JsonUtil.toJson(list));
         return JsonUtil.toJson(responseBean);
+    }
+
+    @Override
+    public SkuBaseInfoDTO getSkuBaseInfo(int skuId) {
+        return prepareService.getSkuBaseInfo(skuId);
+    }
+
+    @Override
+    public SkuBaseInfoDTO getSkuBaseInfo(String sku) {
+        return prepareService.getSkuBaseInfo(sku);
+    }
+
+    @Override
+    public boolean updateSkuBaseInfo(UpdateSkuBaseInfoDTO dto) {
+
+        return  prepareService.updateSkuBaseInfo(dto);
     }
 }
 

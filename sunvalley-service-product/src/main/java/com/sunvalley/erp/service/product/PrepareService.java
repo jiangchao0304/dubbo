@@ -3,19 +3,19 @@
 */
 package com.sunvalley.erp.service.product;
 
+import com.sun.corba.se.spi.extension.CopyObjectPolicy;
 import com.sunvalley.common.constants.Constants;
 import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.common.util.TimeUtil;
 import com.sunvalley.domain.FilterModel;
 import com.sunvalley.domain.Pager;
-import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
-import com.sunvalley.domain.erp.product.dto.PackageSkuDTO;
-import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
-import com.sunvalley.domain.erp.product.dto.PreSkuGridDTO;
+import com.sunvalley.domain.erp.product.dto.*;
 import com.sunvalley.erp.dao.product.*;
+import com.sunvalley.erp.daoEX.product.ItemExMapper;
 import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
 import com.sunvalley.erp.model.product.*;
-import com.sunvalley.face.exception.BusinessException;
+import com.sunvalley.face.exception.FaceException;
+import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 类或方法的功能描述 :TODO
@@ -53,10 +54,16 @@ public class PrepareService {
     private ItemMapper itemMapper;
 
     @Autowired
+    private ItemExMapper itemExMapper;
+
+    @Autowired
     private ItemBrandMapper itemBrandMapper;
 
     @Autowired
     private ItemPreCommomMapper itemPreCommomMapper;
+
+    @Autowired
+    private ItemLocaleMapper itemLocaleMapper;
 
     @Autowired
     private SequenceService sequenceService;
@@ -95,7 +102,7 @@ public class PrepareService {
                 try {
                     PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
                 }catch (Exception ex){
-                    throw  new BusinessException(ex.getMessage());
+                    throw  new FaceException(ex.getMessage());
                 }
 
                 preSkuVOList.add(preSkuGridVO);
@@ -109,7 +116,7 @@ public class PrepareService {
                 try {
                 PropertyUtils.copyProperties(packageSkuVO, packageSkuList.get(i));
                 }catch (Exception ex){
-                    throw  new BusinessException(ex.getMessage());
+                    throw  new FaceException(ex.getMessage());
                 }
                 packageSkuVOList.add(packageSkuVO);
             }
@@ -117,7 +124,7 @@ public class PrepareService {
             vo.setPackageSkuList(packageSkuVOList);
             return vo;
         }else{
-            throw new BusinessException("请输入系统存在的Model号！");
+            throw new FaceException("请输入系统存在的Model号！");
         }
     }
 
@@ -131,7 +138,7 @@ public class PrepareService {
      * @author:
      * @since : 2017-09-15:23:42
      */
-    public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) throws Exception{
+    public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
         HashMap<String,Object> map= new HashMap<String,Object>();
         String filtersql = "";
         String[] ListArray={};
@@ -173,7 +180,12 @@ public class PrepareService {
         for(FilterModel filter :removeFileModelList){
             filterModels.remove(filter);
         }
-        filtersql= new FilterOP().getFilterSQL(filterModels);
+        try {
+            filtersql= new FilterOP().getFilterSQL(filterModels);
+        }catch (Exception ex){
+            throw  new FaceException(ex.getMessage());
+        }
+
         map.put("filtersql", filtersql);
         map.put("offset", offset);
         map.put("pageSize", pageSize);
@@ -229,6 +241,84 @@ public class PrepareService {
         savePreSkuAttr(prepareSkuEx);
 
         return  prepareSkuEx;
+
+    }
+
+    public SkuBaseInfoDTO getSkuBaseInfo(int skuId){
+
+        Map<String,Object> param = new HashMap<>();
+        param.put("skuId",skuId);
+
+        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+        if(skuBaseInfoDTO!=null){
+            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
+        }
+        return skuBaseInfoDTO;
+
+    }
+
+    public SkuBaseInfoDTO getSkuBaseInfo(String sku){
+        Map<String,Object> param = new HashMap<>();
+        param.put("sku",sku);
+        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+
+        if(skuBaseInfoDTO!=null){
+            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
+
+        }
+        return skuBaseInfoDTO;
+
+    }
+
+    /**
+     * updateSkuBaseInfo .更新sku基本信息
+     * @param dto
+     *         [dto]
+     * @return boolean
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/9/18:17:02
+     */
+    public boolean updateSkuBaseInfo(UpdateSkuBaseInfoDTO dto){
+
+        //更新磁性字段
+
+        Item item = new Item();
+        item.setSkuid(dto.getSkuId());
+        item.setMagnetic(dto.getMagnetic());
+
+        ItemExample itemExample = new ItemExample();
+        itemExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
+        return  itemMapper.updateByExampleSelective(item,itemExample)>0;
+
+    }
+
+    public  List<ItemLocaleDTO> listItemLocale(int skuid){
+
+        List<ItemLocaleDTO> result = new ArrayList<>();
+        ItemLocaleExample  itemLocaleExample = new ItemLocaleExample();
+        itemLocaleExample.createCriteria().andSkuidEqualTo(skuid);
+        List<ItemLocale>  itemLocaleList =  itemLocaleMapper.selectByExample(itemLocaleExample);
+
+        if(itemLocaleList==null || itemLocaleList.size()==0)
+            return result;
+
+
+        for (ItemLocale itemLocale : itemLocaleList) {
+
+            ItemLocaleDTO dto = new ItemLocaleDTO();
+            try {
+                PropertyUtils.copyProperties(dto, itemLocale);
+                result.add(dto);
+            }catch (Exception ex){
+                throw  new FaceException(ex.getMessage());
+            }
+
+        }
+
+        return result;
 
     }
 
@@ -313,7 +403,7 @@ public class PrepareService {
             //查询model编码 预备sku规则 :model编码-三位流水号
             ItemModel itemModel = itemModelMapper.selectByPrimaryKey(modelId);
             if(itemModel==null){
-                throw new BusinessException("Model不存在，请检查数据！");
+                throw new FaceException("Model不存在，请检查数据！");
             }
             do {
                 skuCode = sequenceService.getNextIdSkuCodeY3(itemModel.getModelName()+"-");
@@ -334,10 +424,10 @@ public class PrepareService {
             //小类型号
             ProductLine productLine = productLineMapper.selectByPrimaryKey(subCategoryId);
             if(itemBrand==null){
-                throw new BusinessException("品牌信息不存在，请检查数据！");
+                throw new FaceException("品牌信息不存在，请检查数据！");
             }
             if(productLine==null){
-                throw new BusinessException("小类产品线不存在，请检查数据！");
+                throw new FaceException("小类产品线不存在，请检查数据！");
             }
             do {
                 skuCode = itemBrand.getBrandCode()+"-"+productLine.getModelNo();

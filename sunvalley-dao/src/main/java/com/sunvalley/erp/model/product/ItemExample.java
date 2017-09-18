@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
 * @Description: ItemExample
 * @author
-* @date 2017-09-16 11:21:42
+* @date 2017-09-18 05:22:53
 */
 public class ItemExample {
     protected String orderByClause;
@@ -4113,65 +4113,65 @@ public class ItemExample {
 
 
 
-        public Criteria andIsMagneticIsNull() {
-            addCriterion("isMagnetic is null");
+        public Criteria andMagneticIsNull() {
+            addCriterion("magnetic is null");
             return (Criteria) this;
         }
 
 
-        public Criteria andIsMagneticIsNotNull() {
-            addCriterion("isMagnetic is not null");
+        public Criteria andMagneticIsNotNull() {
+            addCriterion("magnetic is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticEqualTo(java.lang.Boolean value) {
-            addCriterion("is_magnetic =", value, "isMagnetic");
+        public Criteria andMagneticEqualTo(Short value) {
+            addCriterion("magnetic =", value, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticNotEqualTo(java.lang.Boolean value) {
-            addCriterion("is_magnetic <>", value, "isMagnetic");
+        public Criteria andMagneticNotEqualTo(Short value) {
+            addCriterion("magnetic <>", value, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticGreaterThan(java.lang.Boolean value) {
-            addCriterion("is_magnetic >", value, "isMagnetic");
+        public Criteria andMagneticGreaterThan(Short value) {
+            addCriterion("magnetic >", value, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticGreaterThanOrEqualTo(java.lang.Boolean value) {
-            addCriterion("is_magnetic >=", value, "is_magnetic");
+        public Criteria andMagneticGreaterThanOrEqualTo(Short value) {
+            addCriterion("magnetic >=", value, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticLessThan(java.lang.Boolean value) {
-            addCriterion("is_magnetic <", value, "isMagnetic");
+        public Criteria andMagneticLessThan(Short value) {
+            addCriterion("magnetic <", value, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticLessThanOrEqualTo(java.lang.Boolean value) {
-            addCriterion("is_magnetic <=", value, "isMagnetic");
+        public Criteria andMagneticLessThanOrEqualTo(Short value) {
+            addCriterion("magnetic <=", value, "magnetic");
             return (Criteria) this;
         }
 
 
-        public Criteria andIsMagneticIn(List<java.lang.Boolean > values) {
-            addCriterion("is_magnetic in", values, "isMagnetic");
+        public Criteria andMagneticIn(List<Short > values) {
+            addCriterion("magnetic in", values, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticNotIn(List<java.lang.Boolean> values) {
-            addCriterion("is_magnetic not in", values, "isMagnetic");
+        public Criteria andMagneticNotIn(List<Short> values) {
+            addCriterion("magnetic not in", values, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticBetween(java.lang.Boolean value1, java.lang.Boolean value2) {
-            addCriterion("is_magnetic between", value1, value2, "isMagnetic");
+        public Criteria andMagneticBetween(Short value1, Short value2) {
+            addCriterion("magnetic between", value1, value2, "magnetic");
             return (Criteria) this;
         }
 
-        public Criteria andIsMagneticNotBetween(java.lang.Boolean value1, java.lang.Boolean value2) {
-            addCriterion("is_magnetic not between", value1, value2, "isMagnetic");
+        public Criteria andMagneticNotBetween(Short value1, Short value2) {
+            addCriterion("magnetic not between", value1, value2, "magnetic");
             return (Criteria) this;
         }
 

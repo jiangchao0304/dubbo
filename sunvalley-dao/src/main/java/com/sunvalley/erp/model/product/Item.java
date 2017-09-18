@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:Item
 * @author
-* @date 2017-09-16 11:21:42
+* @date 2017-09-18 05:22:53
 */
 public class Item implements Serializable{
 
@@ -77,7 +77,7 @@ public class Item implements Serializable{
     private java.lang.Integer isPackage;//包材 1:否； 2:是
     private java.lang.Integer color;//颜色
     private java.lang.Integer modelId;//模型ID
-    private java.lang.Boolean isMagnetic;//是否有磁性 0：否 1：是
+    private Short magnetic;//是否有磁性 0 未知 1 是 2 否
 	//columns 结束
 
 
@@ -1075,19 +1075,19 @@ public class Item implements Serializable{
 	}
 
   	/**
-     * 是否有磁性 0：否 1：是
+     * 是否有磁性 0 未知 1 是 2 否
      *
      * @param value
      */
-	public void setIsMagnetic(java.lang.Boolean value) {
-		this.isMagnetic = value;
+	public void setMagnetic(Short value) {
+		this.magnetic = value;
 	}
 	
 	/**
-     * 是否有磁性 0：否 1：是
+     * 是否有磁性 0 未知 1 是 2 否
      */
-	public java.lang.Boolean getIsMagnetic() {
-		return this.isMagnetic;
+	public Short getMagnetic() {
+		return this.magnetic;
 	}
 
 	public String toString() {
@@ -1154,7 +1154,7 @@ public class Item implements Serializable{
 			.append("isPackage",getIsPackage())
 			.append("color",getColor())
 			.append("modelId",getModelId())
-			.append("isMagnetic",getIsMagnetic())
+			.append("magnetic",getMagnetic())
 			.toString();
 	}
 	//===========================================代码生成结束============================================

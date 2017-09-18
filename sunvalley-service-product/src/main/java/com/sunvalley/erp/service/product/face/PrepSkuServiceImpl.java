@@ -7,10 +7,9 @@ import com.sunvalley.domain.FilterModel;
 import com.sunvalley.domain.Pager;
 import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
 import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.SkuBaseInfoDTO;
 import com.sunvalley.erp.service.product.PrepareService;
-import com.sunvalley.face.base.ResponseObj;
 import com.sunvalley.face.erp.product.IPreSkuService;
-import com.sunvalley.face.exception.FaceException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -29,28 +28,16 @@ public class PrepSkuServiceImpl implements IPreSkuService {
 
     @Override
     public PreSkuDTO getByModel(String modelName, Integer status) {
-
-        throw  new FaceException("exception test");
-        //return  prepareService.getByModel(modelName,status);
-
-
+        return  prepareService.getByModel(modelName,status);
     }
 
     @Override
-    public ResponseObj<PreSkuDTO> saveModel(PreSkuDTO preSkuDTO) {
-
-        ResponseObj<PreSkuDTO> result = new ResponseObj<>();
-        try{
-            PreSkuDTO dto = prepareService.saveModel(preSkuDTO);
-            result.setData(dto);
-            result.setResponseCode(0);
-        }catch (Exception ex){
-            result.setResponseCode(-1);
-            result.setErrorMessage(ex.getMessage());
-        }
-      return result;
-
+    public PreSkuDTO saveModel(PreSkuDTO preSkuDTO) {
+        PreSkuDTO result = prepareService.saveModel(preSkuDTO);
+        return  result;
     }
+
+
 
     @Override
     public String getPreSkuGrid(HashMap<String, Object> map) {
@@ -63,19 +50,10 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     }
 
     @Override
-    public ResponseObj<Pager<ModelAndPreSkuDTO>> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
+    public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
 
-        ResponseObj<Pager<ModelAndPreSkuDTO>> result = new ResponseObj<>();
-        try {
-            Pager<ModelAndPreSkuDTO> pager = prepareService.listModelAndPreSku(filterModels,offset,pageSize);
-            result.setData(pager);
-            result.setResponseCode(0);
-        }catch (Exception ex){
-            result.setResponseCode(-1);
-            result.setErrorMessage(ex.getMessage());
-        }
+        Pager<ModelAndPreSkuDTO> result = prepareService.listModelAndPreSku(filterModels,offset,pageSize);
         return  result;
-
 
     }
 }

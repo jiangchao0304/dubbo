@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.dao.product.ItemMapper">
-<!-- ================================代码生成开始=2017-09-16 11:21:42=========================================== -->
+<!-- ================================代码生成开始=2017-09-18 05:22:53=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.model.product.Item">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -66,7 +66,7 @@
         <result column="is_package" property="isPackage" jdbcType="INTEGER"/>
         <result column="color" property="color" jdbcType="INTEGER"/>
         <result column="model_id" property="modelId" jdbcType="INTEGER"/>
-        <result column="is_magnetic" property="isMagnetic" jdbcType="BIT"/>
+        <result column="magnetic" property="magnetic" jdbcType="SMALLINT"/>
     </resultMap>
 
     <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.model.product.Item" />
@@ -134,7 +134,7 @@
             #{isPackage,jdbcType=INTEGER },
             #{color,jdbcType=INTEGER },
             #{modelId,jdbcType=INTEGER },
-            #{isMagnetic,jdbcType=BIT }
+            #{magnetic,jdbcType=SMALLINT }
     </sql>
 
     <sql id="ValuesBatch">
@@ -200,7 +200,7 @@
             #{item.isPackage,jdbcType=INTEGER},
             #{item.color,jdbcType=INTEGER},
             #{item.modelId,jdbcType=INTEGER},
-            #{item.isMagnetic,jdbcType=BIT}
+            #{item.magnetic,jdbcType=SMALLINT}
     </sql>
 
     <sql id="Set">
@@ -266,7 +266,7 @@
                 is_package= #{isPackage,jdbcType=INTEGER },
                 color= #{color,jdbcType=INTEGER },
                 model_id= #{modelId,jdbcType=INTEGER },
-                is_magnetic= #{isMagnetic,jdbcType=BIT }
+                magnetic= #{magnetic,jdbcType=SMALLINT }
     </sql>
 
     <sql id="SetNotNull">
@@ -332,7 +332,7 @@
                 <if test="isPackage != null">is_package= #{isPackage,jdbcType=INTEGER },</if>
                 <if test="color != null">color= #{color,jdbcType=INTEGER },</if>
                 <if test="modelId != null">model_id= #{modelId,jdbcType=INTEGER },</if>
-                <if test="isMagnetic != null">is_magnetic= #{isMagnetic,jdbcType=BIT }</if>
+                <if test="magnetic != null">magnetic= #{magnetic,jdbcType=SMALLINT }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -459,7 +459,7 @@
 			is_package,
 			color,
 			model_id,
-			is_magnetic
+			magnetic
 	</sql>
 
 
@@ -591,5 +591,5 @@
         DELETE FROM  bs_item
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-16 11:21:42=========================================== -->
+    <!-- ================================代码生成结束=2017-09-18 05:22:53=========================================== -->
 </mapper>

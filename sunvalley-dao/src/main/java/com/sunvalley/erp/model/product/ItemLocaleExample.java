@@ -1,8 +1,15 @@
 package com.sunvalley.erp.model.product;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.math.BigDecimal;
 
+/**
+* @Description: ItemLocaleExample
+* @author
+* @date 2017-09-18 12:27:33
+*/
 public class ItemLocaleExample {
     protected String orderByClause;
 
@@ -137,336 +144,328 @@ public class ItemLocaleExample {
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
-
-        public Criteria andLangIdIsNull() {
-            addCriterion("lang_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdIsNotNull() {
-            addCriterion("lang_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdEqualTo(Byte value) {
-            addCriterion("lang_id =", value, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdNotEqualTo(Byte value) {
-            addCriterion("lang_id <>", value, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdGreaterThan(Byte value) {
-            addCriterion("lang_id >", value, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdGreaterThanOrEqualTo(Byte value) {
-            addCriterion("lang_id >=", value, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdLessThan(Byte value) {
-            addCriterion("lang_id <", value, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdLessThanOrEqualTo(Byte value) {
-            addCriterion("lang_id <=", value, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdIn(List<Byte> values) {
-            addCriterion("lang_id in", values, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdNotIn(List<Byte> values) {
-            addCriterion("lang_id not in", values, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdBetween(Byte value1, Byte value2) {
-            addCriterion("lang_id between", value1, value2, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdNotBetween(Byte value1, Byte value2) {
-            addCriterion("lang_id not between", value1, value2, "langId");
-            return (Criteria) this;
-        }
-
+        
         public Criteria andSkuidIsNull() {
             addCriterion("skuid is null");
             return (Criteria) this;
         }
+
 
         public Criteria andSkuidIsNotNull() {
             addCriterion("skuid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidEqualTo(Integer value) {
+        public Criteria andSkuidEqualTo(java.lang.Integer value) {
             addCriterion("skuid =", value, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidNotEqualTo(Integer value) {
+        public Criteria andSkuidNotEqualTo(java.lang.Integer value) {
             addCriterion("skuid <>", value, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidGreaterThan(Integer value) {
+        public Criteria andSkuidGreaterThan(java.lang.Integer value) {
             addCriterion("skuid >", value, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andSkuidGreaterThanOrEqualTo(java.lang.Integer value) {
             addCriterion("skuid >=", value, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidLessThan(Integer value) {
+        public Criteria andSkuidLessThan(java.lang.Integer value) {
             addCriterion("skuid <", value, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidLessThanOrEqualTo(Integer value) {
+        public Criteria andSkuidLessThanOrEqualTo(java.lang.Integer value) {
             addCriterion("skuid <=", value, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidIn(List<Integer> values) {
+
+        public Criteria andSkuidIn(List<java.lang.Integer > values) {
             addCriterion("skuid in", values, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidNotIn(List<Integer> values) {
+        public Criteria andSkuidNotIn(List<java.lang.Integer> values) {
             addCriterion("skuid not in", values, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidBetween(Integer value1, Integer value2) {
+        public Criteria andSkuidBetween(java.lang.Integer value1, java.lang.Integer value2) {
             addCriterion("skuid between", value1, value2, "skuid");
             return (Criteria) this;
         }
 
-        public Criteria andSkuidNotBetween(Integer value1, Integer value2) {
+        public Criteria andSkuidNotBetween(java.lang.Integer value1, java.lang.Integer value2) {
             addCriterion("skuid not between", value1, value2, "skuid");
             return (Criteria) this;
         }
+
+
+
+        public Criteria andLangIdIsNull() {
+            addCriterion("langId is null");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andLangIdIsNotNull() {
+            addCriterion("langId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdEqualTo(Integer value) {
+            addCriterion("lang_id =", value, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdNotEqualTo(Integer value) {
+            addCriterion("lang_id <>", value, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdGreaterThan(Integer value) {
+            addCriterion("lang_id >", value, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lang_id >=", value, "lang_id");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdLessThan(Integer value) {
+            addCriterion("lang_id <", value, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdLessThanOrEqualTo(Integer value) {
+            addCriterion("lang_id <=", value, "langId");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andLangIdIn(List<Integer > values) {
+            addCriterion("lang_id in", values, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdNotIn(List<Integer> values) {
+            addCriterion("lang_id not in", values, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdBetween(Integer value1, Integer value2) {
+            addCriterion("lang_id between", value1, value2, "langId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("lang_id not between", value1, value2, "langId");
+            return (Criteria) this;
+        }
+
+
 
         public Criteria andSkuIsNull() {
             addCriterion("sku is null");
             return (Criteria) this;
         }
 
+
         public Criteria andSkuIsNotNull() {
             addCriterion("sku is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSkuEqualTo(String value) {
+        public Criteria andSkuEqualTo(java.lang.String value) {
             addCriterion("sku =", value, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuNotEqualTo(String value) {
+        public Criteria andSkuNotEqualTo(java.lang.String value) {
             addCriterion("sku <>", value, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuGreaterThan(String value) {
+        public Criteria andSkuGreaterThan(java.lang.String value) {
             addCriterion("sku >", value, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuGreaterThanOrEqualTo(String value) {
+        public Criteria andSkuGreaterThanOrEqualTo(java.lang.String value) {
             addCriterion("sku >=", value, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuLessThan(String value) {
+        public Criteria andSkuLessThan(java.lang.String value) {
             addCriterion("sku <", value, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuLessThanOrEqualTo(String value) {
+        public Criteria andSkuLessThanOrEqualTo(java.lang.String value) {
             addCriterion("sku <=", value, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuLike(String value) {
-            addCriterion("sku like", value, "sku");
-            return (Criteria) this;
-        }
 
-        public Criteria andSkuNotLike(String value) {
-            addCriterion("sku not like", value, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuIn(List<String> values) {
+        public Criteria andSkuIn(List<java.lang.String > values) {
             addCriterion("sku in", values, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuNotIn(List<String> values) {
+        public Criteria andSkuNotIn(List<java.lang.String> values) {
             addCriterion("sku not in", values, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuBetween(String value1, String value2) {
+        public Criteria andSkuBetween(java.lang.String value1, java.lang.String value2) {
             addCriterion("sku between", value1, value2, "sku");
             return (Criteria) this;
         }
 
-        public Criteria andSkuNotBetween(String value1, String value2) {
+        public Criteria andSkuNotBetween(java.lang.String value1, java.lang.String value2) {
             addCriterion("sku not between", value1, value2, "sku");
             return (Criteria) this;
         }
+
+
 
         public Criteria andDescriptionIsNull() {
             addCriterion("description is null");
             return (Criteria) this;
         }
 
+
         public Criteria andDescriptionIsNotNull() {
             addCriterion("description is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionEqualTo(String value) {
+        public Criteria andDescriptionEqualTo(java.lang.String value) {
             addCriterion("description =", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotEqualTo(String value) {
+        public Criteria andDescriptionNotEqualTo(java.lang.String value) {
             addCriterion("description <>", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionGreaterThan(String value) {
+        public Criteria andDescriptionGreaterThan(java.lang.String value) {
             addCriterion("description >", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+        public Criteria andDescriptionGreaterThanOrEqualTo(java.lang.String value) {
             addCriterion("description >=", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLessThan(String value) {
+        public Criteria andDescriptionLessThan(java.lang.String value) {
             addCriterion("description <", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+        public Criteria andDescriptionLessThanOrEqualTo(java.lang.String value) {
             addCriterion("description <=", value, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLike(String value) {
-            addCriterion("description like", value, "description");
-            return (Criteria) this;
-        }
 
-        public Criteria andDescriptionNotLike(String value) {
-            addCriterion("description not like", value, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionIn(List<String> values) {
+        public Criteria andDescriptionIn(List<java.lang.String > values) {
             addCriterion("description in", values, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotIn(List<String> values) {
+        public Criteria andDescriptionNotIn(List<java.lang.String> values) {
             addCriterion("description not in", values, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionBetween(String value1, String value2) {
+        public Criteria andDescriptionBetween(java.lang.String value1, java.lang.String value2) {
             addCriterion("description between", value1, value2, "description");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotBetween(String value1, String value2) {
+        public Criteria andDescriptionNotBetween(java.lang.String value1, java.lang.String value2) {
             addCriterion("description not between", value1, value2, "description");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameIsNull() {
+
+
+        public Criteria andUnitNameIsNull() {
             addCriterion("unitName is null");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameIsNotNull() {
+
+        public Criteria andUnitNameIsNotNull() {
             addCriterion("unitName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameEqualTo(String value) {
-            addCriterion("unitName =", value, "unitname");
+        public Criteria andUnitNameEqualTo(java.lang.String value) {
+            addCriterion("unitName =", value, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameNotEqualTo(String value) {
-            addCriterion("unitName <>", value, "unitname");
+        public Criteria andUnitNameNotEqualTo(java.lang.String value) {
+            addCriterion("unitName <>", value, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameGreaterThan(String value) {
-            addCriterion("unitName >", value, "unitname");
+        public Criteria andUnitNameGreaterThan(java.lang.String value) {
+            addCriterion("unitName >", value, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameGreaterThanOrEqualTo(String value) {
-            addCriterion("unitName >=", value, "unitname");
+        public Criteria andUnitNameGreaterThanOrEqualTo(java.lang.String value) {
+            addCriterion("unitName >=", value, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameLessThan(String value) {
-            addCriterion("unitName <", value, "unitname");
+        public Criteria andUnitNameLessThan(java.lang.String value) {
+            addCriterion("unitName <", value, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameLessThanOrEqualTo(String value) {
-            addCriterion("unitName <=", value, "unitname");
+        public Criteria andUnitNameLessThanOrEqualTo(java.lang.String value) {
+            addCriterion("unitName <=", value, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameLike(String value) {
-            addCriterion("unitName like", value, "unitname");
+
+        public Criteria andUnitNameIn(List<java.lang.String > values) {
+            addCriterion("unitName in", values, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameNotLike(String value) {
-            addCriterion("unitName not like", value, "unitname");
+        public Criteria andUnitNameNotIn(List<java.lang.String> values) {
+            addCriterion("unitName not in", values, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameIn(List<String> values) {
-            addCriterion("unitName in", values, "unitname");
+        public Criteria andUnitNameBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("unitName between", value1, value2, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameNotIn(List<String> values) {
-            addCriterion("unitName not in", values, "unitname");
+        public Criteria andUnitNameNotBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("unitName not between", value1, value2, "unitName");
             return (Criteria) this;
         }
 
-        public Criteria andUnitnameBetween(String value1, String value2) {
-            addCriterion("unitName between", value1, value2, "unitname");
-            return (Criteria) this;
-        }
 
-        public Criteria andUnitnameNotBetween(String value1, String value2) {
-            addCriterion("unitName not between", value1, value2, "unitname");
-            return (Criteria) this;
-        }
+
+       
     }
 
     public static class Criteria extends GeneratedCriteria {

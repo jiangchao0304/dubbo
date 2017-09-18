@@ -1,33 +1,118 @@
 package com.sunvalley.erp.model.product;
 
-public class ItemLocale extends ItemLocaleKey {
-    private String sku;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import java.math.BigDecimal;
+import java.io.Serializable;
 
-    private String description;
+/**
+* @Description: table:ItemLocale
+* @author
+* @date 2017-09-18 12:27:33
+*/
+public class ItemLocale implements Serializable{
 
-    private String unitname;
+	//===========================================代码生成开始============================================
+	private static final long serialVersionUID = 1L;
+    //columns 开始
+    private java.lang.Integer skuid;//
+    private Integer langId;//
+    private java.lang.String sku;//
+    private java.lang.String description;//
+    private java.lang.String unitName;//
+	//columns 结束
 
-    public String getSku() {
-        return sku;
-    }
 
-    public void setSku(String sku) {
-        this.sku = sku == null ? null : sku.trim();
-    }
 
-    public String getDescription() {
-        return description;
-    }
+  	/**
+     * 
+     *
+     * @param value
+     */
+	public void setSkuid(java.lang.Integer value) {
+		this.skuid = value;
+	}
+	
+	/**
+     * 
+     */
+	public java.lang.Integer getSkuid() {
+		return this.skuid;
+	}
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
+  	/**
+     * 
+     *
+     * @param value
+     */
+	public void setLangId(Integer value) {
+		this.langId = value;
+	}
+	
+	/**
+     * 
+     */
+	public Integer getLangId() {
+		return this.langId;
+	}
 
-    public String getUnitname() {
-        return unitname;
-    }
+  	/**
+     * 
+     *
+     * @param value
+     */
+	public void setSku(java.lang.String value) {
+		this.sku = value;
+	}
+	
+	/**
+     * 
+     */
+	public java.lang.String getSku() {
+		return this.sku;
+	}
 
-    public void setUnitname(String unitname) {
-        this.unitname = unitname == null ? null : unitname.trim();
-    }
+  	/**
+     * 
+     *
+     * @param value
+     */
+	public void setDescription(java.lang.String value) {
+		this.description = value;
+	}
+	
+	/**
+     * 
+     */
+	public java.lang.String getDescription() {
+		return this.description;
+	}
+
+  	/**
+     * 
+     *
+     * @param value
+     */
+	public void setUnitName(java.lang.String value) {
+		this.unitName = value;
+	}
+	
+	/**
+     * 
+     */
+	public java.lang.String getUnitName() {
+		return this.unitName;
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+			.append("skuid",getSkuid())
+			.append("langId",getLangId())
+			.append("sku",getSku())
+			.append("description",getDescription())
+			.append("unitName",getUnitName())
+			.toString();
+	}
+	//===========================================代码生成结束============================================
 }
+
