@@ -3,10 +3,17 @@
 */
 package com.sunvalley.erp.service.product;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.sunvalley.common.constants.Constants;
+import com.sunvalley.common.util.FilterOP;
+import com.sunvalley.domain.FilterModel;
+import com.sunvalley.domain.Pager;
+import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.SkuListNewDTO;
 import com.sunvalley.erp.dao.product.ItemMapper;
 import com.sunvalley.erp.daoEX.product.ItemExMapper;
 import com.sunvalley.erp.model.product.ItemLocale;
+import com.sunvalley.face.exception.FaceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +63,36 @@ public class ItemService {
         }
 
         return itemExMapper.searchSkuCategoryName(param);
+    }
+
+
+
+    public Pager<SkuListNewDTO> listskuListNew(List<FilterModel> filterModels, int offset, int pageSize) {
+        String filtersql="";
+        try {
+             filtersql= new FilterOP().getFilterSQL(filterModels);
+        }
+        catch (Exception ex){
+            throw  new FaceException(ex.getMessage());
+        }
+        HashMap<String,Object> map= new HashMap<String,Object>();
+        map.put("filtersql", filtersql);
+        map.put("offset", offset);
+        map.put("limit", pageSize);
+        Pager<SkuListNewDTO> pager=new Pager<SkuListNewDTO>();
+
+        pager.setFilterSql(filtersql);
+        pager.setPageNo(offset / pageSize+1);
+        pager.setPageSize(pageSize);
+        int rowCount= itemExMapper.countSkuListNew(map);
+        pager.setRowCount(rowCount);
+        if(rowCount>0){
+            List<SkuListNewDTO> list = itemExMapper.listSkuListNew(map);
+            pager.setList(list);
+        }
+
+        return pager;
+
     }
 }
 

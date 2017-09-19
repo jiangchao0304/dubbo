@@ -154,4 +154,51 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 
 	</select>
 
+	<select id="listSkuListNew" resultType="com.sunvalley.domain.erp.product.dto.SkuListNewDTO" parameterType="Map">
+		SELECT
+			Item.skuid skuId,
+			Item.sku,
+			Locale.description,
+			Item.model,
+			ItemBrand.brand_desc brandDesc,
+			Item.region,
+			Item.`line_state` lineState,
+			Item.is_package isPackage,
+			Item.magnetic,
+			CONCAT(Sysu.firstname,'.',Sysu.lastname) pmName,
+			CONCAT(Creator.firstname ,' ',Creator.lastname) creator,
+			Item.create_date createDate
+			from bs_item as Item
+			JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
+		    JOIN bs_bom as Bom on Bom.skuid=Item.skuid
+			left join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
+			LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=Item.brand_id
+			LEFT JOIN sys_user Sysu ON Sysu.userid = Model.pm_id
+			LEFT JOIN sys_user Creator ON Creator.userid = Item.create_user_id
+		     WHERE 1 = 1
+			<if test="filtersql != null">
+				${filtersql}
+			</if>
+		     order by  Item.skuid desc
+			<if test="offset != null">
+			LIMIT ${offset},${limit}
+			</if>
+	</select>
+
+	<select id="countSkuListNew" resultType="int" parameterType="Map">
+		SELECT
+		count(*)
+		from bs_item as Item
+		JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
+		JOIN bs_bom as Bom on Bom.skuid=Item.skuid
+		left join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
+		LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=Item.brand_id
+		LEFT JOIN sys_user Sysu ON Sysu.userid = Model.pm_id
+		LEFT JOIN sys_user Creator ON Creator.userid = Item.create_user_id
+		WHERE 1 = 1
+		<if test="filtersql != null">
+			${filtersql}
+		</if>
+	</select>
+
 </mapper>
