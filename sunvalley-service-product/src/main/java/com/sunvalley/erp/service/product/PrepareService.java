@@ -2,8 +2,6 @@
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
 package com.sunvalley.erp.service.product;
-
-import com.sun.corba.se.spi.extension.CopyObjectPolicy;
 import com.sunvalley.common.constants.Constants;
 import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.common.util.TimeUtil;

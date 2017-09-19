@@ -2,8 +2,6 @@
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
 package com.sunvalley.erp.service.product;
-
-import com.sun.org.apache.regexp.internal.RE;
 import com.sunvalley.common.constants.Constants;
 import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.domain.FilterModel;

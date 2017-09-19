@@ -3,8 +3,6 @@
 */
 package com.sunvalley.domain.erp.product.dto;
 
-import com.sun.org.apache.xpath.internal.operations.String;
-
 import java.io.Serializable;
 import java.util.Date;
 
