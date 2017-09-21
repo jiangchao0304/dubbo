@@ -13,6 +13,7 @@
     <module>../sunvalley-service-product</module>
     <module>../sunvalley-domain</module>
     <module>../sunvalley-dao</module>
+      <module>../sunvalley-common</module>
   </modules>
   <profiles>
     <profile>
