@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="${dubbo.application.name}" owner="${dubbo.owner}" />
+
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" />
+
+    <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"  />
+
+    <bean id="skuService" class="com.sunvalley.erp.service.product.face.SkuServiceImpl"/>
+    <bean id="prepareSkuService" class="com.sunvalley.erp.service.product.face.PrepSkuServiceImpl"/>
+
+    <dubbo:service interface="com.sunvalley.face.erp.product.ISkuService" ref="skuService"  version="0.0.1"/>
+
+    <dubbo:service interface="com.sunvalley.face.erp.product.IPreSkuService" ref="prepareSkuService"  version="0.0.1" />
+
+</beans>
