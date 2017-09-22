@@ -16,8 +16,6 @@ import com.sunvalley.erp.model.product.WarehouseExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.print.attribute.standard.MediaSize;
-
 /**
  * 类或方法的功能描述 :TODO
  *

@@ -14,16 +14,11 @@ import com.sunvalley.erp.daoEX.product.ItemExMapper;
 import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
 import com.sunvalley.erp.model.product.*;
 import com.sunvalley.face.exception.FaceException;
-import javassist.runtime.DotClass;
-import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import sun.awt.SunHints;
-
-import javax.xml.stream.events.DTD;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -470,6 +465,9 @@ public class PrepareService {
         }
 
     }
+
+
+
 
 
     private void  saveSkuDescription(int skuId,String descSource,String cuser,String action){

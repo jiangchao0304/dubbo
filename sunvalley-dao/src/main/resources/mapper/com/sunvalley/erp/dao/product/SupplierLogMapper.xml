@@ -1,78 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunvalley.erp.dao.product.ProductLineMapper">
-<!-- ================================代码生成开始=2017-09-22 04:55:21=========================================== -->
+<mapper namespace="com.sunvalley.erp.dao.product.SupplierLogMapper">
+<!-- ================================代码生成开始=2017-09-22 04:58:57=========================================== -->
 
-    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.model.product.ProductLine">
-        <result column="id" property="id" jdbcType="INTEGER"/>
-        <result column="use_type" property="useType" jdbcType="INTEGER"/>
-        <result column="product_type" property="productType" jdbcType="INTEGER"/>
-        <result column="product_line_name" property="productLineName" jdbcType="VARCHAR"/>
-        <result column="create_user_id" property="createUserId" jdbcType="INTEGER"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="status" property="status" jdbcType="INTEGER"/>
-        <result column="product_code" property="productCode" jdbcType="VARCHAR"/>
-        <result column="model_no" property="modelNo" jdbcType="VARCHAR"/>
-        <result column="update_user_id" property="updateUserId" jdbcType="INTEGER"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.model.product.SupplierLog">
+        <result column="supplierlogid" property="supplierlogid" jdbcType="INTEGER"/>
+        <result column="supplierid" property="supplierid" jdbcType="INTEGER"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+        <result column="operation_type" property="operationType" jdbcType="INTEGER"/>
+        <result column="note" property="note" jdbcType="VARCHAR"/>
+        <result column="belongs_type" property="belongsType" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.model.product.ProductLine" />
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.model.product.SupplierLog" />
 
     <sql id="Values">
-            #{id,jdbcType=INTEGER },
-            #{useType,jdbcType=INTEGER },
-            #{productType,jdbcType=INTEGER },
-            #{productLineName,jdbcType=VARCHAR },
-            #{createUserId,jdbcType=INTEGER },
-            #{createDate,jdbcType=TIMESTAMP },
-            #{status,jdbcType=INTEGER },
-            #{productCode,jdbcType=VARCHAR },
-            #{modelNo,jdbcType=VARCHAR },
-            #{updateUserId,jdbcType=INTEGER },
-            #{updateDate,jdbcType=TIMESTAMP }
+            #{supplierlogid,jdbcType=INTEGER },
+            #{supplierid,jdbcType=INTEGER },
+            #{operationUserId,jdbcType=INTEGER },
+            #{operationDate,jdbcType=TIMESTAMP },
+            #{operationType,jdbcType=INTEGER },
+            #{note,jdbcType=VARCHAR },
+            #{belongsType,jdbcType=INTEGER }
     </sql>
 
     <sql id="ValuesBatch">
-            #{item.id,jdbcType=INTEGER},
-            #{item.useType,jdbcType=INTEGER},
-            #{item.productType,jdbcType=INTEGER},
-            #{item.productLineName,jdbcType=VARCHAR},
-            #{item.createUserId,jdbcType=INTEGER},
-            #{item.createDate,jdbcType=TIMESTAMP},
-            #{item.status,jdbcType=INTEGER},
-            #{item.productCode,jdbcType=VARCHAR},
-            #{item.modelNo,jdbcType=VARCHAR},
-            #{item.updateUserId,jdbcType=INTEGER},
-            #{item.updateDate,jdbcType=TIMESTAMP}
+            #{item.supplierlogid,jdbcType=INTEGER},
+            #{item.supplierid,jdbcType=INTEGER},
+            #{item.operationUserId,jdbcType=INTEGER},
+            #{item.operationDate,jdbcType=TIMESTAMP},
+            #{item.operationType,jdbcType=INTEGER},
+            #{item.note,jdbcType=VARCHAR},
+            #{item.belongsType,jdbcType=INTEGER}
     </sql>
 
     <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                use_type= #{useType,jdbcType=INTEGER },
-                product_type= #{productType,jdbcType=INTEGER },
-                product_line_name= #{productLineName,jdbcType=VARCHAR },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                status= #{status,jdbcType=INTEGER },
-                product_code= #{productCode,jdbcType=VARCHAR },
-                model_no= #{modelNo,jdbcType=VARCHAR },
-                update_user_id= #{updateUserId,jdbcType=INTEGER },
-                update_date= #{updateDate,jdbcType=TIMESTAMP }
+                supplierlogid= #{supplierlogid,jdbcType=INTEGER },
+                supplierid= #{supplierid,jdbcType=INTEGER },
+                operation_user_id= #{operationUserId,jdbcType=INTEGER },
+                operation_date= #{operationDate,jdbcType=TIMESTAMP },
+                operation_type= #{operationType,jdbcType=INTEGER },
+                note= #{note,jdbcType=VARCHAR },
+                belongs_type= #{belongsType,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
-                <if test="record.id != null">id= #{record.id,jdbcType=INTEGER },</if>
-                <if test="record.useType != null">use_type= #{record.useType,jdbcType=INTEGER },</if>
-                <if test="record.productType != null">product_type= #{record.productType,jdbcType=INTEGER },</if>
-                <if test="record.productLineName != null">product_line_name= #{record.productLineName,jdbcType=VARCHAR },</if>
-                <if test="record.createUserId != null">create_user_id= #{record.createUserId,jdbcType=INTEGER },</if>
-                <if test="record.createDate != null">create_date= #{record.createDate,jdbcType=TIMESTAMP },</if>
-                <if test="record.status != null">status= #{record.status,jdbcType=INTEGER },</if>
-                <if test="record.productCode != null">product_code= #{record.productCode,jdbcType=VARCHAR },</if>
-                <if test="record.modelNo != null">model_no= #{record.modelNo,jdbcType=VARCHAR },</if>
-                <if test="record.updateUserId != null">update_user_id= #{record.updateUserId,jdbcType=INTEGER },</if>
-                <if test="record.updateDate != null">update_date= #{record.updateDate,jdbcType=TIMESTAMP }</if>
+                <if test="record.supplierlogid != null">supplierlogid= #{record.supplierlogid,jdbcType=INTEGER },</if>
+                <if test="record.supplierid != null">supplierid= #{record.supplierid,jdbcType=INTEGER },</if>
+                <if test="record.operationUserId != null">operation_user_id= #{record.operationUserId,jdbcType=INTEGER },</if>
+                <if test="record.operationDate != null">operation_date= #{record.operationDate,jdbcType=TIMESTAMP },</if>
+                <if test="record.operationType != null">operation_type= #{record.operationType,jdbcType=INTEGER },</if>
+                <if test="record.note != null">note= #{record.note,jdbcType=VARCHAR },</if>
+                <if test="record.belongsType != null">belongs_type= #{record.belongsType,jdbcType=INTEGER }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -137,35 +117,31 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			id,
-			use_type,
-			product_type,
-			product_line_name,
-			create_user_id,
-			create_date,
-			status,
-			product_code,
-			model_no,
-			update_user_id,
-			update_date
+			supplierlogid,
+			supplierid,
+			operation_user_id,
+			operation_date,
+			operation_type,
+			note,
+			belongs_type
 	</sql>
 
 
     <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"></include>
-        FROM bs_product_line
-        WHERE id = #{id,jdbcType=INTEGER}
+        FROM pr_supplier_log
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
     </select>
 
 
-    <select id="selectByExample" parameterType="com.sunvalley.erp.model.product.ProductLineExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.sunvalley.erp.model.product.SupplierLogExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from bs_product_line
+        from pr_supplier_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -174,23 +150,23 @@
         </if>
     </select>
 
-    <delete id="deleteByExample" parameterType="com.sunvalley.erp.model.product.ProductLineExample">
-        delete from bs_product_line
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.model.product.SupplierLogExample">
+        delete from pr_supplier_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
 
-    <insert id="insert" parameterType="ProductLine" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO bs_product_line
+    <insert id="insert" parameterType="SupplierLog" keyProperty="supplierlogid" useGeneratedKeys="true">
+        INSERT INTO pr_supplier_log
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.model.product.ProductLine" keyProperty="id" useGeneratedKeys="true">
-        insert into bs_product_line
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.model.product.SupplierLog" keyProperty="supplierlogid" useGeneratedKeys="true">
+        insert into pr_supplier_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
         </trim>
@@ -200,8 +176,8 @@
     </insert>
 
 
-    <select id="countByExample" parameterType="com.sunvalley.erp.model.product.ProductLineExample" resultType="java.lang.Integer">
-        select count(*) from bs_product_line
+    <select id="countByExample" parameterType="com.sunvalley.erp.model.product.SupplierLogExample" resultType="java.lang.Integer">
+        select count(*) from pr_supplier_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -209,7 +185,7 @@
 
 
     <update id="updateByExampleSelective" parameterType="map">
-        UPDATE bs_product_line
+        UPDATE pr_supplier_log
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -221,7 +197,7 @@
 
 
     <update id="updateByExample" parameterType="map">
-        UPDATE bs_product_line
+        UPDATE pr_supplier_log
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -231,32 +207,32 @@
 
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.model.product.ProductLine">
-        update bs_product_line
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.model.product.SupplierLog">
+        update pr_supplier_log
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
     </update>
 
 
-    <update id="updateByPrimaryKey" parameterType="ProductLine">
-        UPDATE bs_product_line
+    <update id="updateByPrimaryKey" parameterType="SupplierLog">
+        UPDATE pr_supplier_log
         <set>
             <include refid="Set"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
 
     </update>
 
 
-    <select id="selectPage" parameterType="com.sunvalley.erp.model.product.ProductLineExample" resultMap="selectPageResult">
+    <select id="selectPage" parameterType="com.sunvalley.erp.model.product.SupplierLogExample" resultMap="selectPageResult">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from bs_product_line
+        from pr_supplier_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -267,7 +243,7 @@
     </select>
 
     <insert id="insertBatch" parameterType="java.util.List">
-        INSERT INTO bs_product_line
+        INSERT INTO pr_supplier_log
         (<include refid="Base_Column_List"></include>)
         values
         <foreach item="item" index="index" collection="list" separator=",">
@@ -276,8 +252,8 @@
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        DELETE FROM  bs_product_line
-        WHERE id = #{id,jdbcType=INTEGER}
+        DELETE FROM  pr_supplier_log
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-22 04:55:21=========================================== -->
+    <!-- ================================代码生成结束=2017-09-22 04:58:57=========================================== -->
 </mapper>
