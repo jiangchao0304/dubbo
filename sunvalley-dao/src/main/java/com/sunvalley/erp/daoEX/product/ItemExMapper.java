@@ -15,6 +15,8 @@ public interface ItemExMapper {
 
 	SkuBaseInfoDTO getSkuBaseInfo(Map<String, Object> param);
 
+	SkuBaseInfoDTO getPreSkuBaseInfo(Map<String, Object> param);
+
 	List<SkuListNewDTO> listSkuListNew(Map<String, Object> param);
 	int countSkuListNew (Map<String, Object> param);
 }

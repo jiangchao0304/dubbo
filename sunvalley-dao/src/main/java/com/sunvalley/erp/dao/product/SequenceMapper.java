@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.Sequence;
 import com.sunvalley.erp.model.product.SequenceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: SequenceMapper
 * @author
 * @date 2017-09-15 04:45:44
 */
+@Repository
 public interface SequenceMapper {
 
     int countByExample(SequenceExample example);

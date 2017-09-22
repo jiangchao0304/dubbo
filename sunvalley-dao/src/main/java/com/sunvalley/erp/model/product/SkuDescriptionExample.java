@@ -6,11 +6,11 @@ import java.util.List;
 import java.math.BigDecimal;
 
 /**
-* @Description: ItemLocaleExample
+* @Description: SkuDescriptionExample
 * @author
-* @date 2017-09-20 04:30:45
+* @date 2017-09-22 11:06:39
 */
-public class ItemLocaleExample {
+public class SkuDescriptionExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -21,7 +21,7 @@ public class ItemLocaleExample {
 
     private int pageSize;
 
-    public ItemLocaleExample() {
+    public SkuDescriptionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -98,7 +98,7 @@ public class ItemLocaleExample {
         return this.pageIndex*this.pageSize;
     }
 
-    public ItemLocaleExample(int pageSize, int pageIndex) {
+    public SkuDescriptionExample(int pageSize, int pageIndex) {
         this();
         this.pageSize=pageSize;
         this.pageIndex=pageIndex;
@@ -145,6 +145,70 @@ public class ItemLocaleExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
         
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(java.lang.Integer value) {
+            addCriterion("id =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(java.lang.Integer value) {
+            addCriterion("id <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(java.lang.Integer value) {
+            addCriterion("id >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(java.lang.Integer value) {
+            addCriterion("id >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(java.lang.Integer value) {
+            addCriterion("id <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(java.lang.Integer value) {
+            addCriterion("id <=", value, "id");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andIdIn(List<java.lang.Integer > values) {
+            addCriterion("id in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<java.lang.Integer> values) {
+            addCriterion("id not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(java.lang.Integer value1, java.lang.Integer value2) {
+            addCriterion("id between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(java.lang.Integer value1, java.lang.Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+
+
         public Criteria andSkuidIsNull() {
             addCriterion("skuid is null");
             return (Criteria) this;
@@ -209,257 +273,257 @@ public class ItemLocaleExample {
 
 
 
-        public Criteria andLangIdIsNull() {
-            addCriterion("langId is null");
+        public Criteria andDescSourcIsNull() {
+            addCriterion("descSourc is null");
             return (Criteria) this;
         }
 
 
-        public Criteria andLangIdIsNotNull() {
-            addCriterion("langId is not null");
+        public Criteria andDescSourcIsNotNull() {
+            addCriterion("descSourc is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLangIdEqualTo(Integer value) {
-            addCriterion("lang_id =", value, "langId");
+        public Criteria andDescSourcEqualTo(java.lang.String value) {
+            addCriterion("desc_sourc =", value, "descSourc");
             return (Criteria) this;
         }
 
-        public Criteria andLangIdNotEqualTo(Integer value) {
-            addCriterion("lang_id <>", value, "langId");
+        public Criteria andDescSourcNotEqualTo(java.lang.String value) {
+            addCriterion("desc_sourc <>", value, "descSourc");
             return (Criteria) this;
         }
 
-        public Criteria andLangIdGreaterThan(Integer value) {
-            addCriterion("lang_id >", value, "langId");
+        public Criteria andDescSourcGreaterThan(java.lang.String value) {
+            addCriterion("desc_sourc >", value, "descSourc");
             return (Criteria) this;
         }
 
-        public Criteria andLangIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("lang_id >=", value, "lang_id");
+        public Criteria andDescSourcGreaterThanOrEqualTo(java.lang.String value) {
+            addCriterion("desc_sourc >=", value, "desc_sourc");
             return (Criteria) this;
         }
 
-        public Criteria andLangIdLessThan(Integer value) {
-            addCriterion("lang_id <", value, "langId");
+        public Criteria andDescSourcLessThan(java.lang.String value) {
+            addCriterion("desc_sourc <", value, "descSourc");
             return (Criteria) this;
         }
 
-        public Criteria andLangIdLessThanOrEqualTo(Integer value) {
-            addCriterion("lang_id <=", value, "langId");
-            return (Criteria) this;
-        }
-
-
-        public Criteria andLangIdIn(List<Integer > values) {
-            addCriterion("lang_id in", values, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdNotIn(List<Integer> values) {
-            addCriterion("lang_id not in", values, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdBetween(Integer value1, Integer value2) {
-            addCriterion("lang_id between", value1, value2, "langId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("lang_id not between", value1, value2, "langId");
+        public Criteria andDescSourcLessThanOrEqualTo(java.lang.String value) {
+            addCriterion("desc_sourc <=", value, "descSourc");
             return (Criteria) this;
         }
 
 
-
-        public Criteria andSkuIsNull() {
-            addCriterion("sku is null");
+        public Criteria andDescSourcIn(List<java.lang.String > values) {
+            addCriterion("desc_sourc in", values, "descSourc");
             return (Criteria) this;
         }
 
-
-        public Criteria andSkuIsNotNull() {
-            addCriterion("sku is not null");
+        public Criteria andDescSourcNotIn(List<java.lang.String> values) {
+            addCriterion("desc_sourc not in", values, "descSourc");
             return (Criteria) this;
         }
 
-        public Criteria andSkuEqualTo(java.lang.String value) {
-            addCriterion("sku =", value, "sku");
+        public Criteria andDescSourcBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("desc_sourc between", value1, value2, "descSourc");
             return (Criteria) this;
         }
 
-        public Criteria andSkuNotEqualTo(java.lang.String value) {
-            addCriterion("sku <>", value, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuGreaterThan(java.lang.String value) {
-            addCriterion("sku >", value, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuGreaterThanOrEqualTo(java.lang.String value) {
-            addCriterion("sku >=", value, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuLessThan(java.lang.String value) {
-            addCriterion("sku <", value, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuLessThanOrEqualTo(java.lang.String value) {
-            addCriterion("sku <=", value, "sku");
-            return (Criteria) this;
-        }
-
-
-        public Criteria andSkuIn(List<java.lang.String > values) {
-            addCriterion("sku in", values, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuNotIn(List<java.lang.String> values) {
-            addCriterion("sku not in", values, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuBetween(java.lang.String value1, java.lang.String value2) {
-            addCriterion("sku between", value1, value2, "sku");
-            return (Criteria) this;
-        }
-
-        public Criteria andSkuNotBetween(java.lang.String value1, java.lang.String value2) {
-            addCriterion("sku not between", value1, value2, "sku");
+        public Criteria andDescSourcNotBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("desc_sourc not between", value1, value2, "descSourc");
             return (Criteria) this;
         }
 
 
 
-        public Criteria andDescriptionIsNull() {
-            addCriterion("description is null");
+        public Criteria andActionIsNull() {
+            addCriterion("action is null");
             return (Criteria) this;
         }
 
 
-        public Criteria andDescriptionIsNotNull() {
-            addCriterion("description is not null");
+        public Criteria andActionIsNotNull() {
+            addCriterion("action is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionEqualTo(java.lang.String value) {
-            addCriterion("description =", value, "description");
+        public Criteria andActionEqualTo(java.lang.String value) {
+            addCriterion("action =", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotEqualTo(java.lang.String value) {
-            addCriterion("description <>", value, "description");
+        public Criteria andActionNotEqualTo(java.lang.String value) {
+            addCriterion("action <>", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionGreaterThan(java.lang.String value) {
-            addCriterion("description >", value, "description");
+        public Criteria andActionGreaterThan(java.lang.String value) {
+            addCriterion("action >", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionGreaterThanOrEqualTo(java.lang.String value) {
-            addCriterion("description >=", value, "description");
+        public Criteria andActionGreaterThanOrEqualTo(java.lang.String value) {
+            addCriterion("action >=", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLessThan(java.lang.String value) {
-            addCriterion("description <", value, "description");
+        public Criteria andActionLessThan(java.lang.String value) {
+            addCriterion("action <", value, "action");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLessThanOrEqualTo(java.lang.String value) {
-            addCriterion("description <=", value, "description");
-            return (Criteria) this;
-        }
-
-
-        public Criteria andDescriptionIn(List<java.lang.String > values) {
-            addCriterion("description in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotIn(List<java.lang.String> values) {
-            addCriterion("description not in", values, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionBetween(java.lang.String value1, java.lang.String value2) {
-            addCriterion("description between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andDescriptionNotBetween(java.lang.String value1, java.lang.String value2) {
-            addCriterion("description not between", value1, value2, "description");
+        public Criteria andActionLessThanOrEqualTo(java.lang.String value) {
+            addCriterion("action <=", value, "action");
             return (Criteria) this;
         }
 
 
+        public Criteria andActionIn(List<java.lang.String > values) {
+            addCriterion("action in", values, "action");
+            return (Criteria) this;
+        }
 
-        public Criteria andUnitNameIsNull() {
-            addCriterion("unitName is null");
+        public Criteria andActionNotIn(List<java.lang.String> values) {
+            addCriterion("action not in", values, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("action between", value1, value2, "action");
+            return (Criteria) this;
+        }
+
+        public Criteria andActionNotBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("action not between", value1, value2, "action");
             return (Criteria) this;
         }
 
 
-        public Criteria andUnitNameIsNotNull() {
-            addCriterion("unitName is not null");
-            return (Criteria) this;
-        }
 
-        public Criteria andUnitNameEqualTo(java.lang.String value) {
-            addCriterion("unitName =", value, "unitName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnitNameNotEqualTo(java.lang.String value) {
-            addCriterion("unitName <>", value, "unitName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnitNameGreaterThan(java.lang.String value) {
-            addCriterion("unitName >", value, "unitName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnitNameGreaterThanOrEqualTo(java.lang.String value) {
-            addCriterion("unitName >=", value, "unitName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnitNameLessThan(java.lang.String value) {
-            addCriterion("unitName <", value, "unitName");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnitNameLessThanOrEqualTo(java.lang.String value) {
-            addCriterion("unitName <=", value, "unitName");
+        public Criteria andUpdatepicuserIsNull() {
+            addCriterion("updatepicuser is null");
             return (Criteria) this;
         }
 
 
-        public Criteria andUnitNameIn(List<java.lang.String > values) {
-            addCriterion("unitName in", values, "unitName");
+        public Criteria andUpdatepicuserIsNotNull() {
+            addCriterion("updatepicuser is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUnitNameNotIn(List<java.lang.String> values) {
-            addCriterion("unitName not in", values, "unitName");
+        public Criteria andUpdatepicuserEqualTo(java.lang.String value) {
+            addCriterion("updatepicuser =", value, "updatepicuser");
             return (Criteria) this;
         }
 
-        public Criteria andUnitNameBetween(java.lang.String value1, java.lang.String value2) {
-            addCriterion("unitName between", value1, value2, "unitName");
+        public Criteria andUpdatepicuserNotEqualTo(java.lang.String value) {
+            addCriterion("updatepicuser <>", value, "updatepicuser");
             return (Criteria) this;
         }
 
-        public Criteria andUnitNameNotBetween(java.lang.String value1, java.lang.String value2) {
-            addCriterion("unitName not between", value1, value2, "unitName");
+        public Criteria andUpdatepicuserGreaterThan(java.lang.String value) {
+            addCriterion("updatepicuser >", value, "updatepicuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicuserGreaterThanOrEqualTo(java.lang.String value) {
+            addCriterion("updatepicuser >=", value, "updatepicuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicuserLessThan(java.lang.String value) {
+            addCriterion("updatepicuser <", value, "updatepicuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicuserLessThanOrEqualTo(java.lang.String value) {
+            addCriterion("updatepicuser <=", value, "updatepicuser");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andUpdatepicuserIn(List<java.lang.String > values) {
+            addCriterion("updatepicuser in", values, "updatepicuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicuserNotIn(List<java.lang.String> values) {
+            addCriterion("updatepicuser not in", values, "updatepicuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicuserBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("updatepicuser between", value1, value2, "updatepicuser");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicuserNotBetween(java.lang.String value1, java.lang.String value2) {
+            addCriterion("updatepicuser not between", value1, value2, "updatepicuser");
+            return (Criteria) this;
+        }
+
+
+
+        public Criteria andUpdatepicdateIsNull() {
+            addCriterion("updatepicdate is null");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andUpdatepicdateIsNotNull() {
+            addCriterion("updatepicdate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateEqualTo(java.util.Date value) {
+            addCriterion("updatepicdate =", value, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateNotEqualTo(java.util.Date value) {
+            addCriterion("updatepicdate <>", value, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateGreaterThan(java.util.Date value) {
+            addCriterion("updatepicdate >", value, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateGreaterThanOrEqualTo(java.util.Date value) {
+            addCriterion("updatepicdate >=", value, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateLessThan(java.util.Date value) {
+            addCriterion("updatepicdate <", value, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateLessThanOrEqualTo(java.util.Date value) {
+            addCriterion("updatepicdate <=", value, "updatepicdate");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andUpdatepicdateIn(List<java.util.Date > values) {
+            addCriterion("updatepicdate in", values, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateNotIn(List<java.util.Date> values) {
+            addCriterion("updatepicdate not in", values, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateBetween(java.util.Date value1, java.util.Date value2) {
+            addCriterion("updatepicdate between", value1, value2, "updatepicdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatepicdateNotBetween(java.util.Date value1, java.util.Date value2) {
+            addCriterion("updatepicdate not between", value1, value2, "updatepicdate");
             return (Criteria) this;
         }
 

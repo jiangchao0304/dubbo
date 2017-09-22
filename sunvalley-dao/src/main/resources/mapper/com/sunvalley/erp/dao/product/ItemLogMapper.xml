@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunvalley.erp.dao.product.ItemLocaleMapper">
-<!-- ================================代码生成开始=2017-09-20 04:30:45=========================================== -->
+<mapper namespace="com.sunvalley.erp.dao.product.ItemLogMapper">
+<!-- ================================代码生成开始=2017-09-22 12:18:46=========================================== -->
 
-    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.model.product.ItemLocale">
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.model.product.ItemLog">
+        <result column="id" property="id" jdbcType="INTEGER"/>
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
-        <result column="lang_id" property="langId" jdbcType="TINYINT"/>
-        <result column="sku" property="sku" jdbcType="VARCHAR"/>
-        <result column="description" property="description" jdbcType="VARCHAR"/>
-        <result column="unitName" property="unitName" jdbcType="VARCHAR"/>
+        <result column="optype" property="optype" jdbcType="INTEGER"/>
+        <result column="info_type" property="infoType" jdbcType="INTEGER"/>
+        <result column="opnote" property="opnote" jdbcType="VARCHAR"/>
+        <result column="opterator" property="opterator" jdbcType="VARCHAR"/>
+        <result column="opteratorid" property="opteratorid" jdbcType="INTEGER"/>
+        <result column="opdate" property="opdate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.model.product.ItemLocale" />
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.model.product.ItemLog" />
 
     <sql id="Values">
+            #{id,jdbcType=INTEGER },
             #{skuid,jdbcType=INTEGER },
-            #{langId,jdbcType=TINYINT },
-            #{sku,jdbcType=VARCHAR },
-            #{description,jdbcType=VARCHAR },
-            #{unitName,jdbcType=VARCHAR }
+            #{optype,jdbcType=INTEGER },
+            #{infoType,jdbcType=INTEGER },
+            #{opnote,jdbcType=VARCHAR },
+            #{opterator,jdbcType=VARCHAR },
+            #{opteratorid,jdbcType=INTEGER },
+            #{opdate,jdbcType=TIMESTAMP }
     </sql>
 
     <sql id="ValuesBatch">
+            #{item.id,jdbcType=INTEGER},
             #{item.skuid,jdbcType=INTEGER},
-            #{item.langId,jdbcType=TINYINT},
-            #{item.sku,jdbcType=VARCHAR},
-            #{item.description,jdbcType=VARCHAR},
-            #{item.unitName,jdbcType=VARCHAR}
+            #{item.optype,jdbcType=INTEGER},
+            #{item.infoType,jdbcType=INTEGER},
+            #{item.opnote,jdbcType=VARCHAR},
+            #{item.opterator,jdbcType=VARCHAR},
+            #{item.opteratorid,jdbcType=INTEGER},
+            #{item.opdate,jdbcType=TIMESTAMP}
     </sql>
 
     <sql id="Set">
+                id= #{id,jdbcType=INTEGER },
                 skuid= #{skuid,jdbcType=INTEGER },
-                lang_id= #{langId,jdbcType=TINYINT },
-                sku= #{sku,jdbcType=VARCHAR },
-                description= #{description,jdbcType=VARCHAR },
-                unitName= #{unitName,jdbcType=VARCHAR }
+                optype= #{optype,jdbcType=INTEGER },
+                info_type= #{infoType,jdbcType=INTEGER },
+                opnote= #{opnote,jdbcType=VARCHAR },
+                opterator= #{opterator,jdbcType=VARCHAR },
+                opteratorid= #{opteratorid,jdbcType=INTEGER },
+                opdate= #{opdate,jdbcType=TIMESTAMP }
     </sql>
 
     <sql id="SetNotNull">
+                <if test="record.id != null">id= #{record.id,jdbcType=INTEGER },</if>
                 <if test="record.skuid != null">skuid= #{record.skuid,jdbcType=INTEGER },</if>
-                <if test="record.langId != null">lang_id= #{record.langId,jdbcType=TINYINT },</if>
-                <if test="record.sku != null">sku= #{record.sku,jdbcType=VARCHAR },</if>
-                <if test="record.description != null">description= #{record.description,jdbcType=VARCHAR },</if>
-                <if test="record.unitName != null">unitName= #{record.unitName,jdbcType=VARCHAR }</if>
+                <if test="record.optype != null">optype= #{record.optype,jdbcType=INTEGER },</if>
+                <if test="record.infoType != null">info_type= #{record.infoType,jdbcType=INTEGER },</if>
+                <if test="record.opnote != null">opnote= #{record.opnote,jdbcType=VARCHAR },</if>
+                <if test="record.opterator != null">opterator= #{record.opterator,jdbcType=VARCHAR },</if>
+                <if test="record.opteratorid != null">opteratorid= #{record.opteratorid,jdbcType=INTEGER },</if>
+                <if test="record.opdate != null">opdate= #{record.opdate,jdbcType=TIMESTAMP }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -107,29 +122,32 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
+			id,
 			skuid,
-			lang_id,
-			sku,
-			description,
-			unitName
+			optype,
+			info_type,
+			opnote,
+			opterator,
+			opteratorid,
+			opdate
 	</sql>
 
 
     <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"></include>
-        FROM bs_item_locale
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        FROM bs_item_log
+        WHERE id = #{id,jdbcType=INTEGER}
     </select>
 
 
-    <select id="selectByExample" parameterType="com.sunvalley.erp.model.product.ItemLocaleExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.sunvalley.erp.model.product.ItemLogExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from bs_item_locale
+        from bs_item_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -138,23 +156,23 @@
         </if>
     </select>
 
-    <delete id="deleteByExample" parameterType="com.sunvalley.erp.model.product.ItemLocaleExample">
-        delete from bs_item_locale
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.model.product.ItemLogExample">
+        delete from bs_item_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
 
-    <insert id="insert" parameterType="ItemLocale" >
-        INSERT INTO bs_item_locale
+    <insert id="insert" parameterType="ItemLog" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO bs_item_log
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.model.product.ItemLocale" >
-        insert into bs_item_locale
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.model.product.ItemLog" keyProperty="id" useGeneratedKeys="true">
+        insert into bs_item_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
         </trim>
@@ -164,8 +182,8 @@
     </insert>
 
 
-    <select id="countByExample" parameterType="com.sunvalley.erp.model.product.ItemLocaleExample" resultType="java.lang.Integer">
-        select count(*) from bs_item_locale
+    <select id="countByExample" parameterType="com.sunvalley.erp.model.product.ItemLogExample" resultType="java.lang.Integer">
+        select count(*) from bs_item_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -173,7 +191,7 @@
 
 
     <update id="updateByExampleSelective" parameterType="map">
-        UPDATE bs_item_locale
+        UPDATE bs_item_log
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -185,7 +203,7 @@
 
 
     <update id="updateByExample" parameterType="map">
-        UPDATE bs_item_locale
+        UPDATE bs_item_log
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -195,32 +213,32 @@
 
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.model.product.ItemLocale">
-        update bs_item_locale
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.model.product.ItemLog">
+        update bs_item_log
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=INTEGER}
     </update>
 
 
-    <update id="updateByPrimaryKey" parameterType="ItemLocale">
-        UPDATE bs_item_locale
+    <update id="updateByPrimaryKey" parameterType="ItemLog">
+        UPDATE bs_item_log
         <set>
             <include refid="Set"></include>
         </set>
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=INTEGER}
 
     </update>
 
 
-    <select id="selectPage" parameterType="com.sunvalley.erp.model.product.ItemLocaleExample" resultMap="selectPageResult">
+    <select id="selectPage" parameterType="com.sunvalley.erp.model.product.ItemLogExample" resultMap="selectPageResult">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from bs_item_locale
+        from bs_item_log
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -231,7 +249,7 @@
     </select>
 
     <insert id="insertBatch" parameterType="java.util.List">
-        INSERT INTO bs_item_locale
+        INSERT INTO bs_item_log
         (<include refid="Base_Column_List"></include>)
         values
         <foreach item="item" index="index" collection="list" separator=",">
@@ -240,8 +258,8 @@
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        DELETE FROM  bs_item_locale
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        DELETE FROM  bs_item_log
+        WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-20 04:30:45=========================================== -->
+    <!-- ================================代码生成结束=2017-09-22 12:18:46=========================================== -->
 </mapper>

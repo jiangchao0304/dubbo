@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.PrepareSku;
 import com.sunvalley.erp.model.product.PrepareSkuExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: PrepareSkuMapper
 * @author
 * @date 2017-09-18 12:26:10
 */
+@Repository
 public interface PrepareSkuMapper {
 
     int countByExample(PrepareSkuExample example);

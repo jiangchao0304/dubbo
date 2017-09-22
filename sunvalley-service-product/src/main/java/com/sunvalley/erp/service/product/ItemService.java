@@ -6,12 +6,17 @@ import com.sunvalley.common.constants.Constants;
 import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.domain.FilterModel;
 import com.sunvalley.domain.Pager;
+import com.sunvalley.domain.erp.product.dto.ItemLocaleDTO;
 import com.sunvalley.domain.erp.product.dto.ModelAndPreSkuDTO;
+import com.sunvalley.domain.erp.product.dto.SkuBaseInfoDTO;
 import com.sunvalley.domain.erp.product.dto.SkuListNewDTO;
+import com.sunvalley.erp.dao.product.ItemLocaleMapper;
 import com.sunvalley.erp.dao.product.ItemMapper;
 import com.sunvalley.erp.daoEX.product.ItemExMapper;
 import com.sunvalley.erp.model.product.ItemLocale;
+import com.sunvalley.erp.model.product.ItemLocaleExample;
 import com.sunvalley.face.exception.FaceException;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +38,67 @@ public class ItemService {
     private ItemMapper itemMapper;
 
     @Autowired
+    private ItemLocaleMapper itemLocaleMapper;
+
+    @Autowired
     private ItemExMapper itemExMapper;
+
+
+    public SkuBaseInfoDTO getSkuBaseInfo(int skuId){
+
+        Map<String,Object> param = new HashMap<>();
+        param.put("skuId",skuId);
+
+        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+        if(skuBaseInfoDTO!=null){
+            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
+        }
+        return skuBaseInfoDTO;
+
+    }
+
+    public  List<ItemLocaleDTO> listItemLocale(int skuid){
+
+        List<ItemLocaleDTO> result = new ArrayList<>();
+        ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
+        itemLocaleExample.createCriteria().andSkuidEqualTo(skuid);
+        List<ItemLocale>  itemLocaleList =  itemLocaleMapper.selectByExample(itemLocaleExample);
+
+        if(itemLocaleList==null || itemLocaleList.size()==0)
+            return result;
+
+
+        for (ItemLocale itemLocale : itemLocaleList) {
+
+            ItemLocaleDTO dto = new ItemLocaleDTO();
+            try {
+                PropertyUtils.copyProperties(dto, itemLocale);
+                result.add(dto);
+            }catch (Exception ex){
+                throw  new FaceException(ex.getMessage());
+            }
+
+        }
+
+        return result;
+
+    }
+
+
+    public SkuBaseInfoDTO getSkuBaseInfo(String sku){
+        Map<String,Object> param = new HashMap<>();
+        param.put("sku",sku);
+        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+
+        if(skuBaseInfoDTO!=null){
+            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
+
+        }
+        return skuBaseInfoDTO;
+
+    }
 
 
     public List<ItemLocale> searchSkuCategoryName(String sku, int langId, int[] category,int limit,Integer companyid) {

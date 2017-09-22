@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.ItemLocale;
 import com.sunvalley.erp.model.product.ItemLocaleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemLocaleMapper
 * @author
-* @date 2017-09-18 12:27:33
+* @date 2017-09-20 04:30:45
 */
+@Repository
 public interface ItemLocaleMapper {
 
     int countByExample(ItemLocaleExample example);

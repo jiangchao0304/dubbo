@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.ItemPreCommom;
 import com.sunvalley.erp.model.product.ItemPreCommomExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemPreCommomMapper
 * @author
 * @date 2017-09-16 11:23:54
 */
+@Repository
 public interface ItemPreCommomMapper {
 
     int countByExample(ItemPreCommomExample example);

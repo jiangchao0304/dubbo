@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.ProductLine;
 import com.sunvalley.erp.model.product.ProductLineExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ProductLineMapper
 * @author
 * @date 2017-09-16 11:24:16
 */
+@Repository
 public interface ProductLineMapper {
 
     int countByExample(ProductLineExample example);

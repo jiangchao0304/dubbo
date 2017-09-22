@@ -3,6 +3,8 @@
 */
 package com.sunvalley.domain.erp.product.dto;
 
+import com.sunvalley.domain.erp.common.dto.SysSessionDTO;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,12 +19,13 @@ public class SkuBaseInfoDTO implements Serializable {
     private String sku;
     private int skuId;
     private Integer lineState;
-    private Integer mainCategoryId;
+    private Integer categoryId;
     private String categoryStr;
     private String subCategoryStr;
     private Integer subCategortId;
     private Integer brandId;
     private String model;
+    private Integer modelId;
     private Integer pmId;
     private String pmName;
     private Integer battery;
@@ -34,7 +37,7 @@ public class SkuBaseInfoDTO implements Serializable {
     private String anrule;
     private String country;
     private Integer isPackage;
-    private Integer magnetic;
+    private Short magnetic;
     private Integer combineUnit;
     private Integer warranty;
     private Integer purchaseProperty;
@@ -49,7 +52,33 @@ public class SkuBaseInfoDTO implements Serializable {
     private Short productWidth;
     private Short productHeight;
     private Short productWeight;
+    private SysSessionDTO sessionDTO;
+
+    public SysSessionDTO getSessionDTO() {
+        return sessionDTO;
+    }
+
+    public void setSessionDTO(SysSessionDTO sessionDTO) {
+        this.sessionDTO = sessionDTO;
+    }
+
     private List<ItemLocaleDTO> itemLocaleDTOList;
+
+    public Integer getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public String getPmName() {
         return pmName;
@@ -99,13 +128,6 @@ public class SkuBaseInfoDTO implements Serializable {
         this.lineState = lineState;
     }
 
-    public Integer getMainCategoryId() {
-        return mainCategoryId;
-    }
-
-    public void setMainCategoryId(Integer mainCategoryId) {
-        this.mainCategoryId = mainCategoryId;
-    }
 
     public Integer getSubCategortId() {
         return subCategortId;
@@ -211,11 +233,11 @@ public class SkuBaseInfoDTO implements Serializable {
         this.isPackage = isPackage;
     }
 
-    public Integer getMagnetic() {
+    public Short getMagnetic() {
         return magnetic;
     }
 
-    public void setMagnetic(Integer magnetic) {
+    public void setMagnetic(Short magnetic) {
         this.magnetic = magnetic;
     }
 

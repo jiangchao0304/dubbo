@@ -3,6 +3,7 @@
 */
 package com.sunvalley.domain.erp.product.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,23 +12,25 @@ import java.util.List;
  * @Author: douglas.jiang
  * @Date: 2017-09-18 16:55
  */
-public class UpdateSkuBaseInfoDTO {
+public class UpdateSkuBaseInfoDTO  implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int skuId;
-    private Integer lineState;
-    private Short magnetic;
-    private Integer combineUnit;
-    private Integer purchaseProperty;
+    private int lineState;
+    private short magnetic;
+    private int combineUnit;
+    private int purchaseProperty;
     private String purspec;
     private String purDese;
     private String bomDesc;
-    private Short width;
-    private Short height;
-    private Short weight;
-    private Short len;
-    private Short productLen;
-    private Short productWidth;
-    private Short productHeight;
-    private Short productWeight;
+    private short width;
+    private short height;
+    private short weight;
+    private short len;
+    private short productLen;
+    private short productWidth;
+    private short productHeight;
+    private short productWeight;
     private List<ItemLocaleDTO> itemLocaleDTOList;
 
     public int getSkuId() {
@@ -38,35 +41,35 @@ public class UpdateSkuBaseInfoDTO {
         this.skuId = skuId;
     }
 
-    public Integer getLineState() {
+    public int getLineState() {
         return lineState;
     }
 
-    public void setLineState(Integer lineState) {
+    public void setLineState(int lineState) {
         this.lineState = lineState;
     }
 
-    public Short getMagnetic() {
+    public short getMagnetic() {
         return magnetic;
     }
 
-    public void setMagnetic(Short magnetic) {
+    public void setMagnetic(short magnetic) {
         this.magnetic = magnetic;
     }
 
-    public Integer getCombineUnit() {
+    public int getCombineUnit() {
         return combineUnit;
     }
 
-    public void setCombineUnit(Integer combineUnit) {
+    public void setCombineUnit(int combineUnit) {
         this.combineUnit = combineUnit;
     }
 
-    public Integer getPurchaseProperty() {
+    public int getPurchaseProperty() {
         return purchaseProperty;
     }
 
-    public void setPurchaseProperty(Integer purchaseProperty) {
+    public void setPurchaseProperty(int purchaseProperty) {
         this.purchaseProperty = purchaseProperty;
     }
 
@@ -94,67 +97,67 @@ public class UpdateSkuBaseInfoDTO {
         this.bomDesc = bomDesc;
     }
 
-    public Short getWidth() {
+    public short getWidth() {
         return width;
     }
 
-    public void setWidth(Short width) {
+    public void setWidth(short width) {
         this.width = width;
     }
 
-    public Short getHeight() {
+    public short getHeight() {
         return height;
     }
 
-    public void setHeight(Short height) {
+    public void setHeight(short height) {
         this.height = height;
     }
 
-    public Short getWeight() {
+    public short getWeight() {
         return weight;
     }
 
-    public void setWeight(Short weight) {
+    public void setWeight(short weight) {
         this.weight = weight;
     }
 
-    public Short getLen() {
+    public short getLen() {
         return len;
     }
 
-    public void setLen(Short len) {
+    public void setLen(short len) {
         this.len = len;
     }
 
-    public Short getProductLen() {
+    public short getProductLen() {
         return productLen;
     }
 
-    public void setProductLen(Short productLen) {
+    public void setProductLen(short productLen) {
         this.productLen = productLen;
     }
 
-    public Short getProductWidth() {
+    public short getProductWidth() {
         return productWidth;
     }
 
-    public void setProductWidth(Short productWidth) {
+    public void setProductWidth(short productWidth) {
         this.productWidth = productWidth;
     }
 
-    public Short getProductHeight() {
+    public short getProductHeight() {
         return productHeight;
     }
 
-    public void setProductHeight(Short productHeight) {
+    public void setProductHeight(short productHeight) {
         this.productHeight = productHeight;
     }
 
-    public Short getProductWeight() {
+    public short getProductWeight() {
         return productWeight;
     }
 
-    public void setProductWeight(Short productWeight) {
+    public void setProductWeight(short productWeight) {
         this.productWeight = productWeight;
     }
 

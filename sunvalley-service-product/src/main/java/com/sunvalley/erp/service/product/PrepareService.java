@@ -2,6 +2,7 @@
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
 package com.sunvalley.erp.service.product;
+import com.google.common.base.Strings;
 import com.sunvalley.common.constants.Constants;
 import com.sunvalley.common.util.FilterOP;
 import com.sunvalley.common.util.TimeUtil;
@@ -13,18 +14,18 @@ import com.sunvalley.erp.daoEX.product.ItemExMapper;
 import com.sunvalley.erp.daoEX.product.PrepareSkuExMapper;
 import com.sunvalley.erp.model.product.*;
 import com.sunvalley.face.exception.FaceException;
+import javassist.runtime.DotClass;
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import sun.awt.SunHints;
 
+import javax.xml.stream.events.DTD;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 类或方法的功能描述 :TODO
@@ -64,7 +65,24 @@ public class PrepareService {
     private ItemLocaleMapper itemLocaleMapper;
 
     @Autowired
+    private ItemTextLocaleMapper itemTextLocaleMapper;
+
+    @Autowired
     private SequenceService sequenceService;
+
+    @Autowired
+    private BomMapper bomMapper;
+
+    @Autowired
+    private SkuDescriptionMapper skuDescriptionMapper;
+
+    @Autowired
+    private ItemLogService itemLogService;
+
+    @Autowired
+    private ItemAttrValueLocaleMapper itemAttrValueLocaleMapper;
+
+
     //#endregion
 
     /**
@@ -124,6 +142,20 @@ public class PrepareService {
         }else{
             throw new FaceException("请输入系统存在的Model号！");
         }
+    }
+
+
+    public SkuBaseInfoDTO getPreSkuBaseInfo(Integer preSkuId,Integer modelId){
+        Map<String,Object> param = new HashMap<>();
+        if(preSkuId>0){
+            param.put("preskuId",preSkuId);
+        }
+       if(modelId>0){
+           param.put("modelId",modelId);
+       }
+        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getPreSkuBaseInfo(param);
+        skuBaseInfoDTO.setBomDesc("111111111");
+        return skuBaseInfoDTO;
     }
 
 
@@ -222,12 +254,12 @@ public class PrepareService {
             ItemModel itemModel = itemModelMapper.selectByPrimaryKey(prepareSkuEx.getModelId());
             if(!prepareSkuEx.getMainCategoryId().equals(itemModel.getMainCategoryId()) ||
                     !prepareSkuEx.getSubCategoryId().equals(itemModel.getSubCategoryId())){
-                String modelName = this.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
+                String modelName = sequenceService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
                 model.setModelName(modelName);
             }
             itemModelMapper.updateByPrimaryKey(model);
         }else{
-            String modelName = this.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
+            String modelName = sequenceService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
             model.setModelName(modelName);
             itemModelMapper.insert(model);
             //todo:自动分配组织架构
@@ -242,33 +274,7 @@ public class PrepareService {
 
     }
 
-    public SkuBaseInfoDTO getSkuBaseInfo(int skuId){
 
-        Map<String,Object> param = new HashMap<>();
-        param.put("skuId",skuId);
-
-        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
-        if(skuBaseInfoDTO!=null){
-            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
-            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
-        }
-        return skuBaseInfoDTO;
-
-    }
-
-    public SkuBaseInfoDTO getSkuBaseInfo(String sku){
-        Map<String,Object> param = new HashMap<>();
-        param.put("sku",sku);
-        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
-
-        if(skuBaseInfoDTO!=null){
-            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
-            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
-
-        }
-        return skuBaseInfoDTO;
-
-    }
 
     /**
      * updateSkuBaseInfo .更新sku基本信息
@@ -279,45 +285,311 @@ public class PrepareService {
      * @author: douglas.jiang
      * @date : 2017/9/18:17:02
      */
-    public boolean updateSkuBaseInfo(UpdateSkuBaseInfoDTO dto){
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public boolean updateSkuBaseInfo(SkuBaseInfoDTO dto){
 
-        //更新磁性字段
+        beforeSaveItem(dto);
 
+        //更新bs_item
         Item item = new Item();
         item.setSkuid(dto.getSkuId());
+        item.setLen(dto.getLen());
+        item.setWeight(dto.getWeight());
+        item.setWidth(dto.getWidth());
+        item.setHeight(dto.getHeight());
+        item.setProductHeight(dto.getProductHeight());
+        item.setProductLen(dto.getProductLen());
+        item.setProductWeight(dto.getProductWeight());
+        item.setProductWidth(dto.getProductWeight());
+        item.setPurdesc(dto.getPurDese());
+        item.setPurspec(dto.getPurspec());
+        item.setLineState(dto.getLineState());
         item.setMagnetic(dto.getMagnetic());
+        itemMapper.updateByPrimaryKeySelective(item);
 
-        ItemExample itemExample = new ItemExample();
-        itemExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
-        return  itemMapper.updateByExampleSelective(item,itemExample)>0;
+        //更新bs_bom
+        Bom bom = new Bom();
+        bom.setBomDesc(dto.getBomDesc());
+        bom.setCombineUnit(dto.getCombineUnit());
+        BomExample bomExample = new BomExample();
+        bomExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
+        bomMapper.updateByExampleSelective(bom,bomExample);
+
+        //更新bs_item_locale
+        for (ItemLocaleDTO itemLocaleDTO : dto.getItemLocaleDTOList()) {
+            ItemLocale updateDO = new ItemLocale();
+            updateDO.setDescription(itemLocaleDTO.getDescription());
+            ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
+            itemLocaleExample.createCriteria().andSkuidEqualTo(itemLocaleDTO.getSkuid())
+                    .andLangIdEqualTo(itemLocaleDTO.getLangId());
+            itemLocaleMapper.updateByExampleSelective(updateDO,itemLocaleExample);
+        }
+
+
+        return true;
+    }
+
+
+    /**
+     * updateSkuBaseInfo .更新sku基本信息
+     * @param dto
+     *         [dto]
+     * @return boolean
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/9/18:17:02
+     */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public boolean saveSkuBaseInfo(SkuBaseInfoDTO dto){
+
+        beforeSaveItem(dto);
+
+        // 在sku编码没有输入的情况下,系统根据类别自动产生编码
+        if(Strings.isNullOrEmpty(dto.getSku())){
+            String sku= sequenceService.generationNo(dto.getCategoryId(),dto.getSubCategortId(),null,
+                    Constants.skuCodeType.skuCode,dto.getIsPackage(),null);
+            dto.setSku(sku);
+        }
+
+        //更新bs_item
+        Item item = new Item();
+        item.setSkuid(dto.getSkuId());
+        item.setLen(dto.getLen());
+        item.setWeight(dto.getWeight());
+        item.setWidth(dto.getWidth());
+        item.setHeight(dto.getHeight());
+        item.setProductHeight(dto.getProductHeight());
+        item.setProductLen(dto.getProductLen());
+        item.setProductWeight(dto.getProductWeight());
+        item.setProductWidth(dto.getProductWeight());
+        item.setPurdesc(dto.getPurDese());
+        item.setPurspec(dto.getPurspec());
+        item.setLineState(dto.getLineState());
+        item.setMagnetic(dto.getMagnetic());
+        item.setSku(dto.getSku());
+        item.setCreateUserId(dto.getSessionDTO().getUserId());
+        item.setModelId(dto.getModelId());
+        int skuId = itemMapper.insert(item);
+        if(skuId>0){
+            dto.setSkuId(skuId);
+            SkuDescription  description = new SkuDescription();
+            description.setAction("create");
+            description.setSkuid(item.getSkuid());
+            description.setDescSourc(item.getDescSourc());
+            description.setUpdatepicuser( dto.getSessionDTO().getFirstName()+" "+ dto.getSessionDTO().getLastName());
+            description.setUpdatepicdate(new Date());
+            skuDescriptionMapper.insert(description);
+
+
+            for (ItemLocaleDTO localeDTO : dto.getItemLocaleDTOList()) {
+                localeDTO.setSku(dto.getSku());
+                localeDTO.setSkuid(skuId);
+            }
+
+            saveItemLocale(dto.getItemLocaleDTOList());  //多语言
+            saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleDTOList()); //产品说明
+            saveItemAttrValue(dto.getItemLocaleDTOList()); // 保存属性
+
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void beforeSaveItem(SkuBaseInfoDTO item){
+        if(item.getLen()<0||item.getLen()>32767)
+            throw new FaceException("PackeagedLen is out of range!");
+        if(item.getWidth()<0||item.getWidth()>32767)
+            throw new FaceException("PackeagedWidth is out of range!");
+        if(item.getHeight()<0||item.getHeight()>32767)
+            throw new FaceException("PackeagedHeight is out of range!");
+        if(item.getWeight()<0||item.getWeight()>32767)
+            throw new FaceException("PackeagedWeight is out of range!");
+        if(item.getProductLen()<=0||item.getProductLen()>32767)
+            throw new FaceException("ProductLen is out of range!");
+        if(item.getProductWidth()<=0||item.getProductWidth()>32767)
+            throw new FaceException("ProductWidth is out of range!");
+        if(item.getProductHeight()<=0||item.getProductHeight()>32767)
+            throw new FaceException("ProductHeight is out of range!");
+        if(item.getProductWeight()<=0||item.getProductWeight()>32767)
+            throw new FaceException("ProductWeight is out of range!");
+        // 判断内包装sku是否存在
+//        if (item.getInnersku() != null && !item.getInnersku().trim().equals("")) {
+//            Item innerItem = getByID(item.getInnersku());
+//            if (innerItem == null) {
+//                throw new FaceException("", "sku.noexistinnersku");
+//            }
+//            item.setInnersku_id(innerItem.getSkuid());
+//        }
+//        // 判断外包装sku是否存在
+//        if (item.getOutersku() != null && !item.getOutersku().trim().equals("")) {
+//            Item outerItem = getByID(item.getOutersku());
+//            if (outerItem == null) {
+//                throw new FaceException("", "sku.noexistoutsku");
+//            }
+//            item.setOutersku_id(outerItem.getSkuid());
+//        }
+    }
+
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void edit(SkuBaseInfoDTO dto) throws Exception {
+        saveItemLocale(dto.getItemLocaleDTOList()); // 保存产品描述
+        saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleDTOList()); // 保存产品规格等大文本字段
+        //todo:保存产品属性
+        //saveItemAttrValue(item); // 保存产品属性
+        Item item = itemMapper.selectByPrimaryKey(dto.getSkuId());
+        if (Strings.isNullOrEmpty(item.getDescSourc())){
+            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionDTO().getFirstName(),"create");
+        }else {
+            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionDTO().getFirstName(),"modify");
+        }
+        Item updateItem = new Item();
+        item.setSkuid(dto.getSkuId());
+        item.setLen(dto.getLen());
+        item.setWeight(dto.getWeight());
+        item.setWidth(dto.getWidth());
+        item.setHeight(dto.getHeight());
+        item.setProductHeight(dto.getProductHeight());
+        item.setProductLen(dto.getProductLen());
+        item.setProductWeight(dto.getProductWeight());
+        item.setProductWidth(dto.getProductWeight());
+        item.setPurdesc(dto.getPurDese());
+        item.setPurspec(dto.getPurspec());
+        item.setLineState(dto.getLineState());
+        item.setMagnetic(dto.getMagnetic());
+        int result = itemMapper.updateByPrimaryKeySelective(updateItem);
+        if(result!=0){
+            //记录产品更新历史--产品长，宽等信息
+            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.SIZE,dto.getSessionDTO().getUserId(),dto.getSessionDTO().getFullName());
+            //记录产品更新历史--isDrop
+            itemLogService.addItemLog(updateItem,item,Constants.ProductLogType.IS_DROP_STATUS,dto.getSessionDTO().getUserId(),dto.getSessionDTO().getFullName());
+            //记录产品更新历史--line_state
+            itemLogService.addItemLog(updateItem,item,Constants.ProductLogType.STATUS,dto.getSessionDTO().getUserId(),dto.getSessionDTO().getFullName());
+        }
 
     }
 
-    public  List<ItemLocaleDTO> listItemLocale(int skuid){
 
-        List<ItemLocaleDTO> result = new ArrayList<>();
-        ItemLocaleExample  itemLocaleExample = new ItemLocaleExample();
-        itemLocaleExample.createCriteria().andSkuidEqualTo(skuid);
-        List<ItemLocale>  itemLocaleList =  itemLocaleMapper.selectByExample(itemLocaleExample);
+    private void  saveSkuDescription(int skuId,String descSource,String cuser,String action){
+        SkuDescription  description = new SkuDescription();
+        description.setAction("create");
+        description.setSkuid(skuId);
+        description.setDescSourc(descSource);
+        description.setUpdatepicuser(cuser);
+        description.setUpdatepicdate(new Date());
+        skuDescriptionMapper.insert(description);
+    }
 
-        if(itemLocaleList==null || itemLocaleList.size()==0)
-            return result;
 
+    /**
+     * saveItemLocale .根据语言保存(更新)产品描述
+     * @remark 存在则更新，不存在则插入
+     * @param itemLocaleDTOList
+     *         [itemLocaleDTOList]
+     * @return void
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/9/22:11:25
+     */
+    private void saveItemLocale(List<ItemLocaleDTO> itemLocaleDTOList) {
 
-        for (ItemLocale itemLocale : itemLocaleList) {
+        String desc_En = "";
+        String unitName_En = "";
+        for (ItemLocaleDTO localeDTO : itemLocaleDTOList) {
+            ItemLocale itemLocale = new ItemLocale();
 
-            ItemLocaleDTO dto = new ItemLocaleDTO();
-            try {
-                PropertyUtils.copyProperties(dto, itemLocale);
-                result.add(dto);
-            }catch (Exception ex){
-                throw  new FaceException(ex.getMessage());
+            if(localeDTO.getLangId() == Constants.Language.ENGLISH) {
+                desc_En = localeDTO.getDescription();
+                unitName_En = localeDTO.getUnitName();
+            } else {
+                if(Strings.isNullOrEmpty(localeDTO.getDescription())) {
+                    localeDTO.setDescription(desc_En);
+                }
+                if(Strings.isNullOrEmpty(localeDTO.getUnitName())) {
+                    localeDTO.setUnitName(unitName_En);
+                }
+            }
+            itemLocale.setSku(localeDTO.getSku());
+            itemLocale.setSkuid(localeDTO.getSkuid());
+            itemLocale.setLangId(localeDTO.getLangId());
+            itemLocale.setDescription(localeDTO.getDescription());
+            itemLocale.setUnitName(localeDTO.getUnitName());
+
+            ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
+            itemLocaleExample.createCriteria().andLangIdEqualTo(localeDTO.getLangId()).andSkuidEqualTo(localeDTO.getSkuid());
+            List<ItemLocale> list = itemLocaleMapper.selectByExample(itemLocaleExample);
+            if(list!=null && list.size()>0){
+                itemLocaleMapper.updateByExampleSelective(itemLocale,itemLocaleExample);
+            }else {
+                itemLocaleMapper.insert(itemLocale);
             }
 
         }
+    }
 
-        return result;
 
+    /**
+     * saveItemTextLocale .根据语言保存(更新)产品说明
+     * @remark 存在则更新，不存在则插入
+     * @param warranty
+     *         [warranty]
+     * @param itemLocaleDTOList
+     *         [itemLocaleDTOList]
+     * @return void
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/9/22:11:43
+     */
+    private void  saveItemTextLocale(int warranty, List<ItemLocaleDTO> itemLocaleDTOList){
+
+        for (ItemLocaleDTO localeDTO : itemLocaleDTOList) {
+            ItemTextLocale itemTextLocale = new ItemTextLocale();
+            itemTextLocale.setLangId(localeDTO.getLangId());
+            itemTextLocale.setMetatile("");
+            itemTextLocale.setMetakeyword("");
+            itemTextLocale.setMetadesc("");
+            itemTextLocale.setPartNumber("");
+            itemTextLocale.setLaptopModel("");
+            itemTextLocale.setSpecification("");
+            itemTextLocale.setReview("");
+            itemTextLocale.setPackagedesc("");
+            itemTextLocale.setWarranty(String.valueOf(warranty));
+            itemTextLocale.setSkuid(localeDTO.getSkuid());
+            itemTextLocale.setLangId(localeDTO.getLangId());
+            itemTextLocale.setFlag(false);
+
+
+            ItemTextLocaleExample itemTextLocaleExample = new ItemTextLocaleExample();
+            itemTextLocaleExample.createCriteria().andLangIdEqualTo(localeDTO.getLangId()).andSkuidEqualTo(localeDTO.getSkuid());
+            List<ItemTextLocale> list = itemTextLocaleMapper.selectByExample(itemTextLocaleExample);
+            if(list!=null && list.size()>0){
+                itemTextLocaleMapper.updateByExampleSelective(itemTextLocale,itemTextLocaleExample);
+            }else {
+                itemTextLocaleMapper.insert(itemTextLocale);
+            }
+        }
+
+    }
+
+
+
+    /**
+     * todo:保存产品多语言属性
+     * @param List<ItemLocaleDTO>
+     */
+    private void saveItemAttrValue(List<ItemLocaleDTO> itemLocaleDTOList) {
+//        for (ItemLocaleDTO  item : itemLocaleDTOList) { // 循环处理前端打包产品构造的虚拟对象用来保存产品多语言信息
+//            List<ItemAttrValueLocale> list = itemLocaleVirtual.getAttrList();
+//            for(ItemAttrValueLocale itemAttrValueLocale : list) { // 循环保存产品属性
+//                itemAttrValueLocale.setSkuid(item.getSkuid());
+//                itemAttrValueLocale  (itemLocaleVirtual.getLangId());
+//
+//                itemAttrValueLocaleMapper.insert()
+//                itemAttrService.saveItemAttrValueLocale(itemAttrValueLocale);
+//            }
+//        }
     }
 
 
@@ -355,94 +627,7 @@ public class PrepareService {
 
 
 
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public String generationNo(Integer mainCategoryId,Integer subCategoryId,Integer brandId,int type,Integer isPackage,Integer modelId){
-        //查询大小类的编码
-        ProductLineExample lineExample = new ProductLineExample();
-        List<Integer> idList = new ArrayList<Integer>();
-        idList.add(mainCategoryId);
-        idList.add(subCategoryId);
-        lineExample.createCriteria().andIdIn(idList);
-        String skuCode ="";
-        boolean bl = false;
-        if(type==Constants.skuCodeType.skuCode){//sku生产规则
-            List<ProductLine> productLineList = productLineMapper.selectByExample(lineExample);
-            if(productLineList!=null && productLineList.size()==2){
-                String mainCategoryCode = "";
-                String subCategoryCode ="";
-                for (ProductLine productLine : productLineList) {
-                    if(productLine.getId().equals(mainCategoryId)){
-                        mainCategoryCode = productLine.getProductCode();
-                    }
-                    if(productLine.getId().equals(subCategoryId)){
-                        subCategoryCode = productLine.getProductCode();
-                    }
-                }
-                if(isPackage== Constants.IsPackageSku.isPackage){
-                    mainCategoryCode ="85-"+mainCategoryCode;
-                }else{
-                    mainCategoryCode = mainCategoryCode+"-"+subCategoryCode;
-                }
-                do {
-                    skuCode = sequenceService.getNextIdSkuCodeY6(mainCategoryCode);
-                    //校验sku是否存在
-                    ItemExample itemExample = new ItemExample();
-                    itemExample.createCriteria().andSkuEqualTo(skuCode);
-                    List<Item> items =  itemMapper.selectByExample(itemExample);
-                    if(items==null || items.size()==0){
-                        bl = false;
-                    }else{
-                        bl = true;
-                    }
-                }while(!bl);
 
-            }
-        }else if(type==Constants.skuCodeType.preskuCode){//预备sku规则
-            //查询model编码 预备sku规则 :model编码-三位流水号
-            ItemModel itemModel = itemModelMapper.selectByPrimaryKey(modelId);
-            if(itemModel==null){
-                throw new FaceException("Model不存在，请检查数据！");
-            }
-            do {
-                skuCode = sequenceService.getNextIdSkuCodeY3(itemModel.getModelName()+"-");
-                //校验sku是否存在
-                PrepareSkuExample prepareSkuExample = new PrepareSkuExample();
-                prepareSkuExample.createCriteria().andPreSkuEqualTo(skuCode);
-                List<PrepareSku> prepareSkuList = prepareSkuMapper.selectByExample(prepareSkuExample);
-                if(prepareSkuList==null || prepareSkuList.size()==0){
-                    bl = true;
-                }else{
-                    bl = false;
-                }
-            }while(!bl);
-
-        }else{//model 生产规则
-//		model 的编码规则：品牌简称-小类型号-三位流水号
-            ItemBrand itemBrand = itemBrandMapper.selectByPrimaryKey(brandId);
-            //小类型号
-            ProductLine productLine = productLineMapper.selectByPrimaryKey(subCategoryId);
-            if(itemBrand==null){
-                throw new FaceException("品牌信息不存在，请检查数据！");
-            }
-            if(productLine==null){
-                throw new FaceException("小类产品线不存在，请检查数据！");
-            }
-            do {
-                skuCode = itemBrand.getBrandCode()+"-"+productLine.getModelNo();
-                skuCode = sequenceService.getNextIdSkuCodeY3(skuCode);
-                ItemModelExample itemmodelExample = new ItemModelExample();
-                itemmodelExample.createCriteria().andModelNameEqualTo(skuCode);
-                List<ItemModel> itemModelList = itemModelMapper.selectByExample(itemmodelExample);
-                if(itemModelList==null || itemModelList.size() == 0){
-                    bl = true;
-                }else{
-                    bl = false;
-                }
-            }while(!bl);
-        }
-
-        return skuCode;
-    }
 
 }
 

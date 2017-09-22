@@ -50,6 +50,11 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     }
 
     @Override
+    public SkuBaseInfoDTO getPreSkuBaseInfo(Integer skuId, Integer modelId) {
+        return prepareService.getPreSkuBaseInfo(skuId,modelId);
+    }
+
+    @Override
     public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
 
         Pager<ModelAndPreSkuDTO> result = prepareService.listModelAndPreSku(filterModels,offset,pageSize);

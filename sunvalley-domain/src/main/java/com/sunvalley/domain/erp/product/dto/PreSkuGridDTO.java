@@ -31,7 +31,7 @@ public class PreSkuGridDTO implements Serializable {
     private Date mpDate;
     private String  saleZone;
     private Integer  status;
-    private Integer  remark;
+    private String  remark;
 
     public Integer getId() {
         return id;
@@ -153,11 +153,11 @@ public class PreSkuGridDTO implements Serializable {
         this.status = status;
     }
 
-    public Integer getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Integer remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 }

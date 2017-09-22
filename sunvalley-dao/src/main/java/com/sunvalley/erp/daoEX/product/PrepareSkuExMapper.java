@@ -8,7 +8,9 @@ import com.sunvalley.domain.erp.product.dto.PackageSkuDTO;
 import com.sunvalley.domain.erp.product.dto.PreSkuDTO;
 import com.sunvalley.domain.erp.product.dto.PreSkuGridDTO;
 import com.sunvalley.erp.modelEX.product.PrepareSkuEx;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PrepareSkuExMapper {
 
 	

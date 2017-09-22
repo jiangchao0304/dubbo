@@ -47,18 +47,24 @@ public class SkuServiceImpl implements com.sunvalley.face.erp.product.ISkuServic
 
     @Override
     public SkuBaseInfoDTO getSkuBaseInfo(int skuId) {
-        return prepareService.getSkuBaseInfo(skuId);
+        return itemService.getSkuBaseInfo(skuId);
     }
 
     @Override
     public SkuBaseInfoDTO getSkuBaseInfo(String sku) {
-        return prepareService.getSkuBaseInfo(sku);
+        return itemService.getSkuBaseInfo(sku);
     }
 
     @Override
-    public boolean updateSkuBaseInfo(UpdateSkuBaseInfoDTO dto) {
+    public boolean updateSkuBaseInfo(SkuBaseInfoDTO dto) {
 
         return  prepareService.updateSkuBaseInfo(dto);
+    }
+
+    @Override
+    public boolean saveSkuBaseInfo(SkuBaseInfoDTO dto) {
+
+        return  prepareService.saveSkuBaseInfo(dto);
     }
 
     @Override

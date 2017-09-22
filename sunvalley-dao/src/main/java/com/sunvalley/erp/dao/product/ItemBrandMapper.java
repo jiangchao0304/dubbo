@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.ItemBrand;
 import com.sunvalley.erp.model.product.ItemBrandExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemBrandMapper
 * @author
 * @date 2017-09-16 11:22:31
 */
+@Repository
 public interface ItemBrandMapper {
 
     int countByExample(ItemBrandExample example);

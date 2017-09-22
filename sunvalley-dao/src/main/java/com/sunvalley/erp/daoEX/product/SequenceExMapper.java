@@ -4,6 +4,7 @@
 package com.sunvalley.erp.daoEX.product;
 
 import com.sunvalley.erp.model.product.Sequence;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import java.util.Map;
  * @Author: douglas.jiang
  * @Date: 2017-09-15 11:08
  */
+@Repository
 public interface SequenceExMapper {
 
     int update(String name);
@@ -23,7 +25,10 @@ public interface SequenceExMapper {
 
     Sequence select(String name);
 
-    Sequence selectone(String namae);
+    Sequence selectone(String name);
+
+    int getSeq(Sequence sequence);
+
 
 }
 

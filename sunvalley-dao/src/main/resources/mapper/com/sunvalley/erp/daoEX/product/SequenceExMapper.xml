@@ -50,5 +50,15 @@
         WHERE name = #{name}
     </select>
 
+    <select  id="getSeq"  statementType="CALLABLE" resultType="INTEGER">
+       {    CALL generateSeq(
+           #{name,jdbcType=VARCHAR,mode=IN},
+           #{value,jdbcType=INTEGER,mode=OUT})
+       }
+    </select >
+
+    <!--<select  id="getSeq" parameterType="String" statementType="CALLABLE" resultType="Map">-->
+        <!--CALL generateSeq(#{seqName,jdbcType=VARCHAR,mode=IN},#{seq,jdbcType=INTEGER,mode=OUT})-->
+    <!--</select >-->
 
 </mapper>

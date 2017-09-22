@@ -73,15 +73,16 @@
 
 	<select id="getSkuBaseInfo" parameterType="Map" resultType="com.sunvalley.domain.erp.product.dto.SkuBaseInfoDTO">
 SELECT
-pre.sku,
+item.sku,
 item.skuid skuId,
 item.line_state AS lineState,
-model.main_category_id mainCategoryId,
+model.main_category_id categoryId,
 model.sub_category_id subCategortId,
 lc.product_line_name categoryStr,
 ls.product_line_name subCategoryStr,
 model.brand_id brandId,
 model.model_name model,
+model.model_id modelId,
 model.pm_id pmId,
 CONCAT(sysu.firstname,'.',sysu.lastname) pmName,
 model.battery,
@@ -149,6 +150,85 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 
 		<if test="skuId != null">
 			WHERE  item.skuid=#{skuId}
+		</if>
+
+
+	</select>
+
+	<select id="getPreSkuBaseInfo" parameterType="Map" resultType="com.sunvalley.domain.erp.product.dto.SkuBaseInfoDTO">
+		SELECT
+		DISTINCT
+		m.main_category_id categoryId,
+		m.sub_category_id subcategoryid,
+		maincategory.product_line_name categoryStr,
+		subcategory.product_line_name subCategoryStr,
+		m.brand_id brandId,
+		m.model_id modelId,
+		m.model_name model,
+		m.pm_id pmId,
+		CONCAT(sysu.firstname,'.',sysu.lastname) pmName,
+		m.battery,
+		m.rmacategoryid,
+		s.region,
+		<if test="preskuId!=null">
+			s.color,
+			anrule.anrule anrule,
+			anrule.anruleStr anruleStr,
+			country.country country,
+			s.pre_sku preSku,
+		</if>
+		m.magnetic,
+		m.warranty,
+		s.product_name purdesc,
+		s.product_name purspec
+
+		FROM
+		bs_item_model m
+		LEFT JOIN bs_prepare_sku s ON m.model_id = s.model_id
+		LEFT JOIN bs_item_mapping a ON a.skuid = s.id
+		AND a.data_type = 1
+		AND a.data_origin = 2
+		LEFT JOIN (
+		SELECT
+		mapping.skuid skuid,
+		group_concat(basic.attribute) anruleStr,
+		group_concat(basic. VALUE) anrule
+		FROM
+		bs_item_mapping mapping
+		LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+		WHERE
+		mapping.data_type = 1
+		AND basic.type = 2
+		<if test="preskuId!=null">
+			and mapping.skuid =  #{preskuId}
+		</if>
+		GROUP BY
+		mapping.skuid
+		) anrule ON s.id = anrule.skuid
+		LEFT JOIN (
+		SELECT
+		mapping.skuid skuid,
+		group_concat(mapping.maping) country
+		FROM
+		bs_item_mapping mapping
+		WHERE
+		mapping.data_type = 2
+		<if test="preskuId!=null">
+			and mapping.skuid =  #{preskuId}
+		</if>
+		GROUP BY
+		mapping.skuid
+		) country ON country.skuid = s.id
+		LEFT JOIN bs_product_line maincategory ON maincategory.id = m.main_category_id
+		LEFT JOIN bs_product_line subcategory ON subcategory.id = m.sub_category_id
+		LEFT JOIN sys_user sysu ON sysu.userid = m.pm_id
+		WHERE
+		1 = 1
+		<if test="preskuId!=null">
+			and s.id = #{preskuId}
+		</if>
+		<if test="modelId!=null">
+			and m.model_id =#{modelId}
 		</if>
 
 

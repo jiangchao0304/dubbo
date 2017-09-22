@@ -3,12 +3,14 @@ import com.sunvalley.erp.model.product.ItemModel;
 import com.sunvalley.erp.model.product.ItemModelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemModelMapper
 * @author
 * @date 2017-09-16 11:22:46
 */
+@Repository
 public interface ItemModelMapper {
 
     int countByExample(ItemModelExample example);

@@ -13,25 +13,25 @@ import java.io.Serializable;
  */
 public class ItemLocaleDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    private java.lang.Integer skuid;//
-    private Integer langId;//
+    private int skuid;//
+    private int langId;//
     private java.lang.String sku;//
     private java.lang.String description;//
     private java.lang.String unitName;//
 
-    public Integer getSkuid() {
+    public int getSkuid() {
         return skuid;
     }
 
-    public void setSkuid(Integer skuid) {
+    public void setSkuid(int skuid) {
         this.skuid = skuid;
     }
 
-    public Integer getLangId() {
+    public int getLangId() {
         return langId;
     }
 
-    public void setLangId(Integer langId) {
+    public void setLangId(int langId) {
         this.langId = langId;
     }
 
