@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.dao.ItemBrandMapper">
+<!-- ================================代码生成开始=2017-09-16 11:22:31=========================================== -->
+
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemBrand">
+        <result column="brand_id" property="brandId" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="brand_desc" property="brandDesc" jdbcType="VARCHAR"/>
+        <result column="orderno" property="orderno" jdbcType="INTEGER"/>
+        <result column="note" property="note" jdbcType="VARCHAR"/>
+        <result column="ratio" property="ratio" jdbcType="DECIMAL"/>
+        <result column="brand_code" property="brandCode" jdbcType="VARCHAR"/>
+        <result column="hasused" property="hasused" jdbcType="INTEGER"/>
+        <result column="control_value" property="controlValue" jdbcType="INTEGER"/>
+        <result column="warning_proportion" property="warningProportion" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.ItemBrand" />
+
+    <sql id="Values">
+            #{brandId,jdbcType=INTEGER },
+            #{parentId,jdbcType=INTEGER },
+            #{brandDesc,jdbcType=VARCHAR },
+            #{orderno,jdbcType=INTEGER },
+            #{note,jdbcType=VARCHAR },
+            #{ratio,jdbcType=DECIMAL },
+            #{brandCode,jdbcType=VARCHAR },
+            #{hasused,jdbcType=INTEGER },
+            #{controlValue,jdbcType=INTEGER },
+            #{warningProportion,jdbcType=DECIMAL }
+    </sql>
+
+    <sql id="ValuesBatch">
+            #{item.brandId,jdbcType=INTEGER},
+            #{item.parentId,jdbcType=INTEGER},
+            #{item.brandDesc,jdbcType=VARCHAR},
+            #{item.orderno,jdbcType=INTEGER},
+            #{item.note,jdbcType=VARCHAR},
+            #{item.ratio,jdbcType=DECIMAL},
+            #{item.brandCode,jdbcType=VARCHAR},
+            #{item.hasused,jdbcType=INTEGER},
+            #{item.controlValue,jdbcType=INTEGER},
+            #{item.warningProportion,jdbcType=DECIMAL}
+    </sql>
+
+    <sql id="Set">
+                brand_id= #{brandId,jdbcType=INTEGER },
+                parent_id= #{parentId,jdbcType=INTEGER },
+                brand_desc= #{brandDesc,jdbcType=VARCHAR },
+                orderno= #{orderno,jdbcType=INTEGER },
+                note= #{note,jdbcType=VARCHAR },
+                ratio= #{ratio,jdbcType=DECIMAL },
+                brand_code= #{brandCode,jdbcType=VARCHAR },
+                hasused= #{hasused,jdbcType=INTEGER },
+                control_value= #{controlValue,jdbcType=INTEGER },
+                warning_proportion= #{warningProportion,jdbcType=DECIMAL }
+    </sql>
+
+    <sql id="SetNotNull">
+                <if test="brandId != null">brand_id= #{brandId,jdbcType=INTEGER },</if>
+                <if test="parentId != null">parent_id= #{parentId,jdbcType=INTEGER },</if>
+                <if test="brandDesc != null">brand_desc= #{brandDesc,jdbcType=VARCHAR },</if>
+                <if test="orderno != null">orderno= #{orderno,jdbcType=INTEGER },</if>
+                <if test="note != null">note= #{note,jdbcType=VARCHAR },</if>
+                <if test="ratio != null">ratio= #{ratio,jdbcType=DECIMAL },</if>
+                <if test="brandCode != null">brand_code= #{brandCode,jdbcType=VARCHAR },</if>
+                <if test="hasused != null">hasused= #{hasused,jdbcType=INTEGER },</if>
+                <if test="controlValue != null">control_value= #{controlValue,jdbcType=INTEGER },</if>
+                <if test="warningProportion != null">warning_proportion= #{warningProportion,jdbcType=DECIMAL }</if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+			brand_id,
+			parent_id,
+			brand_desc,
+			orderno,
+			note,
+			ratio,
+			brand_code,
+			hasused,
+			control_value,
+			warning_proportion
+	</sql>
+
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM bs_item_brand
+        WHERE brand_id = #{brandId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.ItemBrandExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from bs_item_brand
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.ItemBrandExample">
+        delete from bs_item_brand
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+    <insert id="insert" parameterType="ItemBrand" >
+        INSERT INTO bs_item_brand
+        (<include refid="Base_Column_List"></include>)
+        VALUES
+        (<include refid="Values"></include>)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.ItemBrand" >
+        insert into bs_item_brand
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="SetNotNull" />
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Values" />
+        </trim>
+    </insert>
+
+
+    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.ItemBrandExample" resultType="java.lang.Integer">
+        select count(*) from bs_item_brand
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        UPDATE bs_item_brand
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+
+    <update id="updateByExample" parameterType="map">
+        UPDATE bs_item_brand
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.ItemBrand">
+        update bs_item_brand
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        WHERE brand_id = #{brandId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="ItemBrand">
+        UPDATE bs_item_brand
+        <set>
+            <include refid="Set"></include>
+        </set>
+        WHERE brand_id = #{brandId,jdbcType=INTEGER}
+
+    </update>
+
+
+    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.ItemBrandExample" resultMap="selectPageResult">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from bs_item_brand
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        LIMIT ${skipRecordCount} , ${pageSize}
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO bs_item_brand
+        (<include refid="Base_Column_List"></include>)
+        values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( <include refid="ValuesBatch"></include> )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  bs_item_brand
+        WHERE brand_id = #{brandId,jdbcType=INTEGER}
+    </delete>
+    <!-- ================================代码生成结束=2017-09-16 11:22:31=========================================== -->
+</mapper>

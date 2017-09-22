@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunvalley.erp.product.daoEX.ItemExMapper">
+
+	<select id="searchSkuCategoryName" parameterType="Map" resultType="ItemLocale">
+		SELECT
+		ItemLocale.skuid,
+		ItemLocale.lang_id,
+		ItemLocale.sku,
+		ItemLocale.description,
+		Item.len,
+		IFNULL(Item.purspec,'') purspec,
+		IFNULL(Item.purdesc,'') purdesc,
+		Item.weight,
+		Item.width,
+		Item.height,
+		icustom.category_name_id,
+		icustom.commodityunit unit,
+		cname.category_name categoryName,
+		Item.haspic,
+		Item.brand_id,
+		CONCAT(IFNULL(Item.purspec,''),IFNULL(Item.purdesc,'')) as model
+		FROM bs_item_locale ItemLocale
+		<choose>
+			<when test="isdrop != null">
+				inner JOIN bs_item Item ON Item.skuid = ItemLocale.skuid and Item.isdrop=#{isdrop}
+				LEFT JOIN (
+				select
+				*
+				from (
+				select
+				a.skuid,
+				a.seller_id,
+				a.isdrop
+				from bs_item_drop_category a
+				left join sys_company_bu b on b.companyid=#{seller_id,jdbcType=INTEGER}
+				where a.seller_id=b.categoryid
+				or a.seller_id=#{seller_id,jdbcType=INTEGER}
+				order by a.skuid,a.seller_id desc
+				) ItemDrop
+				group by ItemDrop.skuid
+				) ItemDrop ON ItemDrop.skuid=Item.skuid
+			</when>
+			<otherwise>
+				inner JOIN bs_item Item ON Item.skuid = ItemLocale.skuid
+				LEFT JOIN bs_item_custom  icustom ON icustom.skuid = Item.skuid AND icustom.stateid = 'CN'
+				LEFT JOIN scm_customs_category_name cname ON cname.id = icustom.category_name_id
+			</otherwise>
+		</choose>
+		WHERE
+		ItemLocale.lang_id = #{lang_id}
+		<if test="categoryid != null">
+			AND Item.categoryid IN
+			<foreach item="item" index="index" collection="categoryid" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<choose>
+			<when test="description != null">
+				AND (ItemLocale.sku LIKE #{sku} OR ItemLocale.description LIKE #{description})
+			</when>
+			<otherwise>
+				AND ItemLocale.sku LIKE #{sku}
+			</otherwise>
+		</choose>
+		<if test="isdrop != null">
+			AND (ItemDrop.isdrop is null or ItemDrop.isdrop=#{isdrop})
+		</if>
+		<if test="limit >0 ">
+			limit #{limit,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getSkuBaseInfo" parameterType="Map" resultType="SkuBaseInfoDTO">
+SELECT
+item.sku,
+item.skuid skuId,
+item.line_state AS lineState,
+model.main_category_id categoryId,
+model.sub_category_id subCategortId,
+lc.product_line_name categoryStr,
+ls.product_line_name subCategoryStr,
+model.brand_id brandId,
+model.model_name model,
+model.model_id modelId,
+model.pm_id pmId,
+CONCAT(sysu.firstname,'.',sysu.lastname) pmName,
+model.battery,
+model.rmacategoryid,
+pre.region,
+pre.pre_sku preSku,
+pre.color color,
+anrule.anruleStr anruleStr,
+anrule.anrule anrule,
+country.country country,
+item.is_package isPackage,
+model.magnetic,
+bom.combine_unit combineUnit,
+model.warranty,
+bom.purchase_property  purchaseProperty,
+pre.purspec,
+IFNULL(item.purdesc,'') purDese,
+bom.bom_desc bomDesc,
+item.width,
+item.height,
+item.weight,
+item.len,
+item.product_len productLen,
+item.product_width productWidth,
+item.product_height productHeight,
+item.product_weight productWeight
+
+FROM   `bs_prepare_sku` AS pre
+JOIN bs_item_model AS model ON pre.model_id=model.model_id
+JOIN bs_item AS item  ON item.skuid =pre.skuid
+LEFT JOIN bs_product_line_mapping mc ON mc.mapping_id = item.skuid AND mc.product_line_id = item.categoryid AND mc.type = 1
+LEFT JOIN bs_product_line_mapping sc ON sc.mapping_id = item.skuid AND sc.product_line_id = item.subcategoryid AND sc.type = 1
+LEFT JOIN bs_product_line lc ON lc.id = mc.product_line_id
+LEFT JOIN bs_product_line ls ON ls.id = sc.product_line_id
+LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
+LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				GROUP_CONCAT(basic.attribute) anruleStr,
+				GROUP_CONCAT(basic. VALUE) anrule
+			FROM
+				bs_item_mapping mapping
+			LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+			WHERE
+				mapping.data_type = 1
+			AND basic.type = 2
+			GROUP BY
+				mapping.skuid
+		) anrule ON pre.id = anrule.skuid
+LEFT JOIN (
+			SELECT
+				mapping.skuid skuid,
+				GROUP_CONCAT(mapping.maping) country
+			FROM
+				bs_item_mapping mapping
+			WHERE
+				mapping.data_type = 2
+			GROUP BY
+				mapping.skuid
+		) country ON country.skuid = pre.id
+LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
+		<if test="sku != null">
+			WHERE  item.sku=#{sku}
+		</if>
+
+		<if test="skuId != null">
+			WHERE  item.skuid=#{skuId}
+		</if>
+
+
+	</select>
+
+	<select id="getPreSkuBaseInfo" parameterType="Map" resultType="SkuBaseInfoDTO">
+		SELECT
+		DISTINCT
+		m.main_category_id categoryId,
+		m.sub_category_id subcategoryid,
+		maincategory.product_line_name categoryStr,
+		subcategory.product_line_name subCategoryStr,
+		m.brand_id brandId,
+		m.model_id modelId,
+		m.model_name model,
+		m.pm_id pmId,
+		CONCAT(sysu.firstname,'.',sysu.lastname) pmName,
+		m.battery,
+		m.rmacategoryid,
+		s.region,
+		<if test="preskuId!=null">
+			s.color,
+			anrule.anrule anrule,
+			anrule.anruleStr anruleStr,
+			country.country country,
+			s.pre_sku preSku,
+		</if>
+		m.magnetic,
+		m.warranty,
+		s.product_name purdesc,
+		s.product_name purspec
+
+		FROM
+		bs_item_model m
+		LEFT JOIN bs_prepare_sku s ON m.model_id = s.model_id
+		LEFT JOIN bs_item_mapping a ON a.skuid = s.id
+		AND a.data_type = 1
+		AND a.data_origin = 2
+		LEFT JOIN (
+		SELECT
+		mapping.skuid skuid,
+		group_concat(basic.attribute) anruleStr,
+		group_concat(basic. VALUE) anrule
+		FROM
+		bs_item_mapping mapping
+		LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
+		WHERE
+		mapping.data_type = 1
+		AND basic.type = 2
+		<if test="preskuId!=null">
+			and mapping.skuid =  #{preskuId}
+		</if>
+		GROUP BY
+		mapping.skuid
+		) anrule ON s.id = anrule.skuid
+		LEFT JOIN (
+		SELECT
+		mapping.skuid skuid,
+		group_concat(mapping.maping) country
+		FROM
+		bs_item_mapping mapping
+		WHERE
+		mapping.data_type = 2
+		<if test="preskuId!=null">
+			and mapping.skuid =  #{preskuId}
+		</if>
+		GROUP BY
+		mapping.skuid
+		) country ON country.skuid = s.id
+		LEFT JOIN bs_product_line maincategory ON maincategory.id = m.main_category_id
+		LEFT JOIN bs_product_line subcategory ON subcategory.id = m.sub_category_id
+		LEFT JOIN sys_user sysu ON sysu.userid = m.pm_id
+		WHERE
+		1 = 1
+		<if test="preskuId!=null">
+			and s.id = #{preskuId}
+		</if>
+		<if test="modelId!=null">
+			and m.model_id =#{modelId}
+		</if>
+
+
+	</select>
+
+	<select id="listSkuListNew" resultType="SkuListNewDTO" parameterType="Map">
+		SELECT
+			Item.skuid skuId,
+			Item.sku,
+			Locale.description,
+			Item.model,
+			ItemBrand.brand_desc brandDesc,
+			Item.region,
+			Item.`line_state` lineState,
+			Item.is_package isPackage,
+			Item.magnetic,
+			CONCAT(Sysu.firstname,'.',Sysu.lastname) pmName,
+			CONCAT(Creator.firstname ,' ',Creator.lastname) creator,
+			Item.create_date createDate
+			from bs_item as Item
+			JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
+		    JOIN bs_bom as Bom on Bom.skuid=Item.skuid
+			left join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
+			LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=Item.brand_id
+			LEFT JOIN sys_user Sysu ON Sysu.userid = Model.pm_id
+			LEFT JOIN sys_user Creator ON Creator.userid = Item.create_user_id
+		     WHERE 1 = 1
+			<if test="filtersql != null">
+				${filtersql}
+			</if>
+		     order by  Item.skuid desc
+			<if test="offset != null">
+			LIMIT ${offset},${limit}
+			</if>
+	</select>
+
+	<select id="countSkuListNew" resultType="int" parameterType="Map">
+		SELECT
+		count(*)
+		from bs_item as Item
+		JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
+		JOIN bs_bom as Bom on Bom.skuid=Item.skuid
+		left join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
+		LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=Item.brand_id
+		LEFT JOIN sys_user Sysu ON Sysu.userid = Model.pm_id
+		LEFT JOIN sys_user Creator ON Creator.userid = Item.create_user_id
+		WHERE 1 = 1
+		<if test="filtersql != null">
+			${filtersql}
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.dao.WarehouseMapper">
+<!-- ================================代码生成开始=2017-09-22 12:25:29=========================================== -->
+
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Warehouse">
+        <result column="wh_id" property="whId" jdbcType="INTEGER"/>
+        <result column="wh_name" property="whName" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="wh_email" property="whEmail" jdbcType="VARCHAR"/>
+        <result column="wh_contact" property="whContact" jdbcType="VARCHAR"/>
+        <result column="wh_contact_lastname" property="whContactLastname" jdbcType="VARCHAR"/>
+        <result column="wh_addr" property="whAddr" jdbcType="VARCHAR"/>
+        <result column="wh_city" property="whCity" jdbcType="VARCHAR"/>
+        <result column="wh_state" property="whState" jdbcType="VARCHAR"/>
+        <result column="wh_country" property="whCountry" jdbcType="VARCHAR"/>
+        <result column="wh_zip" property="whZip" jdbcType="VARCHAR"/>
+        <result column="wh_tel" property="whTel" jdbcType="VARCHAR"/>
+        <result column="wh_fax" property="whFax" jdbcType="VARCHAR"/>
+        <result column="curno" property="curno" jdbcType="VARCHAR"/>
+        <result column="perordercharge" property="perordercharge" jdbcType="DECIMAL"/>
+        <result column="peritemcharge" property="peritemcharge" jdbcType="DECIMAL"/>
+        <result column="dropship" property="dropship" jdbcType="TINYINT"/>
+        <result column="virtual" property="virtual" jdbcType="TINYINT"/>
+        <result column="used_wh_id" property="usedWhId" jdbcType="INTEGER"/>
+        <result column="cistencilid" property="cistencilid" jdbcType="INTEGER"/>
+        <result column="is_merger" property="isMerger" jdbcType="VARCHAR"/>
+        <result column="invoice_price_coefficient" property="invoicePriceCoefficient" jdbcType="DECIMAL"/>
+        <result column="custom_price_coefficient" property="customPriceCoefficient" jdbcType="DECIMAL"/>
+        <result column="ci_price_coefficient" property="ciPriceCoefficient" jdbcType="DECIMAL"/>
+        <result column="wh_country_zone" property="whCountryZone" jdbcType="VARCHAR"/>
+        <result column="wh_3rd" property="wh3rd" jdbcType="INTEGER"/>
+        <result column="istax" property="istax" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.Warehouse" />
+
+    <sql id="Values">
+            #{whId,jdbcType=INTEGER },
+            #{whName,jdbcType=VARCHAR },
+            #{type,jdbcType=VARCHAR },
+            #{whEmail,jdbcType=VARCHAR },
+            #{whContact,jdbcType=VARCHAR },
+            #{whContactLastname,jdbcType=VARCHAR },
+            #{whAddr,jdbcType=VARCHAR },
+            #{whCity,jdbcType=VARCHAR },
+            #{whState,jdbcType=VARCHAR },
+            #{whCountry,jdbcType=VARCHAR },
+            #{whZip,jdbcType=VARCHAR },
+            #{whTel,jdbcType=VARCHAR },
+            #{whFax,jdbcType=VARCHAR },
+            #{curno,jdbcType=VARCHAR },
+            #{perordercharge,jdbcType=DECIMAL },
+            #{peritemcharge,jdbcType=DECIMAL },
+            #{dropship,jdbcType=TINYINT },
+            #{virtual,jdbcType=TINYINT },
+            #{usedWhId,jdbcType=INTEGER },
+            #{cistencilid,jdbcType=INTEGER },
+            #{isMerger,jdbcType=VARCHAR },
+            #{invoicePriceCoefficient,jdbcType=DECIMAL },
+            #{customPriceCoefficient,jdbcType=DECIMAL },
+            #{ciPriceCoefficient,jdbcType=DECIMAL },
+            #{whCountryZone,jdbcType=VARCHAR },
+            #{wh3rd,jdbcType=INTEGER },
+            #{istax,jdbcType=INTEGER }
+    </sql>
+
+    <sql id="ValuesBatch">
+            #{item.whId,jdbcType=INTEGER},
+            #{item.whName,jdbcType=VARCHAR},
+            #{item.type,jdbcType=VARCHAR},
+            #{item.whEmail,jdbcType=VARCHAR},
+            #{item.whContact,jdbcType=VARCHAR},
+            #{item.whContactLastname,jdbcType=VARCHAR},
+            #{item.whAddr,jdbcType=VARCHAR},
+            #{item.whCity,jdbcType=VARCHAR},
+            #{item.whState,jdbcType=VARCHAR},
+            #{item.whCountry,jdbcType=VARCHAR},
+            #{item.whZip,jdbcType=VARCHAR},
+            #{item.whTel,jdbcType=VARCHAR},
+            #{item.whFax,jdbcType=VARCHAR},
+            #{item.curno,jdbcType=VARCHAR},
+            #{item.perordercharge,jdbcType=DECIMAL},
+            #{item.peritemcharge,jdbcType=DECIMAL},
+            #{item.dropship,jdbcType=TINYINT},
+            #{item.virtual,jdbcType=TINYINT},
+            #{item.usedWhId,jdbcType=INTEGER},
+            #{item.cistencilid,jdbcType=INTEGER},
+            #{item.isMerger,jdbcType=VARCHAR},
+            #{item.invoicePriceCoefficient,jdbcType=DECIMAL},
+            #{item.customPriceCoefficient,jdbcType=DECIMAL},
+            #{item.ciPriceCoefficient,jdbcType=DECIMAL},
+            #{item.whCountryZone,jdbcType=VARCHAR},
+            #{item.wh3rd,jdbcType=INTEGER},
+            #{item.istax,jdbcType=INTEGER}
+    </sql>
+
+    <sql id="Set">
+                wh_id= #{whId,jdbcType=INTEGER },
+                wh_name= #{whName,jdbcType=VARCHAR },
+                type= #{type,jdbcType=VARCHAR },
+                wh_email= #{whEmail,jdbcType=VARCHAR },
+                wh_contact= #{whContact,jdbcType=VARCHAR },
+                wh_contact_lastname= #{whContactLastname,jdbcType=VARCHAR },
+                wh_addr= #{whAddr,jdbcType=VARCHAR },
+                wh_city= #{whCity,jdbcType=VARCHAR },
+                wh_state= #{whState,jdbcType=VARCHAR },
+                wh_country= #{whCountry,jdbcType=VARCHAR },
+                wh_zip= #{whZip,jdbcType=VARCHAR },
+                wh_tel= #{whTel,jdbcType=VARCHAR },
+                wh_fax= #{whFax,jdbcType=VARCHAR },
+                curno= #{curno,jdbcType=VARCHAR },
+                perordercharge= #{perordercharge,jdbcType=DECIMAL },
+                peritemcharge= #{peritemcharge,jdbcType=DECIMAL },
+                dropship= #{dropship,jdbcType=TINYINT },
+                virtual= #{virtual,jdbcType=TINYINT },
+                used_wh_id= #{usedWhId,jdbcType=INTEGER },
+                cistencilid= #{cistencilid,jdbcType=INTEGER },
+                is_merger= #{isMerger,jdbcType=VARCHAR },
+                invoice_price_coefficient= #{invoicePriceCoefficient,jdbcType=DECIMAL },
+                custom_price_coefficient= #{customPriceCoefficient,jdbcType=DECIMAL },
+                ci_price_coefficient= #{ciPriceCoefficient,jdbcType=DECIMAL },
+                wh_country_zone= #{whCountryZone,jdbcType=VARCHAR },
+                wh_3rd= #{wh3rd,jdbcType=INTEGER },
+                istax= #{istax,jdbcType=INTEGER }
+    </sql>
+
+    <sql id="SetNotNull">
+                <if test="record.whId != null">wh_id= #{record.whId,jdbcType=INTEGER },</if>
+                <if test="record.whName != null">wh_name= #{record.whName,jdbcType=VARCHAR },</if>
+                <if test="record.type != null">type= #{record.type,jdbcType=VARCHAR },</if>
+                <if test="record.whEmail != null">wh_email= #{record.whEmail,jdbcType=VARCHAR },</if>
+                <if test="record.whContact != null">wh_contact= #{record.whContact,jdbcType=VARCHAR },</if>
+                <if test="record.whContactLastname != null">wh_contact_lastname= #{record.whContactLastname,jdbcType=VARCHAR },</if>
+                <if test="record.whAddr != null">wh_addr= #{record.whAddr,jdbcType=VARCHAR },</if>
+                <if test="record.whCity != null">wh_city= #{record.whCity,jdbcType=VARCHAR },</if>
+                <if test="record.whState != null">wh_state= #{record.whState,jdbcType=VARCHAR },</if>
+                <if test="record.whCountry != null">wh_country= #{record.whCountry,jdbcType=VARCHAR },</if>
+                <if test="record.whZip != null">wh_zip= #{record.whZip,jdbcType=VARCHAR },</if>
+                <if test="record.whTel != null">wh_tel= #{record.whTel,jdbcType=VARCHAR },</if>
+                <if test="record.whFax != null">wh_fax= #{record.whFax,jdbcType=VARCHAR },</if>
+                <if test="record.curno != null">curno= #{record.curno,jdbcType=VARCHAR },</if>
+                <if test="record.perordercharge != null">perordercharge= #{record.perordercharge,jdbcType=DECIMAL },</if>
+                <if test="record.peritemcharge != null">peritemcharge= #{record.peritemcharge,jdbcType=DECIMAL },</if>
+                <if test="record.dropship != null">dropship= #{record.dropship,jdbcType=TINYINT },</if>
+                <if test="record.virtual != null">virtual= #{record.virtual,jdbcType=TINYINT },</if>
+                <if test="record.usedWhId != null">used_wh_id= #{record.usedWhId,jdbcType=INTEGER },</if>
+                <if test="record.cistencilid != null">cistencilid= #{record.cistencilid,jdbcType=INTEGER },</if>
+                <if test="record.isMerger != null">is_merger= #{record.isMerger,jdbcType=VARCHAR },</if>
+                <if test="record.invoicePriceCoefficient != null">invoice_price_coefficient= #{record.invoicePriceCoefficient,jdbcType=DECIMAL },</if>
+                <if test="record.customPriceCoefficient != null">custom_price_coefficient= #{record.customPriceCoefficient,jdbcType=DECIMAL },</if>
+                <if test="record.ciPriceCoefficient != null">ci_price_coefficient= #{record.ciPriceCoefficient,jdbcType=DECIMAL },</if>
+                <if test="record.whCountryZone != null">wh_country_zone= #{record.whCountryZone,jdbcType=VARCHAR },</if>
+                <if test="record.wh3rd != null">wh_3rd= #{record.wh3rd,jdbcType=INTEGER },</if>
+                <if test="record.istax != null">istax= #{record.istax,jdbcType=INTEGER }</if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+			wh_id,
+			wh_name,
+			type,
+			wh_email,
+			wh_contact,
+			wh_contact_lastname,
+			wh_addr,
+			wh_city,
+			wh_state,
+			wh_country,
+			wh_zip,
+			wh_tel,
+			wh_fax,
+			curno,
+			perordercharge,
+			peritemcharge,
+			dropship,
+			virtual,
+			used_wh_id,
+			cistencilid,
+			is_merger,
+			invoice_price_coefficient,
+			custom_price_coefficient,
+			ci_price_coefficient,
+			wh_country_zone,
+			wh_3rd,
+			istax
+	</sql>
+
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM warehouse
+        WHERE wh_id = #{whId,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.WarehouseExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.WarehouseExample">
+        delete from warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+    <insert id="insert" parameterType="Warehouse" keyProperty="wh_id" useGeneratedKeys="true">
+        INSERT INTO warehouse
+        (<include refid="Base_Column_List"></include>)
+        VALUES
+        (<include refid="Values"></include>)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.Warehouse" keyProperty="wh_id" useGeneratedKeys="true">
+        insert into warehouse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="SetNotNull" />
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Values" />
+        </trim>
+    </insert>
+
+
+    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.WarehouseExample" resultType="java.lang.Integer">
+        select count(*) from warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        UPDATE warehouse
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+
+    <update id="updateByExample" parameterType="map">
+        UPDATE warehouse
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.Warehouse">
+        update warehouse
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        WHERE wh_id = #{whId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="Warehouse">
+        UPDATE warehouse
+        <set>
+            <include refid="Set"></include>
+        </set>
+        WHERE wh_id = #{whId,jdbcType=INTEGER}
+
+    </update>
+
+
+    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.WarehouseExample" resultMap="selectPageResult">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from warehouse
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        LIMIT ${skipRecordCount} , ${pageSize}
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO warehouse
+        (<include refid="Base_Column_List"></include>)
+        values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( <include refid="ValuesBatch"></include> )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  warehouse
+        WHERE wh_id = #{whId,jdbcType=INTEGER}
+    </delete>
+    <!-- ================================代码生成结束=2017-09-22 12:25:29=========================================== -->
+</mapper>

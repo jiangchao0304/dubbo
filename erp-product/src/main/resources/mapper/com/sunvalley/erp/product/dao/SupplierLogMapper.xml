@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.dao.SupplierLogMapper">
+<!-- ================================代码生成开始=2017-09-22 04:58:57=========================================== -->
+
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SupplierLog">
+        <result column="supplierlogid" property="supplierlogid" jdbcType="INTEGER"/>
+        <result column="supplierid" property="supplierid" jdbcType="INTEGER"/>
+        <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER"/>
+        <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+        <result column="operation_type" property="operationType" jdbcType="INTEGER"/>
+        <result column="note" property="note" jdbcType="VARCHAR"/>
+        <result column="belongs_type" property="belongsType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.SupplierLog" />
+
+    <sql id="Values">
+            #{supplierlogid,jdbcType=INTEGER },
+            #{supplierid,jdbcType=INTEGER },
+            #{operationUserId,jdbcType=INTEGER },
+            #{operationDate,jdbcType=TIMESTAMP },
+            #{operationType,jdbcType=INTEGER },
+            #{note,jdbcType=VARCHAR },
+            #{belongsType,jdbcType=INTEGER }
+    </sql>
+
+    <sql id="ValuesBatch">
+            #{item.supplierlogid,jdbcType=INTEGER},
+            #{item.supplierid,jdbcType=INTEGER},
+            #{item.operationUserId,jdbcType=INTEGER},
+            #{item.operationDate,jdbcType=TIMESTAMP},
+            #{item.operationType,jdbcType=INTEGER},
+            #{item.note,jdbcType=VARCHAR},
+            #{item.belongsType,jdbcType=INTEGER}
+    </sql>
+
+    <sql id="Set">
+                supplierlogid= #{supplierlogid,jdbcType=INTEGER },
+                supplierid= #{supplierid,jdbcType=INTEGER },
+                operation_user_id= #{operationUserId,jdbcType=INTEGER },
+                operation_date= #{operationDate,jdbcType=TIMESTAMP },
+                operation_type= #{operationType,jdbcType=INTEGER },
+                note= #{note,jdbcType=VARCHAR },
+                belongs_type= #{belongsType,jdbcType=INTEGER }
+    </sql>
+
+    <sql id="SetNotNull">
+                <if test="record.supplierlogid != null">supplierlogid= #{record.supplierlogid,jdbcType=INTEGER },</if>
+                <if test="record.supplierid != null">supplierid= #{record.supplierid,jdbcType=INTEGER },</if>
+                <if test="record.operationUserId != null">operation_user_id= #{record.operationUserId,jdbcType=INTEGER },</if>
+                <if test="record.operationDate != null">operation_date= #{record.operationDate,jdbcType=TIMESTAMP },</if>
+                <if test="record.operationType != null">operation_type= #{record.operationType,jdbcType=INTEGER },</if>
+                <if test="record.note != null">note= #{record.note,jdbcType=VARCHAR },</if>
+                <if test="record.belongsType != null">belongs_type= #{record.belongsType,jdbcType=INTEGER }</if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+			supplierlogid,
+			supplierid,
+			operation_user_id,
+			operation_date,
+			operation_type,
+			note,
+			belongs_type
+	</sql>
+
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM pr_supplier_log
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.SupplierLogExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from pr_supplier_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.SupplierLogExample">
+        delete from pr_supplier_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+    <insert id="insert" parameterType="SupplierLog" keyProperty="supplierlogid" useGeneratedKeys="true">
+        INSERT INTO pr_supplier_log
+        (<include refid="Base_Column_List"></include>)
+        VALUES
+        (<include refid="Values"></include>)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.SupplierLog" keyProperty="supplierlogid" useGeneratedKeys="true">
+        insert into pr_supplier_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="SetNotNull" />
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Values" />
+        </trim>
+    </insert>
+
+
+    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.SupplierLogExample" resultType="java.lang.Integer">
+        select count(*) from pr_supplier_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        UPDATE pr_supplier_log
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+
+    <update id="updateByExample" parameterType="map">
+        UPDATE pr_supplier_log
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.SupplierLog">
+        update pr_supplier_log
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="SupplierLog">
+        UPDATE pr_supplier_log
+        <set>
+            <include refid="Set"></include>
+        </set>
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
+
+    </update>
+
+
+    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.SupplierLogExample" resultMap="selectPageResult">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from pr_supplier_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        LIMIT ${skipRecordCount} , ${pageSize}
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO pr_supplier_log
+        (<include refid="Base_Column_List"></include>)
+        values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( <include refid="ValuesBatch"></include> )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  pr_supplier_log
+        WHERE supplierlogid = #{supplierlogid,jdbcType=INTEGER}
+    </delete>
+    <!-- ================================代码生成结束=2017-09-22 04:58:57=========================================== -->
+</mapper>
