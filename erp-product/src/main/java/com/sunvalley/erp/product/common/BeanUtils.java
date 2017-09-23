@@ -33,7 +33,7 @@ public class BeanUtils {
         List<com.sunvalley.erp.common.util.FilterModel> dests = new ArrayList<>();
 
         if(origs==null || origs.size()==0)
-            return null;
+            return dests;
 
         for (FilterModel orig : origs) {
 
