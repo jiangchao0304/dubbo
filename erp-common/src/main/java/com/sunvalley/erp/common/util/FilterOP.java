@@ -5,12 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import com.google.gson.reflect.TypeToken;
 import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.common.json.JsonParse;
-import com.sunvalley.erp.domain.common.dto.FilterModel;
-
 
 @SuppressWarnings("nls")
 public class FilterOP {

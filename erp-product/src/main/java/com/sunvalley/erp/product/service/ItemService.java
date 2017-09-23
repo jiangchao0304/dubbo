@@ -16,6 +16,7 @@ import com.sunvalley.erp.product.daoEX.ItemExMapper;
 import com.sunvalley.erp.product.model.ItemLocale;
 import com.sunvalley.erp.product.model.ItemLocaleExample;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,7 +130,9 @@ public class ItemService {
     public Pager<SkuListNewDTO> listskuListNew(List<FilterModel> filterModels, int offset, int pageSize) {
         String filtersql="";
         try {
-             filtersql= new FilterOP().getFilterSQL(filterModels);
+            List<com.sunvalley.erp.common.util.FilterModel> origFilterModels =  com.sunvalley.erp.product.common.BeanUtils.copyFilterModel(filterModels);
+
+            filtersql= new FilterOP().getFilterSQL(origFilterModels);
         }
         catch (Exception ex){
             throw  new FaceException(ex.getMessage());

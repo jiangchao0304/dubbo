@@ -9,6 +9,7 @@ import com.sunvalley.erp.common.util.TimeUtil;
 import com.sunvalley.erp.domain.common.dto.FilterModel;
 import com.sunvalley.erp.domain.common.dto.Pager;
 import com.sunvalley.erp.domain.product.dto.*;
+import com.sunvalley.erp.product.common.BeanUtils;
 import com.sunvalley.erp.product.dao.*;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
 import com.sunvalley.erp.product.daoEX.PrepareSkuExMapper;
@@ -164,6 +165,7 @@ public class PrepareService {
      * @since : 2017-09-15:23:42
      */
     public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
+
         HashMap<String,Object> map= new HashMap<String,Object>();
         String filtersql = "";
         String[] ListArray={};
@@ -206,7 +208,8 @@ public class PrepareService {
             filterModels.remove(filter);
         }
         try {
-            filtersql= new FilterOP().getFilterSQL(filterModels);
+            List<com.sunvalley.erp.common.util.FilterModel> origFilterModels =  BeanUtils.copyFilterModel(filterModels);
+            filtersql= new FilterOP().getFilterSQL(origFilterModels);
         }catch (Exception ex){
             throw  new FaceException(ex.getMessage());
         }
