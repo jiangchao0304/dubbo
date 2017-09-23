@@ -47,7 +47,7 @@ spring:
 
       dubbo.scan : com.sunvalley.erp.product
 mybatis:
-     type-aliases-package : com.sunvalley.erp.product.model,com.sunvalley.erp.domain.product.dto
+     type-aliases-package : com.sunvalley.erp.product.model,com.sunvalley.erp.to
      mapper-locations: classpath*:mapper/com/sunvalley/erp/product/**/*.xml
 
      #config-location: classpath:/mybatis-config.xml

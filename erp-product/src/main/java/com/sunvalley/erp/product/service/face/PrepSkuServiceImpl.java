@@ -1,13 +1,14 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
+* owner:
 */
 package com.sunvalley.erp.product.service.face;
 
-import com.sunvalley.erp.domain.common.dto.FilterModel;
-import com.sunvalley.erp.domain.common.dto.Pager;
-import com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO;
-import com.sunvalley.erp.domain.product.dto.PreSkuDTO;
-import com.sunvalley.erp.domain.product.dto.SkuBaseInfoDTO;
+import com.sunvalley.erp.to.common.FilterModelTO;
+import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.ModelAndPreSkuTO;
+import com.sunvalley.erp.to.product.PreSkuTO;
+import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 import com.sunvalley.erp.product.service.PrepareService;
 import com.sunvalley.erp.face.product.IPreSkuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     private PrepareService prepareService;
 
     @Override
-    public PreSkuDTO getByModel(String modelName, Integer status) {
+    public PreSkuTO getByModel(String modelName, Integer status) {
         return  prepareService.getByModel(modelName,status);
     }
 
     @Override
-    public PreSkuDTO saveModel(PreSkuDTO preSkuDTO) {
-        PreSkuDTO result = prepareService.saveModel(preSkuDTO);
+    public PreSkuTO saveModel(PreSkuTO preSkuTO) {
+        PreSkuTO result = prepareService.saveModel(preSkuTO);
         return  result;
     }
 
@@ -50,14 +51,14 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     }
 
     @Override
-    public SkuBaseInfoDTO getPreSkuBaseInfo(Integer skuId, Integer modelId) {
+    public SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId) {
         return prepareService.getPreSkuBaseInfo(skuId,modelId);
     }
 
     @Override
-    public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
+    public PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModelTO> filterModels, int offset, int pageSize) {
 
-        Pager<ModelAndPreSkuDTO> result = prepareService.listModelAndPreSku(filterModels,offset,pageSize);
+        PagerTO<ModelAndPreSkuTO> result = prepareService.listModelAndPreSku(filterModels,offset,pageSize);
         return  result;
 
     }

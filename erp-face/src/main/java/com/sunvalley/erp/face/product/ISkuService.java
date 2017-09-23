@@ -3,10 +3,9 @@
 */
 package com.sunvalley.erp.face.product;
 
-import com.sunvalley.erp.domain.common.dto.FilterModel;
-import com.sunvalley.erp.domain.common.dto.Pager;
-import com.sunvalley.erp.domain.product.dto.SkuBaseInfoDTO;
-import com.sunvalley.erp.domain.product.dto.SkuListNewDTO;
+import com.sunvalley.erp.to.common.FilterModelTO;
+import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 
 import java.util.List;
 
@@ -22,15 +21,15 @@ public interface ISkuService {
     String searchSku(String q, int langId, int limit, Integer companyId);
 
 
-    SkuBaseInfoDTO getSkuBaseInfo(int skuId);
+    SkuBaseInfoTO getSkuBaseInfo(int skuId);
 
-    SkuBaseInfoDTO getSkuBaseInfo(String sku);
+    SkuBaseInfoTO getSkuBaseInfo(String sku);
 
-    boolean updateSkuBaseInfo(SkuBaseInfoDTO dto);
+    boolean updateSkuBaseInfo(SkuBaseInfoTO dto);
 
-    boolean saveSkuBaseInfo(SkuBaseInfoDTO dto);
+    boolean saveSkuBaseInfo(SkuBaseInfoTO dto);
 
 
-    Pager<SkuListNewDTO> listskuListNew(List<FilterModel> filterModels, int offset, int pageSize);
+    PagerTO<com.sunvalley.erp.to.product.SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int offset, int pageSize);
 }
 

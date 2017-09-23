@@ -2,21 +2,22 @@
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
 package com.sunvalley.erp.product.service;
+import com.sunvalley.erp.common.component.filtersql.FilterOP;
+import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.constants.Constants;
-import com.sunvalley.erp.common.util.FilterOP;
-import com.sunvalley.erp.domain.common.dto.FilterModel;
-import com.sunvalley.erp.domain.common.dto.Pager;
-import com.sunvalley.erp.domain.product.dto.ItemLocaleDTO;
-import com.sunvalley.erp.domain.product.dto.SkuBaseInfoDTO;
-import com.sunvalley.erp.domain.product.dto.SkuListNewDTO;
+import com.sunvalley.erp.to.common.FilterModelTO;
+import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.*;
+import com.sunvalley.erp.to.product.ItemLocaleTO;
+import com.sunvalley.erp.to.product.SkuBaseInfoTO;
+
 import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.dao.ItemLocaleMapper;
-import com.sunvalley.erp.product.dao.ItemMapper;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
 import com.sunvalley.erp.product.model.ItemLocale;
 import com.sunvalley.erp.product.model.ItemLocaleExample;
+import com.sunvalley.erp.to.product.SkuListNewTO;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,23 +42,23 @@ public class ItemService {
     private ItemExMapper itemExMapper;
 
 
-    public SkuBaseInfoDTO getSkuBaseInfo(int skuId){
+    public SkuBaseInfoTO getSkuBaseInfo(int skuId){
 
         Map<String,Object> param = new HashMap<>();
         param.put("skuId",skuId);
 
-        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+        SkuBaseInfoTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
         if(skuBaseInfoDTO!=null){
-            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
-            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
+            List<ItemLocaleTO> itemLocaleTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleTOList(itemLocaleTOList);
         }
         return skuBaseInfoDTO;
 
     }
 
-    public  List<ItemLocaleDTO> listItemLocale(int skuid){
+    public  List<ItemLocaleTO> listItemLocale(int skuid){
 
-        List<ItemLocaleDTO> result = new ArrayList<>();
+        List<ItemLocaleTO> result = new ArrayList<>();
         ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
         itemLocaleExample.createCriteria().andSkuidEqualTo(skuid);
         List<ItemLocale>  itemLocaleList =  itemLocaleMapper.selectByExample(itemLocaleExample);
@@ -68,7 +69,7 @@ public class ItemService {
 
         for (ItemLocale itemLocale : itemLocaleList) {
 
-            ItemLocaleDTO dto = new ItemLocaleDTO();
+            ItemLocaleTO dto = new ItemLocaleTO();
             try {
                 PropertyUtils.copyProperties(dto, itemLocale);
                 result.add(dto);
@@ -83,14 +84,14 @@ public class ItemService {
     }
 
 
-    public SkuBaseInfoDTO getSkuBaseInfo(String sku){
+    public SkuBaseInfoTO getSkuBaseInfo(String sku){
         Map<String,Object> param = new HashMap<>();
         param.put("sku",sku);
-        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+        SkuBaseInfoTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
 
         if(skuBaseInfoDTO!=null){
-            List<ItemLocaleDTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
-            skuBaseInfoDTO.setItemLocaleDTOList(itemLocaleDTOList);
+            List<ItemLocaleTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleTOList(itemLocaleDTOList);
 
         }
         return skuBaseInfoDTO;
@@ -127,10 +128,10 @@ public class ItemService {
 
 
 
-    public Pager<SkuListNewDTO> listskuListNew(List<FilterModel> filterModels, int offset, int pageSize) {
+    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int offset, int pageSize) {
         String filtersql="";
         try {
-            List<com.sunvalley.erp.common.util.FilterModel> origFilterModels =  com.sunvalley.erp.product.common.BeanUtils.copyFilterModel(filterModels);
+            List<FilterModel> origFilterModels =  com.sunvalley.erp.product.common.BeanUtils.copyFilterModel(filterModels);
 
             filtersql= new FilterOP().getFilterSQL(origFilterModels);
         }
@@ -141,7 +142,7 @@ public class ItemService {
         map.put("filtersql", filtersql);
         map.put("offset", offset);
         map.put("limit", pageSize);
-        Pager<SkuListNewDTO> pager=new Pager<SkuListNewDTO>();
+        PagerTO<SkuListNewTO> pager=new PagerTO<SkuListNewTO>();
 
         pager.setFilterSql(filtersql);
         pager.setPageNo(offset / pageSize+1);
@@ -149,7 +150,7 @@ public class ItemService {
         int rowCount= itemExMapper.countSkuListNew(map);
         pager.setRowCount(rowCount);
         if(rowCount>0){
-            List<SkuListNewDTO> list = itemExMapper.listSkuListNew(map);
+            List<SkuListNewTO> list = itemExMapper.listSkuListNew(map);
             pager.setList(list);
         }
 

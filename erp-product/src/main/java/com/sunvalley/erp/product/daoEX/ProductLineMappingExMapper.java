@@ -3,7 +3,6 @@
 */
 package com.sunvalley.erp.product.daoEX;
 
-import com.sunvalley.erp.domain.product.dto.ProductLineMappingDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,6 +17,6 @@ import java.util.Map;
 @Repository
 public interface ProductLineMappingExMapper {
 
-    List<ProductLineMappingDTO> getProductLineMappingList(Map<String,Object> map);
+    List<com.sunvalley.erp.to.product.ProductLineMappingTO> getProductLineMappingList(Map<String,Object> map);
 }
 

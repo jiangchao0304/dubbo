@@ -3,11 +3,11 @@
 */
 package com.sunvalley.erp.face.product;
 
-import com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO;
-import com.sunvalley.erp.domain.common.dto.FilterModel;
-import com.sunvalley.erp.domain.common.dto.Pager;
-import com.sunvalley.erp.domain.product.dto.PreSkuDTO;
-import com.sunvalley.erp.domain.product.dto.SkuBaseInfoDTO;
+import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.ModelAndPreSkuTO;
+import com.sunvalley.erp.to.common.FilterModelTO;
+import com.sunvalley.erp.to.product.PreSkuTO;
+import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,16 +20,16 @@ import java.util.List;
  */
 public interface IPreSkuService {
 
-    PreSkuDTO getByModel(String modelName, Integer status);
+    PreSkuTO getByModel(String modelName, Integer status);
 
-    PreSkuDTO saveModel(PreSkuDTO preSkuDTO);
+    PreSkuTO saveModel(PreSkuTO preSkuDTO);
 
     String getPreSkuGrid(HashMap<String, Object> map);
 
     String ListpackageSku(HashMap<String, Object> map);
 
-    SkuBaseInfoDTO getPreSkuBaseInfo(Integer skuId, Integer modelId);
+    SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId);
 
-    Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize);
+    PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModelTO> filterModels, int offset, int pageSize);
 }
 

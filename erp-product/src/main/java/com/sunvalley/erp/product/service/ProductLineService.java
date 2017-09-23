@@ -4,7 +4,6 @@
 package com.sunvalley.erp.product.service;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.util.TimeUtil;
-import com.sunvalley.erp.domain.product.dto.ProductLineMappingDTO;
 import com.sunvalley.erp.product.dao.*;
 import com.sunvalley.erp.product.daoEX.ProductLineMappingExMapper;
 import com.sunvalley.erp.product.model.*;
@@ -55,10 +54,10 @@ public class ProductLineService {
         HashMap<String, Object> param = new HashMap<String, Object>();
         param.put("filtersql", " and line.product_type = 2 AND m.type = 1");
 
-        List<ProductLineMappingDTO> productMappingExList = productLineMappingExMapper.getProductLineMappingList(param);
+        List<com.sunvalley.erp.to.product.ProductLineMappingTO> productMappingExList = productLineMappingExMapper.getProductLineMappingList(param);
         if(productMappingExList!=null && productMappingExList.size()>0){
             List<Integer> idList = new ArrayList<Integer>();
-            for (ProductLineMappingDTO productMappingEx : productMappingExList) {
+            for (com.sunvalley.erp.to.product.ProductLineMappingTO productMappingEx : productMappingExList) {
                 idList.add(productMappingEx.getId());
             }
             productMappingExample.createCriteria().andIdIn(idList);

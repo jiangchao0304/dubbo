@@ -4,11 +4,11 @@
 package com.sunvalley.erp.product.service;
 import com.google.common.base.Strings;
 import com.sunvalley.erp.common.constants.Constants;
-import com.sunvalley.erp.common.util.FilterOP;
+import com.sunvalley.erp.common.component.filtersql.FilterOP;
 import com.sunvalley.erp.common.util.TimeUtil;
-import com.sunvalley.erp.domain.common.dto.FilterModel;
-import com.sunvalley.erp.domain.common.dto.Pager;
-import com.sunvalley.erp.domain.product.dto.*;
+import com.sunvalley.erp.to.common.FilterModelTO;
+import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.*;
 import com.sunvalley.erp.product.common.BeanUtils;
 import com.sunvalley.erp.product.dao.*;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
@@ -87,13 +87,13 @@ public class PrepareService {
      *         [modelName]
      * @param status
      *         [status]
-     * @return com.sunvalley.domain.erp.product.dto.PreSkuDTO
+     * @return com.sunvalley.to.erp.product.dto.PreSkuTO
      * @throws
      * @author: douglas.jiang
      * @date : 2017/9/14:16:23
      */
 
-    public PreSkuDTO getByModel(String modelName, Integer status ){
+    public PreSkuTO getByModel(String modelName, Integer status ){
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("model", modelName);
         if(status == 0){
@@ -102,15 +102,15 @@ public class PrepareService {
             map.put("status", status);
         }
 
-        List<PreSkuDTO> list = prepareSkuExMapper.initByModel(map);
+        List<PreSkuTO> list = prepareSkuExMapper.initByModel(map);
         if(list != null && list.size()>0){
-            PreSkuDTO vo = list.get(0);
+            PreSkuTO vo = list.get(0);
             map.put("model_id", vo.getModelId());
-            List<PreSkuGridDTO> preSkuList =  prepareSkuExMapper.preSkuGrid(map);
+            List<PreSkuGridTO> preSkuList =  prepareSkuExMapper.preSkuGrid(map);
 
-            List<PreSkuGridDTO> preSkuVOList = new ArrayList<>(preSkuList.size());
+            List<PreSkuGridTO> preSkuVOList = new ArrayList<>(preSkuList.size());
             for (int i = 0; i < preSkuList.size(); i++) {
-                PreSkuGridDTO preSkuGridVO = new PreSkuGridDTO();
+                PreSkuGridTO preSkuGridVO = new PreSkuGridTO();
                 try {
                     PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
                 }catch (Exception ex){
@@ -120,11 +120,11 @@ public class PrepareService {
                 preSkuVOList.add(preSkuGridVO);
             }
 
-            List<PackageSkuDTO> packageSkuList = prepareSkuExMapper.packageSkuList(map);
+            List<PackageSkuTO> packageSkuList = prepareSkuExMapper.packageSkuList(map);
 
-            List<PackageSkuDTO> packageSkuVOList = new ArrayList<>(packageSkuList.size());
+            List<PackageSkuTO> packageSkuVOList = new ArrayList<>(packageSkuList.size());
             for (int i = 0; i < packageSkuList.size(); i++) {
-                PackageSkuDTO packageSkuVO = new PackageSkuDTO();
+                PackageSkuTO packageSkuVO = new PackageSkuTO();
                 try {
                 PropertyUtils.copyProperties(packageSkuVO, packageSkuList.get(i));
                 }catch (Exception ex){
@@ -141,7 +141,7 @@ public class PrepareService {
     }
 
 
-    public SkuBaseInfoDTO getPreSkuBaseInfo(Integer preSkuId, Integer modelId){
+    public SkuBaseInfoTO getPreSkuBaseInfo(Integer preSkuId, Integer modelId){
         Map<String,Object> param = new HashMap<>();
         if(preSkuId>0){
             param.put("preskuId",preSkuId);
@@ -149,9 +149,8 @@ public class PrepareService {
        if(modelId>0){
            param.put("modelId",modelId);
        }
-        SkuBaseInfoDTO skuBaseInfoDTO =  itemExMapper.getPreSkuBaseInfo(param);
-        skuBaseInfoDTO.setBomDesc("111111111");
-        return skuBaseInfoDTO;
+        SkuBaseInfoTO skuBaseInfoTO =  itemExMapper.getPreSkuBaseInfo(param);
+        return skuBaseInfoTO;
     }
 
 
@@ -159,18 +158,18 @@ public class PrepareService {
     /**
      * model&预备SKU列表查询.
      * @param filterModels
-     * @return com.sunvalley.domain.Pager<com.sunvalley.erp.domain.product.dto.ModelAndPreSkuDTO>
+     * @return com.sunvalley.to.PagerTO<com.sunvalley.erp.to.product.ModelAndPreSkuTO>
      * @exception
      * @author:
      * @since : 2017-09-15:23:42
      */
-    public Pager<ModelAndPreSkuDTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
+    public PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModelTO> filterModels, int offset, int pageSize) {
 
         HashMap<String,Object> map= new HashMap<String,Object>();
         String filtersql = "";
         String[] ListArray={};
-        List<FilterModel> removeFileModelList = new ArrayList<FilterModel>();
-        for(FilterModel filterModel: filterModels){
+        List<FilterModelTO> removeFileModelList = new ArrayList<FilterModelTO>();
+        for(FilterModelTO filterModel: filterModels){
             if(filterModel.getFiled().equals("mapping.maping")){//安规适用国家
                 removeFileModelList.add(filterModel);
                 String modelList=filterModel.getValue();
@@ -204,11 +203,11 @@ public class PrepareService {
                 filtersql+=filter;
             }
         }
-        for(FilterModel filter :removeFileModelList){
+        for(FilterModelTO filter :removeFileModelList){
             filterModels.remove(filter);
         }
         try {
-            List<com.sunvalley.erp.common.util.FilterModel> origFilterModels =  BeanUtils.copyFilterModel(filterModels);
+            List<com.sunvalley.erp.common.component.filtersql.FilterModel> origFilterModels =  BeanUtils.copyFilterModel(filterModels);
             filtersql= new FilterOP().getFilterSQL(origFilterModels);
         }catch (Exception ex){
             throw  new FaceException(ex.getMessage());
@@ -217,20 +216,20 @@ public class PrepareService {
         map.put("filtersql", filtersql);
         map.put("offset", offset);
         map.put("pageSize", pageSize);
-        Pager<ModelAndPreSkuDTO> pager=new Pager<ModelAndPreSkuDTO>();
+        PagerTO<ModelAndPreSkuTO> pager=new PagerTO<ModelAndPreSkuTO>();
         pager.setFilterSql(filtersql);
         pager.setPageNo(offset / pageSize+1);
         pager.setPageSize(pageSize);
         int rowCount= prepareSkuExMapper.countModelAndPreSku(map);
         pager.setRowCount(rowCount);
-        List<ModelAndPreSkuDTO> list=prepareSkuExMapper.listModelAndPreSku(map);
+        List<ModelAndPreSkuTO> list=prepareSkuExMapper.listModelAndPreSku(map);
         pager.setList(list);
         return pager;
     }
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public PreSkuDTO saveModel(PreSkuDTO prepareSkuEx){
+    public PreSkuTO saveModel(PreSkuTO prepareSkuEx){
 
         ItemModel model = new ItemModel();
         model.setBrandId(prepareSkuEx.getBrandId());
@@ -284,7 +283,7 @@ public class PrepareService {
      * @date : 2017/9/18:17:02
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public boolean updateSkuBaseInfo(SkuBaseInfoDTO dto){
+    public boolean updateSkuBaseInfo(SkuBaseInfoTO dto){
 
         beforeSaveItem(dto);
 
@@ -314,12 +313,12 @@ public class PrepareService {
         bomMapper.updateByExampleSelective(bom,bomExample);
 
         //更新bs_item_locale
-        for (ItemLocaleDTO itemLocaleDTO : dto.getItemLocaleDTOList()) {
+        for (ItemLocaleTO itemLocaleTO : dto.getItemLocaleTOList()) {
             ItemLocale updateDO = new ItemLocale();
-            updateDO.setDescription(itemLocaleDTO.getDescription());
+            updateDO.setDescription(itemLocaleTO.getDescription());
             ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
-            itemLocaleExample.createCriteria().andSkuidEqualTo(itemLocaleDTO.getSkuid())
-                    .andLangIdEqualTo(itemLocaleDTO.getLangId());
+            itemLocaleExample.createCriteria().andSkuidEqualTo(itemLocaleTO.getSkuid())
+                    .andLangIdEqualTo(itemLocaleTO.getLangId());
             itemLocaleMapper.updateByExampleSelective(updateDO,itemLocaleExample);
         }
 
@@ -338,7 +337,7 @@ public class PrepareService {
      * @date : 2017/9/18:17:02
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public boolean saveSkuBaseInfo(SkuBaseInfoDTO dto){
+    public boolean saveSkuBaseInfo(SkuBaseInfoTO dto){
 
         beforeSaveItem(dto);
 
@@ -365,7 +364,7 @@ public class PrepareService {
         item.setLineState(dto.getLineState());
         item.setMagnetic(dto.getMagnetic());
         item.setSku(dto.getSku());
-        item.setCreateUserId(dto.getSessionDTO().getUserId());
+        item.setCreateUserId(dto.getSessionTO().getUserId());
         item.setModelId(dto.getModelId());
         int skuId = itemMapper.insert(item);
         if(skuId>0){
@@ -374,19 +373,19 @@ public class PrepareService {
             description.setAction("create");
             description.setSkuid(item.getSkuid());
             description.setDescSourc(item.getDescSourc());
-            description.setUpdatepicuser( dto.getSessionDTO().getFirstName()+" "+ dto.getSessionDTO().getLastName());
+            description.setUpdatepicuser( dto.getSessionTO().getFirstName()+" "+ dto.getSessionTO().getLastName());
             description.setUpdatepicdate(new Date());
             skuDescriptionMapper.insert(description);
 
 
-            for (ItemLocaleDTO localeDTO : dto.getItemLocaleDTOList()) {
-                localeDTO.setSku(dto.getSku());
-                localeDTO.setSkuid(skuId);
+            for (ItemLocaleTO localeTO : dto.getItemLocaleTOList()) {
+                localeTO.setSku(dto.getSku());
+                localeTO.setSkuid(skuId);
             }
 
-            saveItemLocale(dto.getItemLocaleDTOList());  //多语言
-            saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleDTOList()); //产品说明
-            saveItemAttrValue(dto.getItemLocaleDTOList()); // 保存属性
+            saveItemLocale(dto.getItemLocaleTOList());  //多语言
+            saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleTOList()); //产品说明
+            saveItemAttrValue(dto.getItemLocaleTOList()); // 保存属性
 
 
             return true;
@@ -395,7 +394,7 @@ public class PrepareService {
         return false;
     }
 
-    private void beforeSaveItem(SkuBaseInfoDTO item){
+    private void beforeSaveItem(SkuBaseInfoTO item){
         if(item.getLen()<0||item.getLen()>32767)
             throw new FaceException("PackeagedLen is out of range!");
         if(item.getWidth()<0||item.getWidth()>32767)
@@ -432,16 +431,16 @@ public class PrepareService {
 
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void edit(SkuBaseInfoDTO dto) throws Exception {
-        saveItemLocale(dto.getItemLocaleDTOList()); // 保存产品描述
-        saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleDTOList()); // 保存产品规格等大文本字段
+    public void edit(SkuBaseInfoTO dto) throws Exception {
+        saveItemLocale(dto.getItemLocaleTOList()); // 保存产品描述
+        saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleTOList()); // 保存产品规格等大文本字段
         //todo:保存产品属性
         //saveItemAttrValue(item); // 保存产品属性
         Item item = itemMapper.selectByPrimaryKey(dto.getSkuId());
         if (Strings.isNullOrEmpty(item.getDescSourc())){
-            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionDTO().getFirstName(),"create");
+            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionTO().getFirstName(),"create");
         }else {
-            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionDTO().getFirstName(),"modify");
+            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionTO().getFirstName(),"modify");
         }
         Item updateItem = new Item();
         item.setSkuid(dto.getSkuId());
@@ -460,11 +459,11 @@ public class PrepareService {
         int result = itemMapper.updateByPrimaryKeySelective(updateItem);
         if(result!=0){
             //记录产品更新历史--产品长，宽等信息
-            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.SIZE,dto.getSessionDTO().getUserId(),dto.getSessionDTO().getFullName());
+            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.SIZE,dto.getSessionTO().getUserId(),dto.getSessionTO().getFullName());
             //记录产品更新历史--isDrop
-            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.IS_DROP_STATUS,dto.getSessionDTO().getUserId(),dto.getSessionDTO().getFullName());
+            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.IS_DROP_STATUS,dto.getSessionTO().getUserId(),dto.getSessionTO().getFullName());
             //记录产品更新历史--line_state
-            itemLogService.addItemLog(updateItem,item,Constants.ProductLogType.STATUS,dto.getSessionDTO().getUserId(),dto.getSessionDTO().getFullName());
+            itemLogService.addItemLog(updateItem,item,Constants.ProductLogType.STATUS,dto.getSessionTO().getUserId(),dto.getSessionTO().getFullName());
         }
 
     }
@@ -487,39 +486,39 @@ public class PrepareService {
     /**
      * saveItemLocale .根据语言保存(更新)产品描述
      * @remark 存在则更新，不存在则插入
-     * @param itemLocaleDTOList
-     *         [itemLocaleDTOList]
+     * @param itemLocaleTOList
+     *         [itemLocaleTOList]
      * @return void
      * @throws
      * @author: douglas.jiang
      * @date : 2017/9/22:11:25
      */
-    private void saveItemLocale(List<ItemLocaleDTO> itemLocaleDTOList) {
+    private void saveItemLocale(List<ItemLocaleTO> itemLocaleTOList) {
 
         String desc_En = "";
         String unitName_En = "";
-        for (ItemLocaleDTO localeDTO : itemLocaleDTOList) {
+        for (ItemLocaleTO localeTO : itemLocaleTOList) {
             ItemLocale itemLocale = new ItemLocale();
 
-            if(localeDTO.getLangId() == Constants.Language.ENGLISH) {
-                desc_En = localeDTO.getDescription();
-                unitName_En = localeDTO.getUnitName();
+            if(localeTO.getLangId() == Constants.Language.ENGLISH) {
+                desc_En = localeTO.getDescription();
+                unitName_En = localeTO.getUnitName();
             } else {
-                if(Strings.isNullOrEmpty(localeDTO.getDescription())) {
-                    localeDTO.setDescription(desc_En);
+                if(Strings.isNullOrEmpty(localeTO.getDescription())) {
+                    localeTO.setDescription(desc_En);
                 }
-                if(Strings.isNullOrEmpty(localeDTO.getUnitName())) {
-                    localeDTO.setUnitName(unitName_En);
+                if(Strings.isNullOrEmpty(localeTO.getUnitName())) {
+                    localeTO.setUnitName(unitName_En);
                 }
             }
-            itemLocale.setSku(localeDTO.getSku());
-            itemLocale.setSkuid(localeDTO.getSkuid());
-            itemLocale.setLangId(localeDTO.getLangId());
-            itemLocale.setDescription(localeDTO.getDescription());
-            itemLocale.setUnitName(localeDTO.getUnitName());
+            itemLocale.setSku(localeTO.getSku());
+            itemLocale.setSkuid(localeTO.getSkuid());
+            itemLocale.setLangId(localeTO.getLangId());
+            itemLocale.setDescription(localeTO.getDescription());
+            itemLocale.setUnitName(localeTO.getUnitName());
 
             ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
-            itemLocaleExample.createCriteria().andLangIdEqualTo(localeDTO.getLangId()).andSkuidEqualTo(localeDTO.getSkuid());
+            itemLocaleExample.createCriteria().andLangIdEqualTo(localeTO.getLangId()).andSkuidEqualTo(localeTO.getSkuid());
             List<ItemLocale> list = itemLocaleMapper.selectByExample(itemLocaleExample);
             if(list!=null && list.size()>0){
                 itemLocaleMapper.updateByExampleSelective(itemLocale,itemLocaleExample);
@@ -536,18 +535,18 @@ public class PrepareService {
      * @remark 存在则更新，不存在则插入
      * @param warranty
      *         [warranty]
-     * @param itemLocaleDTOList
-     *         [itemLocaleDTOList]
+     * @param itemLocaleTOList
+     *         [itemLocaleTOList]
      * @return void
      * @throws
      * @author: douglas.jiang
      * @date : 2017/9/22:11:43
      */
-    private void  saveItemTextLocale(int warranty, List<ItemLocaleDTO> itemLocaleDTOList){
+    private void  saveItemTextLocale(int warranty, List<ItemLocaleTO> itemLocaleTOList){
 
-        for (ItemLocaleDTO localeDTO : itemLocaleDTOList) {
+        for (ItemLocaleTO localeTO : itemLocaleTOList) {
             ItemTextLocale itemTextLocale = new ItemTextLocale();
-            itemTextLocale.setLangId(localeDTO.getLangId());
+            itemTextLocale.setLangId(localeTO.getLangId());
             itemTextLocale.setMetatile("");
             itemTextLocale.setMetakeyword("");
             itemTextLocale.setMetadesc("");
@@ -557,13 +556,13 @@ public class PrepareService {
             itemTextLocale.setReview("");
             itemTextLocale.setPackagedesc("");
             itemTextLocale.setWarranty(String.valueOf(warranty));
-            itemTextLocale.setSkuid(localeDTO.getSkuid());
-            itemTextLocale.setLangId(localeDTO.getLangId());
+            itemTextLocale.setSkuid(localeTO.getSkuid());
+            itemTextLocale.setLangId(localeTO.getLangId());
             itemTextLocale.setFlag(false);
 
 
             ItemTextLocaleExample itemTextLocaleExample = new ItemTextLocaleExample();
-            itemTextLocaleExample.createCriteria().andLangIdEqualTo(localeDTO.getLangId()).andSkuidEqualTo(localeDTO.getSkuid());
+            itemTextLocaleExample.createCriteria().andLangIdEqualTo(localeTO.getLangId()).andSkuidEqualTo(localeTO.getSkuid());
             List<ItemTextLocale> list = itemTextLocaleMapper.selectByExample(itemTextLocaleExample);
             if(list!=null && list.size()>0){
                 itemTextLocaleMapper.updateByExampleSelective(itemTextLocale,itemTextLocaleExample);
@@ -579,8 +578,8 @@ public class PrepareService {
     /**
      * todo:保存产品多语言属性
      */
-    private void saveItemAttrValue(List<ItemLocaleDTO> itemLocaleDTOList) {
-//        for (ItemLocaleDTO  item : itemLocaleDTOList) { // 循环处理前端打包产品构造的虚拟对象用来保存产品多语言信息
+    private void saveItemAttrValue(List<ItemLocaleTO> itemLocaleTOList) {
+//        for (ItemLocaleTO  item : itemLocaleTOList) { // 循环处理前端打包产品构造的虚拟对象用来保存产品多语言信息
 //            List<ItemAttrValueLocale> list = itemLocaleVirtual.getAttrList();
 //            for(ItemAttrValueLocale itemAttrValueLocale : list) { // 循环保存产品属性
 //                itemAttrValueLocale.setSkuid(item.getSkuid());
@@ -598,7 +597,7 @@ public class PrepareService {
      * @param
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void savePreSkuAttr(PreSkuDTO prepareSkuEx){
+    public void savePreSkuAttr(PreSkuTO prepareSkuEx){
         ItemPreCommomExample preCommon = new ItemPreCommomExample();
         preCommon.createCriteria().andModelIdEqualTo(prepareSkuEx.getModelId());
         List<ItemPreCommom> list = itemPreCommomMapper.selectByExample(preCommon);

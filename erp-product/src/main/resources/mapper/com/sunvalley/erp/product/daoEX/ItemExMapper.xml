@@ -71,7 +71,7 @@
 		</if>
 	</select>
 
-	<select id="getSkuBaseInfo" parameterType="Map" resultType="SkuBaseInfoDTO">
+	<select id="getSkuBaseInfo" parameterType="Map" resultType="SkuBaseInfoTO">
 SELECT
 item.sku,
 item.skuid skuId,
@@ -155,11 +155,11 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 
 	</select>
 
-	<select id="getPreSkuBaseInfo" parameterType="Map" resultType="SkuBaseInfoDTO">
+	<select id="getPreSkuBaseInfo" parameterType="Map" resultType="SkuBaseInfoTO">
 		SELECT
 		DISTINCT
 		m.main_category_id categoryId,
-		m.sub_category_id subcategoryid,
+		m.sub_category_id subCategortId,
 		maincategory.product_line_name categoryStr,
 		subcategory.product_line_name subCategoryStr,
 		m.brand_id brandId,
@@ -181,7 +181,6 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 		m.warranty,
 		s.product_name purdesc,
 		s.product_name purspec
-
 		FROM
 		bs_item_model m
 		LEFT JOIN bs_prepare_sku s ON m.model_id = s.model_id
@@ -234,7 +233,7 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 
 	</select>
 
-	<select id="listSkuListNew" resultType="SkuListNewDTO" parameterType="Map">
+	<select id="listSkuListNew" resultType="SkuListNewTO" parameterType="Map">
 		SELECT
 			Item.skuid skuId,
 			Item.sku,

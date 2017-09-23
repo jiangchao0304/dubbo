@@ -57,7 +57,7 @@ public class SequenceService {
     public static final int VALUE=1;
     public static final int START=1;
 
-    public synchronized String getNextIdSkuCodeY6(String name){
+    public  String getNextIdSkuCodeY6(String name){
         if (name==null || "".equals(name)) return "";
         Sequence sq = new Sequence();
         sq.setName(name);
@@ -115,9 +115,9 @@ public class SequenceService {
                     itemExample.createCriteria().andSkuEqualTo(skuCode);
                     List<Item> items =  itemMapper.selectByExample(itemExample);
                     if(items==null || items.size()==0){
-                        bl = false;
-                    }else{
                         bl = true;
+                    }else{
+                        bl = false;
                     }
                 }while(!bl);
 

@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sunvalley.erp.product.daoEX.PrepareSkuExMapper" >
 	
-	<select id="initByModel" parameterType="map" resultType="PreSkuDTO">
+	<select id="initByModel" parameterType="map" resultType="PreSkuTO">
 		SELECT
 			model.model_id modelId,
 			model.model_name model,
@@ -45,7 +45,7 @@
 			model.model_name = #{model}
 	</select>
 
-	<select id="preSkuGrid" parameterType="map" resultType="PreSkuGridDTO">
+	<select id="preSkuGrid" parameterType="map" resultType="PreSkuGridTO">
 		SELECT
 			pre.id id,
 			pre.pre_sku preSku,
@@ -107,7 +107,7 @@
 	    </if>
 	</select>
 	
-	<select id="packageSkuList" parameterType="map" resultType="PackageSkuDTO">
+	<select id="packageSkuList" parameterType="map" resultType="PackageSkuTO">
 		SELECT
 			item.sku sku,
 			anrule.anruleStr anruleStr,
@@ -136,7 +136,7 @@
 		AND item.model = #{model}
 	</select>
 
-	<select id="listModelAndPreSku" parameterType="map" resultType="ModelAndPreSkuDTO">
+	<select id="listModelAndPreSku" parameterType="map" resultType="ModelAndPreSkuTO">
 		SELECT
 		anruleStr safety,
 		country.country safetyCountry,
