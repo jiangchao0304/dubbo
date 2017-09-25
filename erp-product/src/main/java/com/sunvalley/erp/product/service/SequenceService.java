@@ -11,6 +11,8 @@ import com.sunvalley.erp.product.dao.ProductLineMapper;
 import com.sunvalley.erp.product.daoEX.SequenceExMapper;
 import com.sunvalley.erp.face.exception.*;
 import com.sunvalley.erp.product.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -53,26 +55,34 @@ public class SequenceService {
     //#endregion
 
 
+    private static Logger logger = LoggerFactory.getLogger(SequenceService.class);
+
+
+
     public static final short STEP=1;
     public static final int VALUE=1;
     public static final int START=1;
 
-    public  String getNextIdSkuCodeY6(String name){
-        if (name==null || "".equals(name)) return "";
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public int getSeq(String name){
         Sequence sq = new Sequence();
         sq.setName(name);
         int value = sequenceExMapper.getSeq(sq);
+        return  value;
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public  String getNextIdSkuCodeY6(String name){
+        int value = getSeq(name);
         String suffixCode =  String.format("%06d", value);
         String skuCode = name+suffixCode.substring(0, 3)+"-"+suffixCode.substring(3, suffixCode.length());
         return skuCode;
     }
 
-
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public  String getNextIdSkuCodeY3(String name){
-        if (name==null || "".equals(name)) return "";
-        Sequence sq = new Sequence();
-        sq.setName(name);
-        int value = sequenceExMapper.getSeq(sq);
+        int value = getSeq(name);
         String suffixCode =  String.format("%03d", value);
         String skuCode = name+suffixCode;
         return skuCode;
@@ -117,6 +127,7 @@ public class SequenceService {
                     if(items==null || items.size()==0){
                         bl = true;
                     }else{
+                        logger.info("skuCode {} 重复,重新生成！",skuCode);
                         bl = false;
                     }
                 }while(!bl);

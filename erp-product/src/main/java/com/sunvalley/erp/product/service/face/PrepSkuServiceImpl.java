@@ -51,8 +51,8 @@ public class PrepSkuServiceImpl implements IPreSkuService {
     }
 
     @Override
-    public SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId) {
-        return prepareService.getPreSkuBaseInfo(skuId,modelId);
+    public SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId,Integer type) {
+        return prepareService.getPreSkuBaseInfo(skuId,modelId,type);
     }
 
     @Override

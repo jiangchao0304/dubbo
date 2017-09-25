@@ -55,22 +55,29 @@ public class SkuBaseInfoTO implements Serializable {
     private SysSessionTO sessionTO;
     private List<ItemLocaleTO> itemLocaleTOList;
 
-    public SysSessionTO getSessionTO() {
-        return sessionTO;
+
+    public String getSku() {
+        return sku;
     }
 
-    public void setSessionDTO(SysSessionTO sessionDTO) {
-        this.sessionTO = sessionDTO;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
-
-
-    public Integer getModelId() {
-        return modelId;
+    public int getSkuId() {
+        return skuId;
     }
 
-    public void setModelId(Integer modelId) {
-        this.modelId = modelId;
+    public void setSkuId(int skuId) {
+        this.skuId = skuId;
+    }
+
+    public Integer getLineState() {
+        return lineState;
+    }
+
+    public void setLineState(Integer lineState) {
+        this.lineState = lineState;
     }
 
     public Integer getCategoryId() {
@@ -79,14 +86,6 @@ public class SkuBaseInfoTO implements Serializable {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getPmName() {
-        return pmName;
-    }
-
-    public void setPmName(String pmName) {
-        this.pmName = pmName;
     }
 
     public String getCategoryStr() {
@@ -104,31 +103,6 @@ public class SkuBaseInfoTO implements Serializable {
     public void setSubCategoryStr(String subCategoryStr) {
         this.subCategoryStr = subCategoryStr;
     }
-
-    public int getSkuId() {
-        return skuId;
-    }
-
-    public void setSkuId(int skuId) {
-        this.skuId = skuId;
-    }
-
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    public Integer getLineState() {
-        return lineState;
-    }
-
-    public void setLineState(Integer lineState) {
-        this.lineState = lineState;
-    }
-
 
     public Integer getSubCategortId() {
         return subCategortId;
@@ -154,12 +128,28 @@ public class SkuBaseInfoTO implements Serializable {
         this.model = model;
     }
 
+    public Integer getModelId() {
+        return modelId;
+    }
+
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
+    }
+
     public Integer getPmId() {
         return pmId;
     }
 
     public void setPmId(Integer pmId) {
         this.pmId = pmId;
+    }
+
+    public String getPmName() {
+        return pmName;
+    }
+
+    public void setPmName(String pmName) {
+        this.pmName = pmName;
     }
 
     public Integer getBattery() {
@@ -352,6 +342,14 @@ public class SkuBaseInfoTO implements Serializable {
 
     public void setProductWeight(Short productWeight) {
         this.productWeight = productWeight;
+    }
+
+    public SysSessionTO getSessionTO() {
+        return sessionTO;
+    }
+
+    public void setSessionTO(SysSessionTO sessionTO) {
+        this.sessionTO = sessionTO;
     }
 
     public List<ItemLocaleTO> getItemLocaleTOList() {

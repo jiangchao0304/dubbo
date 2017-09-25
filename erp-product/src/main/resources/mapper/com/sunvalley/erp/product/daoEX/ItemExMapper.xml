@@ -249,8 +249,8 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 			Item.create_date createDate
 			from bs_item as Item
 			JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
-		    JOIN bs_bom as Bom on Bom.skuid=Item.skuid
-			left join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
+		    LEFT JOIN bs_bom as Bom on Bom.skuid=Item.skuid
+			LEFT join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
 			LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=Item.brand_id
 			LEFT JOIN sys_user Sysu ON Sysu.userid = Model.pm_id
 			LEFT JOIN sys_user Creator ON Creator.userid = Item.create_user_id
@@ -278,6 +278,13 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 		<if test="filtersql != null">
 			${filtersql}
 		</if>
+	</select>
+
+	<select id="getPreSkuRelation" parameterType="int" resultType="com.sunvalley.erp.product.modelEX.PreSkuRelation">
+		SELECT pre.skuid preSkuId,pre.sku preSku,item.skuid skuId,item.sku
+		FROM   `bs_prepare_sku` AS pre
+		JOIN bs_item AS item  ON item.skuid =pre.skuid
+		WHERE item.skuid=#{skuId}
 	</select>
 
 </mapper>

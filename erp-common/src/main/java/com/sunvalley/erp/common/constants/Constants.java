@@ -14,6 +14,24 @@ public class Constants {
 	public final static byte NO = 0;
 	public final static byte YES = 1;
 
+	/**
+	 * sku类型
+	 * @author stone.zhuang
+	 */
+	public class SkuType{
+		public static final int SKU=1;//sku
+		public static final int PRE_SKU=2;//预备sku
+	}
+
+	public class ItemMappingType{
+		public static final int anrule=1;//安规
+		public static final int country=2;//国家
+	}
+
+	public class ItemMappingOrigin{
+		public static final int sku=1;//新建
+		public static final int presku=2;//预备sku
+	}
 
 	public class IsDrop {
 		public final static byte ERP = 0;

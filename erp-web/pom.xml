@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>erp-web</artifactId>
     <packaging>war</packaging>
-    <name>erp-web Maven Webapp</name>
+    <name>erp-web</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>

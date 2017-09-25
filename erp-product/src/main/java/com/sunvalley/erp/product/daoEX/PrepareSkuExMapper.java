@@ -23,5 +23,8 @@ public interface PrepareSkuExMapper {
 
 	List<ModelAndPreSkuTO>  listModelAndPreSku(HashMap<String, Object> map);
 
+	//更新SKU状态
+	int updatePreSkuStatus(HashMap<String, Object> map);
+
 
 }

@@ -2,14 +2,13 @@ package com.sunvalley.erp.product.dao;
 import com.sunvalley.erp.product.model.Bom;
 import com.sunvalley.erp.product.model.BomExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
 * @Description: BomMapper
 * @author
-* @date 2017-09-20 04:29:23
+* @date 2017-09-25 03:06:29
 */
 @Repository
 public interface BomMapper {

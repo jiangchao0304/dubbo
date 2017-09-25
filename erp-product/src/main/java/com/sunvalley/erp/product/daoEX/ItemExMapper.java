@@ -1,9 +1,9 @@
 package com.sunvalley.erp.product.daoEX;
 
+import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 import com.sunvalley.erp.to.product.SkuListNewTO;
 import com.sunvalley.erp.product.model.ItemLocale;
-import com.sunvalley.erp.to.product.SkuListNewTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,5 +18,9 @@ public interface ItemExMapper {
 	SkuBaseInfoTO getPreSkuBaseInfo(Map<String, Object> param);
 
 	List<SkuListNewTO> listSkuListNew(Map<String, Object> param);
+
 	int countSkuListNew (Map<String, Object> param);
+
+	PreSkuRelation getPreSkuRelation(int skuId);
+
 }

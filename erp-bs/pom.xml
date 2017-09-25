@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>erp-bs</artifactId>
     <packaging>war</packaging>
-    <name>erp-bs Maven Webapp</name>
+    <name>erp-bs-web</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>

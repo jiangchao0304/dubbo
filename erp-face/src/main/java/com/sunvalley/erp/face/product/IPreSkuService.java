@@ -28,7 +28,7 @@ public interface IPreSkuService {
 
     String ListpackageSku(HashMap<String, Object> map);
 
-    SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId);
+    SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId,Integer type);
 
     PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModelTO> filterModels, int offset, int pageSize);
 }

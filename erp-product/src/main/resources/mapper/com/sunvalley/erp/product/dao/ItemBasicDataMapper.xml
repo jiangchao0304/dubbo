@@ -1,68 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunvalley.erp.product.dao.BomMapper">
-<!-- ================================代码生成开始=2017-09-25 03:06:29=========================================== -->
+<mapper namespace="com.sunvalley.erp.product.dao.ItemBasicDataMapper">
+<!-- ================================代码生成开始=2017-09-25 01:09:28=========================================== -->
 
-    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Bom">
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemBasicData">
         <result column="id" property="id" jdbcType="INTEGER"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="create_user_id" property="createUserId" jdbcType="INTEGER"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
-        <result column="update_user_id" property="updateUserId" jdbcType="INTEGER"/>
-        <result column="bom_desc" property="bomDesc" jdbcType="VARCHAR"/>
-        <result column="skuid" property="skuid" jdbcType="INTEGER"/>
-        <result column="combine_unit" property="combineUnit" jdbcType="INTEGER"/>
-        <result column="purchase_property" property="purchaseProperty" jdbcType="INTEGER"/>
+        <result column="attribute" property="attribute" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="VALUE2" property="value2" jdbcType="DECIMAL"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.Bom" />
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.ItemBasicData" />
 
     <sql id="Values">
             #{id,jdbcType=INTEGER },
-            #{createDate,jdbcType=TIMESTAMP },
-            #{createUserId,jdbcType=INTEGER },
-            #{updateDate,jdbcType=TIMESTAMP },
-            #{updateUserId,jdbcType=INTEGER },
-            #{bomDesc,jdbcType=VARCHAR },
-            #{skuid,jdbcType=INTEGER },
-            #{combineUnit,jdbcType=INTEGER },
-            #{purchaseProperty,jdbcType=INTEGER }
+            #{attribute,jdbcType=VARCHAR },
+            #{value,jdbcType=VARCHAR },
+            #{type,jdbcType=INTEGER },
+            #{value2,jdbcType=DECIMAL },
+            #{country,jdbcType=VARCHAR }
     </sql>
 
     <sql id="ValuesBatch">
             #{item.id,jdbcType=INTEGER},
-            #{item.createDate,jdbcType=TIMESTAMP},
-            #{item.createUserId,jdbcType=INTEGER},
-            #{item.updateDate,jdbcType=TIMESTAMP},
-            #{item.updateUserId,jdbcType=INTEGER},
-            #{item.bomDesc,jdbcType=VARCHAR},
-            #{item.skuid,jdbcType=INTEGER},
-            #{item.combineUnit,jdbcType=INTEGER},
-            #{item.purchaseProperty,jdbcType=INTEGER}
+            #{item.attribute,jdbcType=VARCHAR},
+            #{item.value,jdbcType=VARCHAR},
+            #{item.type,jdbcType=INTEGER},
+            #{item.value2,jdbcType=DECIMAL},
+            #{item.country,jdbcType=VARCHAR}
     </sql>
 
     <sql id="Set">
                 id= #{id,jdbcType=INTEGER },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                update_date= #{updateDate,jdbcType=TIMESTAMP },
-                update_user_id= #{updateUserId,jdbcType=INTEGER },
-                bom_desc= #{bomDesc,jdbcType=VARCHAR },
-                skuid= #{skuid,jdbcType=INTEGER },
-                combine_unit= #{combineUnit,jdbcType=INTEGER },
-                purchase_property= #{purchaseProperty,jdbcType=INTEGER }
+                attribute= #{attribute,jdbcType=VARCHAR },
+                value= #{value,jdbcType=VARCHAR },
+                type= #{type,jdbcType=INTEGER },
+                VALUE2= #{value2,jdbcType=DECIMAL },
+                country= #{country,jdbcType=VARCHAR }
     </sql>
 
     <sql id="SetNotNull">
                 <if test="record.id != null">id= #{record.id,jdbcType=INTEGER },</if>
-                <if test="record.createDate != null">create_date= #{record.createDate,jdbcType=TIMESTAMP },</if>
-                <if test="record.createUserId != null">create_user_id= #{record.createUserId,jdbcType=INTEGER },</if>
-                <if test="record.updateDate != null">update_date= #{record.updateDate,jdbcType=TIMESTAMP },</if>
-                <if test="record.updateUserId != null">update_user_id= #{record.updateUserId,jdbcType=INTEGER },</if>
-                <if test="record.bomDesc != null">bom_desc= #{record.bomDesc,jdbcType=VARCHAR },</if>
-                <if test="record.skuid != null">skuid= #{record.skuid,jdbcType=INTEGER },</if>
-                <if test="record.combineUnit != null">combine_unit= #{record.combineUnit,jdbcType=INTEGER },</if>
-                <if test="record.purchaseProperty != null">purchase_property= #{record.purchaseProperty,jdbcType=INTEGER }</if>
+                <if test="record.attribute != null">attribute= #{record.attribute,jdbcType=VARCHAR },</if>
+                <if test="record.value != null">value= #{record.value,jdbcType=VARCHAR },</if>
+                <if test="record.type != null">type= #{record.type,jdbcType=INTEGER },</if>
+                <if test="record.value2 != null">VALUE2= #{record.value2,jdbcType=DECIMAL },</if>
+                <if test="record.country != null">country= #{record.country,jdbcType=VARCHAR }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -128,32 +113,29 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
 			id,
-			create_date,
-			create_user_id,
-			update_date,
-			update_user_id,
-			bom_desc,
-			skuid,
-			combine_unit,
-			purchase_property
+			attribute,
+			value,
+			type,
+			VALUE2,
+			country
 	</sql>
 
 
     <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"></include>
-        FROM bs_bom
+        FROM bs_item_basic_data
         WHERE id = #{id,jdbcType=INTEGER}
     </select>
 
 
-    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.BomExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.ItemBasicDataExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from bs_bom
+        from bs_item_basic_data
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -162,23 +144,23 @@
         </if>
     </select>
 
-    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.BomExample">
-        delete from bs_bom
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.ItemBasicDataExample">
+        delete from bs_item_basic_data
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
 
-    <insert id="insert" parameterType="Bom" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO bs_bom
+    <insert id="insert" parameterType="ItemBasicData" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO bs_item_basic_data
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.Bom" keyProperty="id" useGeneratedKeys="true">
-        insert into bs_bom
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.ItemBasicData" keyProperty="id" useGeneratedKeys="true">
+        insert into bs_item_basic_data
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
         </trim>
@@ -188,8 +170,8 @@
     </insert>
 
 
-    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.BomExample" resultType="java.lang.Integer">
-        select count(*) from bs_bom
+    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.ItemBasicDataExample" resultType="java.lang.Integer">
+        select count(*) from bs_item_basic_data
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -197,7 +179,7 @@
 
 
     <update id="updateByExampleSelective" parameterType="map">
-        UPDATE bs_bom
+        UPDATE bs_item_basic_data
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -209,7 +191,7 @@
 
 
     <update id="updateByExample" parameterType="map">
-        UPDATE bs_bom
+        UPDATE bs_item_basic_data
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -219,8 +201,8 @@
 
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.Bom">
-        update bs_bom
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.ItemBasicData">
+        update bs_item_basic_data
         <set>
             <include refid="SetNotNull"></include>
         </set>
@@ -228,8 +210,8 @@
     </update>
 
 
-    <update id="updateByPrimaryKey" parameterType="Bom">
-        UPDATE bs_bom
+    <update id="updateByPrimaryKey" parameterType="ItemBasicData">
+        UPDATE bs_item_basic_data
         <set>
             <include refid="Set"></include>
         </set>
@@ -238,13 +220,13 @@
     </update>
 
 
-    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.BomExample" resultMap="selectPageResult">
+    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.ItemBasicDataExample" resultMap="selectPageResult">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from bs_bom
+        from bs_item_basic_data
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
         </if>
@@ -255,7 +237,7 @@
     </select>
 
     <insert id="insertBatch" parameterType="java.util.List">
-        INSERT INTO bs_bom
+        INSERT INTO bs_item_basic_data
         (<include refid="Base_Column_List"></include>)
         values
         <foreach item="item" index="index" collection="list" separator=",">
@@ -264,8 +246,8 @@
     </insert>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        DELETE FROM  bs_bom
+        DELETE FROM  bs_item_basic_data
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-25 03:06:29=========================================== -->
+    <!-- ================================代码生成结束=2017-09-25 01:09:28=========================================== -->
 </mapper>

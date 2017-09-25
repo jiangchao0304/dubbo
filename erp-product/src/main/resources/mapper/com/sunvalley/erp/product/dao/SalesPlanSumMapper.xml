@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.dao.SalesPlanSumMapper">
+<!-- ================================代码生成开始=2017-09-25 03:11:03=========================================== -->
+
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SalesPlanSum">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="org_id" property="orgId" jdbcType="INTEGER"/>
+        <result column="sales_plan_version" property="salesPlanVersion" jdbcType="INTEGER"/>
+        <result column="plan_type" property="planType" jdbcType="INTEGER"/>
+        <result column="data_type" property="dataType" jdbcType="VARCHAR"/>
+        <result column="p_month" property="pmonth" jdbcType="INTEGER"/>
+        <result column="p_value" property="pvalue" jdbcType="DECIMAL"/>
+        <result column="p_quarter" property="pquarter" jdbcType="VARCHAR"/>
+        <result column="p_year" property="pyear" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="app_state" property="appState" jdbcType="INTEGER"/>
+        <result column="update_user" property="updateUser" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="gross_income" property="grossIncome" jdbcType="DECIMAL"/>
+        <result column="net_income" property="netIncome" jdbcType="DECIMAL"/>
+        <result column="net_income_percentage" property="netIncomePercentage" jdbcType="DOUBLE"/>
+        <result column="gross_profit_rate" property="grossProfitRate" jdbcType="DOUBLE"/>
+        <result column="gross_profit" property="grossProfit" jdbcType="DECIMAL"/>
+        <result column="promotion_expenses" property="promotionExpenses" jdbcType="DECIMAL"/>
+        <result column="net_profit" property="netProfit" jdbcType="DECIMAL"/>
+        <result column="net_profit_rate_percentage" property="netProfitRatePercentage" jdbcType="DOUBLE"/>
+        <result column="sales_volumn" property="salesVolumn" jdbcType="INTEGER"/>
+        <result column="per_unit_sales_price" property="perUnitSalesPrice" jdbcType="DECIMAL"/>
+        <result column="mkt_cost" property="mktCost" jdbcType="DECIMAL"/>
+        <result column="sample_cost" property="sampleCost" jdbcType="DECIMAL"/>
+        <result column="vat_taxes" property="vatTaxes" jdbcType="DECIMAL"/>
+        <result column="sku" property="sku" jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
+        <result column="promotion_expenses_rate" property="promotionExpensesRate" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.SalesPlanSum" />
+
+    <sql id="Values">
+            #{id,jdbcType=INTEGER },
+            #{orgId,jdbcType=INTEGER },
+            #{salesPlanVersion,jdbcType=INTEGER },
+            #{planType,jdbcType=INTEGER },
+            #{dataType,jdbcType=VARCHAR },
+            #{pmonth,jdbcType=INTEGER },
+            #{pvalue,jdbcType=DECIMAL },
+            #{pquarter,jdbcType=VARCHAR },
+            #{pyear,jdbcType=VARCHAR },
+            #{status,jdbcType=INTEGER },
+            #{appState,jdbcType=INTEGER },
+            #{updateUser,jdbcType=INTEGER },
+            #{updateTime,jdbcType=TIMESTAMP },
+            #{grossIncome,jdbcType=DECIMAL },
+            #{netIncome,jdbcType=DECIMAL },
+            #{netIncomePercentage,jdbcType=DOUBLE },
+            #{grossProfitRate,jdbcType=DOUBLE },
+            #{grossProfit,jdbcType=DECIMAL },
+            #{promotionExpenses,jdbcType=DECIMAL },
+            #{netProfit,jdbcType=DECIMAL },
+            #{netProfitRatePercentage,jdbcType=DOUBLE },
+            #{salesVolumn,jdbcType=INTEGER },
+            #{perUnitSalesPrice,jdbcType=DECIMAL },
+            #{mktCost,jdbcType=DECIMAL },
+            #{sampleCost,jdbcType=DECIMAL },
+            #{vatTaxes,jdbcType=DECIMAL },
+            #{sku,jdbcType=VARCHAR },
+            #{country,jdbcType=VARCHAR },
+            #{promotionExpensesRate,jdbcType=DOUBLE }
+    </sql>
+
+    <sql id="ValuesBatch">
+            #{item.id,jdbcType=INTEGER},
+            #{item.orgId,jdbcType=INTEGER},
+            #{item.salesPlanVersion,jdbcType=INTEGER},
+            #{item.planType,jdbcType=INTEGER},
+            #{item.dataType,jdbcType=VARCHAR},
+            #{item.pmonth,jdbcType=INTEGER},
+            #{item.pvalue,jdbcType=DECIMAL},
+            #{item.pquarter,jdbcType=VARCHAR},
+            #{item.pyear,jdbcType=VARCHAR},
+            #{item.status,jdbcType=INTEGER},
+            #{item.appState,jdbcType=INTEGER},
+            #{item.updateUser,jdbcType=INTEGER},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.grossIncome,jdbcType=DECIMAL},
+            #{item.netIncome,jdbcType=DECIMAL},
+            #{item.netIncomePercentage,jdbcType=DOUBLE},
+            #{item.grossProfitRate,jdbcType=DOUBLE},
+            #{item.grossProfit,jdbcType=DECIMAL},
+            #{item.promotionExpenses,jdbcType=DECIMAL},
+            #{item.netProfit,jdbcType=DECIMAL},
+            #{item.netProfitRatePercentage,jdbcType=DOUBLE},
+            #{item.salesVolumn,jdbcType=INTEGER},
+            #{item.perUnitSalesPrice,jdbcType=DECIMAL},
+            #{item.mktCost,jdbcType=DECIMAL},
+            #{item.sampleCost,jdbcType=DECIMAL},
+            #{item.vatTaxes,jdbcType=DECIMAL},
+            #{item.sku,jdbcType=VARCHAR},
+            #{item.country,jdbcType=VARCHAR},
+            #{item.promotionExpensesRate,jdbcType=DOUBLE}
+    </sql>
+
+    <sql id="Set">
+                id= #{id,jdbcType=INTEGER },
+                org_id= #{orgId,jdbcType=INTEGER },
+                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
+                plan_type= #{planType,jdbcType=INTEGER },
+                data_type= #{dataType,jdbcType=VARCHAR },
+                p_month= #{pmonth,jdbcType=INTEGER },
+                p_value= #{pvalue,jdbcType=DECIMAL },
+                p_quarter= #{pquarter,jdbcType=VARCHAR },
+                p_year= #{pyear,jdbcType=VARCHAR },
+                status= #{status,jdbcType=INTEGER },
+                app_state= #{appState,jdbcType=INTEGER },
+                update_user= #{updateUser,jdbcType=INTEGER },
+                update_time= #{updateTime,jdbcType=TIMESTAMP },
+                gross_income= #{grossIncome,jdbcType=DECIMAL },
+                net_income= #{netIncome,jdbcType=DECIMAL },
+                net_income_percentage= #{netIncomePercentage,jdbcType=DOUBLE },
+                gross_profit_rate= #{grossProfitRate,jdbcType=DOUBLE },
+                gross_profit= #{grossProfit,jdbcType=DECIMAL },
+                promotion_expenses= #{promotionExpenses,jdbcType=DECIMAL },
+                net_profit= #{netProfit,jdbcType=DECIMAL },
+                net_profit_rate_percentage= #{netProfitRatePercentage,jdbcType=DOUBLE },
+                sales_volumn= #{salesVolumn,jdbcType=INTEGER },
+                per_unit_sales_price= #{perUnitSalesPrice,jdbcType=DECIMAL },
+                mkt_cost= #{mktCost,jdbcType=DECIMAL },
+                sample_cost= #{sampleCost,jdbcType=DECIMAL },
+                vat_taxes= #{vatTaxes,jdbcType=DECIMAL },
+                sku= #{sku,jdbcType=VARCHAR },
+                country= #{country,jdbcType=VARCHAR },
+                promotion_expenses_rate= #{promotionExpensesRate,jdbcType=DOUBLE }
+    </sql>
+
+    <sql id="SetNotNull">
+                <if test="record.id != null">id= #{record.id,jdbcType=INTEGER },</if>
+                <if test="record.orgId != null">org_id= #{record.orgId,jdbcType=INTEGER },</if>
+                <if test="record.salesPlanVersion != null">sales_plan_version= #{record.salesPlanVersion,jdbcType=INTEGER },</if>
+                <if test="record.planType != null">plan_type= #{record.planType,jdbcType=INTEGER },</if>
+                <if test="record.dataType != null">data_type= #{record.dataType,jdbcType=VARCHAR },</if>
+                <if test="record.pmonth != null">p_month= #{record.pmonth,jdbcType=INTEGER },</if>
+                <if test="record.pvalue != null">p_value= #{record.pvalue,jdbcType=DECIMAL },</if>
+                <if test="record.pquarter != null">p_quarter= #{record.pquarter,jdbcType=VARCHAR },</if>
+                <if test="record.pyear != null">p_year= #{record.pyear,jdbcType=VARCHAR },</if>
+                <if test="record.status != null">status= #{record.status,jdbcType=INTEGER },</if>
+                <if test="record.appState != null">app_state= #{record.appState,jdbcType=INTEGER },</if>
+                <if test="record.updateUser != null">update_user= #{record.updateUser,jdbcType=INTEGER },</if>
+                <if test="record.updateTime != null">update_time= #{record.updateTime,jdbcType=TIMESTAMP },</if>
+                <if test="record.grossIncome != null">gross_income= #{record.grossIncome,jdbcType=DECIMAL },</if>
+                <if test="record.netIncome != null">net_income= #{record.netIncome,jdbcType=DECIMAL },</if>
+                <if test="record.netIncomePercentage != null">net_income_percentage= #{record.netIncomePercentage,jdbcType=DOUBLE },</if>
+                <if test="record.grossProfitRate != null">gross_profit_rate= #{record.grossProfitRate,jdbcType=DOUBLE },</if>
+                <if test="record.grossProfit != null">gross_profit= #{record.grossProfit,jdbcType=DECIMAL },</if>
+                <if test="record.promotionExpenses != null">promotion_expenses= #{record.promotionExpenses,jdbcType=DECIMAL },</if>
+                <if test="record.netProfit != null">net_profit= #{record.netProfit,jdbcType=DECIMAL },</if>
+                <if test="record.netProfitRatePercentage != null">net_profit_rate_percentage= #{record.netProfitRatePercentage,jdbcType=DOUBLE },</if>
+                <if test="record.salesVolumn != null">sales_volumn= #{record.salesVolumn,jdbcType=INTEGER },</if>
+                <if test="record.perUnitSalesPrice != null">per_unit_sales_price= #{record.perUnitSalesPrice,jdbcType=DECIMAL },</if>
+                <if test="record.mktCost != null">mkt_cost= #{record.mktCost,jdbcType=DECIMAL },</if>
+                <if test="record.sampleCost != null">sample_cost= #{record.sampleCost,jdbcType=DECIMAL },</if>
+                <if test="record.vatTaxes != null">vat_taxes= #{record.vatTaxes,jdbcType=DECIMAL },</if>
+                <if test="record.sku != null">sku= #{record.sku,jdbcType=VARCHAR },</if>
+                <if test="record.country != null">country= #{record.country,jdbcType=VARCHAR },</if>
+                <if test="record.promotionExpensesRate != null">promotion_expenses_rate= #{record.promotionExpensesRate,jdbcType=DOUBLE }</if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+			id,
+			org_id,
+			sales_plan_version,
+			plan_type,
+			data_type,
+			p_month,
+			p_value,
+			p_quarter,
+			p_year,
+			status,
+			app_state,
+			update_user,
+			update_time,
+			gross_income,
+			net_income,
+			net_income_percentage,
+			gross_profit_rate,
+			gross_profit,
+			promotion_expenses,
+			net_profit,
+			net_profit_rate_percentage,
+			sales_volumn,
+			per_unit_sales_price,
+			mkt_cost,
+			sample_cost,
+			vat_taxes,
+			sku,
+			country,
+			promotion_expenses_rate
+	</sql>
+
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM so_sales_plan_sum
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.SalesPlanSumExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from so_sales_plan_sum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.SalesPlanSumExample">
+        delete from so_sales_plan_sum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+    <insert id="insert" parameterType="SalesPlanSum" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO so_sales_plan_sum
+        (<include refid="Base_Column_List"></include>)
+        VALUES
+        (<include refid="Values"></include>)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.SalesPlanSum" keyProperty="id" useGeneratedKeys="true">
+        insert into so_sales_plan_sum
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="SetNotNull" />
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Values" />
+        </trim>
+    </insert>
+
+
+    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.SalesPlanSumExample" resultType="java.lang.Integer">
+        select count(*) from so_sales_plan_sum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        UPDATE so_sales_plan_sum
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+
+    <update id="updateByExample" parameterType="map">
+        UPDATE so_sales_plan_sum
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.SalesPlanSum">
+        update so_sales_plan_sum
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="SalesPlanSum">
+        UPDATE so_sales_plan_sum
+        <set>
+            <include refid="Set"></include>
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+
+    </update>
+
+
+    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.SalesPlanSumExample" resultMap="selectPageResult">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from so_sales_plan_sum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        LIMIT ${skipRecordCount} , ${pageSize}
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO so_sales_plan_sum
+        (<include refid="Base_Column_List"></include>)
+        values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( <include refid="ValuesBatch"></include> )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  so_sales_plan_sum
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <!-- ================================代码生成结束=2017-09-25 03:11:03=========================================== -->
+</mapper>

@@ -320,5 +320,15 @@
 		</if>
 	</select>
 
+
+	<update id="updatePreSkuStatus" parameterType="map">
+		UPDATE bs_prepare_sku
+		SET `status` = '2',skuid = #{skuid,jdbcType=INTEGER},sku = #{sku}
+		WHERE (1=1)
+		<if test="filtersql.length() != 0">
+			${filtersql}
+		</if>
+	</update>
+
 	 
 </mapper>

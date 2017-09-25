@@ -16,6 +16,8 @@ import com.sunvalley.erp.product.daoEX.PrepareSkuExMapper;
 import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.model.*;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -77,6 +79,11 @@ public class PrepareService {
 
     @Autowired
     private ItemAttrValueLocaleMapper itemAttrValueLocaleMapper;
+
+    @Autowired
+    private ItemService itemService;
+
+    private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
 
     //#endregion
@@ -141,7 +148,7 @@ public class PrepareService {
     }
 
 
-    public SkuBaseInfoTO getPreSkuBaseInfo(Integer preSkuId, Integer modelId){
+    public SkuBaseInfoTO getPreSkuBaseInfo(Integer preSkuId, Integer modelId,Integer type){
         Map<String,Object> param = new HashMap<>();
         if(preSkuId>0){
             param.put("preskuId",preSkuId);
@@ -150,6 +157,13 @@ public class PrepareService {
            param.put("modelId",modelId);
        }
         SkuBaseInfoTO skuBaseInfoTO =  itemExMapper.getPreSkuBaseInfo(param);
+
+        if(type == Constants.IsPackageSku.isPackage){
+            skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.isPackage);
+        }else{
+            skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.noPackage);
+        }
+
         return skuBaseInfoTO;
     }
 
@@ -328,7 +342,7 @@ public class PrepareService {
 
 
     /**
-     * updateSkuBaseInfo .更新sku基本信息
+     * updateSkuBaseInfo .sku转正.
      * @param dto
      *         [dto]
      * @return boolean
@@ -350,7 +364,22 @@ public class PrepareService {
 
         //更新bs_item
         Item item = new Item();
-        item.setSkuid(dto.getSkuId());
+        item.setSku(dto.getSku());
+        item.setLineState(dto.getLineState());
+        item.setCategoryid(dto.getCategoryId());
+        item.setSubcategoryid(dto.getSubCategortId());
+
+        item.setModelId(dto.getModelId());
+        item.setModel(dto.getModel());
+        item.setBrandId(dto.getBrandId());
+
+        item.setPmid(dto.getPmId());
+        item.setBattery(dto.getBattery());
+
+        item.setRmacategoryid(dto.getRmacategoryid());
+        item.setRegion(dto.getRegion());
+
+
         item.setLen(dto.getLen());
         item.setWeight(dto.getWeight());
         item.setWidth(dto.getWidth());
@@ -359,16 +388,57 @@ public class PrepareService {
         item.setProductLen(dto.getProductLen());
         item.setProductWeight(dto.getProductWeight());
         item.setProductWidth(dto.getProductWeight());
+
         item.setPurdesc(dto.getPurDese());
         item.setPurspec(dto.getPurspec());
-        item.setLineState(dto.getLineState());
+
+
         item.setMagnetic(dto.getMagnetic());
-        item.setSku(dto.getSku());
+
         item.setCreateUserId(dto.getSessionTO().getUserId());
-        item.setModelId(dto.getModelId());
-        int skuId = itemMapper.insert(item);
-        if(skuId>0){
-            dto.setSkuId(skuId);
+
+
+        item.setCreateDate(TimeUtil.BeiJingTimeNow());
+        item.setUpdatedate(TimeUtil.BeiJingTimeNow());
+        item.setIsPackage(dto.getIsPackage());
+        item.setRemark(dto.getBomDesc());
+        item.setColor(Strings.isNullOrEmpty(dto.getColor())?0:Integer.parseInt(dto.getColor()));
+
+
+        //其他默认值
+        item.setActive((short)1);
+        item.setVolweight((short)0);
+        item.setIsdrop(false);
+        item.setDropDef(false);
+        item.setIsvirtual(0);
+        item.setIssale(false);
+        item.setZeroStock(false);
+        item.setZeroWhid((short)0);
+        item.setZeroQty((short)0);
+        item.setBoxtype(0);
+        item.setPeid(0);
+        item.setIsoriginal(false);
+        item.setSkulable("");
+        item.setInnerskuId(0);
+        item.setOuterskuId(0);
+        item.setPkgrate((short)0);
+        item.setPkgweight((short)0);
+        item.setStandard(0);
+        item.setVersionno((short)0);
+        item.setUpdateuserid(dto.getSessionTO().getUserId());
+        item.setHaspic(false);
+        item.setPsid(0);
+        item.setRemark("");
+        item.setLeadtime(0);
+        item.setPurpkg("");
+        item.setStopkg("");
+        item.setProFeatures("");
+        item.setDescSourc("");
+        item.setProductVolweight((short)0);
+        item.setPurchaserId(dto.getPurchaseProperty());
+        itemMapper.insert(item);
+        if(item.getSkuid()>0){
+            dto.setSkuId(item.getSkuid());
             SkuDescription  description = new SkuDescription();
             description.setAction("create");
             description.setSkuid(item.getSkuid());
@@ -380,7 +450,7 @@ public class PrepareService {
 
             for (ItemLocaleTO localeTO : dto.getItemLocaleTOList()) {
                 localeTO.setSku(dto.getSku());
-                localeTO.setSkuid(skuId);
+                localeTO.setSkuid(item.getSkuid());
             }
 
             saveItemLocale(dto.getItemLocaleTOList());  //多语言
@@ -388,10 +458,42 @@ public class PrepareService {
             saveItemAttrValue(dto.getItemLocaleTOList()); // 保存属性
 
 
+            if(item.getIsPackage() == 1){
+                updatePreSkuStatus(item.getSkuid(),item.getSku(),dto.getPreSku()); //更新预备SKU信息
+
+                if(!Strings.isNullOrEmpty(dto.getAnrule()) && !Strings.isNullOrEmpty(dto.getCountry())){
+                    itemService.saveItemMapping(item.getSkuid(), dto.getAnruleStr(), dto.getCountry(),dto.getSessionTO().getUserId());
+                }
+               //添加SKU与安规、安国国家关系
+            }
+
+            //初始化bom记录
+            Bom bom = new Bom();
+            bom.setBomDesc(dto.getBomDesc());
+            bom.setCombineUnit(dto.getCombineUnit());
+            bom.setCreateDate(TimeUtil.BeiJingTimeNow());
+            bom.setCreateUserId(dto.getSessionTO().getUserId());
+            bom.setPurchaseProperty(dto.getPurchaseProperty());
+            bom.setSkuid(item.getSkuid());
+            bom.setUpdateDate(TimeUtil.BeiJingTimeNow());
+            bom.setUpdateUserId(dto.getSessionTO().getUserId());
+            bomMapper.insert(bom);
             return true;
         }
 
         return false;
+    }
+
+
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void updatePreSkuStatus(int skuId,String sku,String preSku){
+        //更新状态
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("skuid", skuId);
+        param.put("sku", sku);
+        param.put("filtersql", " AND pre_sku = '"+preSku+"'");
+        prepareSkuExMapper.updatePreSkuStatus(param);
     }
 
     private void beforeSaveItem(SkuBaseInfoTO item){
