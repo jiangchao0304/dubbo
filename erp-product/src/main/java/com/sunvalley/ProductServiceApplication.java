@@ -20,16 +20,21 @@ public class ProductServiceApplication {
 
 	public static void main(String[] args) {
 
+
+
 		ConfigurableApplicationContext cac = SpringApplication.run(ProductServiceApplication.class, args);
 
-		SequenceExMapper sequenceExMapper = (SequenceExMapper)cac.getBean("sequenceExMapper");
-
-		Sequence sq = new Sequence();
-		sq.setName("test");
-
-		int ss = sequenceExMapper.getSeq(sq);
-
 		logger.info("server start");
+
+//		SequenceExMapper sequenceExMapper = (SequenceExMapper)cac.getBean("sequenceExMapper");
+//
+//		Sequence sq = new Sequence();
+//		sq.setName("test");
+//
+//		int ss = sequenceExMapper.getSeq(sq);
+
+
+
 
 	}
 }

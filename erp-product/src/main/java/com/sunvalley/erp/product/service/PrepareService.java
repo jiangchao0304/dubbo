@@ -157,12 +157,65 @@ public class PrepareService {
            param.put("modelId",modelId);
        }
         SkuBaseInfoTO skuBaseInfoTO =  itemExMapper.getPreSkuBaseInfo(param);
+        if(skuBaseInfoTO==null)
+            return skuBaseInfoTO;
 
         if(type == Constants.IsPackageSku.isPackage){
             skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.isPackage);
         }else{
             skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.noPackage);
         }
+
+        //默认为产品名称
+        skuBaseInfoTO.setPurDesc(skuBaseInfoTO.getProductName());
+        skuBaseInfoTO.setPurSpec(skuBaseInfoTO.getBrandDesc()+" " + skuBaseInfoTO.getModel()+" "+skuBaseInfoTO.getProductName());
+
+        String colorStr ="";
+        switch (skuBaseInfoTO.getColor()){
+            case "1":
+                colorStr="白色";
+                break;
+            case "2":
+                colorStr="银色";
+                break;
+            case "3":
+                colorStr="金色";
+                break;
+            case "4":
+                colorStr="红色";
+                break;
+            case "5":
+                colorStr="黄色";
+                break;
+            case "6":
+                colorStr="蓝色";
+                break;
+            case "7":
+                colorStr="紫色";
+                break;
+            case "8":
+                colorStr="灰色";
+                break;
+            case "9":
+                colorStr="其他";
+                break;
+                default:
+                    colorStr="";
+        }
+
+        List<ItemLocaleTO> itemLocaleTOList  = new ArrayList<>();
+        for (int i=1;i<=7;i++){
+            ItemLocaleTO itemLocaleTO = new ItemLocaleTO();
+            itemLocaleTO.setLangId(i);
+            itemLocaleTO.setSku("");
+            itemLocaleTO.setSkuid(0);
+            itemLocaleTO.setUnitName("");
+            String des= String.format("%s %s %s %s %s",skuBaseInfoTO.getBomDesc(),skuBaseInfoTO.getModel(),
+                    skuBaseInfoTO.getProductName(),skuBaseInfoTO.getAnruleStr(),colorStr);
+            itemLocaleTO.setDescription(des);
+            itemLocaleTOList.add(itemLocaleTO);
+        }
+      skuBaseInfoTO.setItemLocaleTOList(itemLocaleTOList);
 
         return skuBaseInfoTO;
     }
@@ -312,8 +365,8 @@ public class PrepareService {
         item.setProductLen(dto.getProductLen());
         item.setProductWeight(dto.getProductWeight());
         item.setProductWidth(dto.getProductWeight());
-        item.setPurdesc(dto.getPurDese());
-        item.setPurspec(dto.getPurspec());
+        item.setPurdesc(dto.getPurDesc());
+        item.setPurspec(dto.getPurSpec());
         item.setLineState(dto.getLineState());
         item.setMagnetic(dto.getMagnetic());
         itemMapper.updateByPrimaryKeySelective(item);
@@ -351,10 +404,10 @@ public class PrepareService {
      * @date : 2017/9/18:17:02
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public boolean saveSkuBaseInfo(SkuBaseInfoTO dto){
+    public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto){
 
+        PreSkuRelationTO result = new PreSkuRelationTO();
         beforeSaveItem(dto);
-
         // 在sku编码没有输入的情况下,系统根据类别自动产生编码
         if(Strings.isNullOrEmpty(dto.getSku())){
             String sku= sequenceService.generationNo(dto.getCategoryId(),dto.getSubCategortId(),null,
@@ -389,8 +442,8 @@ public class PrepareService {
         item.setProductWeight(dto.getProductWeight());
         item.setProductWidth(dto.getProductWeight());
 
-        item.setPurdesc(dto.getPurDese());
-        item.setPurspec(dto.getPurspec());
+        item.setPurdesc(dto.getPurDesc());
+        item.setPurspec(dto.getPurSpec());
 
 
         item.setMagnetic(dto.getMagnetic());
@@ -478,10 +531,14 @@ public class PrepareService {
             bom.setUpdateDate(TimeUtil.BeiJingTimeNow());
             bom.setUpdateUserId(dto.getSessionTO().getUserId());
             bomMapper.insert(bom);
-            return true;
+
+            result.setPreSku(dto.getPreSku());
+            result.setPreSkuId(0);
+            result.setSku(item.getSku());
+            result.setSkuId(item.getSkuid());
         }
 
-        return false;
+        return result;
     }
 
 
@@ -554,8 +611,8 @@ public class PrepareService {
         item.setProductLen(dto.getProductLen());
         item.setProductWeight(dto.getProductWeight());
         item.setProductWidth(dto.getProductWeight());
-        item.setPurdesc(dto.getPurDese());
-        item.setPurspec(dto.getPurspec());
+        item.setPurdesc(dto.getPurDesc());
+        item.setPurspec(dto.getPurSpec());
         item.setLineState(dto.getLineState());
         item.setMagnetic(dto.getMagnetic());
         int result = itemMapper.updateByPrimaryKeySelective(updateItem);
@@ -573,8 +630,8 @@ public class PrepareService {
 
 
 
-
-    private void  saveSkuDescription(int skuId,String descSource,String cuser,String action){
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void  saveSkuDescription(int skuId,String descSource,String cuser,String action){
         SkuDescription  description = new SkuDescription();
         description.setAction("create");
         description.setSkuid(skuId);
@@ -595,7 +652,8 @@ public class PrepareService {
      * @author: douglas.jiang
      * @date : 2017/9/22:11:25
      */
-    private void saveItemLocale(List<ItemLocaleTO> itemLocaleTOList) {
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void saveItemLocale(List<ItemLocaleTO> itemLocaleTOList) {
 
         String desc_En = "";
         String unitName_En = "";
@@ -644,7 +702,8 @@ public class PrepareService {
      * @author: douglas.jiang
      * @date : 2017/9/22:11:43
      */
-    private void  saveItemTextLocale(int warranty, List<ItemLocaleTO> itemLocaleTOList){
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void  saveItemTextLocale(int warranty, List<ItemLocaleTO> itemLocaleTOList){
 
         for (ItemLocaleTO localeTO : itemLocaleTOList) {
             ItemTextLocale itemTextLocale = new ItemTextLocale();
@@ -680,7 +739,8 @@ public class PrepareService {
     /**
      * todo:保存产品多语言属性
      */
-    private void saveItemAttrValue(List<ItemLocaleTO> itemLocaleTOList) {
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public void saveItemAttrValue(List<ItemLocaleTO> itemLocaleTOList) {
 //        for (ItemLocaleTO  item : itemLocaleTOList) { // 循环处理前端打包产品构造的虚拟对象用来保存产品多语言信息
 //            List<ItemAttrValueLocale> list = itemLocaleVirtual.getAttrList();
 //            for(ItemAttrValueLocale itemAttrValueLocale : list) { // 循环保存产品属性

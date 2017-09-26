@@ -24,6 +24,7 @@ public class SkuBaseInfoTO implements Serializable {
     private String subCategoryStr;
     private Integer subCategortId;
     private Integer brandId;
+    private String  brandDesc;
     private String model;
     private Integer modelId;
     private Integer pmId;
@@ -41,8 +42,9 @@ public class SkuBaseInfoTO implements Serializable {
     private Integer combineUnit;
     private Integer warranty;
     private Integer purchaseProperty;
-    private String purspec;
-    private String purDese;
+    private String purSpec;
+    private String purDesc;
+    private String productName;
     private String bomDesc;
     private Short width;
     private Short height;
@@ -118,6 +120,14 @@ public class SkuBaseInfoTO implements Serializable {
 
     public void setBrandId(Integer brandId) {
         this.brandId = brandId;
+    }
+
+    public String getBrandDesc() {
+        return brandDesc;
+    }
+
+    public void setBrandDesc(String brandDesc) {
+        this.brandDesc = brandDesc;
     }
 
     public String getModel() {
@@ -256,20 +266,28 @@ public class SkuBaseInfoTO implements Serializable {
         this.purchaseProperty = purchaseProperty;
     }
 
-    public String getPurspec() {
-        return purspec;
+    public String getPurSpec() {
+        return purSpec;
     }
 
-    public void setPurspec(String purspec) {
-        this.purspec = purspec;
+    public void setPurSpec(String purSpec) {
+        this.purSpec = purSpec;
     }
 
-    public String getPurDese() {
-        return purDese;
+    public String getPurDesc() {
+        return purDesc;
     }
 
-    public void setPurDese(String purDese) {
-        this.purDese = purDese;
+    public void setPurDesc(String purDesc) {
+        this.purDesc = purDesc;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getBomDesc() {

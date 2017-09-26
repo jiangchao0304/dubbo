@@ -5,6 +5,7 @@ package com.sunvalley.erp.face.product;
 
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.PreSkuRelationTO;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 
 import java.util.List;
@@ -27,9 +28,9 @@ public interface ISkuService {
 
     boolean updateSkuBaseInfo(SkuBaseInfoTO dto);
 
-    boolean saveSkuBaseInfo(SkuBaseInfoTO dto);
+    PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto);
 
 
-    PagerTO<com.sunvalley.erp.to.product.SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int offset, int pageSize);
+    PagerTO<com.sunvalley.erp.to.product.SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int langId, int offset, int pageSize);
 }
 

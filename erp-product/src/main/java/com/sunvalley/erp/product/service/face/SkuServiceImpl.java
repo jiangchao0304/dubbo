@@ -6,6 +6,7 @@ package com.sunvalley.erp.product.service.face;
 import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.PreSkuRelationTO;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 import com.sunvalley.erp.to.product.SkuListNewTO;
 import com.sunvalley.erp.product.model.ItemLocale;
@@ -57,14 +58,14 @@ public class SkuServiceImpl implements com.sunvalley.erp.face.product.ISkuServic
     }
 
     @Override
-    public boolean saveSkuBaseInfo(SkuBaseInfoTO dto) {
+    public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto) {
 
         return  prepareService.saveSkuBaseInfo(dto);
     }
 
     @Override
-    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int offset, int pageSize) {
-        return itemService.listskuListNew(filterModels,offset,pageSize);
+    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int langId,int offset, int pageSize) {
+        return itemService.listskuListNew(filterModels,langId,offset,pageSize);
     }
 }
 

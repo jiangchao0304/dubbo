@@ -24,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.runtime.Log;
 
 import java.util.*;
 
@@ -153,7 +152,7 @@ public class ItemService {
 
 
 
-    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int offset, int pageSize) {
+    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int langId,int offset, int pageSize) {
         String filtersql="";
         try {
             List<FilterModel> origFilterModels =  com.sunvalley.erp.product.common.BeanUtils.copyFilterModel(filterModels);
@@ -167,6 +166,7 @@ public class ItemService {
         map.put("filtersql", filtersql);
         map.put("offset", offset);
         map.put("limit", pageSize);
+        map.put("langId", langId);
         PagerTO<SkuListNewTO> pager=new PagerTO<SkuListNewTO>();
 
         pager.setFilterSql(filtersql);

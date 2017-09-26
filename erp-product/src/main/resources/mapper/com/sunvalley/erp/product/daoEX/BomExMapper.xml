@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunvalley.erp.daoEX.bom.BomExMapper" >
+ <select id="selectById" resultType="com.sunvalley.erp.product.modelEX.BomEX" parameterType="map">
+	 select bom.skuid skuId,
+					bom.id,
+					bom.bom_desc bomDesc,
+					bom.purchase_property purchaseProperty,
+					bom.create_date createDate,
+					bom.create_user_id createUserId,
+					bom.update_date updateDate,
+					bom.update_user_id updateUserId,
+					bom.combine_unit combineUnit,
+					CONCAT(u.firstname ,' ',u.lastname) updateName,
+					CONCAT(createU.firstname ,' ',createU.lastname) createUserName,
+					bom.skuid,
+					item.sku,
+					item.purdesc,
+					item.purspec 
+	 from bs_bom bom 
+	LEFT JOIN sys_user u on u.userid = bom.update_user_id
+	inner JOIN sys_user createU on createU.userid = bom.create_user_id
+	inner join bs_item item on item.skuid = bom.skuid
+	where 1=1
+	<if test="id!=null">
+	and bom.id =#{id}
+	</if>
+	<if test="skuid!=null">
+	and item.skuid = #{skuid}
+	</if>
+ </select>
+
+ <select id="selectTotalChild" parameterType="int" resultType="int">
+ 	select 
+		(if(MAX(v2.actual_skuid)is null ,0,1)+if(MAX(v3.actual_skuid)is null ,0,1)+if(MAX(v1.virtual_skuid)is null ,0,1)+if(MAX(v1.actual_skuid)is null ,0,1))
+	from bs_item_virtual v1 
+LEFT JOIN bs_item_virtual v2 on v1.actual_skuid = v2.virtual_skuid
+LEFT JOIN bs_item_virtual v3 on v2.actual_skuid = v3.virtual_skuid
+LEFT JOIN bs_item_virtual v4 on v3.actual_skuid = v4.virtual_skuid
+where v1.virtual_skuid =#{skuid}
+ </select>
+  <select id="selectTotalParent" parameterType="int" resultType="int">
+ 	select (if(MAX(v1.actual_skuid)is null ,0,1)+if(MAX(v1.virtual_skuid)is null ,0,1)+if(MAX(v2.virtual_skuid)is null ,0,1)+if(MAX(v3.virtual_skuid)is null ,0,1))
+		from bs_item_virtual v1 
+	LEFT JOIN bs_item_virtual v2 on v2.actual_skuid = v1.virtual_skuid
+	LEFT JOIN bs_item_virtual v3 on v3.actual_skuid = v2.virtual_skuid
+	LEFT JOIN bs_item_virtual v4 on v4.actual_skuid = v3.virtual_skuid
+	where v1.actual_skuid =#{skuid}
+ </select>
+</mapper>

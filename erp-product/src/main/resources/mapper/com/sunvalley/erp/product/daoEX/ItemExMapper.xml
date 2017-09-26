@@ -98,8 +98,8 @@ model.magnetic,
 bom.combine_unit combineUnit,
 model.warranty,
 bom.purchase_property  purchaseProperty,
-pre.purspec,
-IFNULL(item.purdesc,'') purDese,
+IFNULL(item.purspec,'')purSpec,
+IFNULL(item.purdesc,'') purDesc,
 bom.bom_desc bomDesc,
 item.width,
 item.height,
@@ -179,12 +179,13 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 		</if>
 		m.magnetic,
 		m.warranty,
-		s.product_name purdesc,
-		s.product_name purspec
+		s.product_name productName,
+		ItemBrand.brand_desc brandDesc
 		FROM
 		bs_item_model m
 		LEFT JOIN bs_prepare_sku s ON m.model_id = s.model_id
 		LEFT JOIN bs_item_mapping a ON a.skuid = s.id
+		JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=m.brand_id
 		AND a.data_type = 1
 		AND a.data_origin = 2
 		LEFT JOIN (
@@ -221,6 +222,7 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 		LEFT JOIN bs_product_line maincategory ON maincategory.id = m.main_category_id
 		LEFT JOIN bs_product_line subcategory ON subcategory.id = m.sub_category_id
 		LEFT JOIN sys_user sysu ON sysu.userid = m.pm_id
+
 		WHERE
 		1 = 1
 		<if test="preskuId!=null">
@@ -248,9 +250,9 @@ LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
 			CONCAT(Creator.firstname ,' ',Creator.lastname) creator,
 			Item.create_date createDate
 			from bs_item as Item
-			JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
+			LEFT JOIN bs_item_model AS Model ON Item.model_id=Model.model_id
 		    LEFT JOIN bs_bom as Bom on Bom.skuid=Item.skuid
-			LEFT join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid`
+			LEFT join `bs_item_locale` as Locale on Locale.`skuid`=Item.`skuid` AND Locale.lang_id=#{langId,jdbcType=INTEGER}
 			LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=Item.brand_id
 			LEFT JOIN sys_user Sysu ON Sysu.userid = Model.pm_id
 			LEFT JOIN sys_user Creator ON Creator.userid = Item.create_user_id
