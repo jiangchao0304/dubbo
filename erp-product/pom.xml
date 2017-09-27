@@ -24,40 +24,6 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<properties>
-				<env>dev</env>
-				<profiles.active>dev</profiles.active>
-				<activeByDefault>true</activeByDefault>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>test</id>
-			<properties>
-				<env>test</env>
-				<profiles.active>test</profiles.active>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>demo</id>
-			<properties>
-				<env>demo</env>
-				<profiles.active>demo</profiles.active>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>pro</id>
-			<properties>
-				<env>pro</env>
-				<profiles.active>pro</profiles.active>
-			</properties>
-		</profile>
-	</profiles>
 
 	<dependencies>
 
@@ -74,6 +40,11 @@
 		<dependency>
 			<groupId>com.sunvalley.erp</groupId>
 			<artifactId>erp-domain</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
 		</dependency>
 
 		<dependency>
@@ -140,10 +111,12 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>log4j-over-slf4j</artifactId>
@@ -232,23 +205,23 @@
 
 	<build>
 
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>env/**/*.*</exclude>
-					<!--<exclude>env/dev/*</exclude>-->
-				</excludes>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/resources/env/${env}</directory>
-				<filtering>true</filtering>
-			</resource>
+		<!--<resources>-->
+			<!--<resource>-->
+				<!--<directory>src/main/resources</directory>-->
+				<!--<excludes>-->
+					<!--<exclude>env/**/*.*</exclude>-->
+					<!--&lt;!&ndash;<exclude>env/dev/*</exclude>&ndash;&gt;-->
+				<!--</excludes>-->
+				<!--<filtering>true</filtering>-->
+			<!--</resource>-->
+			<!--<resource>-->
+				<!--<directory>src/main/resources/env/${env}</directory>-->
+				<!--<filtering>true</filtering>-->
+			<!--</resource>-->
 			<!--<resource>-->
 			<!--<directory>src/main/resources/env/${profiles.active}</directory>-->
 			<!--</resource>-->
-		</resources>
+		<!--</resources>-->
 
 		<finalName>productService</finalName>
 		<plugins>

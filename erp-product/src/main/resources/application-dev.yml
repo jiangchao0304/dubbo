@@ -1,2 +1,31 @@
+debug: false
 server:
-       port: 8082
+       port: 8081
+dubbo:
+      application:
+              name : erp-service-product-dev
+      registry:
+              protocol : zookeeper
+              address : 10.20.0.137:2181
+      protocol:
+              name : dubbo
+              port : 2281
+      owner :
+              douglas.jiang
+
+spring:
+      datasource:
+         driver-class-name : com.mysql.jdbc.Driver
+         url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+         username : dev_express
+         password : Devdb201707
+log:
+    path:  logs
+    level: info
+
+
+
+
+#barker.url:tcp://10.20.0.137:61616
+#dubbo.url:zookeeper://10.20.0.137:2181
+#sserver.name:ERPBS

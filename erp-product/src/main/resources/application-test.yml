@@ -1,0 +1,24 @@
+debug: false
+server:
+       port: 8082
+dubbo:
+      application:
+              name : erp-service-product-test
+      registry:
+              protocol : zookeeper
+              address : 10.20.0.137:2181
+      protocol:
+              name : dubbo
+              port : 2281
+      owner :
+              douglas.jiang
+
+spring:
+      datasource:
+         driver-class-name : com.mysql.jdbc.Driver
+         url : jdbc:mysql://10.20.0.141:3306/nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+         username : eshoponline
+         password : Testdb201705
+log:
+    path:  logs
+    level: info

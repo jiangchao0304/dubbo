@@ -15,7 +15,7 @@ dubbo:
 
 spring:
       profiles:
-        active: @profiles.active@
+        active: dev
       datasource:
          driver-class-name : com.mysql.jdbc.Driver
          url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
@@ -51,11 +51,16 @@ mybatis:
      mapper-locations: classpath*:mapper/com/sunvalley/erp/product/**/*.xml
 
      #config-location: classpath:/mybatis-config.xml
+
 debug: false
+
+log:
+    path:  logs
+    level: info
 
 
 #logging:
-#    config: classpath:logback.xml
+#    config: classpath:logback-spring.xml
 
 
 
