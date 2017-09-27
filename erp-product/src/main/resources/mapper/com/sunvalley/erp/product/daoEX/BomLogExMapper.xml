@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunvalley.erp.product.daoEX.BomLogExMapper" >
+ <select id="selectLogCount" parameterType="int" resultType="int">
+ 	select 
+		count(1)
+		from (
+			SELECT
+			a.skuid , '1' as seq
+			from bs_bom a
+			where 1=1 and a.skuid=#{skuid}
+			
+			UNION all 
+			
+			SELECT
+			b.actual_skuid as skuid, '2' as seq
+			from bs_bom a
+			INNER join bs_item_virtual b on a.skuid=b.virtual_skuid
+			where 1=1 and a.skuid=#{skuid}
+			
+			UNION all 
+			
+			SELECT
+			c.actual_skuid as skuid, '3' as seq
+			from bs_bom a
+			left join bs_item_virtual b on a.skuid=b.virtual_skuid
+			INNER JOIN bs_item_virtual c on b.actual_skuid=c.virtual_skuid
+			where 1=1 and a.skuid=#{skuid}
+			
+		) t 
+		INNER join bs_bom_log log on log.skuid=t.skuid
+		left JOIN bs_item item on item.skuid=log.skuid
+		left join sys_user user on user.userid= log.create_user_id
+		where 1=1
+		ORDER BY t.seq
+ </select>
+ <select id="selectLogPageCount" parameterType="map" resultType="int">
+ select 
+		count(*)
+	from
+	 bs_bom_log log
+	LEFT JOIN bs_item item on item.skuid = log.skuid
+	LEFT JOIN sys_user u on log.create_user_id = u.userid 
+	where 1=1
+	<if test="filtersql != null">
+				${filtersql}
+	</if>
+ </select>
+<select id="selectLogPageList" parameterType="map" resultType="com.sunvalley.erp.to.product.BomLogTO">
+	select 
+		CONCAT(u.firstname,' ',u.lastname) createUserName,
+		log.create_date createDate,
+		log.remark,
+		item.sku,
+		item.purdesc,
+		item.purspec,
+		log.bom_id bomId
+	from
+	 bs_bom_log log
+	LEFT JOIN bs_item item on item.skuid = log.skuid
+	LEFT JOIN sys_user u on log.create_user_id = u.userid 
+	where 1=1
+	<if test="filtersql != null">
+				${filtersql}
+	</if>
+
+	ORDER BY log.create_date desc,log.bom_id desc
+		<if test="offset!=null">
+				LIMIT ${offset},${pageSize}
+	</if>
+</select>
+ <select id="selectLogList" parameterType="map" resultType="com.sunvalley.erp.to.product.BomLogTO">
+ 	select 
+		item.sku,
+		log.create_date createDate,
+		CONCAT(user.firstname ,' ',user.lastname) createUserName,
+		log.remark
+		from (
+			SELECT
+			a.skuid , '1' as seq
+			from bs_bom a
+			where 1=1 and a.skuid=#{skuid}
+			
+			UNION all 
+			
+			SELECT
+			b.actual_skuid as skuid, '2' as seq
+			from bs_bom a
+			INNER join bs_item_virtual b on a.skuid=b.virtual_skuid
+			where 1=1 and a.skuid=#{skuid}
+			
+			UNION all 
+			
+			SELECT
+			c.actual_skuid as skuid, '3' as seq
+			from bs_bom a
+			left join bs_item_virtual b on a.skuid=b.virtual_skuid
+			INNER JOIN bs_item_virtual c on b.actual_skuid=c.virtual_skuid
+			where 1=1 and a.skuid=#{skuid}
+			
+		) t 
+		INNER join bs_bom_log log on log.skuid=t.skuid
+		left JOIN bs_item item on item.skuid=log.skuid
+		left join sys_user user on user.userid= log.create_user_id
+		where 1=1
+		ORDER BY t.seq , log.create_date desc
+		LIMIT ${offset},${pageSize}
+ </select>
+
+</mapper>

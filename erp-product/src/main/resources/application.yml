@@ -45,7 +45,7 @@ spring:
                   statement-executable-sql-log-enable: true
 
 
-      dubbo.scan : com.sunvalley.erp.product
+      dubbo.scan : com.sunvalley.erp.product.service
 mybatis:
      type-aliases-package : com.sunvalley.erp.product.model,com.sunvalley.erp.to
      mapper-locations: classpath*:mapper/com/sunvalley/erp/product/**/*.xml

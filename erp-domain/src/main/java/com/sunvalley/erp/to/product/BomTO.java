@@ -1,8 +1,9 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
-package com.sunvalley.erp.product.modelEX;
+package com.sunvalley.erp.to.product;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,9 @@ import java.util.List;
  * 类或方法的功能描述 :TODO
  *
  * @Author: douglas.jiang
- * @Date: 2017-09-26 15:45
+ * @Date: 2017-09-26 19:06
  */
-public class BomEX {
+public class BomTO implements Serializable{
     private Integer skuid;
     private  Integer id;
     private String bomDesc;
@@ -32,18 +33,18 @@ public class BomEX {
     private int rowCount=0;
     private int pageNo=1;
 
-    private List<BomEX> bomOneSkuList;
-    private List<BomEX> bomTwoSkuList;
-    private List<BomEX> bomSkuInfoList;
-    private List<BomSupplierEX> bomSupplierList;
+    private List<BomTO> bomOneSkuList;
+    private List<BomTO> bomTwoSkuList;
+    private List<BomTO> bomSkuInfoList;
+    private List<BomSupplierTO> bomSupplierList;
 
-    private List<BomLogEx> bomLogExList;
+    private List<BomLogTO> bomLogExList;
 
-    public List<BomLogEx> getBomLogExList() {
+    public List<BomLogTO> getBomLogExList() {
         return bomLogExList;
     }
 
-    public void setBomLogExList(List<BomLogEx> bomLogExList) {
+    public void setBomLogExList(List<BomLogTO> bomLogExList) {
         this.bomLogExList = bomLogExList;
     }
 
@@ -71,35 +72,35 @@ public class BomEX {
         this.pageNo = pageNo;
     }
 
-    public List<BomEX> getBomSkuInfoList() {
+    public List<BomTO> getBomSkuInfoList() {
         return bomSkuInfoList;
     }
 
-    public void setBomSkuInfoList(List<BomEX> bomSkuInfoList) {
+    public void setBomSkuInfoList(List<BomTO> bomSkuInfoList) {
         this.bomSkuInfoList = bomSkuInfoList;
     }
 
-    public List<BomSupplierEX> getBomSupplierList() {
+    public List<BomSupplierTO> getBomSupplierList() {
         return bomSupplierList;
     }
 
-    public void setBomSupplierList(List<BomSupplierEX> bomSupplierList) {
+    public void setBomSupplierList(List<BomSupplierTO> bomSupplierList) {
         this.bomSupplierList = bomSupplierList;
     }
 
-    public List<BomEX> getBomOneSkuList() {
+    public List<BomTO> getBomOneSkuList() {
         return bomOneSkuList;
     }
 
-    public void setBomOneSkuList(List<BomEX> bomOneSkuList) {
+    public void setBomOneSkuList(List<BomTO> bomOneSkuList) {
         this.bomOneSkuList = bomOneSkuList;
     }
 
-    public List<BomEX> getBomTwoSkuList() {
+    public List<BomTO> getBomTwoSkuList() {
         return bomTwoSkuList;
     }
 
-    public void setBomTwoSkuList(List<BomEX> bomTwoSkuList) {
+    public void setBomTwoSkuList(List<BomTO> bomTwoSkuList) {
         this.bomTwoSkuList = bomTwoSkuList;
     }
 

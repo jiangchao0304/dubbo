@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sunvalley.erp.daoEX.bom.BomExMapper" >
- <select id="selectById" resultType="com.sunvalley.erp.product.modelEX.BomEX" parameterType="map">
-	 select bom.skuid skuId,
+<mapper namespace="com.sunvalley.erp.product.daoEX.BomExMapper" >
+ <select id="selectById" resultType="com.sunvalley.erp.to.product.BomTO" parameterType="map">
+	 select bom.skuid,
 					bom.id,
 					bom.bom_desc bomDesc,
 					bom.purchase_property purchaseProperty,
@@ -39,6 +39,7 @@ LEFT JOIN bs_item_virtual v3 on v2.actual_skuid = v3.virtual_skuid
 LEFT JOIN bs_item_virtual v4 on v3.actual_skuid = v4.virtual_skuid
 where v1.virtual_skuid =#{skuid}
  </select>
+
   <select id="selectTotalParent" parameterType="int" resultType="int">
  	select (if(MAX(v1.actual_skuid)is null ,0,1)+if(MAX(v1.virtual_skuid)is null ,0,1)+if(MAX(v2.virtual_skuid)is null ,0,1)+if(MAX(v3.virtual_skuid)is null ,0,1))
 		from bs_item_virtual v1 
@@ -47,4 +48,109 @@ where v1.virtual_skuid =#{skuid}
 	LEFT JOIN bs_item_virtual v4 on v4.actual_skuid = v3.virtual_skuid
 	where v1.actual_skuid =#{skuid}
  </select>
+
+	<select id="selectSkuInfoBySKuid" resultType="com.sunvalley.erp.to.product.BomTO" parameterType="MAP">
+		select virtual.virtual_skuid virtualSkuid,
+		virtalItem.sku virtualSku,
+		item.sku,
+		item.skuid,
+		item.purdesc,
+		item.purspec model,
+		virtual.qty,
+		bom.combine_unit combineUnit,
+		bom.bom_desc bomDesc,
+		case  WHEN bom.purchase_property=1 then '甲方提供'
+		when bom.purchase_property=2 then '乙方提供'
+		else ' ' END purchasePropertyStr
+		from bs_item_virtual virtual
+		left join bs_bom bom on bom.skuid = virtual.actual_skuid
+		LEFT JOIN bs_item item on virtual.actual_skuid = item.skuid
+		LEFT JOIN bs_item virtalItem on virtalItem.skuid = virtual.virtual_skuid
+		where 1=1
+		<if test="skuIdList!=null">
+			and virtual.virtual_skuid in
+			<foreach collection="skuIdList" item="skuId" separator="," open="(" close=")">
+				#{skuId}
+			</foreach>
+		</if>
+		<if test="actualSkuList">
+			and virtual.actual_skuid in
+			<foreach collection="actualSkuList" item="skuId" separator="," open="(" close=")">
+				#{skuId}
+			</foreach>
+		</if>
+		order by virtual.virtual_skuid ,item.skuid
+	</select>
+
+
+	<select id="selectBomSupplier" resultType="com.sunvalley.erp.to.product.BomSupplierTO" parameterType="map">
+		SELECT
+		boms.id,
+		boms.supplier_id supplierid,
+		boms.skuid,
+		boms.bom_id,
+		boms.purchase_property AS purProperty,
+		CASE  WHEN boms.purchase_property=1 THEN '甲方提供'
+		WHEN boms.purchase_property=2 THEN '乙方提供'
+		ELSE ' ' END AS purPropertyStr,
+		bom.id,
+		prs.supplierid,
+		prs.name name,
+		CONCAT(s.firstname, s.lastname) AS purchaserName,
+		bsit.purchaser_id,
+		s.userid
+		FROM bs_bom_supplier boms
+		LEFT JOIN bs_bom bom ON boms.bom_id = bom.id
+		LEFT JOIN pr_supplier prs ON prs.supplierid = boms.supplier_id
+		LEFT JOIN bs_item  bsit on bsit.skuid = bom.skuid
+		LEFT JOIN sys_user s ON s.userid = bsit.purchaser_id
+		WHERE 1=1
+		<if test="id!=null">
+			and bom.id =#{id}
+		</if>
+		GROUP BY boms.supplier_id
+		ORDER BY boms.id desc
+	</select>
+
+	<select id="selectSkuInfoList" parameterType="map" resultType="com.sunvalley.erp.to.product.BomTO">
+		SELECT
+		t.skuid,
+		SUM(t.qty) qty,
+		bom.bom_desc bomDesc,
+		bom.combine_unit combineUnit,
+		bom.purchase_property purchaseProperty,
+		item.purdesc,
+		item.purspec,
+		item.sku
+		from (
+		SELECT
+		a.skuid as skuid,
+		'1' qty
+		from bs_bom a
+		left join bs_item_virtual b on a.skuid=b.virtual_skuid
+		where 1=1 and a.skuid=#{skuid}
+		and b.virtual_skuid is null
+		UNION all
+		SELECT
+		b.actual_skuid as skuid,
+		b.qty
+		from bs_bom a
+		inner join bs_item_virtual b on a.skuid=b.virtual_skuid
+		left JOIN bs_item_virtual c on b.actual_skuid=c.virtual_skuid
+		where 1=1 and a.skuid=#{skuid} and c.virtual_skuid is null
+		UNION all
+		SELECT
+		c.actual_skuid as skuid,
+		(b.qty*c.qty)qty
+		from bs_bom a
+		inner join bs_item_virtual b on a.skuid=b.virtual_skuid
+		inner JOIN bs_item_virtual c on b.actual_skuid=c.virtual_skuid
+		where 1=1 and a.skuid=#{skuid}
+		) t
+		INNER JOIN bs_bom bom on bom.skuid = t.skuid
+		LEFT JOIN bs_item item on item.skuid = bom.skuid
+		GROUP BY t.skuid
+		order by bom.purchase_property desc,t.skuid
+	</select>
+
 </mapper>
