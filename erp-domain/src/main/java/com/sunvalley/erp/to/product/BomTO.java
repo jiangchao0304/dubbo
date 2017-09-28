@@ -28,6 +28,8 @@ public class BomTO implements Serializable{
     private  String sku;
     private String purdesc;
     private String purspec;
+    private int skuType; //0 未选（默认值） 1 裸机 2 配件 3 包材
+    private int qty;
 
     private int pageSize=10;
     private int rowCount=0;
@@ -39,6 +41,22 @@ public class BomTO implements Serializable{
     private List<BomSupplierTO> bomSupplierList;
 
     private List<BomLogTO> bomLogExList;
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public int getSkuType() {
+        return skuType;
+    }
+
+    public void setSkuType(int skuType) {
+        this.skuType = skuType;
+    }
 
     public List<BomLogTO> getBomLogExList() {
         return bomLogExList;
