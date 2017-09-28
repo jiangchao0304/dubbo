@@ -1,6 +1,6 @@
 debug: false
 server:
-       port: 8082
+       port: 8990
 dubbo:
       application:
               name : erp-service-product-test
