@@ -3,13 +3,18 @@
 */
 package com.sunvalley.erp.product.service;
 
+import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.product.dao.BomMapper;
+import com.sunvalley.erp.product.dao.ItemVirtualMapper;
 import com.sunvalley.erp.product.daoEX.BomExMapper;
 import com.sunvalley.erp.product.daoEX.BomLogExMapper;
 import com.sunvalley.erp.product.model.Bom;
 import com.sunvalley.erp.product.model.BomExample;
+import com.sunvalley.erp.product.model.ItemVirtual;
 import com.sunvalley.erp.to.product.BomTO;
+import com.sunvalley.erp.to.product.ImportPackageTO;
+import com.sunvalley.erp.to.product.PreSkuRelationTO;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +45,12 @@ public class BomsService {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private PrepareService prepareService;
+
+    @Autowired
+    private ItemVirtualMapper itemVirtualMapper;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public boolean checkBom(Integer bomId,int skuId,String sku){
@@ -166,6 +177,49 @@ public class BomsService {
         return null;
 
     }
+
+    /**
+     * 根据主sku批量生成包材
+     * @remark savePackageList 方法的详细说明第一行
+     * <p>savePackageList 方法的详细说明第二行</p>
+     * @param skuId
+     *         [skuId]
+     * @param packageTOList
+     *         [packageTOList]
+     * @return void
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/9/28:14:38
+     */
+    public boolean savePackageList(int skuId, List<ImportPackageTO> packageTOList){
+        //查询sku信息
+        SkuBaseInfoTO skuBaseInfoTO = itemService.getSkuBaseInfo(skuId);
+
+        for (ImportPackageTO item : packageTOList) {
+            skuBaseInfoTO.setPurSpec(item.getPurSpec());
+            skuBaseInfoTO.setPurDesc(item.getPurDesc());
+            skuBaseInfoTO.setSkuType(item.getSkuType());
+            skuBaseInfoTO.setPurchaseProperty(item.getPurchaseProperty());
+            skuBaseInfoTO.setBomDesc(item.getRemark());
+            skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.isPackage);
+            skuBaseInfoTO.setSku("");
+            skuBaseInfoTO.setPreSku("");
+            skuBaseInfoTO.setSkuId(0);
+            //插入新的sku信息
+            PreSkuRelationTO relationTO =  prepareService.saveSkuBaseInfo(skuBaseInfoTO);
+            //添加生成的包材和当前bom的关系
+            ItemVirtual itemVirtual = new ItemVirtual();
+            itemVirtual.setVirtualSkuid(skuId);
+            itemVirtual.setActualSkuid(relationTO.getSkuId());
+            itemVirtual.setQty((short) item.getQty());
+            itemVirtualMapper.insert(itemVirtual);
+
+        }
+
+        return true;
+
+    }
+
 
 }
 

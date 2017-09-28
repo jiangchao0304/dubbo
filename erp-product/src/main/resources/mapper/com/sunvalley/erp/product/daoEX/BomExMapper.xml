@@ -59,7 +59,8 @@ where v1.virtual_skuid =#{skuid}
 		virtual.qty,
 		bom.combine_unit combineUnit,
 		bom.bom_desc bomDesc,
-		bom.purchase_property purchaseProperty
+		bom.purchase_property purchaseProperty,
+		item.sku_type  skuType
 		from bs_item_virtual virtual
 		left join bs_bom bom on bom.skuid = virtual.actual_skuid
 		LEFT JOIN bs_item item on virtual.actual_skuid = item.skuid
