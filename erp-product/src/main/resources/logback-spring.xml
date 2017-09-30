@@ -156,7 +156,7 @@
 
     <logger name="org.I0Itec.zkclient" level="ERROR"/>
 
-    <logger name="com.alibaba" level="info"/>
+    <logger name="com.alibaba.dubbo" level="ERROR"/>
 
     <!--log4jdbc -->
     <logger name="jdbc.sqltiming" level="INFO"/>

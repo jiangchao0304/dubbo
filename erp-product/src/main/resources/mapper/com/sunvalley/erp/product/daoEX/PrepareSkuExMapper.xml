@@ -41,8 +41,13 @@
 		AND mianline.product_type = 2
 		LEFT JOIN bs_product_line subline ON model.sub_category_id = subline.id
 		AND subline.product_type = 3
-		WHERE
-			model.model_name = #{model}
+		WHERE (1=1)
+		<if test="model_id != null">
+			and model_id =  #{modelId}
+		</if>
+		<if test="model != null">
+			and model.model_name = #{model}
+		</if>
 	</select>
 
 	<select id="preSkuGrid" parameterType="map" resultType="PreSkuGridTO">

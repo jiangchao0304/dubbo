@@ -29,7 +29,12 @@ public class PrepSkuServiceImpl implements IPreSkuService {
 
     @Override
     public PreSkuTO getByModel(String modelName, Integer status) {
-        return  prepareService.getByModel(modelName,status);
+        return  prepareService.getByModel(null,modelName,status);
+    }
+
+    @Override
+    public PreSkuTO getByModelId(int modelId, Integer status) {
+        return  prepareService.getByModel(modelId,null,status);
     }
 
     @Override

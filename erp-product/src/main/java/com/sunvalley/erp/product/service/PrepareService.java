@@ -100,9 +100,14 @@ public class PrepareService {
      * @date : 2017/9/14:16:23
      */
 
-    public PreSkuTO getByModel(String modelName, Integer status ){
+    public PreSkuTO getByModel(Integer modelId,String modelName, Integer status ){
         HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("model", modelName);
+        if(!Strings.isNullOrEmpty(modelName))
+            map.put("model", modelName);
+
+        if(modelId!=null && modelId>0)
+            map.put("modelId", modelId);
+
         if(status == 0){
             map.put("status", null);
         }else{
@@ -460,7 +465,7 @@ public class PrepareService {
 
         //其他默认值
         item.setActive((short)1);
-        item.setVolweight((short)0);
+        item.setVolweight((short)-1);
         item.setIsdrop(false);
         item.setDropDef(false);
         item.setIsvirtual(0);
@@ -487,7 +492,7 @@ public class PrepareService {
         item.setStopkg("");
         item.setProFeatures("");
         item.setDescSourc("");
-        item.setProductVolweight((short)0);
+        item.setProductVolweight((short)-1);
         item.setPurchaserId(dto.getPurchaseProperty());
         itemMapper.insert(item);
         if(item.getSkuid()>0){

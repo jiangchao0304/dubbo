@@ -7,11 +7,13 @@ import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.product.dao.*;
+import com.sunvalley.erp.product.daoEX.ItemCustomExMapper;
 import com.sunvalley.erp.product.model.*;
 import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.ItemLocaleTO;
+import com.sunvalley.erp.to.product.CustomsInfoTO;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 
 import com.sunvalley.erp.face.exception.FaceException;
@@ -62,6 +64,9 @@ public class ItemService {
 
     @Autowired
     private  SalesPlanCostMapper salesPlanCostMapper;
+
+    @Autowired
+    ItemCustomExMapper itemCustomExMapper;
 
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
@@ -393,6 +398,29 @@ public class ItemService {
                 throw new UniteException("更新年度目标计划基础数据SKU["+preSku+"]出错！");
             }
         }
+    }
+
+
+    /**
+     * getCustomsInfo .按sku查询报关信息.
+     * @remark getCustomsInfo 方法的详细说明第一行
+     * <p>getCustomsInfo 方法的详细说明第二行</p>
+     * @param skuId
+     *         [sku]
+     * @return com.sunvalley.erp.to.product.CustomsInfoTO
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/9/30:9:46
+     */
+    public CustomsInfoTO getCustomsInfo(int skuId){
+
+        Map<String,Object> param = new HashMap<>();
+        param.put("skuId",skuId);
+
+        CustomsInfoTO result =  itemCustomExMapper.getCustomsInfo(param);
+
+        return  result;
+
     }
 
 }

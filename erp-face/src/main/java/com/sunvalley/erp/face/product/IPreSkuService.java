@@ -22,6 +22,8 @@ public interface IPreSkuService {
 
     PreSkuTO getByModel(String modelName, Integer status);
 
+    PreSkuTO getByModelId(int modelId, Integer status);
+
     PreSkuTO saveModel(PreSkuTO preSkuDTO);
 
     String getPreSkuGrid(HashMap<String, Object> map);

@@ -4,8 +4,10 @@
 package com.sunvalley.erp.product.service.face;
 
 import com.sunvalley.erp.common.util.JsonUtil;
+import com.sunvalley.erp.face.product.ISkuService;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
+import com.sunvalley.erp.to.product.CustomsInfoTO;
 import com.sunvalley.erp.to.product.PreSkuRelationTO;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 import com.sunvalley.erp.to.product.SkuListNewTO;
@@ -24,7 +26,7 @@ import java.util.List;
  * @Date: 2017-09-04 10:56
  */
 @Service
-public class SkuServiceImpl implements com.sunvalley.erp.face.product.ISkuService {
+public class SkuServiceImpl implements ISkuService {
 
     @Autowired
     private ItemService itemService;
@@ -61,6 +63,11 @@ public class SkuServiceImpl implements com.sunvalley.erp.face.product.ISkuServic
     public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto) {
 
         return  prepareService.saveSkuBaseInfo(dto);
+    }
+
+    @Override
+    public CustomsInfoTO getCustomsInfo(int skuId) {
+        return itemService.getCustomsInfo(skuId);
     }
 
     @Override

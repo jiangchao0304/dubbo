@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sunvalley.erp.product.daoEX.ItemCustomExMapper" >
+
+    <select id="getCustomsInfo" parameterType="map" resultType="com.sunvalley.erp.to.product.CustomsInfoTO">
+        SELECT
+        bs_item_custom.*,
+        bs_item_custom.item_status itemStatus,
+        bs_item_custom.sku_status skuStatus,
+        bs_item_custom.reporting_elements reportingElements,
+        bs_item_custom.customs_model customsModel,
+        bs_item_custom.category_name_id categoryNameId,
+        cname.category_name categoryName,
+        cname.tax_refund_rate taxRefundRate,
+        cname.status,
+        p.len,
+        p.width,
+        p.height,
+        p.weight,
+        p.volweight,
+        p.capacity,
+        p.createdate packageCreateDate,
+        CONCAT(sysu.firstname ,' ',sysu.lastname) packageCreateUser
+        FROM bs_item_custom
+        LEFT JOIN scm_customs_category_name cname ON cname.id = bs_item_custom.category_name_id
+        LEFT JOIN bs_item_package  p ON p.skuid = bs_item_custom.skuid
+        LEFT JOIN sys_user sysu ON sysu.userid = p.createuserid
+        WHERE (1=1)
+        <if test="id != null">
+            and bs_item_custom.id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="skuid != null">
+            and bs_item_custom.skuid = #{skuid,jdbcType=INTEGER} and bs_item_custom.stateid = 'CN'
+        </if>
+        <if test="sku != null">
+            and bs_item_custom.sku = #{sku} and bs_item_custom.stateid = 'CN'
+        </if>
+    </select>
+
+    <select id="queryCustomsInfoBySKU" parameterType="map" resultType="com.sunvalley.erp.to.product.CustomsInfoTO">
+        SELECT
+        b.id,
+        bsi.sku,
+        bsi.skuid,
+        IFNULL(b.customscode,'') as customscode,
+        IFNULL(b.commodityname,'') as commodityname
+        FROM bs_item bsi
+        LEFT JOIN (
+        SELECT
+        bicd.id,
+        bic.sku,
+        bic.skuid,
+        bicd.customscode,
+        bicd.commodityname,
+        bicd.stateid
+        FROM bs_item_custom bic
+        LEFT JOIN bs_item_custom_detail bicd ON bicd.bsitemcustomid=bic.id
+        where (1=1)
+        <if test="stateid != null">
+            and bicd.stateid = #{stateid}
+        </if>
+        ) b ON b.skuid=bsi.skuid
+        where (1=1)
+        <if test="sku != null">
+            and bsi.sku like #{sku}
+        </if>
+        <if test="skuinfo != null">
+            and bsi.sku = #{skuinfo}
+        </if>
+        limit 10
+    </select>
+    <!-- 通过SKUID查询报关编码和品名 zhong_yong 2015/06/01 -->
+    <select id="queryCustomsInfoBySKUID" parameterType="map" resultType="com.sunvalley.erp.to.product.CustomsInfoTO">
+        SELECT
+        *,
+        category_name_id categoryNameId
+        from bs_item_custom
+        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        and stateid = #{exportCountry}
+    </select>
+</mapper>
