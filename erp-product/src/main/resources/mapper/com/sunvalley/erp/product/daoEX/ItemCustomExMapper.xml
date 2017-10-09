@@ -29,8 +29,8 @@
         <if test="id != null">
             and bs_item_custom.id = #{id,jdbcType=INTEGER}
         </if>
-        <if test="skuid != null">
-            and bs_item_custom.skuid = #{skuid,jdbcType=INTEGER} and bs_item_custom.stateid = 'CN'
+        <if test="skuId != null">
+            and bs_item_custom.skuid = #{skuId,jdbcType=INTEGER} and bs_item_custom.stateid = 'CN'
         </if>
         <if test="sku != null">
             and bs_item_custom.sku = #{sku} and bs_item_custom.stateid = 'CN'

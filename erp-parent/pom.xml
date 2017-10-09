@@ -73,6 +73,7 @@
     <erp-common.version>2.0.0</erp-common.version>
     <erp-product.version>2.0.0</erp-product.version>
     <erp-domain.version>2.0.0</erp-domain.version>
+    <fastjson.version>1.2.39</fastjson.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -99,6 +100,13 @@
         <artifactId>log4j-over-slf4j</artifactId>
         <version>1.7.25</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
 
 
       <dependency>
@@ -318,8 +326,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.2</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <encoding>UTF-8</encoding>
           <showWarnings>true</showWarnings>
         </configuration>

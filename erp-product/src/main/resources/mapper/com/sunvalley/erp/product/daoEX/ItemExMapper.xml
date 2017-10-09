@@ -94,7 +94,7 @@
 		anrule.anrule anrule,
 		country.country country,
 		item.is_package isPackage,
-		model.magnetic,
+		item.magnetic,
 		bom.combine_unit combineUnit,
 		model.warranty,
 		bom.purchase_property  purchaseProperty,
@@ -108,7 +108,8 @@
 		item.product_len productLen,
 		item.product_width productWidth,
 		item.product_height productHeight,
-		item.product_weight productWeight
+		item.product_weight productWeight,
+		CONCAT(purchase.firstname, " ", purchase.lastname)AS purchaserName
 		FROM bs_item AS item
 		LEFT JOIN bs_prepare_sku pre ON pre.skuid = item.skuid
 		LEFT JOIN bs_item_model AS model  ON pre.model_id = model.model_id
@@ -116,6 +117,7 @@
 		LEFT JOIN bs_product_line_mapping sc ON sc.mapping_id = item.skuid AND sc.product_line_id = item.subcategoryid AND sc.type = 1
 		LEFT JOIN bs_product_line lc ON lc.id = mc.product_line_id
 		LEFT JOIN bs_product_line ls ON ls.id = sc.product_line_id
+		LEFT JOIN sys_user purchase  ON purchase.userid = item.purchaser_id
 		LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
 		LEFT JOIN (
 			SELECT
@@ -282,5 +284,69 @@
 		JOIN bs_item AS item  ON item.skuid =pre.skuid
 		WHERE item.skuid=#{skuId}
 	</select>
+
+	<select id="listBySameModel" parameterType="int" resultType="com.sunvalley.erp.to.product.SkuDescTO">
+		SELECT skuid skuId,sku, IFNULL(purdesc,"") purDesc FROM  `bs_item` WHERE  model_id = (SELECT model_id FROM  `bs_item` WHERE skuid=#{skuid}) AND model_id IS NOT NULL
+	</select>
+
+
+	<!-- 根据sku查询概要信息 -->
+	<select id="getSkuSimpleInfo" parameterType="Map" resultType="com.sunvalley.erp.to.product.SkuSimpleInfoTO">
+		SELECT
+		ItemLocale.skuid,
+		ItemLocale.sku,
+		ItemLocale.description,
+		Item.weight,
+		Item.volweight,
+		Item.sku_type skuType,
+		IFNULL(Item.purspec,'') as purspec,
+		IFNULL(Item.purdesc,'') as purdesc,
+		Item.purtitle,
+		Item.purchaser_id purchaserId,
+		users.isactive isactive,
+		bom.bom_desc bomDesc,
+		bom.purchase_property purchaseProperty,
+		case  WHEN bom.purchase_property=1 then '甲方提供'
+		when bom.purchase_property=2 then '乙方提供'
+		else ' ' END purchasePropertyStr
+		FROM bs_item_locale ItemLocale
+		<choose>
+			<when test="isdrop != null">
+				inner JOIN bs_item Item ON Item.skuid = ItemLocale.skuid and Item.isdrop=#{isdrop}
+				LEFT JOIN sys_user users ON users.userid = Item.purchaser_id
+				LEFT JOIN (
+				select
+				*
+				from (
+				select
+				a.skuid,
+				a.seller_id,
+				a.isdrop
+				from bs_item_drop_category a
+				left join sys_company_bu b on b.companyid=#{sellerId,jdbcType=INTEGER}
+				where a.seller_id=b.categoryid
+				or a.seller_id=#{sellerId,jdbcType=INTEGER}
+				order by a.skuid,a.seller_id desc
+				) ItemDrop
+				group by ItemDrop.skuid
+				) ItemDrop ON ItemDrop.skuid=Item.skuid
+			</when>
+			<otherwise>
+				inner JOIN bs_item Item ON Item.skuid = ItemLocale.skuid
+				LEFT JOIN sys_user users ON users.userid = Item.purchaser_id
+			</otherwise>
+		</choose>
+		left join bs_bom bom on bom.skuid = ItemLocale.skuid
+		WHERE ItemLocale.sku = #{sku}
+		AND ItemLocale.lang_id = #{langId}
+		<if test="isdrop != null">
+			AND (ItemDrop.isdrop is null or ItemDrop.isdrop=1)
+		</if>
+	</select>
+
+
+	<update id="copyVirtualFromSku" parameterType="Map">
+		INSERT IGNORE INTO  bs_item_virtual (SELECT #{skuid},v.actual_skuid,v.qty FROM bs_item_virtual AS v JOIN bs_item AS i ON v.virtual_skuid = i.skuid  WHERE i.sku=#{sku});
+	</update>
 
 </mapper>

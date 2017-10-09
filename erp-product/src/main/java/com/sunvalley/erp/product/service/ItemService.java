@@ -6,23 +6,24 @@ import com.sunvalley.erp.common.component.filtersql.FilterOP;
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.exception.UniteException;
+import com.sunvalley.erp.common.util.DateUtil;
+import com.sunvalley.erp.common.util.TimeUtil;
 import com.sunvalley.erp.product.dao.*;
 import com.sunvalley.erp.product.daoEX.ItemCustomExMapper;
 import com.sunvalley.erp.product.model.*;
 import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
-import com.sunvalley.erp.to.product.ItemLocaleTO;
-import com.sunvalley.erp.to.product.CustomsInfoTO;
-import com.sunvalley.erp.to.product.SkuBaseInfoTO;
+import com.sunvalley.erp.to.product.*;
 
 import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
-import com.sunvalley.erp.to.product.SkuListNewTO;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,7 +67,13 @@ public class ItemService {
     private  SalesPlanCostMapper salesPlanCostMapper;
 
     @Autowired
-    ItemCustomExMapper itemCustomExMapper;
+    private ItemCustomExMapper itemCustomExMapper;
+
+    @Autowired
+    private ItemTextLocaleMapper itemTextLocaleMapper;
+
+    @Autowired
+    private  ItemRequirementsMapper itemRequirementsMapper;
 
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
@@ -82,6 +89,22 @@ public class ItemService {
             skuBaseInfoDTO.setItemLocaleTOList(itemLocaleTOList);
         }
         return skuBaseInfoDTO;
+
+    }
+
+    public SkuSimpleInfoTO getSkuSimpleInfo(String sku,int langId,int companyId){
+
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("sku", sku);
+        param.put("langId", langId);
+
+        if(companyId!= Constants.CompanyType.SUNVALLEY){
+            //如果公司不是sunvalley,则查看的是dropship授权的sku
+            param.put("isdrop", 1);
+            param.put("sellerId", companyId);
+        }
+
+        return  itemExMapper.getSkuSimpleInfo(param);
 
     }
 
@@ -111,6 +134,126 @@ public class ItemService {
         return result;
 
     }
+
+
+    /**
+     * saveSkuMarketInfo .更新review字段
+     * @param skuId
+     *         [skuId]
+     * @param SkuMarketInfoTO
+     *         [itemLocaleReviewTOList]
+     * @return void
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/10:16:24
+     */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public boolean saveSkuMarketInfo(int skuId, SkuMarketInfoTO dto){
+
+        for (ItemLocaleReviewTO localeTO : dto.getItemLocaleReviews()) {
+            ItemTextLocaleExample itemTextLocaleExample = new ItemTextLocaleExample();
+            itemTextLocaleExample.createCriteria().andLangIdEqualTo(localeTO.getLangId()).andSkuidEqualTo(skuId);
+            List<ItemTextLocale> list = itemTextLocaleMapper.selectByExample(itemTextLocaleExample);
+            if(list!=null && list.size()>0){
+                ItemTextLocale itemTextLocale = list.get(0);
+                itemTextLocale.setReview(localeTO.getReview());
+                itemTextLocaleMapper.updateByExampleSelective(itemTextLocale,itemTextLocaleExample);
+            }else {
+                ItemTextLocale itemTextLocale = new ItemTextLocale();
+                itemTextLocale.setSkuid(skuId);
+                itemTextLocale.setLangId(localeTO.getLangId());
+                itemTextLocale.setReview(localeTO.getReview());
+                itemTextLocale.setFlag(false);
+                itemTextLocale.setLaptopModel("");
+                itemTextLocale.setMetadesc("");
+                itemTextLocale.setMetakeyword("");
+                itemTextLocale.setMetatile("");
+                itemTextLocale.setPackagedesc("");
+                itemTextLocale.setPartNumber("");
+                itemTextLocale.setSpecification("");
+                itemTextLocaleMapper.insert(itemTextLocale);
+            }
+        }
+
+
+        for (ItemRequirementsTO item : dto.getItemRequirements()) {
+
+             ItemRequirementsExample itemRequirementsExample = new ItemRequirementsExample();
+             itemRequirementsExample.createCriteria().andSkuidEqualTo(skuId).andTypeIdEqualTo(item.getTypeId());
+             List<ItemRequirements> list =  itemRequirementsMapper.selectByExample(itemRequirementsExample);
+             if(list!=null && list.size()>0){
+                 ItemRequirements model = list.get(0);
+                 model.setProductReq(item.getProductReq());
+                 model.setPurchaseReq(item.getPurchaseReq());
+                 itemRequirementsMapper.updateByPrimaryKey(model);
+             }else {
+                 ItemRequirements model =  new ItemRequirements();
+                 model.setCreateuserid(item.getCreateuserid());
+                 model.setCreateDate(TimeUtil.BeiJingTimeNow());
+                 model.setSkuid(skuId);
+                 model.setNote(item.getNote());
+                 model.setPurchaseReq(item.getPurchaseReq());
+                 model.setProductReq(item.getProductReq());
+                 model.setWarehouseReq(item.getWarehouseReq());
+                 model.setTypeId(item.getTypeId());
+                 itemRequirementsMapper.insert(model);
+             }
+        }
+
+        return true;
+
+
+    }
+
+    /**
+     * getSkuMarketInfo .查询sku市场资料
+     * @param skuId
+     *         [skuId]
+     * @return com.sunvalley.erp.to.product.SkuMarketInfoTO
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/10:17:12
+     */
+    public SkuMarketInfoTO getSkuMarketInfo(int skuId){
+
+
+        ItemTextLocaleExample itemTextLocaleExample = new ItemTextLocaleExample();
+        itemTextLocaleExample.createCriteria().andSkuidEqualTo(skuId);
+        List<ItemTextLocale> itemTextLocaleList = itemTextLocaleMapper.selectByExample(itemTextLocaleExample);
+        ItemRequirementsExample itemRequirementsExample = new ItemRequirementsExample();
+        itemRequirementsExample.createCriteria().andSkuidEqualTo(skuId);
+        List<ItemRequirements> itemRequirementsList = itemRequirementsMapper.selectByExample(itemRequirementsExample);
+
+        SkuMarketInfoTO result = new SkuMarketInfoTO();
+         List<ItemLocaleReviewTO> itemLocaleReviews = new ArrayList<>();
+         List<ItemRequirementsTO> itemRequirements = new ArrayList<>();
+
+        for (ItemTextLocale item : itemTextLocaleList) {
+            ItemLocaleReviewTO dto = new ItemLocaleReviewTO();
+            dto.setLangId(item.getLangId());
+            dto.setReview(item.getReview());
+            itemLocaleReviews.add(dto);
+        }
+
+        for (ItemRequirements item : itemRequirementsList) {
+            ItemRequirementsTO to = new ItemRequirementsTO();
+            to.setCreateDate(item.getCreateDate());
+            to.setCreateuserid(item.getCreateuserid());
+            to.setId(item.getId());
+            to.setTypeId(item.getTypeId());
+            to.setNote(item.getNote());
+            to.setProductReq(item.getProductReq());
+            to.setWarehouseReq(item.getWarehouseReq());
+            to.setSkuid(item.getSkuid());
+            to.setPurchaseReq(item.getPurchaseReq());
+            itemRequirements.add(to);
+        }
+
+        result.setItemLocaleReviews(itemLocaleReviews);
+        result.setItemRequirements(itemRequirements);
+        return result;
+    }
+
 
 
     public SkuBaseInfoTO getSkuBaseInfo(String sku){
@@ -420,6 +563,42 @@ public class ItemService {
         CustomsInfoTO result =  itemCustomExMapper.getCustomsInfo(param);
 
         return  result;
+
+    }
+
+    /**
+     * listBySameModel 查询model相同的sku
+     * @param skuId
+     *         [skuId]
+     * @return java.util.List<com.sunvalley.erp.to.product.SkuDescTO>
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/9:17:42
+     */
+    public List<SkuDescTO> listBySameModel(int skuId){
+
+        return itemExMapper.listBySameModel(skuId);
+    }
+
+    /**
+     * copyVirtualFromSku .复制bom属性
+     * @param sourceSku
+     *         [sourceSku]
+     * @param targetSkuId
+     *         [targetSkuId]
+     * @return int
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/9:17:41
+     */
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int copyVirtualFromSku(String sourceSku,int targetSkuId){
+
+        Map<String,Object> param = new HashMap<>();
+        param.put("sku",sourceSku);
+        param.put("skuid",targetSkuId);
+        return itemExMapper.copyVirtualFromSku(param);
 
     }
 

@@ -17,10 +17,10 @@
     <bean id="prepareSkuService" class="com.sunvalley.erp.product.service.face.PrepSkuServiceImpl"/>
 
 
-    <dubbo:service interface="com.sunvalley.erp.face.product.ISkuService" ref="skuService"  version="1.0.1" retries="0" timeout="100000"/>
+    <dubbo:service interface="com.sunvalley.erp.face.product.ISkuService" ref="skuService"  version="1.0.2" retries="0" timeout="100000"/>
 
-    <dubbo:service interface="com.sunvalley.erp.face.product.IPreSkuService" ref="prepareSkuService"  version="1.0.1" retries="0" timeout="100000"/>
+    <dubbo:service interface="com.sunvalley.erp.face.product.IPreSkuService" ref="prepareSkuService"  version="1.0.2" retries="0" timeout="100000"/>
 
-    <dubbo:service interface="com.sunvalley.erp.face.product.IBomService" ref="bomService"  version="1.0.1" retries="0" timeout="100000"/>
+    <dubbo:service interface="com.sunvalley.erp.face.product.IBomService" ref="bomService"  version="1.0.2" retries="0" timeout="100000"/>
 
 </beans>

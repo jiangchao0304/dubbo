@@ -7,10 +7,7 @@ import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.face.product.ISkuService;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
-import com.sunvalley.erp.to.product.CustomsInfoTO;
-import com.sunvalley.erp.to.product.PreSkuRelationTO;
-import com.sunvalley.erp.to.product.SkuBaseInfoTO;
-import com.sunvalley.erp.to.product.SkuListNewTO;
+import com.sunvalley.erp.to.product.*;
 import com.sunvalley.erp.product.model.ItemLocale;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
@@ -71,8 +68,31 @@ public class SkuServiceImpl implements ISkuService {
     }
 
     @Override
+    public List<SkuDescTO> listBySameModel(int skuId) {
+        return itemService.listBySameModel(skuId);
+    }
+
+    @Override
+    public int copyVirtualFromSku(String sourceSku, int targetSkuId) {
+        return itemService.copyVirtualFromSku(sourceSku,targetSkuId);
+    }
+
+    @Override
+    public SkuSimpleInfoTO getSkuSimpleInfo(String sku, int langId, int companyId) {
+       return itemService.getSkuSimpleInfo(sku,langId,companyId);
+    }
+
+    @Override
     public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int langId,int offset, int pageSize) {
         return itemService.listskuListNew(filterModels,langId,offset,pageSize);
     }
+
+    @Override
+    public boolean saveSkuMarketInfo(int skuId,SkuMarketInfoTO dto) {
+        itemService.saveSkuMarketInfo(skuId,dto);
+        return true;
+
+    }
+
 }
 

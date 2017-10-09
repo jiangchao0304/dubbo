@@ -56,7 +56,16 @@ public class SkuBaseInfoTO implements Serializable {
     private Short productWeight;
     private int skuType;
     private SysSessionTO sessionTO;
+    private String purchaserName;
     private List<ItemLocaleTO> itemLocaleTOList;
+
+    public String getPurchaserName() {
+        return purchaserName;
+    }
+
+    public void setPurchaserName(String purchaserName) {
+        this.purchaserName = purchaserName;
+    }
 
     public int getSkuType() {
         return skuType;
