@@ -7,10 +7,7 @@ import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.face.product.ISkuService;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
-import com.sunvalley.erp.to.product.CustomsInfoTO;
-import com.sunvalley.erp.to.product.PreSkuRelationTO;
-import com.sunvalley.erp.to.product.SkuBaseInfoTO;
-import com.sunvalley.erp.to.product.SkuListNewTO;
+import com.sunvalley.erp.to.product.*;
 import com.sunvalley.erp.product.model.ItemLocale;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
@@ -68,6 +65,11 @@ public class SkuServiceImpl implements ISkuService {
     @Override
     public CustomsInfoTO getCustomsInfo(int skuId) {
         return itemService.getCustomsInfo(skuId);
+    }
+
+    @Override
+    public List<SkuDescTO> listBySameModel(String sku) {
+        return itemService.listBySameModel(sku);
     }
 
     @Override

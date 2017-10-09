@@ -108,7 +108,8 @@
 		item.product_len productLen,
 		item.product_width productWidth,
 		item.product_height productHeight,
-		item.product_weight productWeight
+		item.product_weight productWeight,
+		CONCAT(purchase.firstname, " ", purchase.lastname)AS purchaserName
 		FROM bs_item AS item
 		LEFT JOIN bs_prepare_sku pre ON pre.skuid = item.skuid
 		LEFT JOIN bs_item_model AS model  ON pre.model_id = model.model_id
@@ -116,6 +117,7 @@
 		LEFT JOIN bs_product_line_mapping sc ON sc.mapping_id = item.skuid AND sc.product_line_id = item.subcategoryid AND sc.type = 1
 		LEFT JOIN bs_product_line lc ON lc.id = mc.product_line_id
 		LEFT JOIN bs_product_line ls ON ls.id = sc.product_line_id
+		LEFT JOIN sys_user purchase  ON purchase.userid = item.purchaser_id
 		LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
 		LEFT JOIN (
 			SELECT
@@ -281,6 +283,10 @@
 		FROM   `bs_prepare_sku` AS pre
 		JOIN bs_item AS item  ON item.skuid =pre.skuid
 		WHERE item.skuid=#{skuId}
+	</select>
+
+	<select id="listBySameModel" parameterType="String" resultType="com.sunvalley.erp.to.product.SkuDescTO">
+		SELECT skuid skuId,sku, purdesc purDesc FROM  `bs_item` WHERE  model_id = (SELECT model_id FROM  `bs_item` WHERE sku=#{sku}) AND model_id IS NOT NULL
 	</select>
 
 </mapper>

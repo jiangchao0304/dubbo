@@ -380,6 +380,7 @@ public class PrepareService {
         Bom bom = new Bom();
         bom.setBomDesc(dto.getBomDesc());
         bom.setCombineUnit(dto.getCombineUnit());
+        bom.setPurchaseProperty(dto.getPurchaseProperty());
         BomExample bomExample = new BomExample();
         bomExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
         bomMapper.updateByExampleSelective(bom,bomExample);

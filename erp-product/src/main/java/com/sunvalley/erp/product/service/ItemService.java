@@ -12,13 +12,10 @@ import com.sunvalley.erp.product.model.*;
 import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
-import com.sunvalley.erp.to.product.ItemLocaleTO;
-import com.sunvalley.erp.to.product.CustomsInfoTO;
-import com.sunvalley.erp.to.product.SkuBaseInfoTO;
+import com.sunvalley.erp.to.product.*;
 
 import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
-import com.sunvalley.erp.to.product.SkuListNewTO;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -421,6 +418,10 @@ public class ItemService {
 
         return  result;
 
+    }
+
+    public List<SkuDescTO> listBySameModel(String sku){
+        return itemExMapper.listBySameModel(sku);
     }
 
 }
