@@ -349,4 +349,5 @@
 		INSERT IGNORE INTO  bs_item_virtual (SELECT #{skuid},v.actual_skuid,v.qty FROM bs_item_virtual AS v JOIN bs_item AS i ON v.virtual_skuid = i.skuid  WHERE i.sku=#{sku});
 	</update>
 
+
 </mapper>

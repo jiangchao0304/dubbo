@@ -79,7 +79,12 @@ public class SkuServiceImpl implements ISkuService {
 
     @Override
     public SkuSimpleInfoTO getSkuSimpleInfo(String sku, int langId, int companyId) {
-       return itemService.getSkuSimpleInfo(sku,langId,companyId);
+        return itemService.getSkuSimpleInfo(sku, langId, companyId);
+    }
+
+    public List<SkuDescTO> listBySameModel(String sku) {
+        return itemService.listBySameModel(sku);
+
     }
 
     @Override

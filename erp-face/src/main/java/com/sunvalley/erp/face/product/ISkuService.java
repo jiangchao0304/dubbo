@@ -6,6 +6,11 @@ package com.sunvalley.erp.face.product;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
+import com.sunvalley.erp.to.product.CustomsInfoTO;
+import com.sunvalley.erp.to.product.PreSkuRelationTO;
+import com.sunvalley.erp.to.product.SkuBaseInfoTO;
+import com.sunvalley.erp.to.product.SkuDescTO;
+
 
 import java.util.List;
 
@@ -31,6 +36,7 @@ public interface ISkuService {
 
     CustomsInfoTO getCustomsInfo(int skuId);
 
+
     List<SkuDescTO> listBySameModel(int skuId);
 
     int copyVirtualFromSku(String sourceSku,int targetSkuId);
@@ -38,6 +44,9 @@ public interface ISkuService {
     SkuSimpleInfoTO getSkuSimpleInfo(String sku, int langId, int companyId);
 
     boolean saveSkuMarketInfo(int skuId,SkuMarketInfoTO dto);
+
+    List<SkuDescTO> listBySameModel(String sku);
+
 
     PagerTO<com.sunvalley.erp.to.product.SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int langId, int offset, int pageSize);
 }

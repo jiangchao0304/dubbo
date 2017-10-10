@@ -15,10 +15,8 @@ import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
-
 import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -566,6 +564,7 @@ public class ItemService {
 
     }
 
+
     /**
      * listBySameModel 查询model相同的sku
      * @param skuId
@@ -593,12 +592,16 @@ public class ItemService {
      */
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public int copyVirtualFromSku(String sourceSku,int targetSkuId){
+    public int copyVirtualFromSku(String sourceSku,int targetSkuId) {
 
-        Map<String,Object> param = new HashMap<>();
-        param.put("sku",sourceSku);
-        param.put("skuid",targetSkuId);
+        Map<String, Object> param = new HashMap<>();
+        param.put("sku", sourceSku);
+        param.put("skuid", targetSkuId);
         return itemExMapper.copyVirtualFromSku(param);
+    }
+
+    public List<SkuDescTO> listBySameModel(String sku){
+        return itemExMapper.listBySameModel(sku);
 
     }
 

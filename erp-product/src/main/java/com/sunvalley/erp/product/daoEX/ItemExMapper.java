@@ -25,10 +25,14 @@ public interface ItemExMapper {
 
 	PreSkuRelation getPreSkuRelation(int skuId);
 
+
 	List<SkuDescTO> listBySameModel(int skuId);
 
 	int copyVirtualFromSku(Map<String, Object> param);
 
 	SkuSimpleInfoTO getSkuSimpleInfo(Map<String, Object> param);
+
+	List<SkuDescTO> listBySameModel(String sku);
+
 
 }
