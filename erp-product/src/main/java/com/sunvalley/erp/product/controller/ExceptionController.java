@@ -3,6 +3,8 @@
 */
 package com.sunvalley.erp.product.controller;
 
+import com.sunvalley.erp.common.enums.ApiMsgEnum;
+import com.sunvalley.erp.common.exception.ErpException;
 import com.sunvalley.erp.product.vo.BaseReturnVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +26,11 @@ public class ExceptionController {
     @ResponseBody
     @ExceptionHandler({ Exception.class })
     public BaseReturnVO handleException(Exception e) {
-        logger.error("由异常控制器捕获，提示:", e);
-//        if (e instanceof BondException) {
-//            return  new BaseReturnVO((BondException)e);
-//        }
-//        return  new BaseReturnVO(ApiMsgEnum.SERVICEERROR.getResCode(),e.getMessage());
-        return  new BaseReturnVO("99999","error");
+        logger.error("发生未捕获的异常:", e);
+        if (e instanceof ErpException) {
+            return  new BaseReturnVO((ErpException)e);
+        }
+        return  new BaseReturnVO(ApiMsgEnum.SERVICEERROR.getResCode(),e.getMessage());
     }
 }
 
