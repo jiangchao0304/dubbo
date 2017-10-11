@@ -118,6 +118,7 @@ public class PrepareService {
         if(list != null && list.size()>0){
             PreSkuTO vo = list.get(0);
             map.put("model_id", vo.getModelId());
+            map.put("model",vo.getModel());
             List<PreSkuGridTO> preSkuList =  prepareSkuExMapper.preSkuGrid(map);
 
             List<PreSkuGridTO> preSkuVOList = new ArrayList<>(preSkuList.size());

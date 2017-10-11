@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * sku controller.
@@ -54,7 +56,15 @@ public class SkuController {
     @ResponseBody
     public BaseReturnVO updateSkuBaseInfo(@RequestBody SkuBaseInfoTO dto) {
         boolean result =  prepareService.updateSkuBaseInfo(dto);
-        return new BaseReturnVO(result);
+
+        Map<String,String> jsonData = new HashMap<>();
+        if(result){
+            jsonData.put("success","true");
+        }else {
+            jsonData.put("success","false");
+        }
+
+        return new BaseReturnVO(jsonData);
     }
 
 

@@ -1,7 +1,7 @@
 eureka:
         client:
            service-url:
-               defaultZone : http://10.20.0.152:9080/eureka/
+               defaultZone : http://10.20.0.152:8761/eureka/
 server:
        port: 8081
 dubbo:
