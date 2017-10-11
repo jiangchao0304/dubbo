@@ -1,4 +1,7 @@
-
+eureka:
+        client:
+           service-url:
+               defaultZone : http://10.20.0.152:9080/eureka/
 server:
        port: 8081
 dubbo:
@@ -14,6 +17,8 @@ dubbo:
               douglas.jiang
 
 spring:
+      application:
+              name : product-Service
       profiles:
         active: dev
       datasource:
@@ -46,6 +51,9 @@ spring:
 
 
       dubbo.scan : com.sunvalley.erp.product.service
+
+
+
 mybatis:
      type-aliases-package : com.sunvalley.erp.product.model,com.sunvalley.erp.to
      mapper-locations: classpath*:mapper/com/sunvalley/erp/product/**/*.xml
