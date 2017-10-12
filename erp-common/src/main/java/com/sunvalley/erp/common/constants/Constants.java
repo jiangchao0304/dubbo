@@ -22,6 +22,7 @@ public class Constants {
 		public static final int SKU=1;//sku
 		public static final int PRE_SKU=2;//预备sku
 	}
+	
 
 	public class ItemMappingType{
 		public static final int anrule=1;//安规
@@ -217,6 +218,17 @@ public class Constants {
 		public final static String USSTK2="USSmall";
 		public final static String CASTK2="CASmall";
 		public final static String OTHER="Other";
+	}
+	/**
+	 * @author Brian Zhong
+	 * @see bs_systemprofile表的category字段参数
+	 * */
+	public static class SystemProfile_Category{
+		public static final String Bill="Bill";
+		public static final String Import="import";
+		public static final String TrackingNoDateFormat="TrackingNoDateFormat";
+		public static final String IMGUP="imgup"; // 图片上传ftp服务器设置参数
+		public static final String IMGEMANAGE="imageManage"; // 图片显示类别参数			
 	}
 
 	public static class skuCodeType{
