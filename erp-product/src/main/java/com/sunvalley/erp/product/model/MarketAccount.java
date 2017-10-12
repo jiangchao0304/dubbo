@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:MarketAccount
 * @author
-* @date 2017-10-12 11:31:39
+* @date 2017-10-12 12:52:58
 */
 public class MarketAccount implements Serializable{
 
