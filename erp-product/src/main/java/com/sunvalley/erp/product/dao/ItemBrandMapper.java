@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemBrandMapper
 * @author
-* @date 2017-09-16 11:22:31
+* @date 2017-10-12 04:22:44
 */
 @Repository
 public interface ItemBrandMapper {

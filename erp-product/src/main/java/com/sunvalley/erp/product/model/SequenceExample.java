@@ -3,7 +3,13 @@ package com.sunvalley.erp.product.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.math.BigDecimal;
 
+/**
+* @Description: SequenceExample
+* @author
+* @date 2017-10-12 04:27:43
+*/
 public class SequenceExample {
     protected String orderByClause;
 
@@ -278,53 +284,53 @@ public class SequenceExample {
             return (Criteria) this;
         }
 
-        public Criteria andStepEqualTo(Integer value) {
+        public Criteria andStepEqualTo(Short value) {
             addCriterion("step =", value, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepNotEqualTo(Integer value) {
+        public Criteria andStepNotEqualTo(Short value) {
             addCriterion("step <>", value, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepGreaterThan(Integer value) {
+        public Criteria andStepGreaterThan(Short value) {
             addCriterion("step >", value, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStepGreaterThanOrEqualTo(Short value) {
             addCriterion("step >=", value, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepLessThan(Integer value) {
+        public Criteria andStepLessThan(Short value) {
             addCriterion("step <", value, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepLessThanOrEqualTo(Integer value) {
+        public Criteria andStepLessThanOrEqualTo(Short value) {
             addCriterion("step <=", value, "step");
             return (Criteria) this;
         }
 
 
-        public Criteria andStepIn(List<Integer > values) {
+        public Criteria andStepIn(List<Short > values) {
             addCriterion("step in", values, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepNotIn(List<Integer> values) {
+        public Criteria andStepNotIn(List<Short> values) {
             addCriterion("step not in", values, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepBetween(Integer value1, Integer value2) {
+        public Criteria andStepBetween(Short value1, Short value2) {
             addCriterion("step between", value1, value2, "step");
             return (Criteria) this;
         }
 
-        public Criteria andStepNotBetween(Integer value1, Integer value2) {
+        public Criteria andStepNotBetween(Short value1, Short value2) {
             addCriterion("step not between", value1, value2, "step");
             return (Criteria) this;
         }

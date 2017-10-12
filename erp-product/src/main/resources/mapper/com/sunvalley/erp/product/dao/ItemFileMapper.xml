@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemFileMapper">
-<!-- ================================代码生成开始=2017-10-10 06:03:04=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:23:13=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemFile">
         <result column="item_file_id" property="itemFileId" jdbcType="INTEGER"/>
@@ -182,14 +182,14 @@
     </delete>
 
 
-    <insert id="insert" parameterType="ItemFile" keyProperty="item_file_id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="ItemFile" keyProperty="itemFileId" useGeneratedKeys="true">
         INSERT INTO bs_item_file
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.ItemFile" keyProperty="item_file_id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.ItemFile" keyProperty="itemFileId" useGeneratedKeys="true">
         insert into bs_item_file
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
@@ -279,5 +279,5 @@
         DELETE FROM  bs_item_file
         WHERE item_file_id = #{itemFileId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-10 06:03:04=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:23:13=========================================== -->
 </mapper>

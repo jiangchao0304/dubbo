@@ -2,13 +2,13 @@ package com.sunvalley.erp.product.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+import java.math.BigDecimal;
 import java.io.Serializable;
 
 /**
 * @Description: table:Sequence
 * @author
-* @date 2017-09-15 04:47:44
+* @date 2017-10-12 04:27:43
 */
 public class Sequence implements Serializable{
 
@@ -17,7 +17,7 @@ public class Sequence implements Serializable{
     //columns 开始
     private java.lang.String name;//
     private java.lang.Integer value;//
-    private short step;//
+    private Short step;//
     private java.lang.Integer start;//
 	//columns 结束
 
@@ -60,14 +60,14 @@ public class Sequence implements Serializable{
      *
      * @param value
      */
-	public void setStep(short value) {
+	public void setStep(Short value) {
 		this.step = value;
 	}
 	
 	/**
      * 
      */
-	public short getStep() {
+	public Short getStep() {
 		return this.step;
 	}
 

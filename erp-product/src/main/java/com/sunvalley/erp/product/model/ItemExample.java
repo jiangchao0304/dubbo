@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
 * @Description: ItemExample
 * @author
-* @date 2017-09-18 05:22:53
+* @date 2017-10-12 04:24:26
 */
 public class ItemExample {
     protected String orderByClause;
@@ -4172,6 +4172,70 @@ public class ItemExample {
 
         public Criteria andMagneticNotBetween(Short value1, Short value2) {
             addCriterion("magnetic not between", value1, value2, "magnetic");
+            return (Criteria) this;
+        }
+
+
+
+        public Criteria andSkuTypeIsNull() {
+            addCriterion("skuType is null");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andSkuTypeIsNotNull() {
+            addCriterion("skuType is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeEqualTo(Short value) {
+            addCriterion("sku_type =", value, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeNotEqualTo(Short value) {
+            addCriterion("sku_type <>", value, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeGreaterThan(Short value) {
+            addCriterion("sku_type >", value, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeGreaterThanOrEqualTo(Short value) {
+            addCriterion("sku_type >=", value, "sku_type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeLessThan(Short value) {
+            addCriterion("sku_type <", value, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeLessThanOrEqualTo(Short value) {
+            addCriterion("sku_type <=", value, "skuType");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andSkuTypeIn(List<Short > values) {
+            addCriterion("sku_type in", values, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeNotIn(List<Short> values) {
+            addCriterion("sku_type not in", values, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeBetween(Short value1, Short value2) {
+            addCriterion("sku_type between", value1, value2, "skuType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSkuTypeNotBetween(Short value1, Short value2) {
+            addCriterion("sku_type not between", value1, value2, "skuType");
             return (Criteria) this;
         }
 

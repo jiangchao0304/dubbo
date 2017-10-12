@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: OrganizationDetailMapper
 * @author
-* @date 2017-09-25 03:10:30
+* @date 2017-10-12 04:25:58
 */
 @Repository
 public interface OrganizationDetailMapper {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SystemprofileMapper
 * @author
-* @date 2017-10-11 02:51:00
+* @date 2017-10-12 04:28:14
 */
 @Repository
 public interface SystemprofileMapper {

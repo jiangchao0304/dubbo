@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemPackageMapper">
-<!-- ================================代码生成开始=2017-09-30 12:10:43=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:24:59=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemPackage">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -157,21 +157,21 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			id,
-			skuid,
-			sku,
-			len,
-			width,
-			height,
-			weight,
-			volweight,
-			capacity,
-			linestate,
-			purdesc,
-			createdate,
-			createuserid,
-			updatedate,
-			updateuserid
+            `id`,
+            `skuid`,
+            `sku`,
+            `len`,
+            `width`,
+            `height`,
+            `weight`,
+            `volweight`,
+            `capacity`,
+            `linestate`,
+            `purdesc`,
+            `createdate`,
+            `createuserid`,
+            `updatedate`,
+            `updateuserid`
 	</sql>
 
 
@@ -303,5 +303,5 @@
         DELETE FROM  bs_item_package
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-30 12:10:43=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:24:59=========================================== -->
 </mapper>

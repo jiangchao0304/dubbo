@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.WarehouseMapper">
-<!-- ================================代码生成开始=2017-09-22 12:25:29=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:37:26=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Warehouse">
         <result column="wh_id" property="whId" jdbcType="INTEGER"/>
         <result column="wh_name" property="whName" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="CHAR"/>
         <result column="wh_email" property="whEmail" jdbcType="VARCHAR"/>
         <result column="wh_contact" property="whContact" jdbcType="VARCHAR"/>
         <result column="wh_contact_lastname" property="whContactLastname" jdbcType="VARCHAR"/>
@@ -38,7 +38,7 @@
     <sql id="Values">
             #{whId,jdbcType=INTEGER },
             #{whName,jdbcType=VARCHAR },
-            #{type,jdbcType=VARCHAR },
+            #{type,jdbcType=CHAR },
             #{whEmail,jdbcType=VARCHAR },
             #{whContact,jdbcType=VARCHAR },
             #{whContactLastname,jdbcType=VARCHAR },
@@ -68,7 +68,7 @@
     <sql id="ValuesBatch">
             #{item.whId,jdbcType=INTEGER},
             #{item.whName,jdbcType=VARCHAR},
-            #{item.type,jdbcType=VARCHAR},
+            #{item.type,jdbcType=CHAR},
             #{item.whEmail,jdbcType=VARCHAR},
             #{item.whContact,jdbcType=VARCHAR},
             #{item.whContactLastname,jdbcType=VARCHAR},
@@ -98,7 +98,7 @@
     <sql id="Set">
                 wh_id= #{whId,jdbcType=INTEGER },
                 wh_name= #{whName,jdbcType=VARCHAR },
-                type= #{type,jdbcType=VARCHAR },
+                type= #{type,jdbcType=CHAR },
                 wh_email= #{whEmail,jdbcType=VARCHAR },
                 wh_contact= #{whContact,jdbcType=VARCHAR },
                 wh_contact_lastname= #{whContactLastname,jdbcType=VARCHAR },
@@ -128,7 +128,7 @@
     <sql id="SetNotNull">
                 <if test="record.whId != null">wh_id= #{record.whId,jdbcType=INTEGER },</if>
                 <if test="record.whName != null">wh_name= #{record.whName,jdbcType=VARCHAR },</if>
-                <if test="record.type != null">type= #{record.type,jdbcType=VARCHAR },</if>
+                <if test="record.type != null">type= #{record.type,jdbcType=CHAR },</if>
                 <if test="record.whEmail != null">wh_email= #{record.whEmail,jdbcType=VARCHAR },</if>
                 <if test="record.whContact != null">wh_contact= #{record.whContact,jdbcType=VARCHAR },</if>
                 <if test="record.whContactLastname != null">wh_contact_lastname= #{record.whContactLastname,jdbcType=VARCHAR },</if>
@@ -217,33 +217,33 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			wh_id,
-			wh_name,
-			type,
-			wh_email,
-			wh_contact,
-			wh_contact_lastname,
-			wh_addr,
-			wh_city,
-			wh_state,
-			wh_country,
-			wh_zip,
-			wh_tel,
-			wh_fax,
-			curno,
-			perordercharge,
-			peritemcharge,
-			dropship,
-			virtual,
-			used_wh_id,
-			cistencilid,
-			is_merger,
-			invoice_price_coefficient,
-			custom_price_coefficient,
-			ci_price_coefficient,
-			wh_country_zone,
-			wh_3rd,
-			istax
+            `wh_id`,
+            `wh_name`,
+            `type`,
+            `wh_email`,
+            `wh_contact`,
+            `wh_contact_lastname`,
+            `wh_addr`,
+            `wh_city`,
+            `wh_state`,
+            `wh_country`,
+            `wh_zip`,
+            `wh_tel`,
+            `wh_fax`,
+            `curno`,
+            `perordercharge`,
+            `peritemcharge`,
+            `dropship`,
+            `virtual`,
+            `used_wh_id`,
+            `cistencilid`,
+            `is_merger`,
+            `invoice_price_coefficient`,
+            `custom_price_coefficient`,
+            `ci_price_coefficient`,
+            `wh_country_zone`,
+            `wh_3rd`,
+            `istax`
 	</sql>
 
 
@@ -278,14 +278,14 @@
     </delete>
 
 
-    <insert id="insert" parameterType="Warehouse" keyProperty="wh_id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="Warehouse" keyProperty="whId" useGeneratedKeys="true">
         INSERT INTO warehouse
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.Warehouse" keyProperty="wh_id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.Warehouse" keyProperty="whId" useGeneratedKeys="true">
         insert into warehouse
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
@@ -375,5 +375,5 @@
         DELETE FROM  warehouse
         WHERE wh_id = #{whId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-22 12:25:29=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:37:26=========================================== -->
 </mapper>

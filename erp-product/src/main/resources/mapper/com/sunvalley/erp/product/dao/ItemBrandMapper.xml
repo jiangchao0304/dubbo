@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemBrandMapper">
-<!-- ================================代码生成开始=2017-09-16 11:22:31=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:22:44=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemBrand">
         <result column="brand_id" property="brandId" jdbcType="INTEGER"/>
@@ -58,16 +58,16 @@
     </sql>
 
     <sql id="SetNotNull">
-                <if test="brandId != null">brand_id= #{brandId,jdbcType=INTEGER },</if>
-                <if test="parentId != null">parent_id= #{parentId,jdbcType=INTEGER },</if>
-                <if test="brandDesc != null">brand_desc= #{brandDesc,jdbcType=VARCHAR },</if>
-                <if test="orderno != null">orderno= #{orderno,jdbcType=INTEGER },</if>
-                <if test="note != null">note= #{note,jdbcType=VARCHAR },</if>
-                <if test="ratio != null">ratio= #{ratio,jdbcType=DECIMAL },</if>
-                <if test="brandCode != null">brand_code= #{brandCode,jdbcType=VARCHAR },</if>
-                <if test="hasused != null">hasused= #{hasused,jdbcType=INTEGER },</if>
-                <if test="controlValue != null">control_value= #{controlValue,jdbcType=INTEGER },</if>
-                <if test="warningProportion != null">warning_proportion= #{warningProportion,jdbcType=DECIMAL }</if>
+                <if test="record.brandId != null">brand_id= #{record.brandId,jdbcType=INTEGER },</if>
+                <if test="record.parentId != null">parent_id= #{record.parentId,jdbcType=INTEGER },</if>
+                <if test="record.brandDesc != null">brand_desc= #{record.brandDesc,jdbcType=VARCHAR },</if>
+                <if test="record.orderno != null">orderno= #{record.orderno,jdbcType=INTEGER },</if>
+                <if test="record.note != null">note= #{record.note,jdbcType=VARCHAR },</if>
+                <if test="record.ratio != null">ratio= #{record.ratio,jdbcType=DECIMAL },</if>
+                <if test="record.brandCode != null">brand_code= #{record.brandCode,jdbcType=VARCHAR },</if>
+                <if test="record.hasused != null">hasused= #{record.hasused,jdbcType=INTEGER },</if>
+                <if test="record.controlValue != null">control_value= #{record.controlValue,jdbcType=INTEGER },</if>
+                <if test="record.warningProportion != null">warning_proportion= #{record.warningProportion,jdbcType=DECIMAL }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -132,16 +132,16 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			brand_id,
-			parent_id,
-			brand_desc,
-			orderno,
-			note,
-			ratio,
-			brand_code,
-			hasused,
-			control_value,
-			warning_proportion
+            `brand_id`,
+            `parent_id`,
+            `brand_desc`,
+            `orderno`,
+            `note`,
+            `ratio`,
+            `brand_code`,
+            `hasused`,
+            `control_value`,
+            `warning_proportion`
 	</sql>
 
 
@@ -273,5 +273,5 @@
         DELETE FROM  bs_item_brand
         WHERE brand_id = #{brandId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-16 11:22:31=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:22:44=========================================== -->
 </mapper>

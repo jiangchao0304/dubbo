@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: BomLogMapper
 * @author
-* @date 2017-09-26 06:55:53
+* @date 2017-10-12 04:21:35
 */
 @Repository
 public interface BomLogMapper {

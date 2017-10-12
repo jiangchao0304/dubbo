@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemMapper">
-<!-- ================================代码生成开始=2017-09-18 05:22:53=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:24:26=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Item">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -67,6 +67,7 @@
         <result column="color" property="color" jdbcType="INTEGER"/>
         <result column="model_id" property="modelId" jdbcType="INTEGER"/>
         <result column="magnetic" property="magnetic" jdbcType="SMALLINT"/>
+        <result column="sku_type" property="skuType" jdbcType="SMALLINT"/>
     </resultMap>
 
     <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.Item" />
@@ -134,7 +135,8 @@
             #{isPackage,jdbcType=INTEGER },
             #{color,jdbcType=INTEGER },
             #{modelId,jdbcType=INTEGER },
-            #{magnetic,jdbcType=SMALLINT }
+            #{magnetic,jdbcType=SMALLINT },
+            #{skuType,jdbcType=SMALLINT }
     </sql>
 
     <sql id="ValuesBatch">
@@ -200,7 +202,8 @@
             #{item.isPackage,jdbcType=INTEGER},
             #{item.color,jdbcType=INTEGER},
             #{item.modelId,jdbcType=INTEGER},
-            #{item.magnetic,jdbcType=SMALLINT}
+            #{item.magnetic,jdbcType=SMALLINT},
+            #{item.skuType,jdbcType=SMALLINT}
     </sql>
 
     <sql id="Set">
@@ -266,73 +269,75 @@
                 is_package= #{isPackage,jdbcType=INTEGER },
                 color= #{color,jdbcType=INTEGER },
                 model_id= #{modelId,jdbcType=INTEGER },
-                magnetic= #{magnetic,jdbcType=SMALLINT }
+                magnetic= #{magnetic,jdbcType=SMALLINT },
+                sku_type= #{skuType,jdbcType=SMALLINT }
     </sql>
 
     <sql id="SetNotNull">
-                <if test="skuid != null">skuid= #{skuid,jdbcType=INTEGER },</if>
-                <if test="sku != null">sku= #{sku,jdbcType=VARCHAR },</if>
-                <if test="len != null">len= #{len,jdbcType=SMALLINT },</if>
-                <if test="width != null">width= #{width,jdbcType=SMALLINT },</if>
-                <if test="height != null">height= #{height,jdbcType=SMALLINT },</if>
-                <if test="weight != null">weight= #{weight,jdbcType=SMALLINT },</if>
-                <if test="volweight != null">volweight= #{volweight,jdbcType=SMALLINT },</if>
-                <if test="createDate != null">create_date= #{createDate,jdbcType=TIMESTAMP },</if>
-                <if test="active != null">active= #{active,jdbcType=SMALLINT },</if>
-                <if test="isdrop != null">isdrop= #{isdrop,jdbcType=BIT },</if>
-                <if test="dropDef != null">drop_def= #{dropDef,jdbcType=BIT },</if>
-                <if test="isvirtual != null">isvirtual= #{isvirtual,jdbcType=TINYINT },</if>
-                <if test="lineState != null">line_state= #{lineState,jdbcType=TINYINT },</if>
-                <if test="remark != null">remark= #{remark,jdbcType=VARCHAR },</if>
-                <if test="issale != null">issale= #{issale,jdbcType=BIT },</if>
-                <if test="zeroStock != null">zero_stock= #{zeroStock,jdbcType=BIT },</if>
-                <if test="zeroWhid != null">zero_whid= #{zeroWhid,jdbcType=SMALLINT },</if>
-                <if test="zeroQty != null">zero_qty= #{zeroQty,jdbcType=SMALLINT },</if>
-                <if test="boxtype != null">boxtype= #{boxtype,jdbcType=TINYINT },</if>
-                <if test="pmid != null">pmid= #{pmid,jdbcType=INTEGER },</if>
-                <if test="peid != null">peid= #{peid,jdbcType=INTEGER },</if>
-                <if test="isoriginal != null">isoriginal= #{isoriginal,jdbcType=BIT },</if>
-                <if test="purdesc != null">purdesc= #{purdesc,jdbcType=VARCHAR },</if>
-                <if test="purspec != null">purspec= #{purspec,jdbcType=VARCHAR },</if>
-                <if test="leadtime != null">leadtime= #{leadtime,jdbcType=TINYINT },</if>
-                <if test="skulable != null">skulable= #{skulable,jdbcType=VARCHAR },</if>
-                <if test="innerskuId != null">innersku_id= #{innerskuId,jdbcType=INTEGER },</if>
-                <if test="outerskuId != null">outersku_id= #{outerskuId,jdbcType=INTEGER },</if>
-                <if test="pkgweight != null">pkgweight= #{pkgweight,jdbcType=SMALLINT },</if>
-                <if test="pkgrate != null">pkgrate= #{pkgrate,jdbcType=SMALLINT },</if>
-                <if test="purpkg != null">purpkg= #{purpkg,jdbcType=VARCHAR },</if>
-                <if test="stopkg != null">stopkg= #{stopkg,jdbcType=VARCHAR },</if>
-                <if test="standard != null">standard= #{standard,jdbcType=INTEGER },</if>
-                <if test="versionno != null">versionno= #{versionno,jdbcType=SMALLINT },</if>
-                <if test="updateuserid != null">updateuserid= #{updateuserid,jdbcType=INTEGER },</if>
-                <if test="updatedate != null">updatedate= #{updatedate,jdbcType=TIMESTAMP },</if>
-                <if test="haspic != null">haspic= #{haspic,jdbcType=BIT },</if>
-                <if test="updatepicuser != null">updatepicuser= #{updatepicuser,jdbcType=VARCHAR },</if>
-                <if test="updatepicdate != null">updatepicdate= #{updatepicdate,jdbcType=TIMESTAMP },</if>
-                <if test="descSourc != null">desc_sourc= #{descSourc,jdbcType=VARCHAR },</if>
-                <if test="lineStateDate != null">line_state_date= #{lineStateDate,jdbcType=TIMESTAMP },</if>
-                <if test="purtitle != null">purtitle= #{purtitle,jdbcType=VARCHAR },</if>
-                <if test="brandId != null">brand_id= #{brandId,jdbcType=INTEGER },</if>
-                <if test="purchaserId != null">purchaser_id= #{purchaserId,jdbcType=INTEGER },</if>
-                <if test="productLen != null">product_len= #{productLen,jdbcType=SMALLINT },</if>
-                <if test="productWidth != null">product_width= #{productWidth,jdbcType=SMALLINT },</if>
-                <if test="productHeight != null">product_height= #{productHeight,jdbcType=SMALLINT },</if>
-                <if test="productWeight != null">product_weight= #{productWeight,jdbcType=SMALLINT },</if>
-                <if test="productVolweight != null">product_volweight= #{productVolweight,jdbcType=SMALLINT },</if>
-                <if test="battery != null">battery= #{battery,jdbcType=INTEGER },</if>
-                <if test="model != null">model= #{model,jdbcType=VARCHAR },</if>
-                <if test="psid != null">psid= #{psid,jdbcType=INTEGER },</if>
-                <if test="updatedate2 != null">updatedate2= #{updatedate2,jdbcType=TIMESTAMP },</if>
-                <if test="rmacategoryid != null">rmacategoryid= #{rmacategoryid,jdbcType=INTEGER },</if>
-                <if test="region != null">region= #{region,jdbcType=INTEGER },</if>
-                <if test="createUserId != null">create_user_id= #{createUserId,jdbcType=INTEGER },</if>
-                <if test="proFeatures != null">pro_features= #{proFeatures,jdbcType=VARCHAR },</if>
-                <if test="categoryid != null">categoryid= #{categoryid,jdbcType=INTEGER },</if>
-                <if test="subcategoryid != null">subcategoryid= #{subcategoryid,jdbcType=INTEGER },</if>
-                <if test="isPackage != null">is_package= #{isPackage,jdbcType=INTEGER },</if>
-                <if test="color != null">color= #{color,jdbcType=INTEGER },</if>
-                <if test="modelId != null">model_id= #{modelId,jdbcType=INTEGER },</if>
-                <if test="magnetic != null">magnetic= #{magnetic,jdbcType=SMALLINT }</if>
+                <if test="record.skuid != null">skuid= #{record.skuid,jdbcType=INTEGER },</if>
+                <if test="record.sku != null">sku= #{record.sku,jdbcType=VARCHAR },</if>
+                <if test="record.len != null">len= #{record.len,jdbcType=SMALLINT },</if>
+                <if test="record.width != null">width= #{record.width,jdbcType=SMALLINT },</if>
+                <if test="record.height != null">height= #{record.height,jdbcType=SMALLINT },</if>
+                <if test="record.weight != null">weight= #{record.weight,jdbcType=SMALLINT },</if>
+                <if test="record.volweight != null">volweight= #{record.volweight,jdbcType=SMALLINT },</if>
+                <if test="record.createDate != null">create_date= #{record.createDate,jdbcType=TIMESTAMP },</if>
+                <if test="record.active != null">active= #{record.active,jdbcType=SMALLINT },</if>
+                <if test="record.isdrop != null">isdrop= #{record.isdrop,jdbcType=BIT },</if>
+                <if test="record.dropDef != null">drop_def= #{record.dropDef,jdbcType=BIT },</if>
+                <if test="record.isvirtual != null">isvirtual= #{record.isvirtual,jdbcType=TINYINT },</if>
+                <if test="record.lineState != null">line_state= #{record.lineState,jdbcType=TINYINT },</if>
+                <if test="record.remark != null">remark= #{record.remark,jdbcType=VARCHAR },</if>
+                <if test="record.issale != null">issale= #{record.issale,jdbcType=BIT },</if>
+                <if test="record.zeroStock != null">zero_stock= #{record.zeroStock,jdbcType=BIT },</if>
+                <if test="record.zeroWhid != null">zero_whid= #{record.zeroWhid,jdbcType=SMALLINT },</if>
+                <if test="record.zeroQty != null">zero_qty= #{record.zeroQty,jdbcType=SMALLINT },</if>
+                <if test="record.boxtype != null">boxtype= #{record.boxtype,jdbcType=TINYINT },</if>
+                <if test="record.pmid != null">pmid= #{record.pmid,jdbcType=INTEGER },</if>
+                <if test="record.peid != null">peid= #{record.peid,jdbcType=INTEGER },</if>
+                <if test="record.isoriginal != null">isoriginal= #{record.isoriginal,jdbcType=BIT },</if>
+                <if test="record.purdesc != null">purdesc= #{record.purdesc,jdbcType=VARCHAR },</if>
+                <if test="record.purspec != null">purspec= #{record.purspec,jdbcType=VARCHAR },</if>
+                <if test="record.leadtime != null">leadtime= #{record.leadtime,jdbcType=TINYINT },</if>
+                <if test="record.skulable != null">skulable= #{record.skulable,jdbcType=VARCHAR },</if>
+                <if test="record.innerskuId != null">innersku_id= #{record.innerskuId,jdbcType=INTEGER },</if>
+                <if test="record.outerskuId != null">outersku_id= #{record.outerskuId,jdbcType=INTEGER },</if>
+                <if test="record.pkgweight != null">pkgweight= #{record.pkgweight,jdbcType=SMALLINT },</if>
+                <if test="record.pkgrate != null">pkgrate= #{record.pkgrate,jdbcType=SMALLINT },</if>
+                <if test="record.purpkg != null">purpkg= #{record.purpkg,jdbcType=VARCHAR },</if>
+                <if test="record.stopkg != null">stopkg= #{record.stopkg,jdbcType=VARCHAR },</if>
+                <if test="record.standard != null">standard= #{record.standard,jdbcType=INTEGER },</if>
+                <if test="record.versionno != null">versionno= #{record.versionno,jdbcType=SMALLINT },</if>
+                <if test="record.updateuserid != null">updateuserid= #{record.updateuserid,jdbcType=INTEGER },</if>
+                <if test="record.updatedate != null">updatedate= #{record.updatedate,jdbcType=TIMESTAMP },</if>
+                <if test="record.haspic != null">haspic= #{record.haspic,jdbcType=BIT },</if>
+                <if test="record.updatepicuser != null">updatepicuser= #{record.updatepicuser,jdbcType=VARCHAR },</if>
+                <if test="record.updatepicdate != null">updatepicdate= #{record.updatepicdate,jdbcType=TIMESTAMP },</if>
+                <if test="record.descSourc != null">desc_sourc= #{record.descSourc,jdbcType=VARCHAR },</if>
+                <if test="record.lineStateDate != null">line_state_date= #{record.lineStateDate,jdbcType=TIMESTAMP },</if>
+                <if test="record.purtitle != null">purtitle= #{record.purtitle,jdbcType=VARCHAR },</if>
+                <if test="record.brandId != null">brand_id= #{record.brandId,jdbcType=INTEGER },</if>
+                <if test="record.purchaserId != null">purchaser_id= #{record.purchaserId,jdbcType=INTEGER },</if>
+                <if test="record.productLen != null">product_len= #{record.productLen,jdbcType=SMALLINT },</if>
+                <if test="record.productWidth != null">product_width= #{record.productWidth,jdbcType=SMALLINT },</if>
+                <if test="record.productHeight != null">product_height= #{record.productHeight,jdbcType=SMALLINT },</if>
+                <if test="record.productWeight != null">product_weight= #{record.productWeight,jdbcType=SMALLINT },</if>
+                <if test="record.productVolweight != null">product_volweight= #{record.productVolweight,jdbcType=SMALLINT },</if>
+                <if test="record.battery != null">battery= #{record.battery,jdbcType=INTEGER },</if>
+                <if test="record.model != null">model= #{record.model,jdbcType=VARCHAR },</if>
+                <if test="record.psid != null">psid= #{record.psid,jdbcType=INTEGER },</if>
+                <if test="record.updatedate2 != null">updatedate2= #{record.updatedate2,jdbcType=TIMESTAMP },</if>
+                <if test="record.rmacategoryid != null">rmacategoryid= #{record.rmacategoryid,jdbcType=INTEGER },</if>
+                <if test="record.region != null">region= #{record.region,jdbcType=INTEGER },</if>
+                <if test="record.createUserId != null">create_user_id= #{record.createUserId,jdbcType=INTEGER },</if>
+                <if test="record.proFeatures != null">pro_features= #{record.proFeatures,jdbcType=VARCHAR },</if>
+                <if test="record.categoryid != null">categoryid= #{record.categoryid,jdbcType=INTEGER },</if>
+                <if test="record.subcategoryid != null">subcategoryid= #{record.subcategoryid,jdbcType=INTEGER },</if>
+                <if test="record.isPackage != null">is_package= #{record.isPackage,jdbcType=INTEGER },</if>
+                <if test="record.color != null">color= #{record.color,jdbcType=INTEGER },</if>
+                <if test="record.modelId != null">model_id= #{record.modelId,jdbcType=INTEGER },</if>
+                <if test="record.magnetic != null">magnetic= #{record.magnetic,jdbcType=SMALLINT },</if>
+                <if test="record.skuType != null">sku_type= #{record.skuType,jdbcType=SMALLINT }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -397,69 +402,70 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			skuid,
-			sku,
-			len,
-			width,
-			height,
-			weight,
-			volweight,
-			create_date,
-			active,
-			isdrop,
-			drop_def,
-			isvirtual,
-			line_state,
-			remark,
-			issale,
-			zero_stock,
-			zero_whid,
-			zero_qty,
-			boxtype,
-			pmid,
-			peid,
-			isoriginal,
-			purdesc,
-			purspec,
-			leadtime,
-			skulable,
-			innersku_id,
-			outersku_id,
-			pkgweight,
-			pkgrate,
-			purpkg,
-			stopkg,
-			standard,
-			versionno,
-			updateuserid,
-			updatedate,
-			haspic,
-			updatepicuser,
-			updatepicdate,
-			desc_sourc,
-			line_state_date,
-			purtitle,
-			brand_id,
-			purchaser_id,
-			product_len,
-			product_width,
-			product_height,
-			product_weight,
-			product_volweight,
-			battery,
-			model,
-			psid,
-			updatedate2,
-			rmacategoryid,
-			region,
-			create_user_id,
-			pro_features,
-			categoryid,
-			subcategoryid,
-			is_package,
-			color,
-			model_id,
-			magnetic
+            `skuid`,
+            `sku`,
+            `len`,
+            `width`,
+            `height`,
+            `weight`,
+            `volweight`,
+            `create_date`,
+            `active`,
+            `isdrop`,
+            `drop_def`,
+            `isvirtual`,
+            `line_state`,
+            `remark`,
+            `issale`,
+            `zero_stock`,
+            `zero_whid`,
+            `zero_qty`,
+            `boxtype`,
+            `pmid`,
+            `peid`,
+            `isoriginal`,
+            `purdesc`,
+            `purspec`,
+            `leadtime`,
+            `skulable`,
+            `innersku_id`,
+            `outersku_id`,
+            `pkgweight`,
+            `pkgrate`,
+            `purpkg`,
+            `stopkg`,
+            `standard`,
+            `versionno`,
+            `updateuserid`,
+            `updatedate`,
+            `haspic`,
+            `updatepicuser`,
+            `updatepicdate`,
+            `desc_sourc`,
+            `line_state_date`,
+            `purtitle`,
+            `brand_id`,
+            `purchaser_id`,
+            `product_len`,
+            `product_width`,
+            `product_height`,
+            `product_weight`,
+            `product_volweight`,
+            `battery`,
+            `model`,
+            `psid`,
+            `updatedate2`,
+            `rmacategoryid`,
+            `region`,
+            `create_user_id`,
+            `pro_features`,
+            `categoryid`,
+            `subcategoryid`,
+            `is_package`,
+            `color`,
+            `model_id`,
+            `magnetic`,
+            `sku_type`
 	</sql>
 
 
@@ -591,5 +597,5 @@
         DELETE FROM  bs_item
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-18 05:22:53=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:24:26=========================================== -->
 </mapper>

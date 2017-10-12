@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SalesPlanSumMapper
 * @author
-* @date 2017-09-25 03:11:03
+* @date 2017-10-12 04:27:31
 */
 @Repository
 public interface SalesPlanSumMapper {

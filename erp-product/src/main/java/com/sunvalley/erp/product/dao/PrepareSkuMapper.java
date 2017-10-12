@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: PrepareSkuMapper
 * @author
-* @date 2017-09-18 12:26:10
+* @date 2017-10-12 04:26:20
 */
 @Repository
 public interface PrepareSkuMapper {

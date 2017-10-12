@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemAttrValueLocaleMapper">
-<!-- ================================代码生成开始=2017-09-22 01:50:58=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:22:22=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemAttrValueLocale">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -172,24 +172,24 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			skuid,
-			lang_id,
-			rowflag,
-			fa01,
-			fa02,
-			fa03,
-			fa04,
-			fa05,
-			fa06,
-			fa07,
-			fa08,
-			fa09,
-			fa10,
-			fa11,
-			fa12,
-			fa13,
-			fa14,
-			fa15
+            `skuid`,
+            `lang_id`,
+            `rowflag`,
+            `fa01`,
+            `fa02`,
+            `fa03`,
+            `fa04`,
+            `fa05`,
+            `fa06`,
+            `fa07`,
+            `fa08`,
+            `fa09`,
+            `fa10`,
+            `fa11`,
+            `fa12`,
+            `fa13`,
+            `fa14`,
+            `fa15`
 	</sql>
 
 
@@ -321,5 +321,5 @@
         DELETE FROM  bs_item_attr_value_locale
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-22 01:50:58=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:22:22=========================================== -->
 </mapper>
