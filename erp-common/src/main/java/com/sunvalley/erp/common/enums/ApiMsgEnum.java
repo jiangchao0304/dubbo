@@ -31,7 +31,7 @@ public enum ApiMsgEnum {
         this.resDes = msg;
     }
 
-    public static Map<String, String> getAll() {
+    private static Map<String, String> getAll() {
         Map<String, String> retMap = new LinkedHashMap<String, String>();
         ApiMsgEnum[] enumArr = ApiMsgEnum.values();
         for (ApiMsgEnum aEnum : enumArr) {

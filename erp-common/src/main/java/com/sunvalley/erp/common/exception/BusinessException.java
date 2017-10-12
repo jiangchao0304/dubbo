@@ -16,7 +16,7 @@ import java.util.Map;
  * @Author: jiangchao@bond520.com
  * @Date: 2017-01-06 19:32
  */
-public class BusinessException  extends RuntimeException implements ErpException {
+public class BusinessException  extends RuntimeException implements SunvalleyException {
     private static final long serialVersionUID = 8093803025939797139L;
     private String exceptionCode;
     private String detailMsg;

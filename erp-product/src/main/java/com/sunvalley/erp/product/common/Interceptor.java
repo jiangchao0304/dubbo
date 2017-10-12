@@ -1,12 +1,12 @@
 /*
-* Copyright (c) 2016 bond. All Rights Reserved.
+* Copyright (c) 2016 . All Rights Reserved.
 */
 package com.sunvalley.erp.product.common;
 
 import com.alibaba.fastjson.JSON;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.enums.ApiMsgEnum;
-import com.sunvalley.erp.common.exception.ErpException;
+import com.sunvalley.erp.common.exception.SunvalleyException;
 import com.sunvalley.erp.common.util.DateUtil;
 import com.sunvalley.erp.product.vo.BaseReturnVO;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +14,6 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,20 +22,15 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * 时间统计aop
  *
- * @Author: jiangchao@bond520.com
+ * @Author:
  * @Date: 2017-03-21 11:09
  */
 @Aspect
@@ -66,9 +60,9 @@ public class Interceptor {
              result = joinPoint.proceed(args);
         } catch (Throwable e) {
             e.printStackTrace();
-            if (e instanceof ErpException) {
-                //bondErrorScene(startTime,request,((ErpException)e).getErrCode(),((ErpException)e).getErrMessage(),e);
-                return  new BaseReturnVO( ((ErpException)e).getErrCode(), ((ErpException)e).getErrMessage());
+            if (e instanceof SunvalleyException) {
+                //bondErrorScene(startTime,request,((SunvalleyException)e).getErrCode(),((SunvalleyException)e).getErrMessage(),e);
+                return  new BaseReturnVO( ((SunvalleyException)e).getErrCode(), ((SunvalleyException)e).getErrMessage());
             }else {
                 //bondErrorScene(startTime,request,ApiMsgEnum.SERVICEERROR.getResCode(),e.getMessage(),e);
             }

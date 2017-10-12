@@ -11,7 +11,7 @@ import java.util.Map;
  * @Author:
  * @Date: 2017-01-06 20:08
  */
-public interface ErpException {
+public interface SunvalleyException {
      String getErrCode();
      String getErrMessage();
      Map<String, Object> requestParam();
