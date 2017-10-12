@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: MarketAccountMapper
 * @author
-* @date 2017-10-12 11:31:39
+* @date 2017-10-12 04:25:48
 */
 @Repository
 public interface MarketAccountMapper {

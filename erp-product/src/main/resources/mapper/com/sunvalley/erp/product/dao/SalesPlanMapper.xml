@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.SalesPlanMapper">
-<!-- ================================代码生成开始=2017-09-25 03:10:56=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:27:20=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SalesPlan">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -217,33 +217,33 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			id,
-			org_id,
-			sales_plan_version,
-			plan_type,
-			data_type,
-			p_jan,
-			p_feb,
-			p_mar,
-			p_apr,
-			p_may,
-			p_jun,
-			p_jul,
-			p_aug,
-			p_sep,
-			p_oct,
-			p_nov,
-			p_dec,
-			status,
-			app_state,
-			create_user,
-			create_time,
-			update_user,
-			update_time,
-			sku,
-			country,
-			submit_user,
-			remark
+            `id`,
+            `org_id`,
+            `sales_plan_version`,
+            `plan_type`,
+            `data_type`,
+            `p_jan`,
+            `p_feb`,
+            `p_mar`,
+            `p_apr`,
+            `p_may`,
+            `p_jun`,
+            `p_jul`,
+            `p_aug`,
+            `p_sep`,
+            `p_oct`,
+            `p_nov`,
+            `p_dec`,
+            `status`,
+            `app_state`,
+            `create_user`,
+            `create_time`,
+            `update_user`,
+            `update_time`,
+            `sku`,
+            `country`,
+            `submit_user`,
+            `remark`
 	</sql>
 
 
@@ -375,5 +375,5 @@
         DELETE FROM  so_sales_plan
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-25 03:10:56=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:27:20=========================================== -->
 </mapper>

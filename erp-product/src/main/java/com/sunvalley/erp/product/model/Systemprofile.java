@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:Systemprofile
 * @author
-* @date 2017-10-11 02:51:00
+* @date 2017-10-12 04:28:14
 */
 public class Systemprofile implements Serializable{
 

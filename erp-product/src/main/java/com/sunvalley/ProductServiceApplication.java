@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @MapperScan({"com.sunvalley.erp.product.dao","com.sunvalley.erp.product.daoEX"})
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @EnableEurekaClient
 public class ProductServiceApplication {
 	private static Logger logger = LoggerFactory.getLogger(ProductServiceApplication.class);

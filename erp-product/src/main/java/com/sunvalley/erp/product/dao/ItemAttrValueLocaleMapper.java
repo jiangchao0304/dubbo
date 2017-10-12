@@ -2,14 +2,13 @@ package com.sunvalley.erp.product.dao;
 import com.sunvalley.erp.product.model.ItemAttrValueLocale;
 import com.sunvalley.erp.product.model.ItemAttrValueLocaleExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemAttrValueLocaleMapper
 * @author
-* @date 2017-09-22 01:50:58
+* @date 2017-10-12 04:22:22
 */
 @Repository
 public interface ItemAttrValueLocaleMapper {

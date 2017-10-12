@@ -2,14 +2,13 @@ package com.sunvalley.erp.product.dao;
 import com.sunvalley.erp.product.model.ProductType;
 import com.sunvalley.erp.product.model.ProductTypeExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ProductTypeMapper
 * @author
-* @date 2017-09-22 04:56:15
+* @date 2017-10-12 04:26:48
 */
 @Repository
 public interface ProductTypeMapper {

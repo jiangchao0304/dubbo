@@ -2,14 +2,13 @@ package com.sunvalley.erp.product.dao;
 import com.sunvalley.erp.product.model.ItemLog;
 import com.sunvalley.erp.product.model.ItemLogExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemLogMapper
 * @author
-* @date 2017-09-22 12:18:46
+* @date 2017-10-12 04:24:14
 */
 @Repository
 public interface ItemLogMapper {

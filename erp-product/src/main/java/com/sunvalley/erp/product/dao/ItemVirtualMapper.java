@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemVirtualMapper
 * @author
-* @date 2017-09-28 03:10:43
+* @date 2017-10-12 04:25:39
 */
 @Repository
 public interface ItemVirtualMapper {

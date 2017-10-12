@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.VideoMapper">
-<!-- ================================代码生成开始=2017-10-10 06:12:35=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:28:23=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Video">
         <result column="video_id" property="videoId" jdbcType="INTEGER"/>
@@ -188,14 +188,14 @@
     </delete>
 
 
-    <insert id="insert" parameterType="Video" keyProperty="video_id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="Video" keyProperty="videoId" useGeneratedKeys="true">
         INSERT INTO sys_video
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.Video" keyProperty="video_id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.Video" keyProperty="videoId" useGeneratedKeys="true">
         insert into sys_video
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
@@ -285,5 +285,5 @@
         DELETE FROM  sys_video
         WHERE video_id = #{videoId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-10 06:12:35=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:28:23=========================================== -->
 </mapper>

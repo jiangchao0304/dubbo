@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemFileMapper
 * @author
-* @date 2017-10-10 06:03:04
+* @date 2017-10-12 04:23:13
 */
 @Repository
 public interface ItemFileMapper {

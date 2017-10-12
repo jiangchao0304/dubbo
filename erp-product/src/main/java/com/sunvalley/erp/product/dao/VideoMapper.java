@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: VideoMapper
 * @author
-* @date 2017-10-10 06:12:35
+* @date 2017-10-12 04:28:23
 */
 @Repository
 public interface VideoMapper {

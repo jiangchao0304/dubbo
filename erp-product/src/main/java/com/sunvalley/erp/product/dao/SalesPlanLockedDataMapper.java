@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SalesPlanLockedDataMapper
 * @author
-* @date 2017-09-25 03:10:47
+* @date 2017-10-12 04:27:10
 */
 @Repository
 public interface SalesPlanLockedDataMapper {

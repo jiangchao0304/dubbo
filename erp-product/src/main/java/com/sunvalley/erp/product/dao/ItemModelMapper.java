@@ -2,14 +2,13 @@ package com.sunvalley.erp.product.dao;
 import com.sunvalley.erp.product.model.ItemModel;
 import com.sunvalley.erp.product.model.ItemModelExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
 * @Description: ItemModelMapper
 * @author
-* @date 2017-09-16 11:22:46
+* @date 2017-10-12 04:24:47
 */
 @Repository
 public interface ItemModelMapper {

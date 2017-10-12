@@ -12,6 +12,7 @@ import com.sunvalley.erp.product.daoEX.BomLogExMapper;
 import com.sunvalley.erp.product.model.Bom;
 import com.sunvalley.erp.product.model.BomExample;
 import com.sunvalley.erp.product.model.ItemVirtual;
+import com.sunvalley.erp.to.common.SysSessionTO;
 import com.sunvalley.erp.to.product.BomTO;
 import com.sunvalley.erp.to.product.ImportPackageTO;
 import com.sunvalley.erp.to.product.PreSkuRelationTO;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
@@ -192,7 +194,7 @@ public class BomsService {
      * @author: douglas.jiang
      * @date : 2017/9/28:14:38
      */
-    public boolean savePackageList(int skuId, List<ImportPackageTO> packageTOList){
+    public boolean savePackageList(int skuId, List<ImportPackageTO> packageTOList, SysSessionTO sessionTO){
         //查询sku信息
         SkuBaseInfoTO skuBaseInfoTO = itemService.getSkuBaseInfo(skuId);
 
@@ -206,6 +208,7 @@ public class BomsService {
             skuBaseInfoTO.setSku("");
             skuBaseInfoTO.setPreSku("");
             skuBaseInfoTO.setSkuId(0);
+            skuBaseInfoTO.setSessionTO(sessionTO);
             //插入新的sku信息
             PreSkuRelationTO relationTO =  prepareService.saveSkuBaseInfo(skuBaseInfoTO);
             //添加生成的包材和当前bom的关系
@@ -216,7 +219,6 @@ public class BomsService {
             itemVirtualMapper.insert(itemVirtual);
 
         }
-
         return true;
 
     }

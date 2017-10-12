@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
 public class RpcServerStore {
 	
 //	'4'	=> API_URL_TEK,

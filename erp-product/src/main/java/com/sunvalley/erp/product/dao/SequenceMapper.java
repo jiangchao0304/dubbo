@@ -2,14 +2,13 @@ package com.sunvalley.erp.product.dao;
 import com.sunvalley.erp.product.model.Sequence;
 import com.sunvalley.erp.product.model.SequenceExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
 * @Description: SequenceMapper
 * @author
-* @date 2017-09-15 04:45:44
+* @date 2017-10-12 04:27:43
 */
 @Repository
 public interface SequenceMapper {

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:ItemAttrValueLocale
 * @author
-* @date 2017-09-22 01:50:58
+* @date 2017-10-12 04:22:22
 */
 public class ItemAttrValueLocale implements Serializable{
 

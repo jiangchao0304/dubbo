@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.OrganizationDetailMapper">
-<!-- ================================代码生成开始=2017-09-25 03:10:30=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:25:58=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.OrganizationDetail">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -227,35 +227,35 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			id,
-			for_plan,
-			version_no,
-			ps_id,
-			cm_id,
-			skuid,
-			sku_type,
-			company_name,
-			company_id,
-			dept_id,
-			group_id,
-			team_id,
-			dept_name,
-			group_name,
-			country_code,
-			sku,
-			level_id,
-			for_stock_up,
-			tl_id,
-			stl_id,
-			structure_type,
-			dept_type_id,
-			model_id,
-			model_name,
-			team_name,
-			create_date,
-			create_user_id,
-			update_date,
-			update_user_id
+            `id`,
+            `for_plan`,
+            `version_no`,
+            `ps_id`,
+            `cm_id`,
+            `skuid`,
+            `sku_type`,
+            `company_name`,
+            `company_id`,
+            `dept_id`,
+            `group_id`,
+            `team_id`,
+            `dept_name`,
+            `group_name`,
+            `country_code`,
+            `sku`,
+            `level_id`,
+            `for_stock_up`,
+            `tl_id`,
+            `stl_id`,
+            `structure_type`,
+            `dept_type_id`,
+            `model_id`,
+            `model_name`,
+            `team_name`,
+            `create_date`,
+            `create_user_id`,
+            `update_date`,
+            `update_user_id`
 	</sql>
 
 
@@ -387,5 +387,5 @@
         DELETE FROM  sys_organization_detail
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-25 03:10:30=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:25:58=========================================== -->
 </mapper>

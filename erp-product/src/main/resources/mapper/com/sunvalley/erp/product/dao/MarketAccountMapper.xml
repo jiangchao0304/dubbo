@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.MarketAccountMapper">
-<!-- ================================代码生成开始=2017-10-12 11:31:39=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:25:48=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.MarketAccount">
         <result column="m_a_id" property="maid" jdbcType="INTEGER"/>
@@ -11,7 +11,7 @@
         <result column="paypal_email" property="paypalEmail" jdbcType="VARCHAR"/>
         <result column="smtp_email" property="smtpEmail" jdbcType="VARCHAR"/>
         <result column="email_password" property="emailPassword" jdbcType="VARCHAR"/>
-        <result column="tpl_id" property="tplId" jdbcType="MEDIUMINT"/>
+        <result column="tpl_id" property="tplId" jdbcType="INTEGER"/>
         <result column="smtp_id" property="smtpId" jdbcType="INTEGER"/>
         <result column="rpc_url" property="rpcUrl" jdbcType="VARCHAR"/>
         <result column="channel_class" property="channelClass" jdbcType="TINYINT"/>
@@ -30,7 +30,7 @@
             #{paypalEmail,jdbcType=VARCHAR },
             #{smtpEmail,jdbcType=VARCHAR },
             #{emailPassword,jdbcType=VARCHAR },
-            #{tplId,jdbcType=MEDIUMINT },
+            #{tplId,jdbcType=INTEGER },
             #{smtpId,jdbcType=INTEGER },
             #{rpcUrl,jdbcType=VARCHAR },
             #{channelClass,jdbcType=TINYINT },
@@ -47,7 +47,7 @@
             #{item.paypalEmail,jdbcType=VARCHAR},
             #{item.smtpEmail,jdbcType=VARCHAR},
             #{item.emailPassword,jdbcType=VARCHAR},
-            #{item.tplId,jdbcType=MEDIUMINT},
+            #{item.tplId,jdbcType=INTEGER},
             #{item.smtpId,jdbcType=INTEGER},
             #{item.rpcUrl,jdbcType=VARCHAR},
             #{item.channelClass,jdbcType=TINYINT},
@@ -64,7 +64,7 @@
                 paypal_email= #{paypalEmail,jdbcType=VARCHAR },
                 smtp_email= #{smtpEmail,jdbcType=VARCHAR },
                 email_password= #{emailPassword,jdbcType=VARCHAR },
-                tpl_id= #{tplId,jdbcType=MEDIUMINT },
+                tpl_id= #{tplId,jdbcType=INTEGER },
                 smtp_id= #{smtpId,jdbcType=INTEGER },
                 rpc_url= #{rpcUrl,jdbcType=VARCHAR },
                 channel_class= #{channelClass,jdbcType=TINYINT },
@@ -81,7 +81,7 @@
                 <if test="record.paypalEmail != null">paypal_email= #{record.paypalEmail,jdbcType=VARCHAR },</if>
                 <if test="record.smtpEmail != null">smtp_email= #{record.smtpEmail,jdbcType=VARCHAR },</if>
                 <if test="record.emailPassword != null">email_password= #{record.emailPassword,jdbcType=VARCHAR },</if>
-                <if test="record.tplId != null">tpl_id= #{record.tplId,jdbcType=MEDIUMINT },</if>
+                <if test="record.tplId != null">tpl_id= #{record.tplId,jdbcType=INTEGER },</if>
                 <if test="record.smtpId != null">smtp_id= #{record.smtpId,jdbcType=INTEGER },</if>
                 <if test="record.rpcUrl != null">rpc_url= #{record.rpcUrl,jdbcType=VARCHAR },</if>
                 <if test="record.channelClass != null">channel_class= #{record.channelClass,jdbcType=TINYINT },</if>
@@ -200,14 +200,14 @@
     </delete>
 
 
-    <insert id="insert" parameterType="MarketAccount" keyProperty="m_a_id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="MarketAccount" keyProperty="maid" useGeneratedKeys="true">
         INSERT INTO sve_market_account
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.MarketAccount" keyProperty="m_a_id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.MarketAccount" keyProperty="maid" useGeneratedKeys="true">
         insert into sve_market_account
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
@@ -297,5 +297,5 @@
         DELETE FROM  sve_market_account
         WHERE m_a_id = #{maid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 11:31:39=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:25:48=========================================== -->
 </mapper>

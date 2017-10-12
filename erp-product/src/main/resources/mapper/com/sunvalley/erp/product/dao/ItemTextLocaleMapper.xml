@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemTextLocaleMapper">
-<!-- ================================代码生成开始=2017-09-22 11:33:48=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:32:48=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemTextLocale">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -147,19 +147,19 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			skuid,
-			lang_id,
-			metatile,
-			metakeyword,
-			metadesc,
-			laptop_model,
-			review,
-			specification,
-			part_number,
-			packagedesc,
-			warranty,
-			specification_original,
-			flag
+            `skuid`,
+            `lang_id`,
+            `metatile`,
+            `metakeyword`,
+            `metadesc`,
+            `laptop_model`,
+            `review`,
+            `specification`,
+            `part_number`,
+            `packagedesc`,
+            `warranty`,
+            `specification_original`,
+            `flag`
 	</sql>
 
 
@@ -291,5 +291,5 @@
         DELETE FROM  bs_item_text_locale
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-22 11:33:48=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:32:48=========================================== -->
 </mapper>
