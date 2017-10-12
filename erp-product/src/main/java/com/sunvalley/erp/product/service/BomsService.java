@@ -165,6 +165,7 @@ public class BomsService {
 
 
     private List<BomTO> getBomSkuList(List<BomTO> bomExList){
+        List<BomTO> result = new ArrayList<BomTO>();
         HashMap<String, Object> map = new HashMap<String, Object>();
         List<Integer> skuIdList = new ArrayList<Integer>();
         map.put("skuIdList", skuIdList);
@@ -172,9 +173,9 @@ public class BomsService {
             for (BomTO tempBom :bomExList) {
                 skuIdList.add(tempBom.getSkuid());
             }
-            return bomExMapper.selectSkuInfoBySKuid(map);
+            result =  bomExMapper.selectSkuInfoBySKuid(map);
         }
-        return null;
+        return result;
 
     }
 
