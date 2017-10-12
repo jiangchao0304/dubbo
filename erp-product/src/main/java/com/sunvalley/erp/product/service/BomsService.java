@@ -13,10 +13,7 @@ import com.sunvalley.erp.product.model.Bom;
 import com.sunvalley.erp.product.model.BomExample;
 import com.sunvalley.erp.product.model.ItemVirtual;
 import com.sunvalley.erp.to.common.SysSessionTO;
-import com.sunvalley.erp.to.product.BomTO;
-import com.sunvalley.erp.to.product.ImportPackageTO;
-import com.sunvalley.erp.to.product.PreSkuRelationTO;
-import com.sunvalley.erp.to.product.SkuBaseInfoTO;
+import com.sunvalley.erp.to.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -142,16 +139,30 @@ public class BomsService {
             skuIdList.add(bomEx.getSkuid());
             map.clear();
             map.put("skuIdList", skuIdList);
-            bomEx.setBomOneSkuList(bomExMapper.selectSkuInfoBySKuid(map));
+
+
+            List<BomTO> bomOneSkuList = bomExMapper.selectSkuInfoBySKuid(map);
+
+            bomEx.setBomOneSkuList(bomOneSkuList==null?new ArrayList<>() : bomOneSkuList);
+
             bomEx.setBomTwoSkuList(this.getBomSkuList(bomEx.getBomOneSkuList()));
+
             HashMap<String, Object> param = new HashMap<String, Object>();
             param.put("id", bomEx.getId());
-            bomEx.setBomSupplierList(bomExMapper.selectBomSupplier(param));
+            List<BomSupplierTO> bomSupplierTOList = bomExMapper.selectBomSupplier(param);
+
+            bomEx.setBomSupplierList(bomSupplierTOList==null?new ArrayList<>():bomSupplierTOList);
+
             param.put("skuid", bomEx.getSkuid());
-            bomEx.setBomSkuInfoList(bomExMapper.selectSkuInfoList(param));
+            List<BomTO> bomSkuInfoList = bomExMapper.selectSkuInfoList(param);
+
+            bomEx.setBomSkuInfoList(bomSkuInfoList==null? new ArrayList<>() : bomSkuInfoList);
+
             param.put("offset", (bomEx.getPageNo()-1) * bomEx.getPageSize());
             param.put("pageSize",bomEx.getPageSize());
-            bomEx.setBomLogExList(bomLogExMapper.selectLogList(param));
+            List<BomLogTO> bomLogExList = bomLogExMapper.selectLogList(param);
+            bomEx.setBomLogExList(bomLogExList);
+
             bomEx.setRowCount(bomLogExMapper.selectLogCount(bomEx.getSkuid()));
         }
         if(bomEx==null && skuid!=null){
@@ -161,6 +172,10 @@ public class BomsService {
             bomEx.setSkuid(skuid);
             bomEx.setPurdesc(skuBaseInfoTO.getPurDesc());
             bomEx.setPurspec(skuBaseInfoTO.getPurSpec());
+            bomEx.setBomOneSkuList(new ArrayList<>());
+            bomEx.setBomTwoSkuList(new ArrayList<>());
+            bomEx.setBomSupplierList(new ArrayList<>());
+            bomEx.setBomSkuInfoList(new ArrayList<>());
         }
         return bomEx;
     }
