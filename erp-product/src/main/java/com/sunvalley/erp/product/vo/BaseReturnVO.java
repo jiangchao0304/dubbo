@@ -3,6 +3,7 @@
 */
 package com.sunvalley.erp.product.vo;
 
+import com.sunvalley.erp.common.enums.ApiMsgEnum;
 import com.sunvalley.erp.common.util.DateUtil;
 import com.sunvalley.erp.common.util.TimeUtil;
 
@@ -54,8 +55,8 @@ public class BaseReturnVO  implements Serializable {
     }
 
     public BaseReturnVO(Object data) {
-        this.resCode="000000";
-        this.resDes="success";
+        this.resCode= ApiMsgEnum.CORRECT.getResCode();
+        this.resDes= ApiMsgEnum.CORRECT.getResDes();
         this.data=data;
     }
 }

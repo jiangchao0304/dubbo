@@ -5,17 +5,16 @@ package com.sunvalley.erp.product.service;
 import com.sunvalley.erp.common.component.filtersql.FilterOP;
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.constants.Constants;
+import com.sunvalley.erp.common.exception.BusinessException;
+import com.sunvalley.erp.common.exception.ParameterException;
 import com.sunvalley.erp.common.exception.UniteException;
-import com.sunvalley.erp.common.util.DateUtil;
 import com.sunvalley.erp.common.util.TimeUtil;
 import com.sunvalley.erp.product.dao.*;
 import com.sunvalley.erp.product.daoEX.ItemCustomExMapper;
 import com.sunvalley.erp.product.model.*;
 import com.sunvalley.erp.product.modelEX.PreSkuRelation;
-import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
-import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
@@ -124,7 +123,7 @@ public class ItemService {
                 PropertyUtils.copyProperties(dto, itemLocale);
                 result.add(dto);
             }catch (Exception ex){
-                throw  new FaceException(ex.getMessage());
+                throw  new BusinessException(ex.getMessage());
             }
 
         }
@@ -298,15 +297,13 @@ public class ItemService {
 
 
 
-    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModelTO> filterModels, int langId,int offset, int pageSize) {
+    public PagerTO<SkuListNewTO> listskuListNew(List<FilterModel> filterModels, int langId,int offset, int pageSize) {
         String filtersql="";
         try {
-            List<FilterModel> origFilterModels =  com.sunvalley.erp.product.common.BeanUtils.copyFilterModel(filterModels);
-
-            filtersql= new FilterOP().getFilterSQL(origFilterModels);
+            filtersql= new FilterOP().getFilterSQL(filterModels);
         }
         catch (Exception ex){
-            throw  new FaceException(ex.getMessage());
+            throw  new ParameterException(ex.getMessage());
         }
         HashMap<String,Object> map= new HashMap<String,Object>();
         map.put("filtersql", filtersql);

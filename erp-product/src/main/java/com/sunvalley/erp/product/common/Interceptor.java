@@ -104,59 +104,59 @@ public class Interceptor {
      * 调用service之后.
      * requestTime|responseTime|duringTime|serverIP|clinetIp|device|userId|imei|ticket|systemType|responseCode|requrl|requri|refer|requestParam|responseParam|ex
      */
-//    private void afterInvokeService(Date requestTime, HttpServletRequest request, BaseReturnVO response) {
-//        Date currentDate= DateUtil.getCurrentDate();
-//        long duringTime =currentDate.getTime()-requestTime.getTime();
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(Constants.LOG_SPLITER); //log start
-//        sb.append(DateUtil.getFormateDate("yyyy-MM-dd HH:mm:ss.SSS",requestTime)).append(Constants.LOG_SPLITER); //requestTime
-//        sb.append(DateUtil.getFormateDate("yyyy-MM-dd HH:mm:ss.SSS",currentDate)).append(Constants.LOG_SPLITER); //responseTime
-//        sb.append(duringTime).append(Constants.LOG_SPLITER); //duringTime
-//        sb.append("ip").append(Constants.LOG_SPLITER); //serverIP
-//        sb.append("ip").append(Constants.LOG_SPLITER); //clinetIp
-//        sb.append(request.getHeader("user-agent")).append(Constants.LOG_SPLITER); //device
-//        sb.append(request.getHeader("userId")).append(Constants.LOG_SPLITER); //userId
-//        sb.append(request.getHeader("imei")).append(Constants.LOG_SPLITER); //imei
-//        sb.append(request.getHeader("ticket")).append(Constants.LOG_SPLITER); //ticket
-//        sb.append(request.getHeader("systemType")).append(Constants.LOG_SPLITER); //systemType
-//        sb.append(response.getResCode()).append(Constants.LOG_SPLITER); //responseCode
-//        sb.append(request.getRequestURL()).append(Constants.LOG_SPLITER); //requrl
-//        sb.append(request.getRequestURI()).append(Constants.LOG_SPLITER); //requri
-//        sb.append(request.getHeader("Referer")).append(Constants.LOG_SPLITER); //refer
-//        sb.append(getApiVer(request)).append(Constants.LOG_SPLITER); //apiVersion
-//        sb.append(getParameter(request)).append(Constants.LOG_SPLITER); //requestParam
-//        sb.append(JSON.toJSONString(response.getData())).append(Constants.LOG_SPLITER); //responseParam
-//        sb.append("").append(Constants.LOG_SPLITER);//errorMsg
-//        sb.append("");//Throwable
-//        logger.info(sb.toString());
-//    }
+    private void afterInvokeService(Date requestTime, HttpServletRequest request, BaseReturnVO response) {
+        Date currentDate= DateUtil.getCurrentDateTime();
+        long duringTime =currentDate.getTime()-requestTime.getTime();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LOG_SPLITER); //log start
+        sb.append(DateUtil.formatDateTime(requestTime,"yyyy-MM-dd HH:mm:ss.SSS")).append(Constants.LOG_SPLITER); //requestTime
+        sb.append(DateUtil.formatDateTime(currentDate,"yyyy-MM-dd HH:mm:ss.SSS")).append(Constants.LOG_SPLITER); //responseTime
+        sb.append(duringTime).append(Constants.LOG_SPLITER); //duringTime
+        sb.append("ip").append(Constants.LOG_SPLITER); //serverIP
+        sb.append("ip").append(Constants.LOG_SPLITER); //clinetIp
+        sb.append(request.getHeader("user-agent")).append(Constants.LOG_SPLITER); //device
+        sb.append(request.getHeader("userId")).append(Constants.LOG_SPLITER); //userId
+        sb.append(request.getHeader("imei")).append(Constants.LOG_SPLITER); //imei
+        sb.append(request.getHeader("ticket")).append(Constants.LOG_SPLITER); //ticket
+        sb.append(request.getHeader("systemType")).append(Constants.LOG_SPLITER); //systemType
+        sb.append(response.getResCode()).append(Constants.LOG_SPLITER); //responseCode
+        sb.append(request.getRequestURL()).append(Constants.LOG_SPLITER); //requrl
+        sb.append(request.getRequestURI()).append(Constants.LOG_SPLITER); //requri
+        sb.append(request.getHeader("Referer")).append(Constants.LOG_SPLITER); //refer
+        sb.append(getApiVer(request)).append(Constants.LOG_SPLITER); //apiVersion
+        sb.append(getParameter(request)).append(Constants.LOG_SPLITER); //requestParam
+        sb.append(JSON.toJSONString(response.getData())).append(Constants.LOG_SPLITER); //responseParam
+        sb.append("").append(Constants.LOG_SPLITER);//errorMsg
+        sb.append("");//Throwable
+        logger.info(sb.toString());
+    }
 
 
-//    private void bondErrorScene(Date requestTime, HttpServletRequest request,String responseCode,String errMsg, Throwable e){
-//        Date currentDate= DateUtil.getCurrentDate();
-//        long duringTime = currentDate.getTime()-requestTime.getTime();
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(Constants.LOG_SPLITER); //log start
-//        sb.append(DateUtil.getFormateDate("yyyy-MM-dd HH:mm:ss.SSS",requestTime)).append(Constants.LOG_SPLITER); //requestTime
-//        sb.append(DateUtil.getFormateDate("yyyy-MM-dd HH:mm:ss.SSS",currentDate)).append(Constants.LOG_SPLITER); //responseTime
-//        sb.append(duringTime).append(Constants.LOG_SPLITER); //duringTime
-//        sb.append("ip").append(Constants.LOG_SPLITER); //serverIP
-//        sb.append("ip").append(Constants.LOG_SPLITER); //clinetIp
-//        sb.append(request.getHeader("user-agent")).append(Constants.LOG_SPLITER); //device
-//        sb.append(request.getHeader("userId")).append(Constants.LOG_SPLITER); //userId
-//        sb.append(request.getHeader("imei")).append(Constants.LOG_SPLITER); //imei
-//        sb.append(request.getHeader("ticket")).append(Constants.LOG_SPLITER); //ticket
-//        sb.append(request.getHeader("systemType")).append(Constants.LOG_SPLITER); //systemType
-//        sb.append(responseCode).append(Constants.LOG_SPLITER); //responseCode
-//        sb.append(request.getRequestURL()).append(Constants.LOG_SPLITER); //requrl
-//        sb.append(request.getRequestURI()).append(Constants.LOG_SPLITER); //requr
-//        sb.append(request.getHeader("Referer")).append(Constants.LOG_SPLITER); //refer
-//        sb.append(getApiVer(request)).append(Constants.LOG_SPLITER); //apiVersion
-//        sb.append(getParameter(request)).append(Constants.LOG_SPLITER); //requestParam
-//        sb.append("").append(Constants.LOG_SPLITER); //responseParam
-//        sb.append(errMsg).append(Constants.LOG_SPLITER); //errorMsg
-//        logger.error(sb.toString(),e); //Throwable
-//    }
+    private void bondErrorScene(Date requestTime, HttpServletRequest request,String responseCode,String errMsg, Throwable e){
+        Date currentDate= DateUtil.getCurrentDateTime();
+        long duringTime = currentDate.getTime()-requestTime.getTime();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Constants.LOG_SPLITER); //log start
+        sb.append(DateUtil.formatDateTime(requestTime,"yyyy-MM-dd HH:mm:ss.SSS")).append(Constants.LOG_SPLITER); //requestTime
+        sb.append(DateUtil.formatDateTime(currentDate,"yyyy-MM-dd HH:mm:ss.SSS")).append(Constants.LOG_SPLITER); //responseTime
+        sb.append(duringTime).append(Constants.LOG_SPLITER); //duringTime
+        sb.append("ip").append(Constants.LOG_SPLITER); //serverIP
+        sb.append("ip").append(Constants.LOG_SPLITER); //clinetIp
+        sb.append(request.getHeader("user-agent")).append(Constants.LOG_SPLITER); //device
+        sb.append(request.getHeader("userId")).append(Constants.LOG_SPLITER); //userId
+        sb.append(request.getHeader("imei")).append(Constants.LOG_SPLITER); //imei
+        sb.append(request.getHeader("ticket")).append(Constants.LOG_SPLITER); //ticket
+        sb.append(request.getHeader("systemType")).append(Constants.LOG_SPLITER); //systemType
+        sb.append(responseCode).append(Constants.LOG_SPLITER); //responseCode
+        sb.append(request.getRequestURL()).append(Constants.LOG_SPLITER); //requrl
+        sb.append(request.getRequestURI()).append(Constants.LOG_SPLITER); //requr
+        sb.append(request.getHeader("Referer")).append(Constants.LOG_SPLITER); //refer
+        sb.append(getApiVer(request)).append(Constants.LOG_SPLITER); //apiVersion
+        sb.append(getParameter(request)).append(Constants.LOG_SPLITER); //requestParam
+        sb.append("").append(Constants.LOG_SPLITER); //responseParam
+        sb.append(errMsg).append(Constants.LOG_SPLITER); //errorMsg
+        logger.error(sb.toString(),e); //Throwable
+    }
 
     private String getApiVer(HttpServletRequest request) {
         String jsonData = request.getParameter("jsonData");

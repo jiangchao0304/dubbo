@@ -3,13 +3,13 @@
 */
 package com.sunvalley.erp.product.service;
 import com.sunvalley.erp.common.constants.Constants;
+import com.sunvalley.erp.common.exception.BusinessException;
 import com.sunvalley.erp.product.dao.ItemBrandMapper;
 import com.sunvalley.erp.product.dao.ItemMapper;
 import com.sunvalley.erp.product.dao.ItemModelMapper;
 import com.sunvalley.erp.product.dao.PrepareSkuMapper;
 import com.sunvalley.erp.product.dao.ProductLineMapper;
 import com.sunvalley.erp.product.daoEX.SequenceExMapper;
-import com.sunvalley.erp.face.exception.*;
 import com.sunvalley.erp.product.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -137,7 +137,7 @@ public class SequenceService {
             //查询model编码 预备sku规则 :model编码-三位流水号
             ItemModel itemModel = itemModelMapper.selectByPrimaryKey(modelId);
             if(itemModel==null){
-                throw new FaceException("Model不存在，请检查数据！");
+                throw new BusinessException("Model不存在，请检查数据！");
             }
             do {
                 skuCode = sequenceService.getNextIdSkuCodeY3(itemModel.getModelName()+"-");
@@ -158,10 +158,10 @@ public class SequenceService {
             //小类型号
             ProductLine productLine = productLineMapper.selectByPrimaryKey(subCategoryId);
             if(itemBrand==null){
-                throw new FaceException("品牌信息不存在，请检查数据！");
+                throw new BusinessException("品牌信息不存在，请检查数据！");
             }
             if(productLine==null){
-                throw new FaceException("小类产品线不存在，请检查数据！");
+                throw new BusinessException("小类产品线不存在，请检查数据！");
             }
             do {
                 skuCode = itemBrand.getBrandCode()+"-"+productLine.getModelNo();

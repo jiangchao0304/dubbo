@@ -4,17 +4,6 @@ eureka:
                defaultZone : http://10.20.0.152:8761/eureka/
 server:
        port: 8081
-dubbo:
-      application:
-              name : erp-service-product-sku
-      registry:
-              protocol : zookeeper
-              address : 10.20.0.137:2181
-      protocol:
-              name : dubbo
-              port : 2281
-      owner :
-              douglas.jiang
 
 spring:
       application:
@@ -48,11 +37,6 @@ spring:
                 slf4j:
                   enabled: true
                   statement-executable-sql-log-enable: true
-
-
-      dubbo.scan : com.sunvalley.erp.product.service
-
-
 
 mybatis:
      type-aliases-package : com.sunvalley.erp.product.model,com.sunvalley.erp.to

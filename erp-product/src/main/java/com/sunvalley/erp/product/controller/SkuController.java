@@ -4,6 +4,7 @@
 package com.sunvalley.erp.product.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.product.service.ItemFileService;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
@@ -124,7 +125,7 @@ public class SkuController {
     public BaseReturnVO listSkuListNew(@RequestBody String jsonData){
 
         JSONObject jsObject = JSONObject.parseObject(jsonData);
-        List<FilterModelTO> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModelTO.class);
+        List<FilterModel> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModel.class);
 
         int langId= jsObject.getIntValue("langId");
         int offset= jsObject.getIntValue("offset");

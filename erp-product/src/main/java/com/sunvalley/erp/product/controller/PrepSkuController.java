@@ -4,6 +4,7 @@
 package com.sunvalley.erp.product.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.product.model.ItemLocale;
 import com.sunvalley.erp.product.service.ItemService;
@@ -93,7 +94,7 @@ public class PrepSkuController {
     @ResponseBody
     public BaseReturnVO listModelAndPreSku(@RequestBody String jsonData) {
         JSONObject jsObject = JSONObject.parseObject(jsonData);
-        List<FilterModelTO> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModelTO.class);
+        List<FilterModel> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModel.class);
         int offset= jsObject.getIntValue("offset");
         int pageSize= jsObject.getIntValue("pageSize");
         PagerTO<ModelAndPreSkuTO> result = prepareService.listModelAndPreSku(filterModels,offset,pageSize);

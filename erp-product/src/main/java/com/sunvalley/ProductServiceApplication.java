@@ -12,7 +12,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@ImportResource(value = {"classpath:dubbo-provider.xml"})
 @MapperScan({"com.sunvalley.erp.product.dao","com.sunvalley.erp.product.daoEX"})
 @EnableTransactionManagement
 @EnableEurekaClient
