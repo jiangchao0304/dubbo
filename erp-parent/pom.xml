@@ -13,7 +13,6 @@
     <module>../erp-product</module>
     <module>../erp-domain</module>
     <module>../erp-common</module>
-    <module>../erp-face</module>
   </modules>
 
   <repositories>
@@ -69,7 +68,6 @@
     <zookeeper.version>3.3.3</zookeeper.version>
     <gson.version>1.6</gson.version>
     <jedis.version>2.6.2</jedis.version>
-    <erp-face.version>2.0.0</erp-face.version>
     <erp-common.version>2.0.0</erp-common.version>
     <erp-product.version>2.0.0</erp-product.version>
     <erp-domain.version>2.0.0</erp-domain.version>
@@ -116,11 +114,6 @@
         <version>${erp-common.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>com.sunvalley.erp</groupId>
-        <artifactId>erp-face</artifactId>
-        <version>${erp-face.version}</version>
-      </dependency>
 
       <dependency>
         <groupId>com.sunvalley.erp</groupId>

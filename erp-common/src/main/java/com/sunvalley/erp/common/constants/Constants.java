@@ -254,5 +254,12 @@ public class Constants {
 		public static final int FREE = 0;    //BUE标识
 		public static final int DROPSHIP_STOCK = 225;    //DropshipStock-Buffer标识
 	}
+
+	public static  final String EXTRA_EXCEPTION_MSG_SPLITER="^_^==>";
+
+	/**
+	 * 异常信息分隔符
+	 */
+	public static  final String LOG_SPLITER ="^_^";
 	
 }

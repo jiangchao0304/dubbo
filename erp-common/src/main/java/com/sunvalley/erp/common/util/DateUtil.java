@@ -61,6 +61,15 @@ public class DateUtil {
 	public static final String TIME_FORMAT_STRING2 = "HH时mm分ss秒";
 	public static final String UTC_TIME_FORMAT_STRING="yyyy-MM-dd'T'HH:mm:ss'+'00:00";//2013-11-06T02:10:02+00:00
 
+
+	/**
+	 * 获取当前系统时间(原始格式)
+	 */
+	public static Date getCurrentDateTime() {
+		Date date = new Date(System.currentTimeMillis());
+		return date;
+	}
+
 	/**
 	 * 
 	 * @param yearFormat

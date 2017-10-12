@@ -4,6 +4,7 @@
 package com.sunvalley.erp.product.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.product.service.ItemFileService;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
@@ -16,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * sku controller.
@@ -54,7 +57,15 @@ public class SkuController {
     @ResponseBody
     public BaseReturnVO updateSkuBaseInfo(@RequestBody SkuBaseInfoTO dto) {
         boolean result =  prepareService.updateSkuBaseInfo(dto);
-        return new BaseReturnVO(result);
+
+        Map<String,String> jsonData = new HashMap<>();
+        if(result){
+            jsonData.put("success","true");
+        }else {
+            jsonData.put("success","false");
+        }
+
+        return new BaseReturnVO(jsonData);
     }
 
 
@@ -114,7 +125,7 @@ public class SkuController {
     public BaseReturnVO listSkuListNew(@RequestBody String jsonData){
 
         JSONObject jsObject = JSONObject.parseObject(jsonData);
-        List<FilterModelTO> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModelTO.class);
+        List<FilterModel> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModel.class);
 
         int langId= jsObject.getIntValue("langId");
         int offset= jsObject.getIntValue("offset");

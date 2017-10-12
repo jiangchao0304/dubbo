@@ -32,6 +32,6 @@ public interface IPreSkuService {
 
     SkuBaseInfoTO getPreSkuBaseInfo(Integer skuId, Integer modelId,Integer type);
 
-    PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModelTO> filterModels, int offset, int pageSize);
+    PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize);
 }
 

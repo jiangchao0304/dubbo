@@ -3,17 +3,17 @@
 */
 package com.sunvalley.erp.product.service;
 import com.google.common.base.Strings;
+import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.component.filtersql.FilterOP;
+import com.sunvalley.erp.common.exception.BusinessException;
+import com.sunvalley.erp.common.exception.ParameterException;
 import com.sunvalley.erp.common.util.TimeUtil;
-import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
-import com.sunvalley.erp.product.common.BeanUtils;
 import com.sunvalley.erp.product.dao.*;
 import com.sunvalley.erp.product.daoEX.ItemExMapper;
 import com.sunvalley.erp.product.daoEX.PrepareSkuExMapper;
-import com.sunvalley.erp.face.exception.FaceException;
 import com.sunvalley.erp.product.model.*;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
@@ -118,6 +118,7 @@ public class PrepareService {
         if(list != null && list.size()>0){
             PreSkuTO vo = list.get(0);
             map.put("model_id", vo.getModelId());
+            map.put("model",vo.getModel());
             List<PreSkuGridTO> preSkuList =  prepareSkuExMapper.preSkuGrid(map);
 
             List<PreSkuGridTO> preSkuVOList = new ArrayList<>(preSkuList.size());
@@ -126,7 +127,7 @@ public class PrepareService {
                 try {
                     PropertyUtils.copyProperties(preSkuGridVO, preSkuList.get(i));
                 }catch (Exception ex){
-                    throw  new FaceException(ex.getMessage());
+                    throw  new BusinessException(ex.getMessage());
                 }
 
                 preSkuVOList.add(preSkuGridVO);
@@ -140,7 +141,7 @@ public class PrepareService {
                 try {
                 PropertyUtils.copyProperties(packageSkuVO, packageSkuList.get(i));
                 }catch (Exception ex){
-                    throw  new FaceException(ex.getMessage());
+                    throw  new BusinessException(ex.getMessage());
                 }
                 packageSkuVOList.add(packageSkuVO);
             }
@@ -148,7 +149,7 @@ public class PrepareService {
             vo.setPackageSkuList(packageSkuVOList);
             return vo;
         }else{
-            throw new FaceException("请输入系统存在的Model号！");
+            throw new BusinessException("请输入系统存在的Model号！");
         }
     }
 
@@ -235,13 +236,13 @@ public class PrepareService {
      * @author:
      * @since : 2017-09-15:23:42
      */
-    public PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModelTO> filterModels, int offset, int pageSize) {
+    public PagerTO<ModelAndPreSkuTO> listModelAndPreSku(List<FilterModel> filterModels, int offset, int pageSize) {
 
         HashMap<String,Object> map= new HashMap<String,Object>();
         String filtersql = "";
         String[] ListArray={};
-        List<FilterModelTO> removeFileModelList = new ArrayList<FilterModelTO>();
-        for(FilterModelTO filterModel: filterModels){
+        List<FilterModel> removeFileModelList = new ArrayList<FilterModel>();
+        for(FilterModel filterModel: filterModels){
             if(filterModel.getFiled().equals("mapping.maping")){//安规适用国家
                 removeFileModelList.add(filterModel);
                 String modelList=filterModel.getValue();
@@ -275,14 +276,13 @@ public class PrepareService {
                 filtersql+=filter;
             }
         }
-        for(FilterModelTO filter :removeFileModelList){
+        for(FilterModel filter :removeFileModelList){
             filterModels.remove(filter);
         }
         try {
-            List<com.sunvalley.erp.common.component.filtersql.FilterModel> origFilterModels =  BeanUtils.copyFilterModel(filterModels);
-            filtersql= new FilterOP().getFilterSQL(origFilterModels);
+            filtersql= new FilterOP().getFilterSQL(filterModels);
         }catch (Exception ex){
-            throw  new FaceException(ex.getMessage());
+            throw  new ParameterException(ex.getMessage());
         }
 
         map.put("filtersql", filtersql);
@@ -561,21 +561,21 @@ public class PrepareService {
 
     private void beforeSaveItem(SkuBaseInfoTO item){
         if(item.getLen()<0||item.getLen()>32767)
-            throw new FaceException("PackeagedLen is out of range!");
+            throw new BusinessException("PackeagedLen is out of range!");
         if(item.getWidth()<0||item.getWidth()>32767)
-            throw new FaceException("PackeagedWidth is out of range!");
+            throw new BusinessException("PackeagedWidth is out of range!");
         if(item.getHeight()<0||item.getHeight()>32767)
-            throw new FaceException("PackeagedHeight is out of range!");
+            throw new BusinessException("PackeagedHeight is out of range!");
         if(item.getWeight()<0||item.getWeight()>32767)
-            throw new FaceException("PackeagedWeight is out of range!");
+            throw new BusinessException("PackeagedWeight is out of range!");
         if(item.getProductLen()<=0||item.getProductLen()>32767)
-            throw new FaceException("ProductLen is out of range!");
+            throw new BusinessException("ProductLen is out of range!");
         if(item.getProductWidth()<=0||item.getProductWidth()>32767)
-            throw new FaceException("ProductWidth is out of range!");
+            throw new BusinessException("ProductWidth is out of range!");
         if(item.getProductHeight()<=0||item.getProductHeight()>32767)
-            throw new FaceException("ProductHeight is out of range!");
+            throw new BusinessException("ProductHeight is out of range!");
         if(item.getProductWeight()<=0||item.getProductWeight()>32767)
-            throw new FaceException("ProductWeight is out of range!");
+            throw new BusinessException("ProductWeight is out of range!");
         // 判断内包装sku是否存在
 //        if (item.getInnersku() != null && !item.getInnersku().trim().equals("")) {
 //            Item innerItem = getByID(item.getInnersku());

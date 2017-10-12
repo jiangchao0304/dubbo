@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.dao.MarketAccountMapper">
+<!-- ================================代码生成开始=2017-10-12 11:31:39=========================================== -->
+
+    <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.MarketAccount">
+        <result column="m_a_id" property="maid" jdbcType="INTEGER"/>
+        <result column="market_id" property="marketId" jdbcType="INTEGER"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="account_email" property="accountEmail" jdbcType="VARCHAR"/>
+        <result column="paypal_email" property="paypalEmail" jdbcType="VARCHAR"/>
+        <result column="smtp_email" property="smtpEmail" jdbcType="VARCHAR"/>
+        <result column="email_password" property="emailPassword" jdbcType="VARCHAR"/>
+        <result column="tpl_id" property="tplId" jdbcType="MEDIUMINT"/>
+        <result column="smtp_id" property="smtpId" jdbcType="INTEGER"/>
+        <result column="rpc_url" property="rpcUrl" jdbcType="VARCHAR"/>
+        <result column="channel_class" property="channelClass" jdbcType="TINYINT"/>
+        <result column="abbreviation" property="abbreviation" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="mail_center_id" property="mailCenterId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.MarketAccount" />
+
+    <sql id="Values">
+            #{maid,jdbcType=INTEGER },
+            #{marketId,jdbcType=INTEGER },
+            #{account,jdbcType=VARCHAR },
+            #{accountEmail,jdbcType=VARCHAR },
+            #{paypalEmail,jdbcType=VARCHAR },
+            #{smtpEmail,jdbcType=VARCHAR },
+            #{emailPassword,jdbcType=VARCHAR },
+            #{tplId,jdbcType=MEDIUMINT },
+            #{smtpId,jdbcType=INTEGER },
+            #{rpcUrl,jdbcType=VARCHAR },
+            #{channelClass,jdbcType=TINYINT },
+            #{abbreviation,jdbcType=VARCHAR },
+            #{imgUrl,jdbcType=VARCHAR },
+            #{mailCenterId,jdbcType=VARCHAR }
+    </sql>
+
+    <sql id="ValuesBatch">
+            #{item.maid,jdbcType=INTEGER},
+            #{item.marketId,jdbcType=INTEGER},
+            #{item.account,jdbcType=VARCHAR},
+            #{item.accountEmail,jdbcType=VARCHAR},
+            #{item.paypalEmail,jdbcType=VARCHAR},
+            #{item.smtpEmail,jdbcType=VARCHAR},
+            #{item.emailPassword,jdbcType=VARCHAR},
+            #{item.tplId,jdbcType=MEDIUMINT},
+            #{item.smtpId,jdbcType=INTEGER},
+            #{item.rpcUrl,jdbcType=VARCHAR},
+            #{item.channelClass,jdbcType=TINYINT},
+            #{item.abbreviation,jdbcType=VARCHAR},
+            #{item.imgUrl,jdbcType=VARCHAR},
+            #{item.mailCenterId,jdbcType=VARCHAR}
+    </sql>
+
+    <sql id="Set">
+                m_a_id= #{maid,jdbcType=INTEGER },
+                market_id= #{marketId,jdbcType=INTEGER },
+                account= #{account,jdbcType=VARCHAR },
+                account_email= #{accountEmail,jdbcType=VARCHAR },
+                paypal_email= #{paypalEmail,jdbcType=VARCHAR },
+                smtp_email= #{smtpEmail,jdbcType=VARCHAR },
+                email_password= #{emailPassword,jdbcType=VARCHAR },
+                tpl_id= #{tplId,jdbcType=MEDIUMINT },
+                smtp_id= #{smtpId,jdbcType=INTEGER },
+                rpc_url= #{rpcUrl,jdbcType=VARCHAR },
+                channel_class= #{channelClass,jdbcType=TINYINT },
+                abbreviation= #{abbreviation,jdbcType=VARCHAR },
+                img_url= #{imgUrl,jdbcType=VARCHAR },
+                mail_center_id= #{mailCenterId,jdbcType=VARCHAR }
+    </sql>
+
+    <sql id="SetNotNull">
+                <if test="record.maid != null">m_a_id= #{record.maid,jdbcType=INTEGER },</if>
+                <if test="record.marketId != null">market_id= #{record.marketId,jdbcType=INTEGER },</if>
+                <if test="record.account != null">account= #{record.account,jdbcType=VARCHAR },</if>
+                <if test="record.accountEmail != null">account_email= #{record.accountEmail,jdbcType=VARCHAR },</if>
+                <if test="record.paypalEmail != null">paypal_email= #{record.paypalEmail,jdbcType=VARCHAR },</if>
+                <if test="record.smtpEmail != null">smtp_email= #{record.smtpEmail,jdbcType=VARCHAR },</if>
+                <if test="record.emailPassword != null">email_password= #{record.emailPassword,jdbcType=VARCHAR },</if>
+                <if test="record.tplId != null">tpl_id= #{record.tplId,jdbcType=MEDIUMINT },</if>
+                <if test="record.smtpId != null">smtp_id= #{record.smtpId,jdbcType=INTEGER },</if>
+                <if test="record.rpcUrl != null">rpc_url= #{record.rpcUrl,jdbcType=VARCHAR },</if>
+                <if test="record.channelClass != null">channel_class= #{record.channelClass,jdbcType=TINYINT },</if>
+                <if test="record.abbreviation != null">abbreviation= #{record.abbreviation,jdbcType=VARCHAR },</if>
+                <if test="record.imgUrl != null">img_url= #{record.imgUrl,jdbcType=VARCHAR },</if>
+                <if test="record.mailCenterId != null">mail_center_id= #{record.mailCenterId,jdbcType=VARCHAR }</if>
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                    #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+            `m_a_id`,
+            `market_id`,
+            `account`,
+            `account_email`,
+            `paypal_email`,
+            `smtp_email`,
+            `email_password`,
+            `tpl_id`,
+            `smtp_id`,
+            `rpc_url`,
+            `channel_class`,
+            `abbreviation`,
+            `img_url`,
+            `mail_center_id`
+	</sql>
+
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM sve_market_account
+        WHERE m_a_id = #{maid,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByExample" parameterType="com.sunvalley.erp.product.model.MarketAccountExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sve_market_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.sunvalley.erp.product.model.MarketAccountExample">
+        delete from sve_market_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+    <insert id="insert" parameterType="MarketAccount" keyProperty="m_a_id" useGeneratedKeys="true">
+        INSERT INTO sve_market_account
+        (<include refid="Base_Column_List"></include>)
+        VALUES
+        (<include refid="Values"></include>)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.MarketAccount" keyProperty="m_a_id" useGeneratedKeys="true">
+        insert into sve_market_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="SetNotNull" />
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <include refid="Values" />
+        </trim>
+    </insert>
+
+
+    <select id="countByExample" parameterType="com.sunvalley.erp.product.model.MarketAccountExample" resultType="java.lang.Integer">
+        select count(*) from sve_market_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+
+    <update id="updateByExampleSelective" parameterType="map">
+        UPDATE sve_market_account
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+
+    <update id="updateByExample" parameterType="map">
+        UPDATE sve_market_account
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.sunvalley.erp.product.model.MarketAccount">
+        update sve_market_account
+        <set>
+            <include refid="SetNotNull"></include>
+        </set>
+        WHERE m_a_id = #{maid,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="MarketAccount">
+        UPDATE sve_market_account
+        <set>
+            <include refid="Set"></include>
+        </set>
+        WHERE m_a_id = #{maid,jdbcType=INTEGER}
+
+    </update>
+
+
+    <select id="selectPage" parameterType="com.sunvalley.erp.product.model.MarketAccountExample" resultMap="selectPageResult">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sve_market_account
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        LIMIT ${skipRecordCount} , ${pageSize}
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO sve_market_account
+        (<include refid="Base_Column_List"></include>)
+        values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( <include refid="ValuesBatch"></include> )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM  sve_market_account
+        WHERE m_a_id = #{maid,jdbcType=INTEGER}
+    </delete>
+    <!-- ================================代码生成结束=2017-10-12 11:31:39=========================================== -->
+</mapper>
