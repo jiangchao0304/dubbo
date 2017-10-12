@@ -156,6 +156,13 @@ public class SkuController {
         Object result =  itemFileService.listItemVideo(skuId);
         return new BaseReturnVO(result);
     }
+    
+    @RequestMapping("/listSkuImage/{sku}")
+    @ResponseBody
+    public BaseReturnVO listSkuImage(@PathVariable String sku){
+        Object result =  itemFileService.listItemImages(sku,0);
+        return new BaseReturnVO(result);
+    }
 
 }
 

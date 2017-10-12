@@ -5,6 +5,9 @@ package com.sunvalley.erp.to.product;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 类或方法的功能描述 :TODO
@@ -25,8 +28,73 @@ public class ItemFileTO  implements Serializable {
     private java.lang.String desc;//
     private java.util.Date createDate;//
     private java.util.Date updateDate;//
+    private List<String[]> bigpiclist;
+    private List<String[]> gypiclist;
+    private List<String[]> gywmpiclist;
+    private List<String[]> Rppicslist;
+    private List<String> gypType;
+    private Map<String,List<String[]>> listMap = new HashMap<String,List<String[]>>();
+	private Map<String,List<Integer>> indexMap = new HashMap<String,List<Integer>>();
+	
+    
+ 
+    public List<String> getGypType() {
+		return gypType;
+	}
 
-    public Integer getItemFileId() {
+	public void setGypType(List<String> gypType) {
+		this.gypType = gypType;
+	}
+
+	public Map<String, List<String[]>> getListMap() {
+		return listMap;
+	}
+
+	public void setListMap(Map<String, List<String[]>> listMap) {
+		this.listMap = listMap;
+	}
+
+	public Map<String, List<Integer>> getIndexMap() {
+		return indexMap;
+	}
+
+	public void setIndexMap(Map<String, List<Integer>> indexMap) {
+		this.indexMap = indexMap;
+	}
+
+	public List<String[]> getBigpiclist() {
+		return bigpiclist;
+	}
+
+	public void setBigpiclist(List<String[]> bigpiclist) {
+		this.bigpiclist = bigpiclist;
+	}
+
+	public List<String[]> getGypiclist() {
+		return gypiclist;
+	}
+
+	public void setGypiclist(List<String[]> gypiclist) {
+		this.gypiclist = gypiclist;
+	}
+
+	public List<String[]> getGywmpiclist() {
+		return gywmpiclist;
+	}
+
+	public void setGywmpiclist(List<String[]> gywmpiclist) {
+		this.gywmpiclist = gywmpiclist;
+	}
+
+	public List<String[]> getRppicslist() {
+		return Rppicslist;
+	}
+
+	public void setRppicslist(List<String[]> rppicslist) {
+		Rppicslist = rppicslist;
+	}
+
+	public Integer getItemFileId() {
         return itemFileId;
     }
 
