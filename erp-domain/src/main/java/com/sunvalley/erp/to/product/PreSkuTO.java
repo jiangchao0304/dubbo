@@ -3,6 +3,8 @@
 */
 package com.sunvalley.erp.to.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -37,6 +39,7 @@ public class PreSkuTO implements Serializable {
     private String shippingType;
     private BigDecimal mc;
     private BigDecimal salePrice;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date setupDate;
     private String remark; //model备注
     private Integer battery;

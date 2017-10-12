@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemModelMapper">
-<!-- ================================代码生成开始=2017-09-16 11:22:46=========================================== -->
+<!-- ================================代码生成开始=2017-10-12 04:17:37=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemModel">
         <result column="model_id" property="modelId" jdbcType="INTEGER"/>
@@ -82,22 +82,22 @@
     </sql>
 
     <sql id="SetNotNull">
-                <if test="modelId != null">model_id= #{modelId,jdbcType=INTEGER },</if>
-                <if test="modelName != null">model_name= #{modelName,jdbcType=VARCHAR },</if>
-                <if test="brandId != null">brand_id= #{brandId,jdbcType=INTEGER },</if>
-                <if test="brandCode != null">brand_code= #{brandCode,jdbcType=VARCHAR },</if>
-                <if test="pmId != null">pm_id= #{pmId,jdbcType=INTEGER },</if>
-                <if test="mainCategoryId != null">main_category_id= #{mainCategoryId,jdbcType=INTEGER },</if>
-                <if test="subCategoryId != null">sub_category_id= #{subCategoryId,jdbcType=INTEGER },</if>
-                <if test="battery != null">battery= #{battery,jdbcType=INTEGER },</if>
-                <if test="warranty != null">warranty= #{warranty,jdbcType=INTEGER },</if>
-                <if test="rmacategoryid != null">rmacategoryid= #{rmacategoryid,jdbcType=INTEGER },</if>
-                <if test="magnetic != null">magnetic= #{magnetic,jdbcType=INTEGER },</if>
-                <if test="remark != null">remark= #{remark,jdbcType=VARCHAR },</if>
-                <if test="createUser != null">create_user= #{createUser,jdbcType=INTEGER },</if>
-                <if test="createDate != null">create_date= #{createDate,jdbcType=TIMESTAMP },</if>
-                <if test="updateUser != null">update_user= #{updateUser,jdbcType=INTEGER },</if>
-                <if test="updateDate != null">update_date= #{updateDate,jdbcType=TIMESTAMP }</if>
+                <if test="record.modelId != null">model_id= #{record.modelId,jdbcType=INTEGER },</if>
+                <if test="record.modelName != null">model_name= #{record.modelName,jdbcType=VARCHAR },</if>
+                <if test="record.brandId != null">brand_id= #{record.brandId,jdbcType=INTEGER },</if>
+                <if test="record.brandCode != null">brand_code= #{record.brandCode,jdbcType=VARCHAR },</if>
+                <if test="record.pmId != null">pm_id= #{record.pmId,jdbcType=INTEGER },</if>
+                <if test="record.mainCategoryId != null">main_category_id= #{record.mainCategoryId,jdbcType=INTEGER },</if>
+                <if test="record.subCategoryId != null">sub_category_id= #{record.subCategoryId,jdbcType=INTEGER },</if>
+                <if test="record.battery != null">battery= #{record.battery,jdbcType=INTEGER },</if>
+                <if test="record.warranty != null">warranty= #{record.warranty,jdbcType=INTEGER },</if>
+                <if test="record.rmacategoryid != null">rmacategoryid= #{record.rmacategoryid,jdbcType=INTEGER },</if>
+                <if test="record.magnetic != null">magnetic= #{record.magnetic,jdbcType=INTEGER },</if>
+                <if test="record.remark != null">remark= #{record.remark,jdbcType=VARCHAR },</if>
+                <if test="record.createUser != null">create_user= #{record.createUser,jdbcType=INTEGER },</if>
+                <if test="record.createDate != null">create_date= #{record.createDate,jdbcType=TIMESTAMP },</if>
+                <if test="record.updateUser != null">update_user= #{record.updateUser,jdbcType=INTEGER },</if>
+                <if test="record.updateDate != null">update_date= #{record.updateDate,jdbcType=TIMESTAMP }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -162,22 +162,22 @@
 
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="Base_Column_List">
-			model_id,
-			model_name,
-			brand_id,
-			brand_code,
-			pm_id,
-			main_category_id,
-			sub_category_id,
-			battery,
-			warranty,
-			rmacategoryid,
-			magnetic,
-			remark,
-			create_user,
-			create_date,
-			update_user,
-			update_date
+            `model_id`,
+            `model_name`,
+            `brand_id`,
+            `brand_code`,
+            `pm_id`,
+            `main_category_id`,
+            `sub_category_id`,
+            `battery`,
+            `warranty`,
+            `rmacategoryid`,
+            `magnetic`,
+            `remark`,
+            `create_user`,
+            `create_date`,
+            `update_user`,
+            `update_date`
 	</sql>
 
 
@@ -212,14 +212,14 @@
     </delete>
 
 
-    <insert id="insert" parameterType="ItemModel" keyProperty="model_id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="ItemModel" keyProperty="modelId" useGeneratedKeys="true">
         INSERT INTO bs_item_model
         (<include refid="Base_Column_List"></include>)
         VALUES
         (<include refid="Values"></include>)
     </insert>
 
-    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.ItemModel" keyProperty="model_id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.sunvalley.erp.product.model.ItemModel" keyProperty="modelId" useGeneratedKeys="true">
         insert into bs_item_model
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <include refid="SetNotNull" />
@@ -309,5 +309,5 @@
         DELETE FROM  bs_item_model
         WHERE model_id = #{modelId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-09-16 11:22:46=========================================== -->
+    <!-- ================================代码生成结束=2017-10-12 04:17:37=========================================== -->
 </mapper>
