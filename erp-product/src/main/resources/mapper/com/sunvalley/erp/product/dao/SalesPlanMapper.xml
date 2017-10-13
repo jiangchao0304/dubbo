@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.SalesPlanMapper">
-<!-- ================================代码生成开始=2017-10-12 04:27:20=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:13:29=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SalesPlan">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -93,36 +93,6 @@
             #{item.country,jdbcType=VARCHAR},
             #{item.submitUser,jdbcType=INTEGER},
             #{item.remark,jdbcType=VARCHAR}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                org_id= #{orgId,jdbcType=INTEGER },
-                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
-                plan_type= #{planType,jdbcType=INTEGER },
-                data_type= #{dataType,jdbcType=VARCHAR },
-                p_jan= #{pjan,jdbcType=DECIMAL },
-                p_feb= #{pfeb,jdbcType=DECIMAL },
-                p_mar= #{pmar,jdbcType=DECIMAL },
-                p_apr= #{papr,jdbcType=DECIMAL },
-                p_may= #{pmay,jdbcType=DECIMAL },
-                p_jun= #{pjun,jdbcType=DECIMAL },
-                p_jul= #{pjul,jdbcType=DECIMAL },
-                p_aug= #{paug,jdbcType=DECIMAL },
-                p_sep= #{psep,jdbcType=DECIMAL },
-                p_oct= #{poct,jdbcType=DECIMAL },
-                p_nov= #{pnov,jdbcType=DECIMAL },
-                p_dec= #{pdec,jdbcType=DECIMAL },
-                status= #{status,jdbcType=INTEGER },
-                app_state= #{appState,jdbcType=INTEGER },
-                create_user= #{createUser,jdbcType=INTEGER },
-                create_time= #{createTime,jdbcType=TIMESTAMP },
-                update_user= #{updateUser,jdbcType=INTEGER },
-                update_time= #{updateTime,jdbcType=TIMESTAMP },
-                sku= #{sku,jdbcType=VARCHAR },
-                country= #{country,jdbcType=VARCHAR },
-                submit_user= #{submitUser,jdbcType=INTEGER },
-                remark= #{remark,jdbcType=VARCHAR }
     </sql>
 
     <sql id="SetNotNull">
@@ -319,7 +289,33 @@
     <update id="updateByExample" parameterType="map">
         UPDATE so_sales_plan
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         org_id= #{record.orgId,jdbcType=INTEGER },
+         sales_plan_version= #{record.salesPlanVersion,jdbcType=INTEGER },
+         plan_type= #{record.planType,jdbcType=INTEGER },
+         data_type= #{record.dataType,jdbcType=VARCHAR },
+         p_jan= #{record.pjan,jdbcType=DECIMAL },
+         p_feb= #{record.pfeb,jdbcType=DECIMAL },
+         p_mar= #{record.pmar,jdbcType=DECIMAL },
+         p_apr= #{record.papr,jdbcType=DECIMAL },
+         p_may= #{record.pmay,jdbcType=DECIMAL },
+         p_jun= #{record.pjun,jdbcType=DECIMAL },
+         p_jul= #{record.pjul,jdbcType=DECIMAL },
+         p_aug= #{record.paug,jdbcType=DECIMAL },
+         p_sep= #{record.psep,jdbcType=DECIMAL },
+         p_oct= #{record.poct,jdbcType=DECIMAL },
+         p_nov= #{record.pnov,jdbcType=DECIMAL },
+         p_dec= #{record.pdec,jdbcType=DECIMAL },
+         status= #{record.status,jdbcType=INTEGER },
+         app_state= #{record.appState,jdbcType=INTEGER },
+         create_user= #{record.createUser,jdbcType=INTEGER },
+         create_time= #{record.createTime,jdbcType=TIMESTAMP },
+         update_user= #{record.updateUser,jdbcType=INTEGER },
+         update_time= #{record.updateTime,jdbcType=TIMESTAMP },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         country= #{record.country,jdbcType=VARCHAR },
+         submit_user= #{record.submitUser,jdbcType=INTEGER },
+         remark= #{record.remark,jdbcType=VARCHAR }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -332,14 +328,40 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="SalesPlan">
         UPDATE so_sales_plan
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                org_id= #{orgId,jdbcType=INTEGER },
+                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
+                plan_type= #{planType,jdbcType=INTEGER },
+                data_type= #{dataType,jdbcType=VARCHAR },
+                p_jan= #{pjan,jdbcType=DECIMAL },
+                p_feb= #{pfeb,jdbcType=DECIMAL },
+                p_mar= #{pmar,jdbcType=DECIMAL },
+                p_apr= #{papr,jdbcType=DECIMAL },
+                p_may= #{pmay,jdbcType=DECIMAL },
+                p_jun= #{pjun,jdbcType=DECIMAL },
+                p_jul= #{pjul,jdbcType=DECIMAL },
+                p_aug= #{paug,jdbcType=DECIMAL },
+                p_sep= #{psep,jdbcType=DECIMAL },
+                p_oct= #{poct,jdbcType=DECIMAL },
+                p_nov= #{pnov,jdbcType=DECIMAL },
+                p_dec= #{pdec,jdbcType=DECIMAL },
+                status= #{status,jdbcType=INTEGER },
+                app_state= #{appState,jdbcType=INTEGER },
+                create_user= #{createUser,jdbcType=INTEGER },
+                create_time= #{createTime,jdbcType=TIMESTAMP },
+                update_user= #{updateUser,jdbcType=INTEGER },
+                update_time= #{updateTime,jdbcType=TIMESTAMP },
+                sku= #{sku,jdbcType=VARCHAR },
+                country= #{country,jdbcType=VARCHAR },
+                submit_user= #{submitUser,jdbcType=INTEGER },
+                remark= #{remark,jdbcType=VARCHAR }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -375,5 +397,5 @@
         DELETE FROM  so_sales_plan
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:27:20=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:13:29=========================================== -->
 </mapper>

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
 * @Description: MarketAccountExample
 * @author
-* @date 2017-10-12 04:25:48
+* @date 2017-10-13 02:12:20
 */
 public class MarketAccountExample {
     protected String orderByClause;

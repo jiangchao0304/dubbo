@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemFileMapper">
-<!-- ================================代码生成开始=2017-10-12 04:23:13=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:11:07=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemFile">
         <result column="item_file_id" property="itemFileId" jdbcType="INTEGER"/>
@@ -45,20 +45,6 @@
             #{item.desc,jdbcType=VARCHAR},
             #{item.createDate,jdbcType=TIMESTAMP},
             #{item.updateDate,jdbcType=TIMESTAMP}
-    </sql>
-
-    <sql id="Set">
-                item_file_id= #{itemFileId,jdbcType=INTEGER },
-                file_id= #{fileId,jdbcType=INTEGER },
-                file_name= #{fileName,jdbcType=VARCHAR },
-                file_type= #{fileType,jdbcType=INTEGER },
-                sku_id= #{skuId,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                user_id= #{userId,jdbcType=INTEGER },
-                email= #{email,jdbcType=VARCHAR },
-                desc= #{desc,jdbcType=VARCHAR },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                update_date= #{updateDate,jdbcType=TIMESTAMP }
     </sql>
 
     <sql id="SetNotNull">
@@ -223,7 +209,17 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_file
         <set>
-            <include refid="SetNotNull"></include>
+         item_file_id= #{record.itemFileId,jdbcType=INTEGER },
+         file_id= #{record.fileId,jdbcType=INTEGER },
+         file_name= #{record.fileName,jdbcType=VARCHAR },
+         file_type= #{record.fileType,jdbcType=INTEGER },
+         sku_id= #{record.skuId,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         user_id= #{record.userId,jdbcType=INTEGER },
+         email= #{record.email,jdbcType=VARCHAR },
+         desc= #{record.desc,jdbcType=VARCHAR },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         update_date= #{record.updateDate,jdbcType=TIMESTAMP }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -236,14 +232,24 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE item_file_id = #{itemFileId,jdbcType=INTEGER}
+        WHERE item_file_id = #{record.itemFileId,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemFile">
         UPDATE bs_item_file
         <set>
-            <include refid="Set"></include>
+                item_file_id= #{itemFileId,jdbcType=INTEGER },
+                file_id= #{fileId,jdbcType=INTEGER },
+                file_name= #{fileName,jdbcType=VARCHAR },
+                file_type= #{fileType,jdbcType=INTEGER },
+                sku_id= #{skuId,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                user_id= #{userId,jdbcType=INTEGER },
+                email= #{email,jdbcType=VARCHAR },
+                desc= #{desc,jdbcType=VARCHAR },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                update_date= #{updateDate,jdbcType=TIMESTAMP }
         </set>
         WHERE item_file_id = #{itemFileId,jdbcType=INTEGER}
 
@@ -279,5 +285,5 @@
         DELETE FROM  bs_item_file
         WHERE item_file_id = #{itemFileId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:23:13=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:11:07=========================================== -->
 </mapper>

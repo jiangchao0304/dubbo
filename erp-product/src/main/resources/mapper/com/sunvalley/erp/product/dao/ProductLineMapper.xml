@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ProductLineMapper">
-<!-- ================================代码生成开始=2017-10-12 04:26:29=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:12:59=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ProductLine">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -45,20 +45,6 @@
             #{item.modelNo,jdbcType=VARCHAR},
             #{item.updateUserId,jdbcType=INTEGER},
             #{item.updateDate,jdbcType=TIMESTAMP}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                use_type= #{useType,jdbcType=INTEGER },
-                product_type= #{productType,jdbcType=INTEGER },
-                product_line_name= #{productLineName,jdbcType=VARCHAR },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                status= #{status,jdbcType=INTEGER },
-                product_code= #{productCode,jdbcType=VARCHAR },
-                model_no= #{modelNo,jdbcType=VARCHAR },
-                update_user_id= #{updateUserId,jdbcType=INTEGER },
-                update_date= #{updateDate,jdbcType=TIMESTAMP }
     </sql>
 
     <sql id="SetNotNull">
@@ -223,7 +209,17 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_product_line
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         use_type= #{record.useType,jdbcType=INTEGER },
+         product_type= #{record.productType,jdbcType=INTEGER },
+         product_line_name= #{record.productLineName,jdbcType=VARCHAR },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         status= #{record.status,jdbcType=INTEGER },
+         product_code= #{record.productCode,jdbcType=VARCHAR },
+         model_no= #{record.modelNo,jdbcType=VARCHAR },
+         update_user_id= #{record.updateUserId,jdbcType=INTEGER },
+         update_date= #{record.updateDate,jdbcType=TIMESTAMP }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -236,14 +232,24 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ProductLine">
         UPDATE bs_product_line
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                use_type= #{useType,jdbcType=INTEGER },
+                product_type= #{productType,jdbcType=INTEGER },
+                product_line_name= #{productLineName,jdbcType=VARCHAR },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                status= #{status,jdbcType=INTEGER },
+                product_code= #{productCode,jdbcType=VARCHAR },
+                model_no= #{modelNo,jdbcType=VARCHAR },
+                update_user_id= #{updateUserId,jdbcType=INTEGER },
+                update_date= #{updateDate,jdbcType=TIMESTAMP }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -279,5 +285,5 @@
         DELETE FROM  bs_product_line
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:26:29=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:12:59=========================================== -->
 </mapper>

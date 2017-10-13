@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.SalesPlanLockedDataMapper">
-<!-- ================================代码生成开始=2017-10-12 04:27:10=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:13:23=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SalesPlanLockedData">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -87,34 +87,6 @@
             #{item.month5Sales,jdbcType=INTEGER},
             #{item.month6Sales,jdbcType=INTEGER},
             #{item.vatTaxRate,jdbcType=DECIMAL}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                org_id= #{orgId,jdbcType=INTEGER },
-                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                pur_pec= #{purPec,jdbcType=VARCHAR },
-                model= #{model,jdbcType=VARCHAR },
-                country= #{country,jdbcType=VARCHAR },
-                mc= #{mc,jdbcType=DECIMAL },
-                currency= #{currency,jdbcType=VARCHAR },
-                exchange_rate_version= #{exchangeRateVersion,jdbcType=INTEGER },
-                exchange_rate= #{exchangeRate,jdbcType=DECIMAL },
-                commission_rate= #{commissionRate,jdbcType=DECIMAL },
-                fba_cost= #{fbaCost,jdbcType=DECIMAL },
-                rma_ratio= #{rmaRatio,jdbcType=DECIMAL },
-                rma_formule= #{rmaFormule,jdbcType=VARCHAR },
-                status= #{status,jdbcType=INTEGER },
-                locked_date= #{lockedDate,jdbcType=TIMESTAMP },
-                locked_user= #{lockedUser,jdbcType=INTEGER },
-                month1_sales= #{month1Sales,jdbcType=INTEGER },
-                month2_sales= #{month2Sales,jdbcType=INTEGER },
-                month3_sales= #{month3Sales,jdbcType=INTEGER },
-                month4_sales= #{month4Sales,jdbcType=INTEGER },
-                month5_sales= #{month5Sales,jdbcType=INTEGER },
-                month6_sales= #{month6Sales,jdbcType=INTEGER },
-                vat_tax_rate= #{vatTaxRate,jdbcType=DECIMAL }
     </sql>
 
     <sql id="SetNotNull">
@@ -307,7 +279,31 @@
     <update id="updateByExample" parameterType="map">
         UPDATE so_sales_plan_locked_data
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         org_id= #{record.orgId,jdbcType=INTEGER },
+         sales_plan_version= #{record.salesPlanVersion,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         pur_pec= #{record.purPec,jdbcType=VARCHAR },
+         model= #{record.model,jdbcType=VARCHAR },
+         country= #{record.country,jdbcType=VARCHAR },
+         mc= #{record.mc,jdbcType=DECIMAL },
+         currency= #{record.currency,jdbcType=VARCHAR },
+         exchange_rate_version= #{record.exchangeRateVersion,jdbcType=INTEGER },
+         exchange_rate= #{record.exchangeRate,jdbcType=DECIMAL },
+         commission_rate= #{record.commissionRate,jdbcType=DECIMAL },
+         fba_cost= #{record.fbaCost,jdbcType=DECIMAL },
+         rma_ratio= #{record.rmaRatio,jdbcType=DECIMAL },
+         rma_formule= #{record.rmaFormule,jdbcType=VARCHAR },
+         status= #{record.status,jdbcType=INTEGER },
+         locked_date= #{record.lockedDate,jdbcType=TIMESTAMP },
+         locked_user= #{record.lockedUser,jdbcType=INTEGER },
+         month1_sales= #{record.month1Sales,jdbcType=INTEGER },
+         month2_sales= #{record.month2Sales,jdbcType=INTEGER },
+         month3_sales= #{record.month3Sales,jdbcType=INTEGER },
+         month4_sales= #{record.month4Sales,jdbcType=INTEGER },
+         month5_sales= #{record.month5Sales,jdbcType=INTEGER },
+         month6_sales= #{record.month6Sales,jdbcType=INTEGER },
+         vat_tax_rate= #{record.vatTaxRate,jdbcType=DECIMAL }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -320,14 +316,38 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="SalesPlanLockedData">
         UPDATE so_sales_plan_locked_data
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                org_id= #{orgId,jdbcType=INTEGER },
+                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                pur_pec= #{purPec,jdbcType=VARCHAR },
+                model= #{model,jdbcType=VARCHAR },
+                country= #{country,jdbcType=VARCHAR },
+                mc= #{mc,jdbcType=DECIMAL },
+                currency= #{currency,jdbcType=VARCHAR },
+                exchange_rate_version= #{exchangeRateVersion,jdbcType=INTEGER },
+                exchange_rate= #{exchangeRate,jdbcType=DECIMAL },
+                commission_rate= #{commissionRate,jdbcType=DECIMAL },
+                fba_cost= #{fbaCost,jdbcType=DECIMAL },
+                rma_ratio= #{rmaRatio,jdbcType=DECIMAL },
+                rma_formule= #{rmaFormule,jdbcType=VARCHAR },
+                status= #{status,jdbcType=INTEGER },
+                locked_date= #{lockedDate,jdbcType=TIMESTAMP },
+                locked_user= #{lockedUser,jdbcType=INTEGER },
+                month1_sales= #{month1Sales,jdbcType=INTEGER },
+                month2_sales= #{month2Sales,jdbcType=INTEGER },
+                month3_sales= #{month3Sales,jdbcType=INTEGER },
+                month4_sales= #{month4Sales,jdbcType=INTEGER },
+                month5_sales= #{month5Sales,jdbcType=INTEGER },
+                month6_sales= #{month6Sales,jdbcType=INTEGER },
+                vat_tax_rate= #{vatTaxRate,jdbcType=DECIMAL }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -363,5 +383,5 @@
         DELETE FROM  so_sales_plan_locked_data
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:27:10=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:13:23=========================================== -->
 </mapper>

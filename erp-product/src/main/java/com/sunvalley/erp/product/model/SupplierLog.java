@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:SupplierLog
 * @author
-* @date 2017-10-12 04:28:05
+* @date 2017-10-13 02:13:53
 */
 public class SupplierLog implements Serializable{
 

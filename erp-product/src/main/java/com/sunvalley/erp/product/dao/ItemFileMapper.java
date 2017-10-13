@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemFileMapper
 * @author
-* @date 2017-10-12 04:23:13
+* @date 2017-10-13 02:11:07
 */
 @Repository
 public interface ItemFileMapper {
@@ -31,7 +31,7 @@ public interface ItemFileMapper {
 
     int updateByExample(@Param("record") ItemFile record, @Param("example") ItemFileExample example);
 
-    int updateByPrimaryKeySelective(ItemFile record);
+    int updateByPrimaryKeySelective(@Param("record") ItemFile record);
 
     int updateByPrimaryKey(ItemFile record);
 

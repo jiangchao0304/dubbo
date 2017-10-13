@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemTextLocaleMapper">
-<!-- ================================代码生成开始=2017-10-12 04:32:48=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:12:07=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemTextLocale">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -51,22 +51,6 @@
             #{item.warranty,jdbcType=VARCHAR},
             #{item.specificationOriginal,jdbcType=VARCHAR},
             #{item.flag,jdbcType=BIT}
-    </sql>
-
-    <sql id="Set">
-                skuid= #{skuid,jdbcType=INTEGER },
-                lang_id= #{langId,jdbcType=TINYINT },
-                metatile= #{metatile,jdbcType=VARCHAR },
-                metakeyword= #{metakeyword,jdbcType=VARCHAR },
-                metadesc= #{metadesc,jdbcType=VARCHAR },
-                laptop_model= #{laptopModel,jdbcType=VARCHAR },
-                review= #{review,jdbcType=VARCHAR },
-                specification= #{specification,jdbcType=VARCHAR },
-                part_number= #{partNumber,jdbcType=VARCHAR },
-                packagedesc= #{packagedesc,jdbcType=VARCHAR },
-                warranty= #{warranty,jdbcType=VARCHAR },
-                specification_original= #{specificationOriginal,jdbcType=VARCHAR },
-                flag= #{flag,jdbcType=BIT }
     </sql>
 
     <sql id="SetNotNull">
@@ -235,7 +219,19 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_text_locale
         <set>
-            <include refid="SetNotNull"></include>
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         lang_id= #{record.langId,jdbcType=TINYINT },
+         metatile= #{record.metatile,jdbcType=VARCHAR },
+         metakeyword= #{record.metakeyword,jdbcType=VARCHAR },
+         metadesc= #{record.metadesc,jdbcType=VARCHAR },
+         laptop_model= #{record.laptopModel,jdbcType=VARCHAR },
+         review= #{record.review,jdbcType=VARCHAR },
+         specification= #{record.specification,jdbcType=VARCHAR },
+         part_number= #{record.partNumber,jdbcType=VARCHAR },
+         packagedesc= #{record.packagedesc,jdbcType=VARCHAR },
+         warranty= #{record.warranty,jdbcType=VARCHAR },
+         specification_original= #{record.specificationOriginal,jdbcType=VARCHAR },
+         flag= #{record.flag,jdbcType=BIT }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -248,14 +244,26 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        WHERE skuid = #{record.skuid,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemTextLocale">
         UPDATE bs_item_text_locale
         <set>
-            <include refid="Set"></include>
+                skuid= #{skuid,jdbcType=INTEGER },
+                lang_id= #{langId,jdbcType=TINYINT },
+                metatile= #{metatile,jdbcType=VARCHAR },
+                metakeyword= #{metakeyword,jdbcType=VARCHAR },
+                metadesc= #{metadesc,jdbcType=VARCHAR },
+                laptop_model= #{laptopModel,jdbcType=VARCHAR },
+                review= #{review,jdbcType=VARCHAR },
+                specification= #{specification,jdbcType=VARCHAR },
+                part_number= #{partNumber,jdbcType=VARCHAR },
+                packagedesc= #{packagedesc,jdbcType=VARCHAR },
+                warranty= #{warranty,jdbcType=VARCHAR },
+                specification_original= #{specificationOriginal,jdbcType=VARCHAR },
+                flag= #{flag,jdbcType=BIT }
         </set>
         WHERE skuid = #{skuid,jdbcType=INTEGER}
 
@@ -291,5 +299,5 @@
         DELETE FROM  bs_item_text_locale
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:32:48=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:12:07=========================================== -->
 </mapper>

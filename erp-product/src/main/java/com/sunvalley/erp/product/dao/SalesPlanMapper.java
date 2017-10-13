@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SalesPlanMapper
 * @author
-* @date 2017-10-12 04:27:20
+* @date 2017-10-13 02:13:29
 */
 @Repository
 public interface SalesPlanMapper {
@@ -31,7 +31,7 @@ public interface SalesPlanMapper {
 
     int updateByExample(@Param("record") SalesPlan record, @Param("example") SalesPlanExample example);
 
-    int updateByPrimaryKeySelective(SalesPlan record);
+    int updateByPrimaryKeySelective(@Param("record") SalesPlan record);
 
     int updateByPrimaryKey(SalesPlan record);
 

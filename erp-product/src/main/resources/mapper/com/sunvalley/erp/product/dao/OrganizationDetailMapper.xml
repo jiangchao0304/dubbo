@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.OrganizationDetailMapper">
-<!-- ================================代码生成开始=2017-10-12 04:25:58=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:12:26=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.OrganizationDetail">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -99,38 +99,6 @@
             #{item.createUserId,jdbcType=INTEGER},
             #{item.updateDate,jdbcType=TIMESTAMP},
             #{item.updateUserId,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                for_plan= #{forPlan,jdbcType=INTEGER },
-                version_no= #{versionNo,jdbcType=VARCHAR },
-                ps_id= #{psId,jdbcType=INTEGER },
-                cm_id= #{cmId,jdbcType=INTEGER },
-                skuid= #{skuid,jdbcType=INTEGER },
-                sku_type= #{skuType,jdbcType=TINYINT },
-                company_name= #{companyName,jdbcType=VARCHAR },
-                company_id= #{companyId,jdbcType=INTEGER },
-                dept_id= #{deptId,jdbcType=INTEGER },
-                group_id= #{groupId,jdbcType=INTEGER },
-                team_id= #{teamId,jdbcType=INTEGER },
-                dept_name= #{deptName,jdbcType=VARCHAR },
-                group_name= #{groupName,jdbcType=VARCHAR },
-                country_code= #{countryCode,jdbcType=VARCHAR },
-                sku= #{sku,jdbcType=VARCHAR },
-                level_id= #{levelId,jdbcType=TINYINT },
-                for_stock_up= #{forStockUp,jdbcType=TINYINT },
-                tl_id= #{tlId,jdbcType=INTEGER },
-                stl_id= #{stlId,jdbcType=INTEGER },
-                structure_type= #{structureType,jdbcType=INTEGER },
-                dept_type_id= #{deptTypeId,jdbcType=INTEGER },
-                model_id= #{modelId,jdbcType=INTEGER },
-                model_name= #{modelName,jdbcType=VARCHAR },
-                team_name= #{teamName,jdbcType=VARCHAR },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                update_date= #{updateDate,jdbcType=TIMESTAMP },
-                update_user_id= #{updateUserId,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -331,7 +299,35 @@
     <update id="updateByExample" parameterType="map">
         UPDATE sys_organization_detail
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         for_plan= #{record.forPlan,jdbcType=INTEGER },
+         version_no= #{record.versionNo,jdbcType=VARCHAR },
+         ps_id= #{record.psId,jdbcType=INTEGER },
+         cm_id= #{record.cmId,jdbcType=INTEGER },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         sku_type= #{record.skuType,jdbcType=TINYINT },
+         company_name= #{record.companyName,jdbcType=VARCHAR },
+         company_id= #{record.companyId,jdbcType=INTEGER },
+         dept_id= #{record.deptId,jdbcType=INTEGER },
+         group_id= #{record.groupId,jdbcType=INTEGER },
+         team_id= #{record.teamId,jdbcType=INTEGER },
+         dept_name= #{record.deptName,jdbcType=VARCHAR },
+         group_name= #{record.groupName,jdbcType=VARCHAR },
+         country_code= #{record.countryCode,jdbcType=VARCHAR },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         level_id= #{record.levelId,jdbcType=TINYINT },
+         for_stock_up= #{record.forStockUp,jdbcType=TINYINT },
+         tl_id= #{record.tlId,jdbcType=INTEGER },
+         stl_id= #{record.stlId,jdbcType=INTEGER },
+         structure_type= #{record.structureType,jdbcType=INTEGER },
+         dept_type_id= #{record.deptTypeId,jdbcType=INTEGER },
+         model_id= #{record.modelId,jdbcType=INTEGER },
+         model_name= #{record.modelName,jdbcType=VARCHAR },
+         team_name= #{record.teamName,jdbcType=VARCHAR },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         update_date= #{record.updateDate,jdbcType=TIMESTAMP },
+         update_user_id= #{record.updateUserId,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -344,14 +340,42 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="OrganizationDetail">
         UPDATE sys_organization_detail
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                for_plan= #{forPlan,jdbcType=INTEGER },
+                version_no= #{versionNo,jdbcType=VARCHAR },
+                ps_id= #{psId,jdbcType=INTEGER },
+                cm_id= #{cmId,jdbcType=INTEGER },
+                skuid= #{skuid,jdbcType=INTEGER },
+                sku_type= #{skuType,jdbcType=TINYINT },
+                company_name= #{companyName,jdbcType=VARCHAR },
+                company_id= #{companyId,jdbcType=INTEGER },
+                dept_id= #{deptId,jdbcType=INTEGER },
+                group_id= #{groupId,jdbcType=INTEGER },
+                team_id= #{teamId,jdbcType=INTEGER },
+                dept_name= #{deptName,jdbcType=VARCHAR },
+                group_name= #{groupName,jdbcType=VARCHAR },
+                country_code= #{countryCode,jdbcType=VARCHAR },
+                sku= #{sku,jdbcType=VARCHAR },
+                level_id= #{levelId,jdbcType=TINYINT },
+                for_stock_up= #{forStockUp,jdbcType=TINYINT },
+                tl_id= #{tlId,jdbcType=INTEGER },
+                stl_id= #{stlId,jdbcType=INTEGER },
+                structure_type= #{structureType,jdbcType=INTEGER },
+                dept_type_id= #{deptTypeId,jdbcType=INTEGER },
+                model_id= #{modelId,jdbcType=INTEGER },
+                model_name= #{modelName,jdbcType=VARCHAR },
+                team_name= #{teamName,jdbcType=VARCHAR },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                update_date= #{updateDate,jdbcType=TIMESTAMP },
+                update_user_id= #{updateUserId,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -387,5 +411,5 @@
         DELETE FROM  sys_organization_detail
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:25:58=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:12:26=========================================== -->
 </mapper>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.BomLogMapper">
-<!-- ================================代码生成开始=2017-10-12 04:21:35=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:09:22=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.BomLog">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -33,16 +33,6 @@
             #{item.remark,jdbcType=VARCHAR},
             #{item.bomId,jdbcType=INTEGER},
             #{item.skuid,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                remark= #{remark,jdbcType=VARCHAR },
-                bom_id= #{bomId,jdbcType=INTEGER },
-                skuid= #{skuid,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -199,7 +189,13 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_bom_log
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         remark= #{record.remark,jdbcType=VARCHAR },
+         bom_id= #{record.bomId,jdbcType=INTEGER },
+         skuid= #{record.skuid,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -212,14 +208,20 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="BomLog">
         UPDATE bs_bom_log
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                remark= #{remark,jdbcType=VARCHAR },
+                bom_id= #{bomId,jdbcType=INTEGER },
+                skuid= #{skuid,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -255,5 +257,5 @@
         DELETE FROM  bs_bom_log
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:21:35=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:09:22=========================================== -->
 </mapper>

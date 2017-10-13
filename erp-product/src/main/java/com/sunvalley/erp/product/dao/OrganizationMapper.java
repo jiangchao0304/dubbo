@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: OrganizationMapper
 * @author
-* @date 2017-10-12 04:26:09
+* @date 2017-10-13 02:12:34
 */
 @Repository
 public interface OrganizationMapper {
@@ -31,7 +31,7 @@ public interface OrganizationMapper {
 
     int updateByExample(@Param("record") Organization record, @Param("example") OrganizationExample example);
 
-    int updateByPrimaryKeySelective(Organization record);
+    int updateByPrimaryKeySelective(@Param("record") Organization record);
 
     int updateByPrimaryKey(Organization record);
 

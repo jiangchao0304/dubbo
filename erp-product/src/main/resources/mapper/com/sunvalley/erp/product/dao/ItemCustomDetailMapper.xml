@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemCustomDetailMapper">
-<!-- ================================代码生成开始=2017-10-12 04:22:55=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:10:53=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemCustomDetail">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -33,16 +33,6 @@
             #{item.commodityname,jdbcType=VARCHAR},
             #{item.tariffrates,jdbcType=DOUBLE},
             #{item.secondname,jdbcType=VARCHAR}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                bsitemcustomid= #{bsitemcustomid,jdbcType=INTEGER },
-                stateid= #{stateid,jdbcType=VARCHAR },
-                customscode= #{customscode,jdbcType=VARCHAR },
-                commodityname= #{commodityname,jdbcType=VARCHAR },
-                tariffrates= #{tariffrates,jdbcType=DOUBLE },
-                secondname= #{secondname,jdbcType=VARCHAR }
     </sql>
 
     <sql id="SetNotNull">
@@ -199,7 +189,13 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_custom_detail
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         bsitemcustomid= #{record.bsitemcustomid,jdbcType=INTEGER },
+         stateid= #{record.stateid,jdbcType=VARCHAR },
+         customscode= #{record.customscode,jdbcType=VARCHAR },
+         commodityname= #{record.commodityname,jdbcType=VARCHAR },
+         tariffrates= #{record.tariffrates,jdbcType=DOUBLE },
+         secondname= #{record.secondname,jdbcType=VARCHAR }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -212,14 +208,20 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemCustomDetail">
         UPDATE bs_item_custom_detail
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                bsitemcustomid= #{bsitemcustomid,jdbcType=INTEGER },
+                stateid= #{stateid,jdbcType=VARCHAR },
+                customscode= #{customscode,jdbcType=VARCHAR },
+                commodityname= #{commodityname,jdbcType=VARCHAR },
+                tariffrates= #{tariffrates,jdbcType=DOUBLE },
+                secondname= #{secondname,jdbcType=VARCHAR }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -255,5 +257,5 @@
         DELETE FROM  bs_item_custom_detail
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:22:55=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:10:53=========================================== -->
 </mapper>

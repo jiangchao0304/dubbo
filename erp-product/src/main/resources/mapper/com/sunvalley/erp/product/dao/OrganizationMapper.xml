@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.OrganizationMapper">
-<!-- ================================代码生成开始=2017-10-12 04:26:09=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:12:34=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Organization">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -87,34 +87,6 @@
             #{item.remark,jdbcType=VARCHAR},
             #{item.structureType,jdbcType=INTEGER},
             #{item.oldId,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                organization_name= #{organizationName,jdbcType=VARCHAR },
-                parent_id= #{parentId,jdbcType=INTEGER },
-                model_id= #{modelId,jdbcType=INTEGER },
-                version_no= #{versionNo,jdbcType=VARCHAR },
-                level_id= #{levelId,jdbcType=INTEGER },
-                country_code= #{countryCode,jdbcType=VARCHAR },
-                sku= #{sku,jdbcType=VARCHAR },
-                skuid= #{skuid,jdbcType=INTEGER },
-                dept_type_id= #{deptTypeId,jdbcType=INTEGER },
-                cm_id= #{cmId,jdbcType=INTEGER },
-                ps_id= #{psId,jdbcType=INTEGER },
-                sku_type= #{skuType,jdbcType=INTEGER },
-                status= #{status,jdbcType=INTEGER },
-                for_plan= #{forPlan,jdbcType=INTEGER },
-                for_stock_up= #{forStockUp,jdbcType=TINYINT },
-                tl_id= #{tlId,jdbcType=INTEGER },
-                stl_id= #{stlId,jdbcType=INTEGER },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                update_date= #{updateDate,jdbcType=TIMESTAMP },
-                update_user_id= #{updateUserId,jdbcType=INTEGER },
-                remark= #{remark,jdbcType=VARCHAR },
-                structure_type= #{structureType,jdbcType=INTEGER },
-                old_id= #{oldId,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -307,7 +279,31 @@
     <update id="updateByExample" parameterType="map">
         UPDATE sys_organization
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         organization_name= #{record.organizationName,jdbcType=VARCHAR },
+         parent_id= #{record.parentId,jdbcType=INTEGER },
+         model_id= #{record.modelId,jdbcType=INTEGER },
+         version_no= #{record.versionNo,jdbcType=VARCHAR },
+         level_id= #{record.levelId,jdbcType=INTEGER },
+         country_code= #{record.countryCode,jdbcType=VARCHAR },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         dept_type_id= #{record.deptTypeId,jdbcType=INTEGER },
+         cm_id= #{record.cmId,jdbcType=INTEGER },
+         ps_id= #{record.psId,jdbcType=INTEGER },
+         sku_type= #{record.skuType,jdbcType=INTEGER },
+         status= #{record.status,jdbcType=INTEGER },
+         for_plan= #{record.forPlan,jdbcType=INTEGER },
+         for_stock_up= #{record.forStockUp,jdbcType=TINYINT },
+         tl_id= #{record.tlId,jdbcType=INTEGER },
+         stl_id= #{record.stlId,jdbcType=INTEGER },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         update_date= #{record.updateDate,jdbcType=TIMESTAMP },
+         update_user_id= #{record.updateUserId,jdbcType=INTEGER },
+         remark= #{record.remark,jdbcType=VARCHAR },
+         structure_type= #{record.structureType,jdbcType=INTEGER },
+         old_id= #{record.oldId,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -320,14 +316,38 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="Organization">
         UPDATE sys_organization
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                organization_name= #{organizationName,jdbcType=VARCHAR },
+                parent_id= #{parentId,jdbcType=INTEGER },
+                model_id= #{modelId,jdbcType=INTEGER },
+                version_no= #{versionNo,jdbcType=VARCHAR },
+                level_id= #{levelId,jdbcType=INTEGER },
+                country_code= #{countryCode,jdbcType=VARCHAR },
+                sku= #{sku,jdbcType=VARCHAR },
+                skuid= #{skuid,jdbcType=INTEGER },
+                dept_type_id= #{deptTypeId,jdbcType=INTEGER },
+                cm_id= #{cmId,jdbcType=INTEGER },
+                ps_id= #{psId,jdbcType=INTEGER },
+                sku_type= #{skuType,jdbcType=INTEGER },
+                status= #{status,jdbcType=INTEGER },
+                for_plan= #{forPlan,jdbcType=INTEGER },
+                for_stock_up= #{forStockUp,jdbcType=TINYINT },
+                tl_id= #{tlId,jdbcType=INTEGER },
+                stl_id= #{stlId,jdbcType=INTEGER },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                update_date= #{updateDate,jdbcType=TIMESTAMP },
+                update_user_id= #{updateUserId,jdbcType=INTEGER },
+                remark= #{remark,jdbcType=VARCHAR },
+                structure_type= #{structureType,jdbcType=INTEGER },
+                old_id= #{oldId,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -363,5 +383,5 @@
         DELETE FROM  sys_organization
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:26:09=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:12:34=========================================== -->
 </mapper>

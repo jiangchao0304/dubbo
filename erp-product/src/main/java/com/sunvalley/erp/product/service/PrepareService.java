@@ -216,7 +216,7 @@ public class PrepareService {
             itemLocaleTO.setSku("");
             itemLocaleTO.setSkuid(0);
             itemLocaleTO.setUnitName("");
-            String des= String.format("%s %s %s %s %s",skuBaseInfoTO.getBomDesc(),skuBaseInfoTO.getModel(),
+            String des= String.format("%s %s %s %s %s",skuBaseInfoTO.getBrandDesc(),skuBaseInfoTO.getModel(),
                     skuBaseInfoTO.getProductName(),skuBaseInfoTO.getAnruleStr(),colorStr);
             itemLocaleTO.setDescription(des);
             itemLocaleTOList.add(itemLocaleTO);
@@ -456,6 +456,7 @@ public class PrepareService {
 
         item.setCreateUserId(dto.getSessionTO().getUserId());
 
+        item.setSkuType((short)dto.getSkuType());
 
         item.setCreateDate(TimeUtil.BeiJingTimeNow());
         item.setUpdatedate(TimeUtil.BeiJingTimeNow());

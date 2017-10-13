@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemPackageMapper">
-<!-- ================================代码生成开始=2017-10-12 04:24:59=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:11:48=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemPackage">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -57,24 +57,6 @@
             #{item.createuserid,jdbcType=INTEGER},
             #{item.updatedate,jdbcType=TIMESTAMP},
             #{item.updateuserid,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                skuid= #{skuid,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                len= #{len,jdbcType=SMALLINT },
-                width= #{width,jdbcType=SMALLINT },
-                height= #{height,jdbcType=SMALLINT },
-                weight= #{weight,jdbcType=DECIMAL },
-                volweight= #{volweight,jdbcType=DECIMAL },
-                capacity= #{capacity,jdbcType=INTEGER },
-                linestate= #{linestate,jdbcType=TINYINT },
-                purdesc= #{purdesc,jdbcType=VARCHAR },
-                createdate= #{createdate,jdbcType=TIMESTAMP },
-                createuserid= #{createuserid,jdbcType=INTEGER },
-                updatedate= #{updatedate,jdbcType=TIMESTAMP },
-                updateuserid= #{updateuserid,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -247,7 +229,21 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_package
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         len= #{record.len,jdbcType=SMALLINT },
+         width= #{record.width,jdbcType=SMALLINT },
+         height= #{record.height,jdbcType=SMALLINT },
+         weight= #{record.weight,jdbcType=DECIMAL },
+         volweight= #{record.volweight,jdbcType=DECIMAL },
+         capacity= #{record.capacity,jdbcType=INTEGER },
+         linestate= #{record.linestate,jdbcType=TINYINT },
+         purdesc= #{record.purdesc,jdbcType=VARCHAR },
+         createdate= #{record.createdate,jdbcType=TIMESTAMP },
+         createuserid= #{record.createuserid,jdbcType=INTEGER },
+         updatedate= #{record.updatedate,jdbcType=TIMESTAMP },
+         updateuserid= #{record.updateuserid,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -260,14 +256,28 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemPackage">
         UPDATE bs_item_package
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                skuid= #{skuid,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                len= #{len,jdbcType=SMALLINT },
+                width= #{width,jdbcType=SMALLINT },
+                height= #{height,jdbcType=SMALLINT },
+                weight= #{weight,jdbcType=DECIMAL },
+                volweight= #{volweight,jdbcType=DECIMAL },
+                capacity= #{capacity,jdbcType=INTEGER },
+                linestate= #{linestate,jdbcType=TINYINT },
+                purdesc= #{purdesc,jdbcType=VARCHAR },
+                createdate= #{createdate,jdbcType=TIMESTAMP },
+                createuserid= #{createuserid,jdbcType=INTEGER },
+                updatedate= #{updatedate,jdbcType=TIMESTAMP },
+                updateuserid= #{updateuserid,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -303,5 +313,5 @@
         DELETE FROM  bs_item_package
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:24:59=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:11:48=========================================== -->
 </mapper>
