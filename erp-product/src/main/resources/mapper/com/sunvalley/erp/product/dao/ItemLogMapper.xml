@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemLogMapper">
-<!-- ================================代码生成开始=2017-10-12 04:24:14=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:11:20=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemLog">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -36,17 +36,6 @@
             #{item.opterator,jdbcType=VARCHAR},
             #{item.opteratorid,jdbcType=INTEGER},
             #{item.opdate,jdbcType=TIMESTAMP}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                skuid= #{skuid,jdbcType=INTEGER },
-                optype= #{optype,jdbcType=INTEGER },
-                info_type= #{infoType,jdbcType=INTEGER },
-                opnote= #{opnote,jdbcType=VARCHAR },
-                opterator= #{opterator,jdbcType=VARCHAR },
-                opteratorid= #{opteratorid,jdbcType=INTEGER },
-                opdate= #{opdate,jdbcType=TIMESTAMP }
     </sql>
 
     <sql id="SetNotNull">
@@ -205,7 +194,14 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_log
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         optype= #{record.optype,jdbcType=INTEGER },
+         info_type= #{record.infoType,jdbcType=INTEGER },
+         opnote= #{record.opnote,jdbcType=VARCHAR },
+         opterator= #{record.opterator,jdbcType=VARCHAR },
+         opteratorid= #{record.opteratorid,jdbcType=INTEGER },
+         opdate= #{record.opdate,jdbcType=TIMESTAMP }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -218,14 +214,21 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemLog">
         UPDATE bs_item_log
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                skuid= #{skuid,jdbcType=INTEGER },
+                optype= #{optype,jdbcType=INTEGER },
+                info_type= #{infoType,jdbcType=INTEGER },
+                opnote= #{opnote,jdbcType=VARCHAR },
+                opterator= #{opterator,jdbcType=VARCHAR },
+                opteratorid= #{opteratorid,jdbcType=INTEGER },
+                opdate= #{opdate,jdbcType=TIMESTAMP }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -261,5 +264,5 @@
         DELETE FROM  bs_item_log
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:24:14=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:11:20=========================================== -->
 </mapper>

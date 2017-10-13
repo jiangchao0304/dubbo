@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemAttrValueLocaleMapper">
-<!-- ================================代码生成开始=2017-10-12 04:22:22=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:10:32=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemAttrValueLocale">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -66,27 +66,6 @@
             #{item.fa13,jdbcType=VARCHAR},
             #{item.fa14,jdbcType=VARCHAR},
             #{item.fa15,jdbcType=VARCHAR}
-    </sql>
-
-    <sql id="Set">
-                skuid= #{skuid,jdbcType=INTEGER },
-                lang_id= #{langId,jdbcType=TINYINT },
-                rowflag= #{rowflag,jdbcType=TINYINT },
-                fa01= #{fa01,jdbcType=VARCHAR },
-                fa02= #{fa02,jdbcType=VARCHAR },
-                fa03= #{fa03,jdbcType=VARCHAR },
-                fa04= #{fa04,jdbcType=VARCHAR },
-                fa05= #{fa05,jdbcType=VARCHAR },
-                fa06= #{fa06,jdbcType=VARCHAR },
-                fa07= #{fa07,jdbcType=VARCHAR },
-                fa08= #{fa08,jdbcType=VARCHAR },
-                fa09= #{fa09,jdbcType=VARCHAR },
-                fa10= #{fa10,jdbcType=VARCHAR },
-                fa11= #{fa11,jdbcType=VARCHAR },
-                fa12= #{fa12,jdbcType=VARCHAR },
-                fa13= #{fa13,jdbcType=VARCHAR },
-                fa14= #{fa14,jdbcType=VARCHAR },
-                fa15= #{fa15,jdbcType=VARCHAR }
     </sql>
 
     <sql id="SetNotNull">
@@ -265,7 +244,24 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_attr_value_locale
         <set>
-            <include refid="SetNotNull"></include>
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         lang_id= #{record.langId,jdbcType=TINYINT },
+         rowflag= #{record.rowflag,jdbcType=TINYINT },
+         fa01= #{record.fa01,jdbcType=VARCHAR },
+         fa02= #{record.fa02,jdbcType=VARCHAR },
+         fa03= #{record.fa03,jdbcType=VARCHAR },
+         fa04= #{record.fa04,jdbcType=VARCHAR },
+         fa05= #{record.fa05,jdbcType=VARCHAR },
+         fa06= #{record.fa06,jdbcType=VARCHAR },
+         fa07= #{record.fa07,jdbcType=VARCHAR },
+         fa08= #{record.fa08,jdbcType=VARCHAR },
+         fa09= #{record.fa09,jdbcType=VARCHAR },
+         fa10= #{record.fa10,jdbcType=VARCHAR },
+         fa11= #{record.fa11,jdbcType=VARCHAR },
+         fa12= #{record.fa12,jdbcType=VARCHAR },
+         fa13= #{record.fa13,jdbcType=VARCHAR },
+         fa14= #{record.fa14,jdbcType=VARCHAR },
+         fa15= #{record.fa15,jdbcType=VARCHAR }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -278,14 +274,31 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        WHERE skuid = #{record.skuid,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemAttrValueLocale">
         UPDATE bs_item_attr_value_locale
         <set>
-            <include refid="Set"></include>
+                skuid= #{skuid,jdbcType=INTEGER },
+                lang_id= #{langId,jdbcType=TINYINT },
+                rowflag= #{rowflag,jdbcType=TINYINT },
+                fa01= #{fa01,jdbcType=VARCHAR },
+                fa02= #{fa02,jdbcType=VARCHAR },
+                fa03= #{fa03,jdbcType=VARCHAR },
+                fa04= #{fa04,jdbcType=VARCHAR },
+                fa05= #{fa05,jdbcType=VARCHAR },
+                fa06= #{fa06,jdbcType=VARCHAR },
+                fa07= #{fa07,jdbcType=VARCHAR },
+                fa08= #{fa08,jdbcType=VARCHAR },
+                fa09= #{fa09,jdbcType=VARCHAR },
+                fa10= #{fa10,jdbcType=VARCHAR },
+                fa11= #{fa11,jdbcType=VARCHAR },
+                fa12= #{fa12,jdbcType=VARCHAR },
+                fa13= #{fa13,jdbcType=VARCHAR },
+                fa14= #{fa14,jdbcType=VARCHAR },
+                fa15= #{fa15,jdbcType=VARCHAR }
         </set>
         WHERE skuid = #{skuid,jdbcType=INTEGER}
 
@@ -321,5 +334,5 @@
         DELETE FROM  bs_item_attr_value_locale
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:22:22=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:10:32=========================================== -->
 </mapper>

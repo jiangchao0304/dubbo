@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.MarketAccountMapper">
-<!-- ================================代码生成开始=2017-10-12 04:25:48=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:12:20=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.MarketAccount">
         <result column="m_a_id" property="maid" jdbcType="INTEGER"/>
@@ -54,23 +54,6 @@
             #{item.abbreviation,jdbcType=VARCHAR},
             #{item.imgUrl,jdbcType=VARCHAR},
             #{item.mailCenterId,jdbcType=VARCHAR}
-    </sql>
-
-    <sql id="Set">
-                m_a_id= #{maid,jdbcType=INTEGER },
-                market_id= #{marketId,jdbcType=INTEGER },
-                account= #{account,jdbcType=VARCHAR },
-                account_email= #{accountEmail,jdbcType=VARCHAR },
-                paypal_email= #{paypalEmail,jdbcType=VARCHAR },
-                smtp_email= #{smtpEmail,jdbcType=VARCHAR },
-                email_password= #{emailPassword,jdbcType=VARCHAR },
-                tpl_id= #{tplId,jdbcType=INTEGER },
-                smtp_id= #{smtpId,jdbcType=INTEGER },
-                rpc_url= #{rpcUrl,jdbcType=VARCHAR },
-                channel_class= #{channelClass,jdbcType=TINYINT },
-                abbreviation= #{abbreviation,jdbcType=VARCHAR },
-                img_url= #{imgUrl,jdbcType=VARCHAR },
-                mail_center_id= #{mailCenterId,jdbcType=VARCHAR }
     </sql>
 
     <sql id="SetNotNull">
@@ -241,7 +224,20 @@
     <update id="updateByExample" parameterType="map">
         UPDATE sve_market_account
         <set>
-            <include refid="SetNotNull"></include>
+         m_a_id= #{record.maid,jdbcType=INTEGER },
+         market_id= #{record.marketId,jdbcType=INTEGER },
+         account= #{record.account,jdbcType=VARCHAR },
+         account_email= #{record.accountEmail,jdbcType=VARCHAR },
+         paypal_email= #{record.paypalEmail,jdbcType=VARCHAR },
+         smtp_email= #{record.smtpEmail,jdbcType=VARCHAR },
+         email_password= #{record.emailPassword,jdbcType=VARCHAR },
+         tpl_id= #{record.tplId,jdbcType=INTEGER },
+         smtp_id= #{record.smtpId,jdbcType=INTEGER },
+         rpc_url= #{record.rpcUrl,jdbcType=VARCHAR },
+         channel_class= #{record.channelClass,jdbcType=TINYINT },
+         abbreviation= #{record.abbreviation,jdbcType=VARCHAR },
+         img_url= #{record.imgUrl,jdbcType=VARCHAR },
+         mail_center_id= #{record.mailCenterId,jdbcType=VARCHAR }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -254,14 +250,27 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE m_a_id = #{maid,jdbcType=INTEGER}
+        WHERE m_a_id = #{record.maid,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="MarketAccount">
         UPDATE sve_market_account
         <set>
-            <include refid="Set"></include>
+                m_a_id= #{maid,jdbcType=INTEGER },
+                market_id= #{marketId,jdbcType=INTEGER },
+                account= #{account,jdbcType=VARCHAR },
+                account_email= #{accountEmail,jdbcType=VARCHAR },
+                paypal_email= #{paypalEmail,jdbcType=VARCHAR },
+                smtp_email= #{smtpEmail,jdbcType=VARCHAR },
+                email_password= #{emailPassword,jdbcType=VARCHAR },
+                tpl_id= #{tplId,jdbcType=INTEGER },
+                smtp_id= #{smtpId,jdbcType=INTEGER },
+                rpc_url= #{rpcUrl,jdbcType=VARCHAR },
+                channel_class= #{channelClass,jdbcType=TINYINT },
+                abbreviation= #{abbreviation,jdbcType=VARCHAR },
+                img_url= #{imgUrl,jdbcType=VARCHAR },
+                mail_center_id= #{mailCenterId,jdbcType=VARCHAR }
         </set>
         WHERE m_a_id = #{maid,jdbcType=INTEGER}
 
@@ -297,5 +306,5 @@
         DELETE FROM  sve_market_account
         WHERE m_a_id = #{maid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:25:48=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:12:20=========================================== -->
 </mapper>

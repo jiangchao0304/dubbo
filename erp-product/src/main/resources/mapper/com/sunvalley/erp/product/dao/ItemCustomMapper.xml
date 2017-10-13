@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemCustomMapper">
-<!-- ================================代码生成开始=2017-10-12 04:23:04=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:11:00=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemCustom">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -69,28 +69,6 @@
             #{item.itemStatus,jdbcType=INTEGER},
             #{item.skuStatus,jdbcType=INTEGER},
             #{item.reportingElements,jdbcType=VARCHAR}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                skuid= #{skuid,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                stateid= #{stateid,jdbcType=VARCHAR },
-                cncustomscode= #{cncustomscode,jdbcType=VARCHAR },
-                importchecking= #{importchecking,jdbcType=TINYINT },
-                exportchecking= #{exportchecking,jdbcType=TINYINT },
-                commodityunit= #{commodityunit,jdbcType=VARCHAR },
-                cncommodityname= #{cncommodityname,jdbcType=VARCHAR },
-                refundrate= #{refundrate,jdbcType=DOUBLE },
-                createuserid= #{createuserid,jdbcType=INTEGER },
-                createdate= #{createdate,jdbcType=TIMESTAMP },
-                updateuserid= #{updateuserid,jdbcType=INTEGER },
-                updatedate= #{updatedate,jdbcType=TIMESTAMP },
-                category_name_id= #{categoryNameId,jdbcType=INTEGER },
-                customs_model= #{customsModel,jdbcType=VARCHAR },
-                item_status= #{itemStatus,jdbcType=INTEGER },
-                sku_status= #{skuStatus,jdbcType=INTEGER },
-                reporting_elements= #{reportingElements,jdbcType=VARCHAR }
     </sql>
 
     <sql id="SetNotNull">
@@ -271,7 +249,25 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_custom
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         stateid= #{record.stateid,jdbcType=VARCHAR },
+         cncustomscode= #{record.cncustomscode,jdbcType=VARCHAR },
+         importchecking= #{record.importchecking,jdbcType=TINYINT },
+         exportchecking= #{record.exportchecking,jdbcType=TINYINT },
+         commodityunit= #{record.commodityunit,jdbcType=VARCHAR },
+         cncommodityname= #{record.cncommodityname,jdbcType=VARCHAR },
+         refundrate= #{record.refundrate,jdbcType=DOUBLE },
+         createuserid= #{record.createuserid,jdbcType=INTEGER },
+         createdate= #{record.createdate,jdbcType=TIMESTAMP },
+         updateuserid= #{record.updateuserid,jdbcType=INTEGER },
+         updatedate= #{record.updatedate,jdbcType=TIMESTAMP },
+         category_name_id= #{record.categoryNameId,jdbcType=INTEGER },
+         customs_model= #{record.customsModel,jdbcType=VARCHAR },
+         item_status= #{record.itemStatus,jdbcType=INTEGER },
+         sku_status= #{record.skuStatus,jdbcType=INTEGER },
+         reporting_elements= #{record.reportingElements,jdbcType=VARCHAR }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -284,14 +280,32 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemCustom">
         UPDATE bs_item_custom
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                skuid= #{skuid,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                stateid= #{stateid,jdbcType=VARCHAR },
+                cncustomscode= #{cncustomscode,jdbcType=VARCHAR },
+                importchecking= #{importchecking,jdbcType=TINYINT },
+                exportchecking= #{exportchecking,jdbcType=TINYINT },
+                commodityunit= #{commodityunit,jdbcType=VARCHAR },
+                cncommodityname= #{cncommodityname,jdbcType=VARCHAR },
+                refundrate= #{refundrate,jdbcType=DOUBLE },
+                createuserid= #{createuserid,jdbcType=INTEGER },
+                createdate= #{createdate,jdbcType=TIMESTAMP },
+                updateuserid= #{updateuserid,jdbcType=INTEGER },
+                updatedate= #{updatedate,jdbcType=TIMESTAMP },
+                category_name_id= #{categoryNameId,jdbcType=INTEGER },
+                customs_model= #{customsModel,jdbcType=VARCHAR },
+                item_status= #{itemStatus,jdbcType=INTEGER },
+                sku_status= #{skuStatus,jdbcType=INTEGER },
+                reporting_elements= #{reportingElements,jdbcType=VARCHAR }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -327,5 +341,5 @@
         DELETE FROM  bs_item_custom
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:23:04=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:11:00=========================================== -->
 </mapper>

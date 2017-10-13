@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemMapper">
-<!-- ================================代码生成开始=2017-10-12 04:24:26=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:11:30=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Item">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -204,73 +204,6 @@
             #{item.modelId,jdbcType=INTEGER},
             #{item.magnetic,jdbcType=SMALLINT},
             #{item.skuType,jdbcType=SMALLINT}
-    </sql>
-
-    <sql id="Set">
-                skuid= #{skuid,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                len= #{len,jdbcType=SMALLINT },
-                width= #{width,jdbcType=SMALLINT },
-                height= #{height,jdbcType=SMALLINT },
-                weight= #{weight,jdbcType=SMALLINT },
-                volweight= #{volweight,jdbcType=SMALLINT },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                active= #{active,jdbcType=SMALLINT },
-                isdrop= #{isdrop,jdbcType=BIT },
-                drop_def= #{dropDef,jdbcType=BIT },
-                isvirtual= #{isvirtual,jdbcType=TINYINT },
-                line_state= #{lineState,jdbcType=TINYINT },
-                remark= #{remark,jdbcType=VARCHAR },
-                issale= #{issale,jdbcType=BIT },
-                zero_stock= #{zeroStock,jdbcType=BIT },
-                zero_whid= #{zeroWhid,jdbcType=SMALLINT },
-                zero_qty= #{zeroQty,jdbcType=SMALLINT },
-                boxtype= #{boxtype,jdbcType=TINYINT },
-                pmid= #{pmid,jdbcType=INTEGER },
-                peid= #{peid,jdbcType=INTEGER },
-                isoriginal= #{isoriginal,jdbcType=BIT },
-                purdesc= #{purdesc,jdbcType=VARCHAR },
-                purspec= #{purspec,jdbcType=VARCHAR },
-                leadtime= #{leadtime,jdbcType=TINYINT },
-                skulable= #{skulable,jdbcType=VARCHAR },
-                innersku_id= #{innerskuId,jdbcType=INTEGER },
-                outersku_id= #{outerskuId,jdbcType=INTEGER },
-                pkgweight= #{pkgweight,jdbcType=SMALLINT },
-                pkgrate= #{pkgrate,jdbcType=SMALLINT },
-                purpkg= #{purpkg,jdbcType=VARCHAR },
-                stopkg= #{stopkg,jdbcType=VARCHAR },
-                standard= #{standard,jdbcType=INTEGER },
-                versionno= #{versionno,jdbcType=SMALLINT },
-                updateuserid= #{updateuserid,jdbcType=INTEGER },
-                updatedate= #{updatedate,jdbcType=TIMESTAMP },
-                haspic= #{haspic,jdbcType=BIT },
-                updatepicuser= #{updatepicuser,jdbcType=VARCHAR },
-                updatepicdate= #{updatepicdate,jdbcType=TIMESTAMP },
-                desc_sourc= #{descSourc,jdbcType=VARCHAR },
-                line_state_date= #{lineStateDate,jdbcType=TIMESTAMP },
-                purtitle= #{purtitle,jdbcType=VARCHAR },
-                brand_id= #{brandId,jdbcType=INTEGER },
-                purchaser_id= #{purchaserId,jdbcType=INTEGER },
-                product_len= #{productLen,jdbcType=SMALLINT },
-                product_width= #{productWidth,jdbcType=SMALLINT },
-                product_height= #{productHeight,jdbcType=SMALLINT },
-                product_weight= #{productWeight,jdbcType=SMALLINT },
-                product_volweight= #{productVolweight,jdbcType=SMALLINT },
-                battery= #{battery,jdbcType=INTEGER },
-                model= #{model,jdbcType=VARCHAR },
-                psid= #{psid,jdbcType=INTEGER },
-                updatedate2= #{updatedate2,jdbcType=TIMESTAMP },
-                rmacategoryid= #{rmacategoryid,jdbcType=INTEGER },
-                region= #{region,jdbcType=INTEGER },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                pro_features= #{proFeatures,jdbcType=VARCHAR },
-                categoryid= #{categoryid,jdbcType=INTEGER },
-                subcategoryid= #{subcategoryid,jdbcType=INTEGER },
-                is_package= #{isPackage,jdbcType=INTEGER },
-                color= #{color,jdbcType=INTEGER },
-                model_id= #{modelId,jdbcType=INTEGER },
-                magnetic= #{magnetic,jdbcType=SMALLINT },
-                sku_type= #{skuType,jdbcType=SMALLINT }
     </sql>
 
     <sql id="SetNotNull">
@@ -541,7 +474,70 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item
         <set>
-            <include refid="SetNotNull"></include>
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         len= #{record.len,jdbcType=SMALLINT },
+         width= #{record.width,jdbcType=SMALLINT },
+         height= #{record.height,jdbcType=SMALLINT },
+         weight= #{record.weight,jdbcType=SMALLINT },
+         volweight= #{record.volweight,jdbcType=SMALLINT },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         active= #{record.active,jdbcType=SMALLINT },
+         isdrop= #{record.isdrop,jdbcType=BIT },
+         drop_def= #{record.dropDef,jdbcType=BIT },
+         isvirtual= #{record.isvirtual,jdbcType=TINYINT },
+         line_state= #{record.lineState,jdbcType=TINYINT },
+         remark= #{record.remark,jdbcType=VARCHAR },
+         issale= #{record.issale,jdbcType=BIT },
+         zero_stock= #{record.zeroStock,jdbcType=BIT },
+         zero_whid= #{record.zeroWhid,jdbcType=SMALLINT },
+         zero_qty= #{record.zeroQty,jdbcType=SMALLINT },
+         boxtype= #{record.boxtype,jdbcType=TINYINT },
+         pmid= #{record.pmid,jdbcType=INTEGER },
+         peid= #{record.peid,jdbcType=INTEGER },
+         isoriginal= #{record.isoriginal,jdbcType=BIT },
+         purdesc= #{record.purdesc,jdbcType=VARCHAR },
+         purspec= #{record.purspec,jdbcType=VARCHAR },
+         leadtime= #{record.leadtime,jdbcType=TINYINT },
+         skulable= #{record.skulable,jdbcType=VARCHAR },
+         innersku_id= #{record.innerskuId,jdbcType=INTEGER },
+         outersku_id= #{record.outerskuId,jdbcType=INTEGER },
+         pkgweight= #{record.pkgweight,jdbcType=SMALLINT },
+         pkgrate= #{record.pkgrate,jdbcType=SMALLINT },
+         purpkg= #{record.purpkg,jdbcType=VARCHAR },
+         stopkg= #{record.stopkg,jdbcType=VARCHAR },
+         standard= #{record.standard,jdbcType=INTEGER },
+         versionno= #{record.versionno,jdbcType=SMALLINT },
+         updateuserid= #{record.updateuserid,jdbcType=INTEGER },
+         updatedate= #{record.updatedate,jdbcType=TIMESTAMP },
+         haspic= #{record.haspic,jdbcType=BIT },
+         updatepicuser= #{record.updatepicuser,jdbcType=VARCHAR },
+         updatepicdate= #{record.updatepicdate,jdbcType=TIMESTAMP },
+         desc_sourc= #{record.descSourc,jdbcType=VARCHAR },
+         line_state_date= #{record.lineStateDate,jdbcType=TIMESTAMP },
+         purtitle= #{record.purtitle,jdbcType=VARCHAR },
+         brand_id= #{record.brandId,jdbcType=INTEGER },
+         purchaser_id= #{record.purchaserId,jdbcType=INTEGER },
+         product_len= #{record.productLen,jdbcType=SMALLINT },
+         product_width= #{record.productWidth,jdbcType=SMALLINT },
+         product_height= #{record.productHeight,jdbcType=SMALLINT },
+         product_weight= #{record.productWeight,jdbcType=SMALLINT },
+         product_volweight= #{record.productVolweight,jdbcType=SMALLINT },
+         battery= #{record.battery,jdbcType=INTEGER },
+         model= #{record.model,jdbcType=VARCHAR },
+         psid= #{record.psid,jdbcType=INTEGER },
+         updatedate2= #{record.updatedate2,jdbcType=TIMESTAMP },
+         rmacategoryid= #{record.rmacategoryid,jdbcType=INTEGER },
+         region= #{record.region,jdbcType=INTEGER },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         pro_features= #{record.proFeatures,jdbcType=VARCHAR },
+         categoryid= #{record.categoryid,jdbcType=INTEGER },
+         subcategoryid= #{record.subcategoryid,jdbcType=INTEGER },
+         is_package= #{record.isPackage,jdbcType=INTEGER },
+         color= #{record.color,jdbcType=INTEGER },
+         model_id= #{record.modelId,jdbcType=INTEGER },
+         magnetic= #{record.magnetic,jdbcType=SMALLINT },
+         sku_type= #{record.skuType,jdbcType=SMALLINT }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -554,14 +550,77 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE skuid = #{skuid,jdbcType=INTEGER}
+        WHERE skuid = #{record.skuid,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="Item">
         UPDATE bs_item
         <set>
-            <include refid="Set"></include>
+                skuid= #{skuid,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                len= #{len,jdbcType=SMALLINT },
+                width= #{width,jdbcType=SMALLINT },
+                height= #{height,jdbcType=SMALLINT },
+                weight= #{weight,jdbcType=SMALLINT },
+                volweight= #{volweight,jdbcType=SMALLINT },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                active= #{active,jdbcType=SMALLINT },
+                isdrop= #{isdrop,jdbcType=BIT },
+                drop_def= #{dropDef,jdbcType=BIT },
+                isvirtual= #{isvirtual,jdbcType=TINYINT },
+                line_state= #{lineState,jdbcType=TINYINT },
+                remark= #{remark,jdbcType=VARCHAR },
+                issale= #{issale,jdbcType=BIT },
+                zero_stock= #{zeroStock,jdbcType=BIT },
+                zero_whid= #{zeroWhid,jdbcType=SMALLINT },
+                zero_qty= #{zeroQty,jdbcType=SMALLINT },
+                boxtype= #{boxtype,jdbcType=TINYINT },
+                pmid= #{pmid,jdbcType=INTEGER },
+                peid= #{peid,jdbcType=INTEGER },
+                isoriginal= #{isoriginal,jdbcType=BIT },
+                purdesc= #{purdesc,jdbcType=VARCHAR },
+                purspec= #{purspec,jdbcType=VARCHAR },
+                leadtime= #{leadtime,jdbcType=TINYINT },
+                skulable= #{skulable,jdbcType=VARCHAR },
+                innersku_id= #{innerskuId,jdbcType=INTEGER },
+                outersku_id= #{outerskuId,jdbcType=INTEGER },
+                pkgweight= #{pkgweight,jdbcType=SMALLINT },
+                pkgrate= #{pkgrate,jdbcType=SMALLINT },
+                purpkg= #{purpkg,jdbcType=VARCHAR },
+                stopkg= #{stopkg,jdbcType=VARCHAR },
+                standard= #{standard,jdbcType=INTEGER },
+                versionno= #{versionno,jdbcType=SMALLINT },
+                updateuserid= #{updateuserid,jdbcType=INTEGER },
+                updatedate= #{updatedate,jdbcType=TIMESTAMP },
+                haspic= #{haspic,jdbcType=BIT },
+                updatepicuser= #{updatepicuser,jdbcType=VARCHAR },
+                updatepicdate= #{updatepicdate,jdbcType=TIMESTAMP },
+                desc_sourc= #{descSourc,jdbcType=VARCHAR },
+                line_state_date= #{lineStateDate,jdbcType=TIMESTAMP },
+                purtitle= #{purtitle,jdbcType=VARCHAR },
+                brand_id= #{brandId,jdbcType=INTEGER },
+                purchaser_id= #{purchaserId,jdbcType=INTEGER },
+                product_len= #{productLen,jdbcType=SMALLINT },
+                product_width= #{productWidth,jdbcType=SMALLINT },
+                product_height= #{productHeight,jdbcType=SMALLINT },
+                product_weight= #{productWeight,jdbcType=SMALLINT },
+                product_volweight= #{productVolweight,jdbcType=SMALLINT },
+                battery= #{battery,jdbcType=INTEGER },
+                model= #{model,jdbcType=VARCHAR },
+                psid= #{psid,jdbcType=INTEGER },
+                updatedate2= #{updatedate2,jdbcType=TIMESTAMP },
+                rmacategoryid= #{rmacategoryid,jdbcType=INTEGER },
+                region= #{region,jdbcType=INTEGER },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                pro_features= #{proFeatures,jdbcType=VARCHAR },
+                categoryid= #{categoryid,jdbcType=INTEGER },
+                subcategoryid= #{subcategoryid,jdbcType=INTEGER },
+                is_package= #{isPackage,jdbcType=INTEGER },
+                color= #{color,jdbcType=INTEGER },
+                model_id= #{modelId,jdbcType=INTEGER },
+                magnetic= #{magnetic,jdbcType=SMALLINT },
+                sku_type= #{skuType,jdbcType=SMALLINT }
         </set>
         WHERE skuid = #{skuid,jdbcType=INTEGER}
 
@@ -597,5 +656,5 @@
         DELETE FROM  bs_item
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:24:26=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:11:30=========================================== -->
 </mapper>

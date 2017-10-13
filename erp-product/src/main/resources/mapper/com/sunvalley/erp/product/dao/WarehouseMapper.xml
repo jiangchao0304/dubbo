@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.WarehouseMapper">
-<!-- ================================代码生成开始=2017-10-12 04:37:26=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:14:11=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Warehouse">
         <result column="wh_id" property="whId" jdbcType="INTEGER"/>
@@ -93,36 +93,6 @@
             #{item.whCountryZone,jdbcType=VARCHAR},
             #{item.wh3rd,jdbcType=INTEGER},
             #{item.istax,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                wh_id= #{whId,jdbcType=INTEGER },
-                wh_name= #{whName,jdbcType=VARCHAR },
-                type= #{type,jdbcType=CHAR },
-                wh_email= #{whEmail,jdbcType=VARCHAR },
-                wh_contact= #{whContact,jdbcType=VARCHAR },
-                wh_contact_lastname= #{whContactLastname,jdbcType=VARCHAR },
-                wh_addr= #{whAddr,jdbcType=VARCHAR },
-                wh_city= #{whCity,jdbcType=VARCHAR },
-                wh_state= #{whState,jdbcType=VARCHAR },
-                wh_country= #{whCountry,jdbcType=VARCHAR },
-                wh_zip= #{whZip,jdbcType=VARCHAR },
-                wh_tel= #{whTel,jdbcType=VARCHAR },
-                wh_fax= #{whFax,jdbcType=VARCHAR },
-                curno= #{curno,jdbcType=VARCHAR },
-                perordercharge= #{perordercharge,jdbcType=DECIMAL },
-                peritemcharge= #{peritemcharge,jdbcType=DECIMAL },
-                dropship= #{dropship,jdbcType=TINYINT },
-                virtual= #{virtual,jdbcType=TINYINT },
-                used_wh_id= #{usedWhId,jdbcType=INTEGER },
-                cistencilid= #{cistencilid,jdbcType=INTEGER },
-                is_merger= #{isMerger,jdbcType=VARCHAR },
-                invoice_price_coefficient= #{invoicePriceCoefficient,jdbcType=DECIMAL },
-                custom_price_coefficient= #{customPriceCoefficient,jdbcType=DECIMAL },
-                ci_price_coefficient= #{ciPriceCoefficient,jdbcType=DECIMAL },
-                wh_country_zone= #{whCountryZone,jdbcType=VARCHAR },
-                wh_3rd= #{wh3rd,jdbcType=INTEGER },
-                istax= #{istax,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -319,7 +289,33 @@
     <update id="updateByExample" parameterType="map">
         UPDATE warehouse
         <set>
-            <include refid="SetNotNull"></include>
+         wh_id= #{record.whId,jdbcType=INTEGER },
+         wh_name= #{record.whName,jdbcType=VARCHAR },
+         type= #{record.type,jdbcType=CHAR },
+         wh_email= #{record.whEmail,jdbcType=VARCHAR },
+         wh_contact= #{record.whContact,jdbcType=VARCHAR },
+         wh_contact_lastname= #{record.whContactLastname,jdbcType=VARCHAR },
+         wh_addr= #{record.whAddr,jdbcType=VARCHAR },
+         wh_city= #{record.whCity,jdbcType=VARCHAR },
+         wh_state= #{record.whState,jdbcType=VARCHAR },
+         wh_country= #{record.whCountry,jdbcType=VARCHAR },
+         wh_zip= #{record.whZip,jdbcType=VARCHAR },
+         wh_tel= #{record.whTel,jdbcType=VARCHAR },
+         wh_fax= #{record.whFax,jdbcType=VARCHAR },
+         curno= #{record.curno,jdbcType=VARCHAR },
+         perordercharge= #{record.perordercharge,jdbcType=DECIMAL },
+         peritemcharge= #{record.peritemcharge,jdbcType=DECIMAL },
+         dropship= #{record.dropship,jdbcType=TINYINT },
+         virtual= #{record.virtual,jdbcType=TINYINT },
+         used_wh_id= #{record.usedWhId,jdbcType=INTEGER },
+         cistencilid= #{record.cistencilid,jdbcType=INTEGER },
+         is_merger= #{record.isMerger,jdbcType=VARCHAR },
+         invoice_price_coefficient= #{record.invoicePriceCoefficient,jdbcType=DECIMAL },
+         custom_price_coefficient= #{record.customPriceCoefficient,jdbcType=DECIMAL },
+         ci_price_coefficient= #{record.ciPriceCoefficient,jdbcType=DECIMAL },
+         wh_country_zone= #{record.whCountryZone,jdbcType=VARCHAR },
+         wh_3rd= #{record.wh3rd,jdbcType=INTEGER },
+         istax= #{record.istax,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -332,14 +328,40 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE wh_id = #{whId,jdbcType=INTEGER}
+        WHERE wh_id = #{record.whId,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="Warehouse">
         UPDATE warehouse
         <set>
-            <include refid="Set"></include>
+                wh_id= #{whId,jdbcType=INTEGER },
+                wh_name= #{whName,jdbcType=VARCHAR },
+                type= #{type,jdbcType=CHAR },
+                wh_email= #{whEmail,jdbcType=VARCHAR },
+                wh_contact= #{whContact,jdbcType=VARCHAR },
+                wh_contact_lastname= #{whContactLastname,jdbcType=VARCHAR },
+                wh_addr= #{whAddr,jdbcType=VARCHAR },
+                wh_city= #{whCity,jdbcType=VARCHAR },
+                wh_state= #{whState,jdbcType=VARCHAR },
+                wh_country= #{whCountry,jdbcType=VARCHAR },
+                wh_zip= #{whZip,jdbcType=VARCHAR },
+                wh_tel= #{whTel,jdbcType=VARCHAR },
+                wh_fax= #{whFax,jdbcType=VARCHAR },
+                curno= #{curno,jdbcType=VARCHAR },
+                perordercharge= #{perordercharge,jdbcType=DECIMAL },
+                peritemcharge= #{peritemcharge,jdbcType=DECIMAL },
+                dropship= #{dropship,jdbcType=TINYINT },
+                virtual= #{virtual,jdbcType=TINYINT },
+                used_wh_id= #{usedWhId,jdbcType=INTEGER },
+                cistencilid= #{cistencilid,jdbcType=INTEGER },
+                is_merger= #{isMerger,jdbcType=VARCHAR },
+                invoice_price_coefficient= #{invoicePriceCoefficient,jdbcType=DECIMAL },
+                custom_price_coefficient= #{customPriceCoefficient,jdbcType=DECIMAL },
+                ci_price_coefficient= #{ciPriceCoefficient,jdbcType=DECIMAL },
+                wh_country_zone= #{whCountryZone,jdbcType=VARCHAR },
+                wh_3rd= #{wh3rd,jdbcType=INTEGER },
+                istax= #{istax,jdbcType=INTEGER }
         </set>
         WHERE wh_id = #{whId,jdbcType=INTEGER}
 
@@ -375,5 +397,5 @@
         DELETE FROM  warehouse
         WHERE wh_id = #{whId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:37:26=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:14:11=========================================== -->
 </mapper>

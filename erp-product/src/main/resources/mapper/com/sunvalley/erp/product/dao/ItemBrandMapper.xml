@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemBrandMapper">
-<!-- ================================代码生成开始=2017-10-12 04:22:44=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:10:46=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemBrand">
         <result column="brand_id" property="brandId" jdbcType="INTEGER"/>
@@ -42,19 +42,6 @@
             #{item.hasused,jdbcType=INTEGER},
             #{item.controlValue,jdbcType=INTEGER},
             #{item.warningProportion,jdbcType=DECIMAL}
-    </sql>
-
-    <sql id="Set">
-                brand_id= #{brandId,jdbcType=INTEGER },
-                parent_id= #{parentId,jdbcType=INTEGER },
-                brand_desc= #{brandDesc,jdbcType=VARCHAR },
-                orderno= #{orderno,jdbcType=INTEGER },
-                note= #{note,jdbcType=VARCHAR },
-                ratio= #{ratio,jdbcType=DECIMAL },
-                brand_code= #{brandCode,jdbcType=VARCHAR },
-                hasused= #{hasused,jdbcType=INTEGER },
-                control_value= #{controlValue,jdbcType=INTEGER },
-                warning_proportion= #{warningProportion,jdbcType=DECIMAL }
     </sql>
 
     <sql id="SetNotNull">
@@ -217,7 +204,16 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_brand
         <set>
-            <include refid="SetNotNull"></include>
+         brand_id= #{record.brandId,jdbcType=INTEGER },
+         parent_id= #{record.parentId,jdbcType=INTEGER },
+         brand_desc= #{record.brandDesc,jdbcType=VARCHAR },
+         orderno= #{record.orderno,jdbcType=INTEGER },
+         note= #{record.note,jdbcType=VARCHAR },
+         ratio= #{record.ratio,jdbcType=DECIMAL },
+         brand_code= #{record.brandCode,jdbcType=VARCHAR },
+         hasused= #{record.hasused,jdbcType=INTEGER },
+         control_value= #{record.controlValue,jdbcType=INTEGER },
+         warning_proportion= #{record.warningProportion,jdbcType=DECIMAL }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -230,14 +226,23 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE brand_id = #{brandId,jdbcType=INTEGER}
+        WHERE brand_id = #{record.brandId,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemBrand">
         UPDATE bs_item_brand
         <set>
-            <include refid="Set"></include>
+                brand_id= #{brandId,jdbcType=INTEGER },
+                parent_id= #{parentId,jdbcType=INTEGER },
+                brand_desc= #{brandDesc,jdbcType=VARCHAR },
+                orderno= #{orderno,jdbcType=INTEGER },
+                note= #{note,jdbcType=VARCHAR },
+                ratio= #{ratio,jdbcType=DECIMAL },
+                brand_code= #{brandCode,jdbcType=VARCHAR },
+                hasused= #{hasused,jdbcType=INTEGER },
+                control_value= #{controlValue,jdbcType=INTEGER },
+                warning_proportion= #{warningProportion,jdbcType=DECIMAL }
         </set>
         WHERE brand_id = #{brandId,jdbcType=INTEGER}
 
@@ -273,5 +278,5 @@
         DELETE FROM  bs_item_brand
         WHERE brand_id = #{brandId,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:22:44=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:10:46=========================================== -->
 </mapper>

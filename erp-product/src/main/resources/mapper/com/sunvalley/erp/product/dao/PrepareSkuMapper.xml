@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.PrepareSkuMapper">
-<!-- ================================代码生成开始=2017-10-12 04:26:20=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:12:53=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.PrepareSku">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -72,29 +72,6 @@
             #{item.region,jdbcType=INTEGER},
             #{item.updateDate,jdbcType=TIMESTAMP},
             #{item.updateUserId,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                pre_sku= #{preSku,jdbcType=VARCHAR },
-                sku= #{sku,jdbcType=VARCHAR },
-                model= #{model,jdbcType=VARCHAR },
-                model_id= #{modelId,jdbcType=INTEGER },
-                rma_ratio= #{rmaRatio,jdbcType=DECIMAL },
-                skuid= #{skuid,jdbcType=INTEGER },
-                purspec= #{purspec,jdbcType=VARCHAR },
-                status= #{status,jdbcType=INTEGER },
-                sale_qty= #{saleQty,jdbcType=INTEGER },
-                market_capacity= #{marketCapacity,jdbcType=INTEGER },
-                mp_date= #{mpDate,jdbcType=TIMESTAMP },
-                color= #{color,jdbcType=INTEGER },
-                product_name= #{productName,jdbcType=VARCHAR },
-                remark= #{remark,jdbcType=VARCHAR },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                region= #{region,jdbcType=INTEGER },
-                update_date= #{updateDate,jdbcType=TIMESTAMP },
-                update_user_id= #{updateUserId,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -277,7 +254,26 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_prepare_sku
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         pre_sku= #{record.preSku,jdbcType=VARCHAR },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         model= #{record.model,jdbcType=VARCHAR },
+         model_id= #{record.modelId,jdbcType=INTEGER },
+         rma_ratio= #{record.rmaRatio,jdbcType=DECIMAL },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         purspec= #{record.purspec,jdbcType=VARCHAR },
+         status= #{record.status,jdbcType=INTEGER },
+         sale_qty= #{record.saleQty,jdbcType=INTEGER },
+         market_capacity= #{record.marketCapacity,jdbcType=INTEGER },
+         mp_date= #{record.mpDate,jdbcType=TIMESTAMP },
+         color= #{record.color,jdbcType=INTEGER },
+         product_name= #{record.productName,jdbcType=VARCHAR },
+         remark= #{record.remark,jdbcType=VARCHAR },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         region= #{record.region,jdbcType=INTEGER },
+         update_date= #{record.updateDate,jdbcType=TIMESTAMP },
+         update_user_id= #{record.updateUserId,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -290,14 +286,33 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="PrepareSku">
         UPDATE bs_prepare_sku
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                pre_sku= #{preSku,jdbcType=VARCHAR },
+                sku= #{sku,jdbcType=VARCHAR },
+                model= #{model,jdbcType=VARCHAR },
+                model_id= #{modelId,jdbcType=INTEGER },
+                rma_ratio= #{rmaRatio,jdbcType=DECIMAL },
+                skuid= #{skuid,jdbcType=INTEGER },
+                purspec= #{purspec,jdbcType=VARCHAR },
+                status= #{status,jdbcType=INTEGER },
+                sale_qty= #{saleQty,jdbcType=INTEGER },
+                market_capacity= #{marketCapacity,jdbcType=INTEGER },
+                mp_date= #{mpDate,jdbcType=TIMESTAMP },
+                color= #{color,jdbcType=INTEGER },
+                product_name= #{productName,jdbcType=VARCHAR },
+                remark= #{remark,jdbcType=VARCHAR },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                region= #{region,jdbcType=INTEGER },
+                update_date= #{updateDate,jdbcType=TIMESTAMP },
+                update_user_id= #{updateUserId,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -333,5 +348,5 @@
         DELETE FROM  bs_prepare_sku
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:26:20=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:12:53=========================================== -->
 </mapper>

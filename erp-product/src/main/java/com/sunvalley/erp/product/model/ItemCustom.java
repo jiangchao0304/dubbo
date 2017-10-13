@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:ItemCustom
 * @author
-* @date 2017-10-12 04:23:04
+* @date 2017-10-13 02:11:00
 */
 public class ItemCustom implements Serializable{
 

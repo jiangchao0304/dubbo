@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ProductLineMappingMapper
 * @author
-* @date 2017-10-12 04:26:39
+* @date 2017-10-13 02:13:05
 */
 @Repository
 public interface ProductLineMappingMapper {
@@ -31,7 +31,7 @@ public interface ProductLineMappingMapper {
 
     int updateByExample(@Param("record") ProductLineMapping record, @Param("example") ProductLineMappingExample example);
 
-    int updateByPrimaryKeySelective(ProductLineMapping record);
+    int updateByPrimaryKeySelective(@Param("record") ProductLineMapping record);
 
     int updateByPrimaryKey(ProductLineMapping record);
 

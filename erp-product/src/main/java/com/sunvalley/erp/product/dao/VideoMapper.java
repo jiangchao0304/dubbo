@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: VideoMapper
 * @author
-* @date 2017-10-12 04:28:23
+* @date 2017-10-13 02:14:05
 */
 @Repository
 public interface VideoMapper {
@@ -31,7 +31,7 @@ public interface VideoMapper {
 
     int updateByExample(@Param("record") Video record, @Param("example") VideoExample example);
 
-    int updateByPrimaryKeySelective(Video record);
+    int updateByPrimaryKeySelective(@Param("record") Video record);
 
     int updateByPrimaryKey(Video record);
 

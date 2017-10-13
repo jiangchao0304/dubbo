@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: BomMapper
 * @author
-* @date 2017-10-12 04:21:57
+* @date 2017-10-13 02:09:35
 */
 @Repository
 public interface BomMapper {
@@ -31,7 +31,7 @@ public interface BomMapper {
 
     int updateByExample(@Param("record") Bom record, @Param("example") BomExample example);
 
-    int updateByPrimaryKeySelective(Bom record);
+    int updateByPrimaryKeySelective(@Param("record") Bom record);
 
     int updateByPrimaryKey(Bom record);
 

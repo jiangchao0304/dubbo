@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ProductTypeMapper">
-<!-- ================================代码生成开始=2017-10-12 04:26:48=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:13:11=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ProductType">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -21,12 +21,6 @@
             #{item.id,jdbcType=INTEGER},
             #{item.name,jdbcType=VARCHAR},
             #{item.type,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                name= #{name,jdbcType=VARCHAR },
-                type= #{type,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -175,7 +169,9 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_product_type
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         name= #{record.name,jdbcType=VARCHAR },
+         type= #{record.type,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -188,14 +184,16 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ProductType">
         UPDATE bs_product_type
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                name= #{name,jdbcType=VARCHAR },
+                type= #{type,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -231,5 +229,5 @@
         DELETE FROM  bs_product_type
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:26:48=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:13:11=========================================== -->
 </mapper>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.SalesPlanCostMapper">
-<!-- ================================代码生成开始=2017-10-12 04:27:00=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:13:17=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SalesPlanCost">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -75,30 +75,6 @@
             #{item.isDirectShipments,jdbcType=TINYINT},
             #{item.isOutsideDetect,jdbcType=TINYINT},
             #{item.fcstQty,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                sku= #{sku,jdbcType=VARCHAR },
-                sku_type= #{skuType,jdbcType=INTEGER },
-                model= #{model,jdbcType=VARCHAR },
-                country= #{country,jdbcType=VARCHAR },
-                commission_rate= #{commissionRate,jdbcType=DECIMAL },
-                fba_cost= #{fbaCost,jdbcType=DECIMAL },
-                create_user= #{createUser,jdbcType=INTEGER },
-                create_time= #{createTime,jdbcType=TIMESTAMP },
-                update_user= #{updateUser,jdbcType=INTEGER },
-                update_time= #{updateTime,jdbcType=TIMESTAMP },
-                remark= #{remark,jdbcType=VARCHAR },
-                status= #{status,jdbcType=VARCHAR },
-                vat_tax_rate= #{vatTaxRate,jdbcType=DECIMAL },
-                skuid= #{skuid,jdbcType=INTEGER },
-                ship_type= #{shipType,jdbcType=TINYINT },
-                purchase_cycle= #{purchaseCycle,jdbcType=INTEGER },
-                cal_month= #{calMonth,jdbcType=DECIMAL },
-                is_direct_shipments= #{isDirectShipments,jdbcType=TINYINT },
-                is_outside_detect= #{isOutsideDetect,jdbcType=TINYINT },
-                fcst_qty= #{fcstQty,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -283,7 +259,27 @@
     <update id="updateByExample" parameterType="map">
         UPDATE so_sales_plan_cost
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         sku_type= #{record.skuType,jdbcType=INTEGER },
+         model= #{record.model,jdbcType=VARCHAR },
+         country= #{record.country,jdbcType=VARCHAR },
+         commission_rate= #{record.commissionRate,jdbcType=DECIMAL },
+         fba_cost= #{record.fbaCost,jdbcType=DECIMAL },
+         create_user= #{record.createUser,jdbcType=INTEGER },
+         create_time= #{record.createTime,jdbcType=TIMESTAMP },
+         update_user= #{record.updateUser,jdbcType=INTEGER },
+         update_time= #{record.updateTime,jdbcType=TIMESTAMP },
+         remark= #{record.remark,jdbcType=VARCHAR },
+         status= #{record.status,jdbcType=VARCHAR },
+         vat_tax_rate= #{record.vatTaxRate,jdbcType=DECIMAL },
+         skuid= #{record.skuid,jdbcType=INTEGER },
+         ship_type= #{record.shipType,jdbcType=TINYINT },
+         purchase_cycle= #{record.purchaseCycle,jdbcType=INTEGER },
+         cal_month= #{record.calMonth,jdbcType=DECIMAL },
+         is_direct_shipments= #{record.isDirectShipments,jdbcType=TINYINT },
+         is_outside_detect= #{record.isOutsideDetect,jdbcType=TINYINT },
+         fcst_qty= #{record.fcstQty,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -296,14 +292,34 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="SalesPlanCost">
         UPDATE so_sales_plan_cost
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                sku= #{sku,jdbcType=VARCHAR },
+                sku_type= #{skuType,jdbcType=INTEGER },
+                model= #{model,jdbcType=VARCHAR },
+                country= #{country,jdbcType=VARCHAR },
+                commission_rate= #{commissionRate,jdbcType=DECIMAL },
+                fba_cost= #{fbaCost,jdbcType=DECIMAL },
+                create_user= #{createUser,jdbcType=INTEGER },
+                create_time= #{createTime,jdbcType=TIMESTAMP },
+                update_user= #{updateUser,jdbcType=INTEGER },
+                update_time= #{updateTime,jdbcType=TIMESTAMP },
+                remark= #{remark,jdbcType=VARCHAR },
+                status= #{status,jdbcType=VARCHAR },
+                vat_tax_rate= #{vatTaxRate,jdbcType=DECIMAL },
+                skuid= #{skuid,jdbcType=INTEGER },
+                ship_type= #{shipType,jdbcType=TINYINT },
+                purchase_cycle= #{purchaseCycle,jdbcType=INTEGER },
+                cal_month= #{calMonth,jdbcType=DECIMAL },
+                is_direct_shipments= #{isDirectShipments,jdbcType=TINYINT },
+                is_outside_detect= #{isOutsideDetect,jdbcType=TINYINT },
+                fcst_qty= #{fcstQty,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -339,5 +355,5 @@
         DELETE FROM  so_sales_plan_cost
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:27:00=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:13:17=========================================== -->
 </mapper>

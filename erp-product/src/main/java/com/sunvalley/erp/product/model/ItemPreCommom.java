@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:ItemPreCommom
 * @author
-* @date 2017-10-12 04:25:10
+* @date 2017-10-13 02:11:54
 */
 public class ItemPreCommom implements Serializable{
 
