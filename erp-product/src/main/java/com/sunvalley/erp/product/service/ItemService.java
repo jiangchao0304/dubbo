@@ -135,18 +135,19 @@ public class ItemService {
 
     /**
      * saveSkuMarketInfo .更新review字段
-     * @param skuId
-     *         [skuId]
      * @param SkuMarketInfoTO
      *         [itemLocaleReviewTOList]
      * @return void
-     * @throws
      * @author: douglas.jiang
      * @date : 2017/10/10:16:24
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public boolean saveSkuMarketInfo(int skuId, SkuMarketInfoTO dto){
+    public boolean saveSkuMarketInfo(SkuMarketInfoTO dto){
 
+        if(dto.getSkuId()==null || dto.getSkuId()==0)
+            throw  new  ParameterException("skuId不能为空!");
+
+        int skuId = dto.getSkuId();
         for (ItemLocaleReviewTO localeTO : dto.getItemLocaleReviews()) {
             ItemTextLocaleExample itemTextLocaleExample = new ItemTextLocaleExample();
             itemTextLocaleExample.createCriteria().andLangIdEqualTo(localeTO.getLangId()).andSkuidEqualTo(skuId);
@@ -222,6 +223,7 @@ public class ItemService {
         List<ItemRequirements> itemRequirementsList = itemRequirementsMapper.selectByExample(itemRequirementsExample);
 
         SkuMarketInfoTO result = new SkuMarketInfoTO();
+        result.setSkuId(skuId);
          List<ItemLocaleReviewTO> itemLocaleReviews = new ArrayList<>();
          List<ItemRequirementsTO> itemRequirements = new ArrayList<>();
 

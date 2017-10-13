@@ -78,10 +78,10 @@ public class SkuController {
     }
 
 
-    @RequestMapping("/saveSkuMarketInfo/{skuId}")
+    @RequestMapping("/saveSkuMarketInfo")
     @ResponseBody
-    public BaseReturnVO saveSkuMarketInfo(@PathVariable int skuId, @RequestBody SkuMarketInfoTO dto) {
-        itemService.saveSkuMarketInfo(skuId,dto);
+    public BaseReturnVO saveSkuMarketInfo(@RequestBody SkuMarketInfoTO dto) {
+        itemService.saveSkuMarketInfo(dto);
         return new BaseReturnVO(true);
     }
 

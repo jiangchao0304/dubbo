@@ -12,11 +12,21 @@ import java.util.List;
  * @Date: 2017-10-10 16:59
  */
 public class SkuMarketInfoTO {
+    private Integer skuId;
     private List<ItemLocaleReviewTO> itemLocaleReviews;
     private List<ItemRequirementsTO> itemRequirements;
 
     public List<ItemLocaleReviewTO> getItemLocaleReviews() {
         return itemLocaleReviews;
+    }
+
+
+    public Integer getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(Integer skuId) {
+        this.skuId = skuId;
     }
 
     public void setItemLocaleReviews(List<ItemLocaleReviewTO> itemLocaleReviews) {
