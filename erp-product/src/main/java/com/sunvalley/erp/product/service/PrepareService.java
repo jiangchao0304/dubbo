@@ -561,22 +561,22 @@ public class PrepareService {
     }
 
     private void beforeSaveItem(SkuBaseInfoTO item){
-        if(item.getLen()<0||item.getLen()>32767)
-            throw new BusinessException("PackeagedLen is out of range!");
-        if(item.getWidth()<0||item.getWidth()>32767)
-            throw new BusinessException("PackeagedWidth is out of range!");
-        if(item.getHeight()<0||item.getHeight()>32767)
-            throw new BusinessException("PackeagedHeight is out of range!");
-        if(item.getWeight()<0||item.getWeight()>32767)
-            throw new BusinessException("PackeagedWeight is out of range!");
-        if(item.getProductLen()<=0||item.getProductLen()>32767)
-            throw new BusinessException("ProductLen is out of range!");
-        if(item.getProductWidth()<=0||item.getProductWidth()>32767)
-            throw new BusinessException("ProductWidth is out of range!");
-        if(item.getProductHeight()<=0||item.getProductHeight()>32767)
-            throw new BusinessException("ProductHeight is out of range!");
-        if(item.getProductWeight()<=0||item.getProductWeight()>32767)
-            throw new BusinessException("ProductWeight is out of range!");
+        if(item.getLen()==null || item.getLen()<0||item.getLen()>32767)
+            throw new ParameterException("PackeagedLen is out of range!");
+        if(item.getWidth()==null || item.getWidth()<0||item.getWidth()>32767)
+            throw new ParameterException("PackeagedWidth is out of range!");
+        if(item.getHeight()==null || item.getHeight()<0||item.getHeight()>32767)
+            throw new ParameterException("PackeagedHeight is out of range!");
+        if(item.getWeight()==null || item.getWeight()<0||item.getWeight()>32767)
+            throw new ParameterException("PackeagedWeight is out of range!");
+        if(item.getProductLen()==null || item.getProductLen()<=0||item.getProductLen()>32767)
+            throw new ParameterException("ProductLen is out of range!");
+        if(item.getProductWidth()==null || item.getProductWidth()<=0||item.getProductWidth()>32767)
+            throw new ParameterException("ProductWidth is out of range!");
+        if(item.getProductHeight()==null || item.getProductHeight()<=0||item.getProductHeight()>32767)
+            throw new ParameterException("ProductHeight is out of range!");
+        if(item.getProductWeight()==null || item.getProductWeight()<=0||item.getProductWeight()>32767)
+            throw new ParameterException("ProductWeight is out of range!");
         // 判断内包装sku是否存在
 //        if (item.getInnersku() != null && !item.getInnersku().trim().equals("")) {
 //            Item innerItem = getByID(item.getInnersku());

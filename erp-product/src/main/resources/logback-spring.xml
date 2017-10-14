@@ -148,7 +148,7 @@
 
     <logger name="org.springframework.web.context.ContextLoader" level="ERROR"/>
 
-    <logger name="org.springframework.jdbc" level="ALL" />
+    <logger name="org.springframework.jdbc" level="INFO" />
 
     <logger name="org.apache.zookeeper" level="ERROR"/>
 

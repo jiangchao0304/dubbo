@@ -3,6 +3,8 @@
 */
 package com.sunvalley.erp.to.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,6 +30,7 @@ public class PreSkuGridTO implements Serializable {
     private Integer  saleQty;
     private Integer  marketCapacity;
     private BigDecimal rmaRatio;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date mpDate;
     private String  saleZone;
     private Integer  status;
