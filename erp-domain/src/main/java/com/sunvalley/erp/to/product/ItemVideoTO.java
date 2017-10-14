@@ -3,6 +3,8 @@
 */
 package com.sunvalley.erp.to.product;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
