@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.daoEX.ItemCustomDetailExMapper">
+
+    <select id="listBySkuId" parameterType="int" resultType="com.sunvalley.erp.to.product.CustomsInfoDetailTO">
+            SELECT
+            d.`id`,
+            d.`bsitemcustomid`,
+            d.`stateid`,
+            s.`zonename` stateName,
+            d.`customscode`,
+            d.`commodityname`,
+            d.`tariffrates`,
+            d.`secondname`
+            FROM `bs_item_custom_detail`  AS d
+            JOIN `bs_item_custom`  AS c ON d.`bsitemcustomid` = c.`id`
+            LEFT JOIN `sys_zone_country`  AS s ON s.`zoneshort` = d.`stateid`
+            WHERE c.`skuid`=#{skuId}
+            ORDER BY id ASC
+    </select>
+</mapper>

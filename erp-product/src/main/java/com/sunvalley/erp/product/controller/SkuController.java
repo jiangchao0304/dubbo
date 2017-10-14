@@ -9,7 +9,6 @@ import com.sunvalley.erp.product.service.ItemFileService;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
 import com.sunvalley.erp.product.vo.BaseReturnVO;
-import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
 import org.apache.commons.lang3.StringUtils;
@@ -88,7 +87,7 @@ public class SkuController {
     @RequestMapping("/getCustomsInfo/{skuId}")
     @ResponseBody
     public BaseReturnVO getCustomsInfo(@PathVariable int skuId) {
-        CustomsInfoTO customsInfoTO =  itemService.getCustomsInfo(skuId);
+        Map<String,Object> customsInfoTO =  itemService.getCustomsInfo(skuId);
         return new BaseReturnVO(customsInfoTO);
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunvalley.erp.product.daoEX.ItemPackageExMapper">
+
+    <select id="getBySkuId" parameterType="int" resultType="com.sunvalley.erp.to.product.PackingBoxTO">
+        select
+           package.`id`,
+           package.`skuid`,
+           package.`sku`,
+           package.`len`,
+           package.`width`,
+           package.`height`,
+           package.`weight`,
+           package.`volweight`,
+           package.`capacity`,
+           package.`linestate`,
+           package.`purdesc`,
+           package.`createdate`,
+           package.`createuserid`,
+           package.`updatedate`,
+           package.`updateuserid`,
+            CONCAT(Creator.firstname ,' ',Creator.lastname) creator
+            from bs_item_package as package
+            LEFT JOIN sys_user Creator ON Creator.userid = package.createuserid
+            where package.skuid=#{skuId}
+    </select>
+
+</mapper>

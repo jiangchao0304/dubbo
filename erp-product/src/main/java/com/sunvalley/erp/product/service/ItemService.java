@@ -10,7 +10,9 @@ import com.sunvalley.erp.common.exception.ParameterException;
 import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.common.util.TimeUtil;
 import com.sunvalley.erp.product.dao.*;
+import com.sunvalley.erp.product.daoEX.ItemCustomDetailExMapper;
 import com.sunvalley.erp.product.daoEX.ItemCustomExMapper;
+import com.sunvalley.erp.product.daoEX.ItemPackageExMapper;
 import com.sunvalley.erp.product.model.*;
 import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.common.PagerTO;
@@ -71,6 +73,12 @@ public class ItemService {
 
     @Autowired
     private  ItemRequirementsMapper itemRequirementsMapper;
+
+    @Autowired
+    private ItemPackageExMapper itemPackageExMapper;
+
+    @Autowired
+    private ItemCustomDetailExMapper itemCustomDetailExMapper;
 
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
@@ -135,7 +143,7 @@ public class ItemService {
 
     /**
      * saveSkuMarketInfo .更新review字段
-     * @param SkuMarketInfoTO
+     * @param 'SkuMarketInfoTO'
      *         [itemLocaleReviewTOList]
      * @return void
      * @author: douglas.jiang
@@ -552,12 +560,21 @@ public class ItemService {
      * @author: douglas.jiang
      * @date : 2017/9/30:9:46
      */
-    public CustomsInfoTO getCustomsInfo(int skuId){
+    public Map<String,Object> getCustomsInfo(int skuId){
 
         Map<String,Object> param = new HashMap<>();
         param.put("skuId",skuId);
 
-        CustomsInfoTO result =  itemCustomExMapper.getCustomsInfo(param);
+        CustomsInfoTO customsInfoTO =  itemCustomExMapper.getCustomsInfo(param);
+
+        PackingBoxTO packingBoxTO = itemPackageExMapper.getBySkuId(skuId);
+
+        List<CustomsInfoDetailTO> customsInfoDetailTOList = itemCustomDetailExMapper.listBySkuId(skuId);
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("customs",customsInfoTO);
+        result.put("packingBox",packingBoxTO);
+        result.put("customsDetailList",customsInfoDetailTOList);
 
         return  result;
 

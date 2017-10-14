@@ -7,9 +7,9 @@ import java.util.Calendar;
 import java.util.List;
 import com.google.gson.reflect.TypeToken;
 import com.sunvalley.erp.common.exception.UniteException;
-import com.sunvalley.erp.common.json.JsonParse;
 import com.sunvalley.erp.common.util.DateUtil;
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
+import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.common.util.StringUtil;
 
 @SuppressWarnings("nls")
@@ -26,7 +26,7 @@ public class FilterOP {
 
 	@SuppressWarnings("unchecked")
 	public List<FilterModel> getFliterList(String jsonData) {
-		List<FilterModel> filterModelList=(List<FilterModel>) JsonParse.fromJson(jsonData,
+		List<FilterModel> filterModelList=(List<FilterModel>) JsonUtil.fromJson(jsonData,
 				new TypeToken<List<FilterModel>>() {
 		}.getType());
 		if(null!=filterModelList&&filterModelList.size()>0){
