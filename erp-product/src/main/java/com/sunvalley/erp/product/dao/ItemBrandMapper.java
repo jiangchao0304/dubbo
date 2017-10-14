@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemBrandMapper
 * @author
-* @date 2017-10-12 04:22:44
+* @date 2017-10-13 02:10:46
 */
 @Repository
 public interface ItemBrandMapper {
@@ -31,7 +31,7 @@ public interface ItemBrandMapper {
 
     int updateByExample(@Param("record") ItemBrand record, @Param("example") ItemBrandExample example);
 
-    int updateByPrimaryKeySelective(ItemBrand record);
+    int updateByPrimaryKeySelective(@Param("record") ItemBrand record);
 
     int updateByPrimaryKey(ItemBrand record);
 

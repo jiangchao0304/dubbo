@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: WarehouseMapper
 * @author
-* @date 2017-10-12 04:37:26
+* @date 2017-10-13 02:14:11
 */
 @Repository
 public interface WarehouseMapper {
@@ -31,7 +31,7 @@ public interface WarehouseMapper {
 
     int updateByExample(@Param("record") Warehouse record, @Param("example") WarehouseExample example);
 
-    int updateByPrimaryKeySelective(Warehouse record);
+    int updateByPrimaryKeySelective(@Param("record") Warehouse record);
 
     int updateByPrimaryKey(Warehouse record);
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: MarketAccountMapper
 * @author
-* @date 2017-10-12 04:25:48
+* @date 2017-10-13 02:12:20
 */
 @Repository
 public interface MarketAccountMapper {
@@ -31,7 +31,7 @@ public interface MarketAccountMapper {
 
     int updateByExample(@Param("record") MarketAccount record, @Param("example") MarketAccountExample example);
 
-    int updateByPrimaryKeySelective(MarketAccount record);
+    int updateByPrimaryKeySelective(@Param("record") MarketAccount record);
 
     int updateByPrimaryKey(MarketAccount record);
 

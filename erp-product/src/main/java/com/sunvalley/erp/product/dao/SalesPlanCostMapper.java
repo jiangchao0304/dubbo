@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SalesPlanCostMapper
 * @author
-* @date 2017-10-12 04:27:00
+* @date 2017-10-13 02:13:17
 */
 @Repository
 public interface SalesPlanCostMapper {
@@ -31,7 +31,7 @@ public interface SalesPlanCostMapper {
 
     int updateByExample(@Param("record") SalesPlanCost record, @Param("example") SalesPlanCostExample example);
 
-    int updateByPrimaryKeySelective(SalesPlanCost record);
+    int updateByPrimaryKeySelective(@Param("record") SalesPlanCost record);
 
     int updateByPrimaryKey(SalesPlanCost record);
 

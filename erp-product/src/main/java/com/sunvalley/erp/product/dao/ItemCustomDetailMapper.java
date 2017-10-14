@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemCustomDetailMapper
 * @author
-* @date 2017-10-12 04:22:55
+* @date 2017-10-13 02:10:53
 */
 @Repository
 public interface ItemCustomDetailMapper {
@@ -31,7 +31,7 @@ public interface ItemCustomDetailMapper {
 
     int updateByExample(@Param("record") ItemCustomDetail record, @Param("example") ItemCustomDetailExample example);
 
-    int updateByPrimaryKeySelective(ItemCustomDetail record);
+    int updateByPrimaryKeySelective(@Param("record") ItemCustomDetail record);
 
     int updateByPrimaryKey(ItemCustomDetail record);
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemAttrValueLocaleMapper
 * @author
-* @date 2017-10-12 04:22:22
+* @date 2017-10-13 02:10:32
 */
 @Repository
 public interface ItemAttrValueLocaleMapper {
@@ -31,7 +31,7 @@ public interface ItemAttrValueLocaleMapper {
 
     int updateByExample(@Param("record") ItemAttrValueLocale record, @Param("example") ItemAttrValueLocaleExample example);
 
-    int updateByPrimaryKeySelective(ItemAttrValueLocale record);
+    int updateByPrimaryKeySelective(@Param("record") ItemAttrValueLocale record);
 
     int updateByPrimaryKey(ItemAttrValueLocale record);
 

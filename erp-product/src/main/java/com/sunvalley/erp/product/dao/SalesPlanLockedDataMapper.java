@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SalesPlanLockedDataMapper
 * @author
-* @date 2017-10-12 04:27:10
+* @date 2017-10-13 02:13:23
 */
 @Repository
 public interface SalesPlanLockedDataMapper {
@@ -31,7 +31,7 @@ public interface SalesPlanLockedDataMapper {
 
     int updateByExample(@Param("record") SalesPlanLockedData record, @Param("example") SalesPlanLockedDataExample example);
 
-    int updateByPrimaryKeySelective(SalesPlanLockedData record);
+    int updateByPrimaryKeySelective(@Param("record") SalesPlanLockedData record);
 
     int updateByPrimaryKey(SalesPlanLockedData record);
 

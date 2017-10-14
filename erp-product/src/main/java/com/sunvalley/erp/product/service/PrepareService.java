@@ -456,6 +456,7 @@ public class PrepareService {
 
         item.setCreateUserId(dto.getSessionTO().getUserId());
 
+        item.setSkuType((short)dto.getSkuType());
 
         item.setCreateDate(TimeUtil.BeiJingTimeNow());
         item.setUpdatedate(TimeUtil.BeiJingTimeNow());

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemPreCommomMapper">
-<!-- ================================代码生成开始=2017-10-12 04:25:10=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:11:54=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.ItemPreCommom">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -54,23 +54,6 @@
             #{item.createDate,jdbcType=TIMESTAMP},
             #{item.updateDate,jdbcType=TIMESTAMP},
             #{item.updateUserId,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                model_id= #{modelId,jdbcType=INTEGER },
-                standard_size= #{standardSize,jdbcType=INTEGER },
-                weight= #{weight,jdbcType=DECIMAL },
-                shipping_type= #{shippingType,jdbcType=INTEGER },
-                mc= #{mc,jdbcType=DECIMAL },
-                setup_date= #{setupDate,jdbcType=TIMESTAMP },
-                sale_price= #{salePrice,jdbcType=DECIMAL },
-                custom_name= #{customName,jdbcType=VARCHAR },
-                sale_dept= #{saleDept,jdbcType=INTEGER },
-                create_user_id= #{createUserId,jdbcType=INTEGER },
-                create_date= #{createDate,jdbcType=TIMESTAMP },
-                update_date= #{updateDate,jdbcType=TIMESTAMP },
-                update_user_id= #{updateUserId,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -241,7 +224,20 @@
     <update id="updateByExample" parameterType="map">
         UPDATE bs_item_pre_commom
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         model_id= #{record.modelId,jdbcType=INTEGER },
+         standard_size= #{record.standardSize,jdbcType=INTEGER },
+         weight= #{record.weight,jdbcType=DECIMAL },
+         shipping_type= #{record.shippingType,jdbcType=INTEGER },
+         mc= #{record.mc,jdbcType=DECIMAL },
+         setup_date= #{record.setupDate,jdbcType=TIMESTAMP },
+         sale_price= #{record.salePrice,jdbcType=DECIMAL },
+         custom_name= #{record.customName,jdbcType=VARCHAR },
+         sale_dept= #{record.saleDept,jdbcType=INTEGER },
+         create_user_id= #{record.createUserId,jdbcType=INTEGER },
+         create_date= #{record.createDate,jdbcType=TIMESTAMP },
+         update_date= #{record.updateDate,jdbcType=TIMESTAMP },
+         update_user_id= #{record.updateUserId,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -254,14 +250,27 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="ItemPreCommom">
         UPDATE bs_item_pre_commom
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                model_id= #{modelId,jdbcType=INTEGER },
+                standard_size= #{standardSize,jdbcType=INTEGER },
+                weight= #{weight,jdbcType=DECIMAL },
+                shipping_type= #{shippingType,jdbcType=INTEGER },
+                mc= #{mc,jdbcType=DECIMAL },
+                setup_date= #{setupDate,jdbcType=TIMESTAMP },
+                sale_price= #{salePrice,jdbcType=DECIMAL },
+                custom_name= #{customName,jdbcType=VARCHAR },
+                sale_dept= #{saleDept,jdbcType=INTEGER },
+                create_user_id= #{createUserId,jdbcType=INTEGER },
+                create_date= #{createDate,jdbcType=TIMESTAMP },
+                update_date= #{updateDate,jdbcType=TIMESTAMP },
+                update_user_id= #{updateUserId,jdbcType=INTEGER }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -297,5 +306,5 @@
         DELETE FROM  bs_item_pre_commom
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:25:10=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:11:54=========================================== -->
 </mapper>

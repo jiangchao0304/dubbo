@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: PrepareSkuMapper
 * @author
-* @date 2017-10-12 04:26:20
+* @date 2017-10-13 02:12:53
 */
 @Repository
 public interface PrepareSkuMapper {
@@ -31,7 +31,7 @@ public interface PrepareSkuMapper {
 
     int updateByExample(@Param("record") PrepareSku record, @Param("example") PrepareSkuExample example);
 
-    int updateByPrimaryKeySelective(PrepareSku record);
+    int updateByPrimaryKeySelective(@Param("record") PrepareSku record);
 
     int updateByPrimaryKey(PrepareSku record);
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SequenceMapper
 * @author
-* @date 2017-10-12 04:27:43
+* @date 2017-10-13 02:13:41
 */
 @Repository
 public interface SequenceMapper {
@@ -31,7 +31,7 @@ public interface SequenceMapper {
 
     int updateByExample(@Param("record") Sequence record, @Param("example") SequenceExample example);
 
-    int updateByPrimaryKeySelective(Sequence record);
+    int updateByPrimaryKeySelective(@Param("record") Sequence record);
 
     int updateByPrimaryKey(Sequence record);
 

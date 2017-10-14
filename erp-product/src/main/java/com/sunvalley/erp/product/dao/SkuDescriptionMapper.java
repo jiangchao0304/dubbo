@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SkuDescriptionMapper
 * @author
-* @date 2017-10-12 04:27:53
+* @date 2017-10-13 02:13:47
 */
 @Repository
 public interface SkuDescriptionMapper {
@@ -31,7 +31,7 @@ public interface SkuDescriptionMapper {
 
     int updateByExample(@Param("record") SkuDescription record, @Param("example") SkuDescriptionExample example);
 
-    int updateByPrimaryKeySelective(SkuDescription record);
+    int updateByPrimaryKeySelective(@Param("record") SkuDescription record);
 
     int updateByPrimaryKey(SkuDescription record);
 

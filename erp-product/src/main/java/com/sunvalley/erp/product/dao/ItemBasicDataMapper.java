@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemBasicDataMapper
 * @author
-* @date 2017-10-12 04:22:33
+* @date 2017-10-13 02:10:39
 */
 @Repository
 public interface ItemBasicDataMapper {
@@ -31,7 +31,7 @@ public interface ItemBasicDataMapper {
 
     int updateByExample(@Param("record") ItemBasicData record, @Param("example") ItemBasicDataExample example);
 
-    int updateByPrimaryKeySelective(ItemBasicData record);
+    int updateByPrimaryKeySelective(@Param("record") ItemBasicData record);
 
     int updateByPrimaryKey(ItemBasicData record);
 

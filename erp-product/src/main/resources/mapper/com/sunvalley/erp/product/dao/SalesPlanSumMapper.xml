@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.SalesPlanSumMapper">
-<!-- ================================代码生成开始=2017-10-12 04:27:31=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:13:35=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.SalesPlanSum">
         <result column="id" property="id" jdbcType="INTEGER"/>
@@ -99,38 +99,6 @@
             #{item.sku,jdbcType=VARCHAR},
             #{item.country,jdbcType=VARCHAR},
             #{item.promotionExpensesRate,jdbcType=DOUBLE}
-    </sql>
-
-    <sql id="Set">
-                id= #{id,jdbcType=INTEGER },
-                org_id= #{orgId,jdbcType=INTEGER },
-                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
-                plan_type= #{planType,jdbcType=INTEGER },
-                data_type= #{dataType,jdbcType=VARCHAR },
-                p_month= #{pmonth,jdbcType=INTEGER },
-                p_value= #{pvalue,jdbcType=DECIMAL },
-                p_quarter= #{pquarter,jdbcType=VARCHAR },
-                p_year= #{pyear,jdbcType=VARCHAR },
-                status= #{status,jdbcType=INTEGER },
-                app_state= #{appState,jdbcType=INTEGER },
-                update_user= #{updateUser,jdbcType=INTEGER },
-                update_time= #{updateTime,jdbcType=TIMESTAMP },
-                gross_income= #{grossIncome,jdbcType=DECIMAL },
-                net_income= #{netIncome,jdbcType=DECIMAL },
-                net_income_percentage= #{netIncomePercentage,jdbcType=DOUBLE },
-                gross_profit_rate= #{grossProfitRate,jdbcType=DOUBLE },
-                gross_profit= #{grossProfit,jdbcType=DECIMAL },
-                promotion_expenses= #{promotionExpenses,jdbcType=DECIMAL },
-                net_profit= #{netProfit,jdbcType=DECIMAL },
-                net_profit_rate_percentage= #{netProfitRatePercentage,jdbcType=DOUBLE },
-                sales_volumn= #{salesVolumn,jdbcType=INTEGER },
-                per_unit_sales_price= #{perUnitSalesPrice,jdbcType=DECIMAL },
-                mkt_cost= #{mktCost,jdbcType=DECIMAL },
-                sample_cost= #{sampleCost,jdbcType=DECIMAL },
-                vat_taxes= #{vatTaxes,jdbcType=DECIMAL },
-                sku= #{sku,jdbcType=VARCHAR },
-                country= #{country,jdbcType=VARCHAR },
-                promotion_expenses_rate= #{promotionExpensesRate,jdbcType=DOUBLE }
     </sql>
 
     <sql id="SetNotNull">
@@ -331,7 +299,35 @@
     <update id="updateByExample" parameterType="map">
         UPDATE so_sales_plan_sum
         <set>
-            <include refid="SetNotNull"></include>
+         id= #{record.id,jdbcType=INTEGER },
+         org_id= #{record.orgId,jdbcType=INTEGER },
+         sales_plan_version= #{record.salesPlanVersion,jdbcType=INTEGER },
+         plan_type= #{record.planType,jdbcType=INTEGER },
+         data_type= #{record.dataType,jdbcType=VARCHAR },
+         p_month= #{record.pmonth,jdbcType=INTEGER },
+         p_value= #{record.pvalue,jdbcType=DECIMAL },
+         p_quarter= #{record.pquarter,jdbcType=VARCHAR },
+         p_year= #{record.pyear,jdbcType=VARCHAR },
+         status= #{record.status,jdbcType=INTEGER },
+         app_state= #{record.appState,jdbcType=INTEGER },
+         update_user= #{record.updateUser,jdbcType=INTEGER },
+         update_time= #{record.updateTime,jdbcType=TIMESTAMP },
+         gross_income= #{record.grossIncome,jdbcType=DECIMAL },
+         net_income= #{record.netIncome,jdbcType=DECIMAL },
+         net_income_percentage= #{record.netIncomePercentage,jdbcType=DOUBLE },
+         gross_profit_rate= #{record.grossProfitRate,jdbcType=DOUBLE },
+         gross_profit= #{record.grossProfit,jdbcType=DECIMAL },
+         promotion_expenses= #{record.promotionExpenses,jdbcType=DECIMAL },
+         net_profit= #{record.netProfit,jdbcType=DECIMAL },
+         net_profit_rate_percentage= #{record.netProfitRatePercentage,jdbcType=DOUBLE },
+         sales_volumn= #{record.salesVolumn,jdbcType=INTEGER },
+         per_unit_sales_price= #{record.perUnitSalesPrice,jdbcType=DECIMAL },
+         mkt_cost= #{record.mktCost,jdbcType=DECIMAL },
+         sample_cost= #{record.sampleCost,jdbcType=DECIMAL },
+         vat_taxes= #{record.vatTaxes,jdbcType=DECIMAL },
+         sku= #{record.sku,jdbcType=VARCHAR },
+         country= #{record.country,jdbcType=VARCHAR },
+         promotion_expenses_rate= #{record.promotionExpensesRate,jdbcType=DOUBLE }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -344,14 +340,42 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE id = #{id,jdbcType=INTEGER}
+        WHERE id = #{record.id,jdbcType=INTEGER}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="SalesPlanSum">
         UPDATE so_sales_plan_sum
         <set>
-            <include refid="Set"></include>
+                id= #{id,jdbcType=INTEGER },
+                org_id= #{orgId,jdbcType=INTEGER },
+                sales_plan_version= #{salesPlanVersion,jdbcType=INTEGER },
+                plan_type= #{planType,jdbcType=INTEGER },
+                data_type= #{dataType,jdbcType=VARCHAR },
+                p_month= #{pmonth,jdbcType=INTEGER },
+                p_value= #{pvalue,jdbcType=DECIMAL },
+                p_quarter= #{pquarter,jdbcType=VARCHAR },
+                p_year= #{pyear,jdbcType=VARCHAR },
+                status= #{status,jdbcType=INTEGER },
+                app_state= #{appState,jdbcType=INTEGER },
+                update_user= #{updateUser,jdbcType=INTEGER },
+                update_time= #{updateTime,jdbcType=TIMESTAMP },
+                gross_income= #{grossIncome,jdbcType=DECIMAL },
+                net_income= #{netIncome,jdbcType=DECIMAL },
+                net_income_percentage= #{netIncomePercentage,jdbcType=DOUBLE },
+                gross_profit_rate= #{grossProfitRate,jdbcType=DOUBLE },
+                gross_profit= #{grossProfit,jdbcType=DECIMAL },
+                promotion_expenses= #{promotionExpenses,jdbcType=DECIMAL },
+                net_profit= #{netProfit,jdbcType=DECIMAL },
+                net_profit_rate_percentage= #{netProfitRatePercentage,jdbcType=DOUBLE },
+                sales_volumn= #{salesVolumn,jdbcType=INTEGER },
+                per_unit_sales_price= #{perUnitSalesPrice,jdbcType=DECIMAL },
+                mkt_cost= #{mktCost,jdbcType=DECIMAL },
+                sample_cost= #{sampleCost,jdbcType=DECIMAL },
+                vat_taxes= #{vatTaxes,jdbcType=DECIMAL },
+                sku= #{sku,jdbcType=VARCHAR },
+                country= #{country,jdbcType=VARCHAR },
+                promotion_expenses_rate= #{promotionExpensesRate,jdbcType=DOUBLE }
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
 
@@ -387,5 +411,5 @@
         DELETE FROM  so_sales_plan_sum
         WHERE id = #{id,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:27:31=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:13:35=========================================== -->
 </mapper>

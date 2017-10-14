@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
 * @Description: ItemAttrValueLocaleExample
 * @author
-* @date 2017-10-12 04:22:22
+* @date 2017-10-13 02:10:32
 */
 public class ItemAttrValueLocaleExample {
     protected String orderByClause;

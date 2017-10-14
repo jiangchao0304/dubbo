@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: ItemLogMapper
 * @author
-* @date 2017-10-12 04:24:14
+* @date 2017-10-13 02:11:20
 */
 @Repository
 public interface ItemLogMapper {
@@ -31,7 +31,7 @@ public interface ItemLogMapper {
 
     int updateByExample(@Param("record") ItemLog record, @Param("example") ItemLogExample example);
 
-    int updateByPrimaryKeySelective(ItemLog record);
+    int updateByPrimaryKeySelective(@Param("record") ItemLog record);
 
     int updateByPrimaryKey(ItemLog record);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.SequenceMapper">
-<!-- ================================代码生成开始=2017-10-12 04:27:43=========================================== -->
+<!-- ================================代码生成开始=2017-10-13 02:13:41=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Sequence">
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -24,13 +24,6 @@
             #{item.value,jdbcType=INTEGER},
             #{item.step,jdbcType=SMALLINT},
             #{item.start,jdbcType=INTEGER}
-    </sql>
-
-    <sql id="Set">
-                name= #{name,jdbcType=VARCHAR },
-                value= #{value,jdbcType=INTEGER },
-                step= #{step,jdbcType=SMALLINT },
-                start= #{start,jdbcType=INTEGER }
     </sql>
 
     <sql id="SetNotNull">
@@ -181,7 +174,10 @@
     <update id="updateByExample" parameterType="map">
         UPDATE sys_sequence
         <set>
-            <include refid="SetNotNull"></include>
+         name= #{record.name,jdbcType=VARCHAR },
+         value= #{record.value,jdbcType=INTEGER },
+         step= #{record.step,jdbcType=SMALLINT },
+         start= #{record.start,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -194,14 +190,17 @@
         <set>
             <include refid="SetNotNull"></include>
         </set>
-        WHERE name = #{name,jdbcType=VARCHAR}
+        WHERE name = #{record.name,jdbcType=VARCHAR}
     </update>
 
 
     <update id="updateByPrimaryKey" parameterType="Sequence">
         UPDATE sys_sequence
         <set>
-            <include refid="Set"></include>
+                name= #{name,jdbcType=VARCHAR },
+                value= #{value,jdbcType=INTEGER },
+                step= #{step,jdbcType=SMALLINT },
+                start= #{start,jdbcType=INTEGER }
         </set>
         WHERE name = #{name,jdbcType=VARCHAR}
 
@@ -237,5 +236,5 @@
         DELETE FROM  sys_sequence
         WHERE name = #{name,jdbcType=VARCHAR}
     </delete>
-    <!-- ================================代码生成结束=2017-10-12 04:27:43=========================================== -->
+    <!-- ================================代码生成结束=2017-10-13 02:13:41=========================================== -->
 </mapper>

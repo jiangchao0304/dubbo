@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
 * @Description: SystemprofileMapper
 * @author
-* @date 2017-10-12 04:28:14
+* @date 2017-10-13 02:13:59
 */
 @Repository
 public interface SystemprofileMapper {
@@ -31,7 +31,7 @@ public interface SystemprofileMapper {
 
     int updateByExample(@Param("record") Systemprofile record, @Param("example") SystemprofileExample example);
 
-    int updateByPrimaryKeySelective(Systemprofile record);
+    int updateByPrimaryKeySelective(@Param("record") Systemprofile record);
 
     int updateByPrimaryKey(Systemprofile record);
 
