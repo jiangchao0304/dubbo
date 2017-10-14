@@ -12,6 +12,7 @@ import com.sunvalley.erp.product.model.ItemFileExample;
 import com.sunvalley.erp.product.model.Systemprofile;
 import com.sunvalley.erp.product.model.SystemprofileExample;
 import com.sunvalley.erp.to.product.ItemFileTO;
+import com.sunvalley.erp.to.product.ItemImageTO;
 import com.sunvalley.erp.to.product.ItemVideoTO;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -29,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -68,6 +70,7 @@ public class ItemFileService {
             ItemFileTO dto = new ItemFileTO();
             try {
                 BeanUtils.copyProperties(dto,itemFile);
+				dto.setUrl(getFileUrl(itemFile.getSku(),itemFile.getFileName()));
             }catch (Exception ex){
 
             }
@@ -84,8 +87,9 @@ public class ItemFileService {
         return  result;
     }
     
-    public ItemFileTO listItemImages(String sku,int sellerId){
+    public ItemImageTO listItemImages(String sku, int sellerId){
     	fPath  = this.initPath();
+    	fileName=sku;
     	List<String> categoryList = getCategoryList();
     	String sku_33 = getSku(sku);
     	File dir = new File(fPath);
@@ -98,9 +102,10 @@ public class ItemFileService {
 		List<Integer> bigpicfolderlist = new ArrayList<Integer>();
 		List<Integer> gypicfolderlist = new ArrayList<Integer>();
 		List<Integer> rppicsfolderlist = new ArrayList<Integer>();
-		ItemFileTO itemFileTO = new ItemFileTO();
-		Map<String,List<String[]>> listMap = itemFileTO.getListMap();
-		Map<String,List<Integer>> indexMap = itemFileTO.getIndexMap();
+		ItemImageTO itemImageTO = new ItemImageTO();
+		itemImageTO.setGypType( new ArrayList<>());
+		Map<String,List<String[]>> listMap = itemImageTO.getListMap();
+		Map<String,List<Integer>> indexMap = itemImageTO.getIndexMap();
 		for (int i = 0; i < l; i++) {
 			if (files[i].isDirectory()) {
 				String foldername = files[i].getName();
@@ -201,13 +206,13 @@ public class ItemFileService {
 				rppicslist.add(str);
 			}
 		}
-		itemFileTO.setBigpiclist(bigpiclist);
-		itemFileTO.setGypiclist(gypiclist);
-		itemFileTO.setGywmpiclist(gywmpiclist);
-		itemFileTO.setRppicslist(rppicslist);
+		itemImageTO.setBigpiclist(bigpiclist);
+		itemImageTO.setGypiclist(gypiclist);
+		itemImageTO.setGywmpiclist(gywmpiclist);
+		itemImageTO.setRppicslist(rppicslist);
     	if(null != categoryList )
-    		itemFileTO.getGypType().addAll(categoryList);		
-		return itemFileTO;
+			itemImageTO.getGypType().addAll(categoryList);
+		return itemImageTO;
     }
     private void mkDirImgPath(String path) {
 		File dir = new File(path);
@@ -371,6 +376,21 @@ public class ItemFileService {
 		}
 		return fPath;
     }
+
+
+    public String getFileUrl(String sku,String fileName){
+		String formatUrl="sku=%s&file=%s";
+		String _url= String.format(formatUrl,sku,fileName);
+		try {
+			_url= "http://sss.com/?"+Base64.getEncoder().encodeToString(_url.getBytes("utf-8"));
+			return _url;
+		}catch (Exception ex){
+		}
+		finally {
+
+		}
+		return "";
+	}
     
 }
 

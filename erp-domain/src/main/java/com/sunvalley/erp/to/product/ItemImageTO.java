@@ -1,10 +1,9 @@
 /*
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
+* @Owner:douglas.jiang
+* @Date:  2017-10-14 18:35
 */
 package com.sunvalley.erp.to.product;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jdk.nashorn.internal.ir.debug.PrintVisitor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,9 +15,10 @@ import java.util.Map;
  * 类或方法的功能描述 :TODO
  *
  * @Author: douglas.jiang
- * @Date: 2017-10-10 17:53
+ * @Date: 2017-10-14 18:35
  */
-public class ItemFileTO  implements Serializable {
+public class ItemImageTO implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private java.lang.Integer itemFileId;//
     private java.lang.Integer fileId;//
@@ -29,18 +29,72 @@ public class ItemFileTO  implements Serializable {
     private java.lang.Integer userId;//
     private java.lang.String email;//
     private java.lang.String desc;//
-    private java.lang.String url;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date createDate;//
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private java.util.Date updateDate;//
+    private List<String[]> bigpiclist;
+    private List<String[]> gypiclist;
+    private List<String[]> gywmpiclist;
+    private List<String[]> Rppicslist;
+    private List<String> gypType;
+    private Map<String,List<String[]>> listMap = new HashMap<String,List<String[]>>();
+    private Map<String,List<Integer>> indexMap = new HashMap<String,List<Integer>>();
 
-    public String getUrl() {
-        return url;
+
+
+    public List<String> getGypType() {
+        return gypType;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setGypType(List<String> gypType) {
+        this.gypType = gypType;
+    }
+
+    public Map<String, List<String[]>> getListMap() {
+        return listMap;
+    }
+
+    public void setListMap(Map<String, List<String[]>> listMap) {
+        this.listMap = listMap;
+    }
+
+    public Map<String, List<Integer>> getIndexMap() {
+        return indexMap;
+    }
+
+    public void setIndexMap(Map<String, List<Integer>> indexMap) {
+        this.indexMap = indexMap;
+    }
+
+    public List<String[]> getBigpiclist() {
+        return bigpiclist;
+    }
+
+    public void setBigpiclist(List<String[]> bigpiclist) {
+        this.bigpiclist = bigpiclist;
+    }
+
+    public List<String[]> getGypiclist() {
+        return gypiclist;
+    }
+
+    public void setGypiclist(List<String[]> gypiclist) {
+        this.gypiclist = gypiclist;
+    }
+
+    public List<String[]> getGywmpiclist() {
+        return gywmpiclist;
+    }
+
+    public void setGywmpiclist(List<String[]> gywmpiclist) {
+        this.gywmpiclist = gywmpiclist;
+    }
+
+    public List<String[]> getRppicslist() {
+        return Rppicslist;
+    }
+
+    public void setRppicslist(List<String[]> rppicslist) {
+        Rppicslist = rppicslist;
     }
 
     public Integer getItemFileId() {
@@ -131,4 +185,6 @@ public class ItemFileTO  implements Serializable {
         this.updateDate = updateDate;
     }
 }
+
+
 
