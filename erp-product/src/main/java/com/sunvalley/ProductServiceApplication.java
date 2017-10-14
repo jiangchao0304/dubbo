@@ -1,4 +1,5 @@
 package com.sunvalley;
+import com.sunvalley.erp.common.util.ConfigUtil;
 import com.sunvalley.erp.product.daoEX.SequenceExMapper;
 import com.sunvalley.erp.product.model.Sequence;
 import org.mybatis.spring.annotation.MapperScan;
@@ -24,6 +25,8 @@ public class ProductServiceApplication {
 
 
 		ConfigurableApplicationContext cac = SpringApplication.run(ProductServiceApplication.class, args);
+
+		String ss =  ConfigUtil.getProperty("test");
 
 		logger.info("server start");
 
