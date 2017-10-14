@@ -3,6 +3,7 @@ package com.sunvalley.erp.common.util;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,18 +38,29 @@ public class JsonUtil {
 
 
 
-
-	public static JsonNode getJsonNode(String jsonString,String key) {
+	/**
+	 *
+	 * @Description: 转换json串为泛型集合列表
+	 * @remark 示例代码：json = [{\"name\":\"pyj1\",\"age\":\"28\"},{\"name\":\"pyj2\",\"age\":\"29\"}]
+	 * 					List<User> users = convertJsonToList(json2,ArrayList.class,User.class);
+	 * @param jsonStr json串
+	 * @param elementClass 元素类
+	 * @return
+	 * @throws Exception
+	 * @author
+	 * @date
+	 */
+	public static <T> List<T> fromJSON(String jsonStr, String fieldName,Class<T> elementClass) {
 		try {
-			JsonNode node = objectMapper.readTree(jsonString);
-			return node.get(key);
-		}catch (Exception ex){
-			throw new RuntimeException(ex);
+			JsonNode node = objectMapper.readTree(jsonStr);
+			String  fieldJson = node.get(fieldName).toString();
+			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, elementClass);
+			return (List<T>) objectMapper.readValue(fieldJson, javaType);
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
 		}
-
 	}
-
-
 
 	/**
 	 * 将 JSON 字符串转为 Java 对象
@@ -76,15 +88,12 @@ public class JsonUtil {
 	 * @author
 	 * @date 2016-11-6
 	 */
-	public static <T> T getObjFromJsonArrStr(String source, TypeReference<T> ref) throws Exception
+	public static <T> T fromJSON(String source, TypeReference<T> ref) throws Exception
 	{
 		T rtn = null;
 		try
 		{
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-			rtn = mapper.readValue(source, ref);
+			rtn = objectMapper.readValue(source, ref);
 		}
 		catch (IOException e)
 		{
@@ -106,7 +115,7 @@ public class JsonUtil {
 	 * @author Jerry
 	 * @date 2016-7-11
 	 */
-	public static <T> List<T> convertJsonToList(String jsonStr, Class<?> collectionClass, Class<T> elementClass) throws Exception
+	public static <T> List<T> fromJSON(String jsonStr, Class<?> collectionClass, Class<T> elementClass) throws Exception
 	{
 		try
 		{
