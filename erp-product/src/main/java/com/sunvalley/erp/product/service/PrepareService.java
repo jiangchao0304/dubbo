@@ -308,8 +308,7 @@ public class PrepareService {
         model.setMainCategoryId(prepareSkuEx.getMainCategoryId());
         model.setSubCategoryId(prepareSkuEx.getSubCategoryId());
         model.setPmId(prepareSkuEx.getPmId());
-        model.setCreateUser(prepareSkuEx.getSessionId());
-        model.setCreateDate(TimeUtil.BeiJingTimeNow());
+
         model.setRemark(prepareSkuEx.getRemark());
         model.setBattery(prepareSkuEx.getBattery());
         model.setWarranty(prepareSkuEx.getWarranty());
@@ -326,10 +325,12 @@ public class PrepareService {
                 String modelName = sequenceService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
                 model.setModelName(modelName);
             }
-            itemModelMapper.updateByPrimaryKey(model);
+            itemModelMapper.updateByPrimaryKeySelective(model);
         }else{
             String modelName = sequenceService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
             model.setModelName(modelName);
+            model.setCreateUser(prepareSkuEx.getSessionId());
+            model.setCreateDate(TimeUtil.BeiJingTimeNow());
             itemModelMapper.insert(model);
             //todo:自动分配组织架构
            // adapteModelOrg(model);
