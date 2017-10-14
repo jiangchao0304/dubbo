@@ -12,6 +12,8 @@ import com.sunvalley.erp.product.daoEX.BomLogExMapper;
 import com.sunvalley.erp.product.model.Bom;
 import com.sunvalley.erp.product.model.BomExample;
 import com.sunvalley.erp.product.model.ItemVirtual;
+import com.sunvalley.erp.product.model.ItemVirtualExample;
+import com.sunvalley.erp.product.modelEX.BomEX;
 import com.sunvalley.erp.to.common.SysSessionTO;
 import com.sunvalley.erp.to.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,6 +237,109 @@ public class BomsService {
 
         }
         return true;
+
+    }
+
+
+    /**
+     * saveBomOneSkuList .保存第二层bom信息
+     * @param skuId
+     *         [skuId]
+     * @param bomOneSkuTOList
+     *         [bomOneSkuTOList]
+     * @return boolean
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/13:16:05
+     */
+    public int saveBomOneSkuList(int skuId,List<BomOneSkuTO> bomOneSkuTOList){
+
+         //验证是否超过三层
+        ItemVirtualExample itemVirtualExample = new ItemVirtualExample();
+        itemVirtualExample.createCriteria().andVirtualSkuidEqualTo(skuId);
+        itemVirtualMapper.deleteByExample(itemVirtualExample);
+        int result = 0;
+        for (BomOneSkuTO bomOneSkuTO : bomOneSkuTOList) {
+            if(bomOneSkuTO.getRowState()==4)
+                continue;
+            ItemVirtual model = new ItemVirtual();
+            model.setQty((short) bomOneSkuTO.getQty());
+            model.setVirtualSkuid(skuId);
+            model.setActualSkuid(bomOneSkuTO.getSkuid());
+            itemVirtualMapper.insert(model);
+            result++;
+        }
+        return  result;
+    }
+
+    public boolean checkBom(int skuId){
+
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("skuid", skuId);
+        BomTO tempBom = bomExMapper.selectById(map);
+        if(tempBom==null ) {
+            return false;
+        }
+
+
+        //判断sku 是否是最底层
+//        int totallevelChild=0;
+//        int totalLevelParent=0;
+//        if(tempBom.getId()!=null){
+//            //校验当前sku 是否输入最高级别
+//            totallevelChild = bomExMapper.selectTotalChild(tempBom.getSkuid());//查询子级
+//            totalLevelParent =bomExMapper.selectTotalParent(tempBom.getSkuid());//查询父级
+//            if(totallevelChild>0 && totalLevelParent>0){
+//                totallevelChild-=1;
+//            }
+//            if((totallevelChild+totalLevelParent)>3){
+//                throw new UniteException("SKU:"+tempBom.getSku()+"总层大于3层！");
+//            }
+//            if(totalLevelParent==3 && tempBom.getBomOneSkuList()!=null && tempBom.getBomOneSkuList().size()>0){
+//                throw new UniteException("SKU:"+tempBom.getSku()+"总层大于3层！");
+//            }
+//
+//            if(tempBom.getBomOneSkuList()!=null && tempBom.getBomOneSkuList().size()>0){
+//                HashMap< String, Object> param = new HashMap<String, Object>();
+//                for (BomTO tempBomEx  : tempBom.getBomOneSkuList()) {
+//                    param.clear();
+//                    List<Integer> skuIdList = new ArrayList<Integer>();
+//                    skuIdList.add(tempBomEx.getSkuid());
+//                    param.put("skuIdList", skuIdList);
+//                    List<BomTO> oneSkuList =  bomExMapper.selectSkuInfoBySKuid(param);
+//                    if(oneSkuList!=null && oneSkuList.size()>0){
+//                        for (BomTO twoBom : oneSkuList) {
+//                            if(twoBom.getSkuid().equals(tempBom.getSkuid())){
+//                                throw new UniteException("SKU:"+tempBomEx.getSku()+"总层大于三层");
+//                            }
+//                        }
+//                    }
+//                    if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
+//                        this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,totalLevelParent,bomEX.getSkuid());
+//                    }
+//                }
+//            }
+//
+//
+//        }else{
+//            totallevelChild = bomExMapper.selectTotalChild(bomEX.getSkuid());//查询子级
+//            if(totallevelChild<3){
+//                if(bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
+//                    for (BomEX tempBomEx  : bomEX.getBomOneSkuList()) {
+//                        if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
+//                            this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,1,bomEX.getSkuid());
+//                        }
+//                    }
+//                }
+//            }else{
+//                throw new UniteException("SKU:"+bomEX.getSku()+"总层大于3层！");
+//            }
+//        }
+        return true;
+
+
+
 
     }
 

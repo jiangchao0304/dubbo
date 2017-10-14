@@ -14,6 +14,7 @@ import com.sunvalley.erp.product.service.BomsService;
 import com.sunvalley.erp.product.service.ItemLogService;
 import com.sunvalley.erp.product.vo.BaseReturnVO;
 import com.sunvalley.erp.to.common.SysSessionTO;
+import com.sunvalley.erp.to.product.BomOneSkuTO;
 import com.sunvalley.erp.to.product.BomTO;
 import com.sunvalley.erp.to.product.ImportPackageTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,21 @@ public class BomController {
         Integer bomId= jsObject.getInteger("bomId");
         Integer skuId= jsObject.getInteger("skuId");
         BomTO result =  bomsService.getBom(bomId,skuId);
+        return  new BaseReturnVO(result);
+    }
+
+
+    @RequestMapping(value = "/saveBomOneSkuList",consumes="application/json")
+    @ResponseBody
+    public BaseReturnVO saveBomOneSkuList(@RequestBody String jsonData) {
+        JSONObject jsObject = JSONObject.parseObject(jsonData);
+
+        Integer skuId= jsObject.getInteger("skuid");
+
+        List<BomOneSkuTO> bomOneSkuTOList =JSON.parseArray(jsObject.getString("bomOneSkuList"), BomOneSkuTO.class);
+
+        int result =  bomsService.saveBomOneSkuList(skuId,bomOneSkuTOList);
+
         return  new BaseReturnVO(result);
     }
 
