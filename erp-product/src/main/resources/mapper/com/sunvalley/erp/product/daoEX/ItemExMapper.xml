@@ -115,8 +115,8 @@
 		LEFT JOIN bs_item_model AS model  ON pre.model_id = model.model_id
 		LEFT JOIN bs_product_line_mapping mc ON mc.mapping_id = item.skuid AND mc.product_line_id = item.categoryid AND mc.type = 1
 		LEFT JOIN bs_product_line_mapping sc ON sc.mapping_id = item.skuid AND sc.product_line_id = item.subcategoryid AND sc.type = 1
-		LEFT JOIN bs_product_line lc ON lc.id = mc.product_line_id
-		LEFT JOIN bs_product_line ls ON ls.id = sc.product_line_id
+		LEFT JOIN bs_product_line lc ON lc.id = model.main_category_id
+		LEFT JOIN bs_product_line ls ON ls.id = model.sub_category_id
 		LEFT JOIN sys_user purchase  ON purchase.userid = item.purchaser_id
 		LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
 		LEFT JOIN (
