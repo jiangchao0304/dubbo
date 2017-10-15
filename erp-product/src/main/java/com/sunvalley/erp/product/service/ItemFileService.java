@@ -4,6 +4,7 @@
 package com.sunvalley.erp.product.service;
 
 import com.sunvalley.erp.common.constants.Constants.SystemProfile_Category;
+import com.sunvalley.erp.common.util.ConfigUtil;
 import com.sunvalley.erp.product.dao.ItemFileMapper;
 import com.sunvalley.erp.product.dao.SystemprofileMapper;
 import com.sunvalley.erp.product.daoEX.VideoExMapper;
@@ -354,13 +355,11 @@ public class ItemFileService {
      * 初始化图片路径
      */
     public String initPath(){
-    	String fPath = "D:\\upload\\"; 
-//    	if(System.getProperty("os.name").toLowerCase().contains("window")) {
-//			fPath = Config.getProperty("uploadimage.windowspath");
-//		} else {
-//			fPath = Config.getProperty("uploadimage.linuxpath");
-//		}
-    	
+    	if(System.getProperty("os.name").toLowerCase().contains("window")) {
+			fPath = ConfigUtil.getProperty("uploadimage.windowspath");
+		} else {
+			fPath = ConfigUtil.getProperty("uploadimage.linuxpath");
+		}
     	File dir = new File(fPath);
 		if(!dir.exists()) { // 文件夹不存在就创建
 			dir.mkdir();
@@ -382,7 +381,7 @@ public class ItemFileService {
 		String formatUrl="sku=%s&file=%s";
 		String _url= String.format(formatUrl,sku,fileName);
 		try {
-			_url= "http://sss.com/?"+Base64.getEncoder().encodeToString(_url.getBytes("utf-8"));
+			_url=  ConfigUtil.getProperty("driver.download.domain")+"/?"+Base64.getEncoder().encodeToString(_url.getBytes("utf-8"));
 			return _url;
 		}catch (Exception ex){
 		}

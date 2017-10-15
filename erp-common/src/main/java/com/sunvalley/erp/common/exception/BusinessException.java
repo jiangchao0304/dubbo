@@ -64,7 +64,8 @@ public class BusinessException  extends RuntimeException implements SunvalleyExc
         if (ApiMsgEnum.apiMsgMap.containsKey(exceptionCode)) {
             this.detailMsg = ApiMsgEnum.apiMsgMap.get(exceptionCode);
         } else {
-            this.detailMsg = ApiMsgEnum.EXCEPTION_CODE_NOT_FOUND.getResDes();
+            //this.detailMsg = ApiMsgEnum.EXCEPTION_CODE_NOT_FOUND.getResDes();
+            this.detailMsg = exceptionCode;
         }
     }
 

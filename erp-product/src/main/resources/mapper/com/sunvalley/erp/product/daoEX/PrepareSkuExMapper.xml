@@ -326,6 +326,10 @@
 	</select>
 
 
+	<select id="getStatusByPreSku" parameterType="String" resultType="Integer">
+		SELECT `status` FROM `bs_prepare_sku` WHERE pre_sku = #{preSku}
+	</select>
+
 	<update id="updatePreSkuStatus" parameterType="map">
 		UPDATE bs_prepare_sku
 		SET `status` = '2',skuid = #{skuid,jdbcType=INTEGER},sku = #{sku}
@@ -334,6 +338,8 @@
 			${filtersql}
 		</if>
 	</update>
+
+
 
 	 
 </mapper>

@@ -9,6 +9,7 @@ import com.sunvalley.erp.common.component.filtersql.FilterOP;
 import com.sunvalley.erp.common.exception.BusinessException;
 import com.sunvalley.erp.common.exception.ParameterException;
 import com.sunvalley.erp.common.util.TimeUtil;
+import com.sunvalley.erp.product.daoEX.BomExMapper;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
 import com.sunvalley.erp.product.dao.*;
@@ -377,26 +378,34 @@ public class PrepareService {
         item.setMagnetic(dto.getMagnetic());
         itemMapper.updateByPrimaryKeySelective(item);
 
-        //更新bs_bom
-        Bom bom = new Bom();
-        bom.setBomDesc(dto.getBomDesc());
-        bom.setCombineUnit(dto.getCombineUnit());
-        bom.setPurchaseProperty(dto.getPurchaseProperty());
+
         BomExample bomExample = new BomExample();
         bomExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
-        bomMapper.updateByExampleSelective(bom,bomExample);
+        List<Bom> bomList =  bomMapper.selectByExample(bomExample);
 
-        //更新bs_item_locale
-        for (ItemLocaleTO itemLocaleTO : dto.getItemLocaleTOList()) {
-            ItemLocale updateDO = new ItemLocale();
-            updateDO.setDescription(itemLocaleTO.getDescription());
-            ItemLocaleExample itemLocaleExample = new ItemLocaleExample();
-            itemLocaleExample.createCriteria().andSkuidEqualTo(itemLocaleTO.getSkuid())
-                    .andLangIdEqualTo(itemLocaleTO.getLangId());
-            itemLocaleMapper.updateByExampleSelective(updateDO,itemLocaleExample);
+        //如果没有bom信息，初始化bom信息
+        if(bomList==null || bomList.size()==0){
+            Bom bom = new Bom();
+            bom.setBomDesc(dto.getBomDesc());
+            bom.setCombineUnit(dto.getCombineUnit());
+            bom.setCreateDate(TimeUtil.BeiJingTimeNow());
+            bom.setCreateUserId(dto.getSessionTO().getUserId());
+            bom.setPurchaseProperty(dto.getPurchaseProperty());
+            bom.setSkuid(item.getSkuid());
+            bom.setUpdateDate(TimeUtil.BeiJingTimeNow());
+            bom.setUpdateUserId(dto.getSessionTO().getUserId());
+            bomMapper.insert(bom);
+        }else {
+            Bom bom = new Bom();
+            bom.setBomDesc(dto.getBomDesc());
+            bom.setCombineUnit(dto.getCombineUnit());
+            bom.setPurchaseProperty(dto.getPurchaseProperty());
+            bomExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
+            bomMapper.updateByExampleSelective(bom,bomExample);
         }
 
-
+        //更新bs_item_locale
+        saveItemLocale(dto.getItemLocaleTOList());
         return true;
     }
 
@@ -412,6 +421,18 @@ public class PrepareService {
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto){
+
+        if(Strings.isNullOrEmpty(dto.getPreSku()))
+            throw new ParameterException( "preSku不能为空！");
+
+        //查询状态是否已转正
+       Integer status =  prepareSkuExMapper.getStatusByPreSku(dto.getPreSku());
+
+       if(status == null)
+           throw new ParameterException( String.format("preSku %s 不存在！",dto.getPreSku()));
+
+       if(status == 2)
+           throw new ParameterException( String.format("preSku %s 已转正！",dto.getPreSku()));
 
         PreSkuRelationTO result = new PreSkuRelationTO();
         beforeSaveItem(dto);

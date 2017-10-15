@@ -26,7 +26,7 @@ public class ProductServiceApplication {
 
 		ConfigurableApplicationContext cac = SpringApplication.run(ProductServiceApplication.class, args);
 
-		String ss =  ConfigUtil.getProperty("test");
+		String ss =  ConfigUtil.getProperty("uploadimage.windowspath");
 
 		logger.info("server start");
 

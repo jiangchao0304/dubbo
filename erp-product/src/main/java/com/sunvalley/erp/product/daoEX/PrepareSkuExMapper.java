@@ -26,5 +26,7 @@ public interface PrepareSkuExMapper {
 	//更新SKU状态
 	int updatePreSkuStatus(HashMap<String, Object> map);
 
+	Integer getStatusByPreSku(String preSku);
+
 
 }
