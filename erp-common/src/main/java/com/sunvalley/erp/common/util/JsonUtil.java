@@ -1,33 +1,26 @@
 package com.sunvalley.erp.common.util;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Simon.Cheng
  * */
 public class JsonUtil {
 	
-	private static Gson gson;
+
 	private static ObjectMapper objectMapper;
 	
 	static {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gson = gsonBuilder.setDateFormat(DateUtil.DATE_TIME_FORMAT_STRING1).disableHtmlEscaping().create();
-
 
 		objectMapper  = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -50,7 +43,7 @@ public class JsonUtil {
 	 * @author
 	 * @date
 	 */
-	public static <T> List<T> fromJSON(String jsonStr, String fieldName,Class<T> elementClass) {
+	public static <T> List<T> fromJSONArray(String jsonStr, String fieldName, Class<T> elementClass) {
 		try {
 			JsonNode node = objectMapper.readTree(jsonStr);
 			String  fieldJson = node.get(fieldName).toString();
@@ -58,6 +51,67 @@ public class JsonUtil {
 			return (List<T>) objectMapper.readValue(fieldJson, javaType);
 		} catch (Exception e)
 		{
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static <T> List<T> fromJSONArray(String jsonStr, Class<T> elementClass) {
+		try {
+			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, elementClass);
+			return (List<T>) objectMapper.readValue(jsonStr, javaType);
+		} catch (Exception e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+
+
+
+	/**
+	 *
+	 * @Description: 转换json串为泛型集合列表
+	 * @remark 示例代码：json = [{\"name\":\"pyj1\",\"age\":\"28\"},{\"name\":\"pyj2\",\"age\":\"29\"}]
+	 * 					List<User> users = convertJsonToList(json2,ArrayList.class,User.class);
+	 * @param jsonStr json串
+	 * @param elementClass 元素类
+	 * @return
+	 * @throws Exception
+	 * @author
+	 * @date
+	 */
+	public static <T> T fromJSON(String jsonStr, String fieldName, Class<T> elementClass) {
+		try {
+			JsonNode node = objectMapper.readTree(jsonStr);
+
+			String  fieldJson = node.get(fieldName).toString();
+
+			return  objectMapper.readValue(fieldJson, elementClass);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 将 JSON 字符串转为 Java 对象
+	 */
+	public static String getString(String jsonStr, String fieldName) {
+		try {
+			JsonNode node = objectMapper.readTree(jsonStr);
+			String  fieldJson = node.get(fieldName).toString();
+			return fieldJson;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static Integer getInteger(String jsonStr, String fieldName) {
+		try {
+			JsonNode node = objectMapper.readTree(jsonStr);
+			JsonNode jsonNode = node.get(fieldName);
+			if(jsonNode==null)
+				return null;
+			return  castToInt(jsonNode.asText());
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -145,16 +199,38 @@ public class JsonUtil {
 
 
 	
-	//独立字段可以用Map对象接收new TypeToken<Map<String, String>>(){}.getType()
-	public static Object fromJson(String jsonData, Type type) {
-		return gson.fromJson(jsonData, type);
+	public static String toJson(Object object) throws Exception{
+		return objectMapper.writeValueAsString(object);
 	}
 	
-	public static String toJson(Object object){
-		return gson.toJson(object);
-	}
-	
-	public static String toJson(Object object,Type TokenType){
-		return gson.toJson(object,TokenType);
+
+
+	private static Integer castToInt(Object value){
+		if(value == null){
+			return null;
+		}
+		if(value instanceof Integer){
+			return (Integer) value;
+		}
+		if(value instanceof Number){
+			return ((Number) value).intValue();
+		}
+		if(value instanceof String){
+			String strVal = (String) value;
+			if(strVal.length() == 0 //
+					|| "null".equals(strVal) //
+					|| "NULL".equals(strVal)){
+				return null;
+			}
+			if(strVal.indexOf(',') != 0){
+				strVal = strVal.replaceAll(",", "");
+			}
+			return Integer.parseInt(strVal);
+		}
+		if(value instanceof Boolean){
+			return ((Boolean) value).booleanValue() ? 1 : 0;
+		}
+
+		return null;
 	}
 }

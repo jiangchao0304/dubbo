@@ -1,16 +1,15 @@
 package com.sunvalley.erp.common.component.filtersql;
 
+import com.sunvalley.erp.common.exception.UniteException;
+import com.sunvalley.erp.common.util.DateUtil;
+import com.sunvalley.erp.common.util.JsonUtil;
+import com.sunvalley.erp.common.util.StringUtil;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import com.google.gson.reflect.TypeToken;
-import com.sunvalley.erp.common.exception.UniteException;
-import com.sunvalley.erp.common.util.DateUtil;
-import com.sunvalley.erp.common.component.filtersql.FilterModel;
-import com.sunvalley.erp.common.util.JsonUtil;
-import com.sunvalley.erp.common.util.StringUtil;
 
 @SuppressWarnings("nls")
 public class FilterOP {
@@ -26,9 +25,7 @@ public class FilterOP {
 
 	@SuppressWarnings("unchecked")
 	public List<FilterModel> getFliterList(String jsonData) {
-		List<FilterModel> filterModelList=(List<FilterModel>) JsonUtil.fromJson(jsonData,
-				new TypeToken<List<FilterModel>>() {
-		}.getType());
+		List<FilterModel> filterModelList= JsonUtil.fromJSONArray(jsonData,FilterModel.class);
 		if(null!=filterModelList&&filterModelList.size()>0){
 			for(FilterModel fm : filterModelList){//循环处理SQL注入的问题
 				if(null!=fm.getValue()&&!"".equals(fm.getValue())){

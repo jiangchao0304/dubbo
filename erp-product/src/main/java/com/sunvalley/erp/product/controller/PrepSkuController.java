@@ -3,21 +3,19 @@
 */
 package com.sunvalley.erp.product.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
 import com.sunvalley.erp.common.util.JsonUtil;
-import com.sunvalley.erp.product.model.ItemLocale;
-import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
 import com.sunvalley.erp.product.vo.BaseReturnVO;
-import com.sunvalley.erp.to.common.FilterModelTO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.ModelAndPreSkuTO;
 import com.sunvalley.erp.to.product.PreSkuTO;
 import com.sunvalley.erp.to.product.SkuBaseInfoTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,10 +38,8 @@ public class PrepSkuController {
     @ResponseBody
     public BaseReturnVO getByModel(@RequestBody String jsonData) {
 
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        String modelName= jsObject.getString("modelName");
-        Integer status= jsObject.getInteger("status");
-
+        String modelName=JsonUtil.getString(jsonData,"modelName");
+        Integer status= JsonUtil.getInteger(jsonData,"status");
         PreSkuTO result = prepareService.getByModel(null,modelName,status);
         return  new BaseReturnVO(result);
     }
@@ -51,9 +47,8 @@ public class PrepSkuController {
     @RequestMapping("/getByModelId")
     @ResponseBody
     public BaseReturnVO getByModelId(@RequestBody String jsonData) {
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        Integer modelId= jsObject.getInteger("modelId");
-        Integer status= jsObject.getInteger("status");
+        Integer modelId= JsonUtil.getInteger(jsonData,"modelId");
+        Integer status= JsonUtil.getInteger(jsonData,"status");
         PreSkuTO result =  prepareService.getByModel(modelId,null,status);
         return  new BaseReturnVO(result);
     }
@@ -82,10 +77,9 @@ public class PrepSkuController {
     @RequestMapping("/getPreSkuBaseInfo")
     @ResponseBody
     public BaseReturnVO getPreSkuBaseInfo(@RequestBody String jsonData) {
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        Integer skuId= jsObject.getInteger("skuId");
-        Integer modelId= jsObject.getInteger("modelId");
-        Integer type= jsObject.getInteger("type");
+        Integer skuId= JsonUtil.getInteger(jsonData,"skuId");
+        Integer modelId= JsonUtil.getInteger(jsonData,"modelId");
+        Integer type= JsonUtil.getInteger(jsonData,"type");
         SkuBaseInfoTO result =  prepareService.getPreSkuBaseInfo(skuId,modelId,type);
         return  new BaseReturnVO(result);
     }
@@ -93,10 +87,13 @@ public class PrepSkuController {
     @RequestMapping("/listModelAndPreSku")
     @ResponseBody
     public BaseReturnVO listModelAndPreSku(@RequestBody String jsonData) {
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        List<FilterModel> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModel.class);
-        int offset= jsObject.getIntValue("offset");
-        int pageSize= jsObject.getIntValue("pageSize");
+
+        List<FilterModel> filterModels = JsonUtil.fromJSONArray(jsonData,"filterModels",FilterModel.class);
+
+        int offset= JsonUtil.getInteger(jsonData,"offset");
+
+        int pageSize= JsonUtil.getInteger(jsonData,"pageSize");
+
         PagerTO<ModelAndPreSkuTO> result = prepareService.listModelAndPreSku(filterModels,offset,pageSize);
         return  new BaseReturnVO(result);
 

@@ -3,12 +3,6 @@
 */
 package com.sunvalley.erp.product.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.sunvalley.erp.common.enums.ApiMsgEnum;
-import com.sunvalley.erp.common.exception.BusinessException;
-import com.sunvalley.erp.common.exception.SunvalleyException;
-import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.product.service.BomsService;
 import com.sunvalley.erp.product.service.ItemLogService;
@@ -21,10 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 
@@ -47,10 +39,8 @@ public class BomController {
     @RequestMapping(value = "/getBomInfo",consumes="application/json")
     @ResponseBody
     public BaseReturnVO getBomInfo(@RequestBody String jsonData) {
-
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        Integer bomId= jsObject.getInteger("bomId");
-        Integer skuId= jsObject.getInteger("skuId");
+        Integer bomId= JsonUtil.getInteger(jsonData,"bomId");
+        Integer skuId= JsonUtil.getInteger(jsonData,"skuId");
         BomTO result =  bomsService.getBom(bomId,skuId);
         return  new BaseReturnVO(result);
     }
@@ -59,11 +49,10 @@ public class BomController {
     @RequestMapping(value = "/saveBomOneSkuList",consumes="application/json")
     @ResponseBody
     public BaseReturnVO saveBomOneSkuList(@RequestBody String jsonData) {
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
 
-        Integer skuId= jsObject.getInteger("skuid");
+        Integer skuId= JsonUtil.getInteger(jsonData,"skuid");
 
-        List<BomOneSkuTO> bomOneSkuTOList =JSON.parseArray(jsObject.getString("bomOneSkuList"), BomOneSkuTO.class);
+        List<BomOneSkuTO> bomOneSkuTOList =JsonUtil.fromJSONArray(jsonData,"bomOneSkuList",BomOneSkuTO.class);
 
         int result =  bomsService.saveBomOneSkuList(skuId,bomOneSkuTOList);
 
@@ -74,13 +63,11 @@ public class BomController {
     @ResponseBody
     public BaseReturnVO importPackageList(@RequestBody String jsonData) {
 
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
+        Integer skuId= JsonUtil.getInteger(jsonData,"skuId");
 
-        Integer skuId= jsObject.getInteger("skuId");
+        List<ImportPackageTO> packageList =JsonUtil.fromJSONArray(jsonData,"packageList", ImportPackageTO.class);
 
-        List<ImportPackageTO> packageList =JSON.parseArray(jsObject.getString("packageList"), ImportPackageTO.class);
-
-        SysSessionTO sysSessionTO =JSON.parseObject(jsObject.getString("sessionTO"), SysSessionTO.class);
+        SysSessionTO sysSessionTO =JsonUtil.fromJSON(jsonData,"sessionTO", SysSessionTO.class);
 
         boolean result =  bomsService.savePackageList(skuId,packageList,sysSessionTO);
 

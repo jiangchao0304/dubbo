@@ -3,8 +3,8 @@
 */
 package com.sunvalley.erp.product.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
+import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.product.service.ItemFileService;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
@@ -101,9 +101,8 @@ public class SkuController {
     @RequestMapping("/copyVirtualFromSku")
     @ResponseBody
     public BaseReturnVO copyVirtualFromSku(@RequestBody String jsonData) {
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        String sourceSku= jsObject.getString("sourceSku");
-        int targetSkuId= jsObject.getIntValue("targetSkuId");
+        String sourceSku= JsonUtil.getString(jsonData,"sourceSku");
+        int targetSkuId= JsonUtil.getInteger(jsonData,"targetSkuId");
         int result =  itemService.copyVirtualFromSku(sourceSku,targetSkuId);
         return new BaseReturnVO(result);
     }
@@ -111,10 +110,9 @@ public class SkuController {
     @RequestMapping("/getSkuSimpleInfo")
     @ResponseBody
     public BaseReturnVO getSkuSimpleInfo(@RequestBody String jsonData) {
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        String sku= jsObject.getString("sku");
-        int langId= jsObject.getIntValue("langId");
-        int companyId= jsObject.getIntValue("companyId");
+        String sku= JsonUtil.getString(jsonData,"sku");
+        int langId= JsonUtil.getInteger(jsonData,"langId");
+        int companyId= JsonUtil.getInteger(jsonData,"companyId");
         SkuSimpleInfoTO skuSimpleInfoTO =  itemService.getSkuSimpleInfo(sku,langId,companyId);
         return new BaseReturnVO(skuSimpleInfoTO);
     }
@@ -123,12 +121,11 @@ public class SkuController {
     @ResponseBody
     public BaseReturnVO listSkuListNew(@RequestBody String jsonData){
 
-        JSONObject jsObject = JSONObject.parseObject(jsonData);
-        List<FilterModel> filterModels = jsObject.getJSONArray("filterModels").toJavaList(FilterModel.class);
+        List<FilterModel> filterModels = JsonUtil.fromJSONArray(jsonData,"filterModels",FilterModel.class);
 
-        int langId= jsObject.getIntValue("langId");
-        int offset= jsObject.getIntValue("offset");
-        int pageSize= jsObject.getIntValue("pageSize");
+        int langId= JsonUtil.getInteger(jsonData,"langId");
+        int offset= JsonUtil.getInteger(jsonData,"offset");
+        int pageSize= JsonUtil.getInteger(jsonData,"pageSize");
 
         PagerTO<SkuListNewTO> result =  itemService.listskuListNew(filterModels,langId,offset,pageSize);
         return new BaseReturnVO(result);

@@ -3,15 +3,14 @@
 */
 package com.sunvalley.erp.product.common;
 
-import com.alibaba.fastjson.JSON;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.enums.ApiMsgEnum;
 import com.sunvalley.erp.common.exception.SunvalleyException;
 import com.sunvalley.erp.common.util.DateUtil;
+import com.sunvalley.erp.common.util.JsonUtil;
 import com.sunvalley.erp.product.vo.BaseReturnVO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -119,7 +118,7 @@ public class Interceptor {
         sb.append(request.getHeader("Referer")).append(Constants.LOG_SPLITER); //refer
         sb.append(getApiVer(request)).append(Constants.LOG_SPLITER); //apiVersion
         sb.append(getParameter(request)).append(Constants.LOG_SPLITER); //requestParam
-        sb.append(JSON.toJSONString(response.getData())).append(Constants.LOG_SPLITER); //responseParam
+        sb.append(JsonUtil.toJSON(response.getData())).append(Constants.LOG_SPLITER); //responseParam
         sb.append("").append(Constants.LOG_SPLITER);//errorMsg
         sb.append("");//Throwable
         logger.info(sb.toString());
