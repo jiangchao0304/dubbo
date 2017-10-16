@@ -371,7 +371,7 @@ public class PrepareService {
         item.setProductHeight(dto.getProductHeight());
         item.setProductLen(dto.getProductLen());
         item.setProductWeight(dto.getProductWeight());
-        item.setProductWidth(dto.getProductWeight());
+        item.setProductWidth(dto.getProductWidth());
         item.setPurdesc(dto.getPurDesc());
         item.setPurspec(dto.getPurSpec());
         item.setLineState(dto.getLineState());
