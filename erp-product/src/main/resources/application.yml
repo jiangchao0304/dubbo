@@ -45,7 +45,7 @@ spring:
                   statement-executable-sql-log-enable: true
       jackson:
         #date-format: "yyyy-MM-dd HH:mm:ss"
-        time-zone: "GMT+08"
+        time-zone: "GMT-07"
 
 
 mybatis:
