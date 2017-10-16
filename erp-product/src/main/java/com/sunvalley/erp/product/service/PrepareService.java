@@ -700,7 +700,7 @@ public class PrepareService {
                     localeTO.setUnitName(unitName_En);
                 }
             }
-            itemLocale.setSku(localeTO.getSku());
+
             itemLocale.setSkuid(localeTO.getSkuid());
             itemLocale.setLangId(localeTO.getLangId());
             itemLocale.setDescription(localeTO.getDescription());
@@ -712,6 +712,7 @@ public class PrepareService {
             if(list!=null && list.size()>0){
                 itemLocaleMapper.updateByExampleSelective(itemLocale,itemLocaleExample);
             }else {
+                itemLocale.setSku(localeTO.getSku());
                 itemLocaleMapper.insert(itemLocale);
             }
 
