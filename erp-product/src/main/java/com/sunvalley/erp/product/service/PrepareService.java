@@ -583,21 +583,44 @@ public class PrepareService {
     }
 
     private void beforeSaveItem(SkuBaseInfoTO item){
-        if(item.getLen()==null || item.getLen()<0||item.getLen()>32767)
+        if(item.getLen()==null)
+            throw new ParameterException("PackeagedLen can not be empty!");
+        if(item.getLen()<0||item.getLen()>32767)
             throw new ParameterException("PackeagedLen is out of range!");
-        if(item.getWidth()==null || item.getWidth()<0||item.getWidth()>32767)
+
+        if(item.getWidth()==null)
+            throw new ParameterException("PackeagedWidth can not be empty!");
+        if(item.getWidth()<0||item.getWidth()>32767)
             throw new ParameterException("PackeagedWidth is out of range!");
+
+        if(item.getHeight()==null)
+            throw new ParameterException("PackeagedHeight can not be empty!");
         if(item.getHeight()==null || item.getHeight()<0||item.getHeight()>32767)
             throw new ParameterException("PackeagedHeight is out of range!");
-        if(item.getWeight()==null || item.getWeight()<0||item.getWeight()>32767)
+
+        if(item.getWeight()==null)
+            throw new ParameterException("PackeagedWeight can not be empty!");
+        if( item.getWeight()<0||item.getWeight()>32767)
             throw new ParameterException("PackeagedWeight is out of range!");
+
+        if(item.getProductLen()==null)
+            throw new ParameterException("ProductLen can not be empty!");
         if(item.getProductLen()==null || item.getProductLen()<=0||item.getProductLen()>32767)
             throw new ParameterException("ProductLen is out of range!");
+
+        if(item.getProductWidth()==null)
+            throw new ParameterException("ProductWidth can not be empty!");
         if(item.getProductWidth()==null || item.getProductWidth()<=0||item.getProductWidth()>32767)
             throw new ParameterException("ProductWidth is out of range!");
-        if(item.getProductHeight()==null || item.getProductHeight()<=0||item.getProductHeight()>32767)
+
+        if(item.getProductHeight()==null)
+            throw new ParameterException("ProductHeight can not be empty!");
+        if(item.getProductHeight()<=0||item.getProductHeight()>32767)
             throw new ParameterException("ProductHeight is out of range!");
-        if(item.getProductWeight()==null || item.getProductWeight()<=0||item.getProductWeight()>32767)
+
+        if(item.getProductWeight()==null)
+            throw new ParameterException("ProductWeight  can not be empty!");
+        if(item.getProductWeight()<=0||item.getProductWeight()>32767)
             throw new ParameterException("ProductWeight is out of range!");
         // 判断内包装sku是否存在
 //        if (item.getInnersku() != null && !item.getInnersku().trim().equals("")) {
