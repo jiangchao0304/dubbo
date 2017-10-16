@@ -15,6 +15,15 @@ public class SkuDescTO implements Serializable {
     private int skuId;
     private String sku;
     private String purDesc;
+    private String purSpec;
+
+    public String getPurSpec() {
+        return purSpec;
+    }
+
+    public void setPurSpec(String purSpec) {
+        this.purSpec = purSpec;
+    }
 
     public int getSkuId() {
         return skuId;

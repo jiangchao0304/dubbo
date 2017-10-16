@@ -157,6 +157,8 @@ public class ItemService {
 
         int skuId = dto.getSkuId();
         for (ItemLocaleReviewTO localeTO : dto.getItemLocaleReviews()) {
+            if(localeTO.getReview().length()>2000)
+                throw  new ParameterException("Product Feature 超过最大长度2000限制!");
             ItemTextLocaleExample itemTextLocaleExample = new ItemTextLocaleExample();
             itemTextLocaleExample.createCriteria().andLangIdEqualTo(localeTO.getLangId()).andSkuidEqualTo(skuId);
             List<ItemTextLocale> list = itemTextLocaleMapper.selectByExample(itemTextLocaleExample);
@@ -183,6 +185,12 @@ public class ItemService {
 
 
         for (ItemRequirementsTO item : dto.getItemRequirements()) {
+
+            if(item.getProductReq().length()>2000)
+                throw  new ParameterException("Product Requirements 超过最大长度2000限制!");
+
+            if(item.getPurchaseReq().length()>2000)
+                throw  new ParameterException("Product getPurchaseReq 超过最大长度2000限制!");
 
              ItemRequirementsExample itemRequirementsExample = new ItemRequirementsExample();
              itemRequirementsExample.createCriteria().andSkuidEqualTo(skuId).andTypeIdEqualTo(item.getTypeId());
