@@ -101,8 +101,8 @@ public class SkuController {
     @RequestMapping("/copyVirtualFromSku")
     @ResponseBody
     public BaseReturnVO copyVirtualFromSku(@RequestBody String jsonData) {
-        String sourceSku= JsonUtil.getString(jsonData,"sourceSku");
-        int targetSkuId= JsonUtil.getInteger(jsonData,"targetSkuId");
+        String sourceSku= JsonUtil.getString(jsonData,"sku");
+        int targetSkuId= JsonUtil.getInteger(jsonData,"skuId");
         int result =  itemService.copyVirtualFromSku(sourceSku,targetSkuId);
         return new BaseReturnVO(result);
     }
