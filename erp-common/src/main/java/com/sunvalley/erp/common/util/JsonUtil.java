@@ -97,8 +97,10 @@ public class JsonUtil {
 	public static String getString(String jsonStr, String fieldName) {
 		try {
 			JsonNode node = objectMapper.readTree(jsonStr);
-			String  fieldJson = node.get(fieldName).textValue();
-			return fieldJson;
+			JsonNode fieldJson = node.get(fieldName);
+			if(fieldJson==null)
+				return "";
+			return node.get(fieldName).textValue();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
