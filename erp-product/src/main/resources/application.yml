@@ -43,6 +43,10 @@ spring:
                 slf4j:
                   enabled: true
                   statement-executable-sql-log-enable: true
+      jackson:
+        date-format: "yyyy-MM-dd HH:mm:ss"
+        time-zone: "GMT+08"
+
 
 mybatis:
      type-aliases-package : com.sunvalley.erp.product.model,com.sunvalley.erp.to
