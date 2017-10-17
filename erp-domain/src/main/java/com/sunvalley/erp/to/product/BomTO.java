@@ -17,6 +17,7 @@ public class BomTO implements Serializable{
     private Integer skuid;
     private  Integer id;
     private String bomDesc;
+    private String virtualSku;
     private Integer purchaseProperty;
     private Date createDate;
     private Integer createUserId;
@@ -41,6 +42,14 @@ public class BomTO implements Serializable{
     private List<BomSupplierTO> bomSupplierList;
 
     private List<BomLogTO> bomLogExList;
+
+    public String getVirtualSku() {
+        return virtualSku;
+    }
+
+    public void setVirtualSku(String virtualSku) {
+        this.virtualSku = virtualSku;
+    }
 
     public int getQty() {
         return qty;
