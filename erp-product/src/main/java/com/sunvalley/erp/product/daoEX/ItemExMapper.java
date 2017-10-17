@@ -28,7 +28,7 @@ public interface ItemExMapper {
 
 	List<SkuDescTO> listBySameModel(int skuId);
 
-	int copyVirtualFromSku(Map<String, Object> param);
+
 
 	SkuSimpleInfoTO getSkuSimpleInfo(Map<String, Object> param);
 

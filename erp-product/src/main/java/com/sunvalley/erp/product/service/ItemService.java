@@ -10,14 +10,11 @@ import com.sunvalley.erp.common.exception.ParameterException;
 import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.common.util.TimeUtil;
 import com.sunvalley.erp.product.dao.*;
-import com.sunvalley.erp.product.daoEX.ItemCustomDetailExMapper;
-import com.sunvalley.erp.product.daoEX.ItemCustomExMapper;
-import com.sunvalley.erp.product.daoEX.ItemPackageExMapper;
+import com.sunvalley.erp.product.daoEX.*;
 import com.sunvalley.erp.product.model.*;
 import com.sunvalley.erp.product.modelEX.PreSkuRelation;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
-import com.sunvalley.erp.product.daoEX.ItemExMapper;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,6 +79,9 @@ public class ItemService {
 
     @Autowired
     private ItemFileService itemFileService;
+
+    @Autowired
+    private ItemVirtualExMapper itemVirtualExMapper;
 
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
@@ -641,7 +641,13 @@ public class ItemService {
         Map<String, Object> param = new HashMap<>();
         param.put("sku", sourceSku);
         param.put("skuid", targetSkuId);
-        return itemExMapper.copyVirtualFromSku(param);
+
+        //检查自己是否超过三层
+        Integer qty = itemVirtualExMapper.checkSubSkuLevel(sourceSku);
+       if(qty !=null)
+           throw new BusinessException("SKU BOM结构超过三层");
+
+        return itemVirtualExMapper.copyVirtualFromSku(param);
     }
 
     public List<SkuDescTO> listBySameModel(String sku){

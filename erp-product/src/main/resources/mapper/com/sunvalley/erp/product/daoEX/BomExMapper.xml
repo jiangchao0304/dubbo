@@ -153,4 +153,5 @@ where v1.virtual_skuid =#{skuid}
 		order by bom.purchase_property desc,t.skuid
 	</select>
 
+
 </mapper>

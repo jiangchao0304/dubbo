@@ -341,10 +341,17 @@
 		INSERT  INTO  bs_item_virtual (
 		SELECT #{skuid},src.actual_skuid,src.qty from  `bs_item_virtual` src
 		LEFT JOIN bs_item_virtual tar  ON src.actual_skuid=tar.actual_skuid AND tar.virtual_skuid=#{skuid}
+		LEFT JOIN bs_item_virtual ign ON src.actual_skuid=ign.virtual_skuid
 		JOIN bs_item AS i ON src.virtual_skuid = i.skuid
-		WHERE i.sku=#{sku}  and   tar.virtual_skuid is null
+		WHERE i.sku=#{sku}  AND src.actual_skuid &gt;&lt; #{skuid} AND tar.actual_skuid IS NULL AND ign.virtual_skuid IS NULL;
 		);
 	</update>
 
+
+	<select id="checkSubSkuAble"  parameterType="int" resultType="int">
+		SELECT 1 FROM bs_item_virtual A
+		LEFT JOIN bs_item_virtual B ON A.virtual_skuid=B.actual_skuid
+		WHERE A.actual_skuid=#{skuId} AND B.virtual_skuid IS NOT NULL LIMIT 1;
+	</select>
 
 </mapper>
