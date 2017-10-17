@@ -472,7 +472,7 @@ public class PrepareService {
         item.setProductHeight(dto.getProductHeight());
         item.setProductLen(dto.getProductLen());
         item.setProductWeight(dto.getProductWeight());
-        item.setProductWidth(dto.getProductWeight());
+        item.setProductWidth(dto.getProductWidth());
 
         item.setPurdesc(dto.getPurDesc());
         item.setPurspec(dto.getPurSpec());
@@ -648,46 +648,6 @@ public class PrepareService {
 //            item.setOutersku_id(outerItem.getSkuid());
 //        }
     }
-
-
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void edit(SkuBaseInfoTO dto) throws Exception {
-        saveItemLocale(dto.getItemLocaleTOList()); // 保存产品描述
-        saveItemTextLocale(dto.getWarranty(),dto.getItemLocaleTOList()); // 保存产品规格等大文本字段
-        //todo:保存产品属性
-        //saveItemAttrValue(item); // 保存产品属性
-        Item item = itemMapper.selectByPrimaryKey(dto.getSkuId());
-        if (Strings.isNullOrEmpty(item.getDescSourc())){
-            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionTO().getFirstName(),"create");
-        }else {
-            saveSkuDescription(item.getSkuid(),item.getDescSourc(),dto.getSessionTO().getFirstName(),"modify");
-        }
-        Item updateItem = new Item();
-        item.setSkuid(dto.getSkuId());
-        item.setLen(dto.getLen());
-        item.setWeight(dto.getWeight());
-        item.setWidth(dto.getWidth());
-        item.setHeight(dto.getHeight());
-        item.setProductHeight(dto.getProductHeight());
-        item.setProductLen(dto.getProductLen());
-        item.setProductWeight(dto.getProductWeight());
-        item.setProductWidth(dto.getProductWeight());
-        item.setPurdesc(dto.getPurDesc());
-        item.setPurspec(dto.getPurSpec());
-        item.setLineState(dto.getLineState());
-        item.setMagnetic(dto.getMagnetic());
-        int result = itemMapper.updateByPrimaryKeySelective(updateItem);
-        if(result!=0){
-            //记录产品更新历史--产品长，宽等信息
-            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.SIZE,dto.getSessionTO().getUserId(),dto.getSessionTO().getFullName());
-            //记录产品更新历史--isDrop
-            itemLogService.addItemLog(updateItem,item, Constants.ProductLogType.IS_DROP_STATUS,dto.getSessionTO().getUserId(),dto.getSessionTO().getFullName());
-            //记录产品更新历史--line_state
-            itemLogService.addItemLog(updateItem,item,Constants.ProductLogType.STATUS,dto.getSessionTO().getUserId(),dto.getSessionTO().getFullName());
-        }
-
-    }
-
 
 
 

@@ -9,6 +9,8 @@ eureka:
             lease-expiration-duration-in-seconds: 5  # 发呆时间，即服务续约到期时间（缺省为90s）
             prefer-ip-address: true                  # 使用ip
 server:
+       tomcat:
+         uri-encoding: UTF-8
        port: 8081
 
 spring:
@@ -46,6 +48,13 @@ spring:
       jackson:
         date-format: "yyyy-MM-dd HH:mm:ss"
         time-zone: "GMT+08"
+      http:
+        encoding:
+          force: true
+          charset: utf-8
+          enabled: true
+
+
 
 
 mybatis:
@@ -55,6 +64,7 @@ mybatis:
      #config-location: classpath:/mybatis-config.xml
 
 debug: false
+
 
 log:
     path:  logs

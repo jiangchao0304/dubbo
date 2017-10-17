@@ -211,6 +211,7 @@ public class BomsService {
      * @author: douglas.jiang
      * @date : 2017/9/28:14:38
      */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public boolean savePackageList(int skuId, List<ImportPackageTO> packageTOList, SysSessionTO sessionTO){
         //查询sku信息
         SkuBaseInfoTO skuBaseInfoTO = itemService.getSkuBaseInfo(skuId);
@@ -252,6 +253,7 @@ public class BomsService {
      * @author: douglas.jiang
      * @date : 2017/10/13:16:05
      */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public int saveBomOneSkuList(int skuId,List<BomOneSkuTO> bomOneSkuTOList){
 
          //验证是否超过三层

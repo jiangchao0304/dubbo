@@ -93,6 +93,7 @@ public class SequenceService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public String generationNo(Integer mainCategoryId,Integer subCategoryId,Integer brandId,int type,Integer isPackage,Integer modelId){
         //查询大小类的编码
+        int retries =0;
         ProductLineExample lineExample = new ProductLineExample();
         List<Integer> idList = new ArrayList<Integer>();
         idList.add(mainCategoryId);
@@ -128,6 +129,9 @@ public class SequenceService {
                         bl = true;
                     }else{
                         logger.info("skuCode {} 重复,重新生成！",skuCode);
+                        retries++;
+                       if(retries>=10)
+                           throw  new BusinessException("生成序列号重复查过10次!");
                         bl = false;
                     }
                 }while(!bl);
