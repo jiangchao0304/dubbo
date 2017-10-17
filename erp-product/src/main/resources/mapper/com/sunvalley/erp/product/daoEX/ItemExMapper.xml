@@ -278,7 +278,7 @@
 
 	<select id="listBySameModel" parameterType="int" resultType="com.sunvalley.erp.to.product.SkuDescTO">
 		SELECT skuid skuId,sku, IFNULL(purdesc,"") purDesc, IFNULL(purspec,"") purSpec FROM  `bs_item`
-		WHERE  model_id = (SELECT model_id FROM  `bs_item` WHERE skuid=#{skuid}) AND model_id IS NOT NULL limit 5;
+		WHERE  model_id = (SELECT model_id FROM  `bs_item` WHERE skuid=#{skuid}) AND model_id IS NOT NULL ORDER BY create_date DESC LIMIT 5;
 	</select>
 
 
