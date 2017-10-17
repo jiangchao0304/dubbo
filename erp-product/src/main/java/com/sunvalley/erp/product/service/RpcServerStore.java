@@ -1,5 +1,6 @@
 package com.sunvalley.erp.product.service;
 
+import com.sunvalley.erp.product.common.SpringUtil;
 import com.sunvalley.erp.product.dao.MarketAccountMapper;
 import com.sunvalley.erp.product.model.MarketAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class RpcServerStore {
 	
 //	'4'	=> API_URL_TEK,
@@ -103,7 +105,9 @@ public class RpcServerStore {
 //		__store.put(30, "http://www.papatek.com/API/erpapi/server.asp");
 //		__store.put(32, "http://www.usadapter.com/API/erpapi/server.asp");
 		//IMarketAccountDao marketAccountDao=(IMarketAccountDao)Env.getBean("marketAccountDao");
-		
+
+		MarketAccountMapper marketAccountMapper = SpringUtil.getBean(MarketAccountMapper.class);
+
 		List<MarketAccount> list = marketAccountMapper.selectByExample(null);
 		String httpreg="http://([A-Za-z0-9-]+\\.)+[A-Za-z0-9-]+(/[A-Za-z0-9- ./?%&=]||[:A-Za-z0-9- ./?%&=]*)?";
 		String httpsreg="https://([A-Za-z0-9-]+\\.)+[A-Za-z0-9-]+(/[A-Za-z0-9- ./?%&=]||[:A-Za-z0-9- ./?%&=]*)?";

@@ -259,6 +259,9 @@ public class BomsService {
         itemVirtualExample.createCriteria().andVirtualSkuidEqualTo(skuId);
         itemVirtualMapper.deleteByExample(itemVirtualExample);
         int result = 0;
+        if(bomOneSkuTOList==null || bomOneSkuTOList.size()==0)
+            return 0;
+
         for (BomOneSkuTO bomOneSkuTO : bomOneSkuTOList) {
             if(bomOneSkuTO.getRowState()==4)
                 continue;

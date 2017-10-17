@@ -128,7 +128,7 @@
 		LEFT JOIN sys_user purchase ON purchase.userid = item.purchaser_id
 		LEFT JOIN sys_user sysu ON sysu.userid = item.pmid
 		LEFT JOIN bs_item_mapping mapping ON mapping.skuid = item.skuid AND mapping.data_type = 1 AND mapping.data_origin = 1
-		LEFT JOIN bs_item_mapping mappings ON mappings.skuid = item.skuid AND mappings.data_type = 2  AND mapping.data_origin = 1
+		LEFT JOIN bs_item_mapping mappings ON mappings.skuid = item.skuid AND mappings.data_type = 2  AND mappings.data_origin = 1
 		LEFT JOIN bs_bom AS bom ON bom.skuid = item.skuid
 		<if test="sku != null">
 			WHERE  item.sku=#{sku}
@@ -340,7 +340,7 @@
 		SELECT #{skuid},src.actual_skuid,src.qty from  `bs_item_virtual` src
 		LEFT JOIN bs_item_virtual tar  ON src.actual_skuid=tar.actual_skuid AND tar.virtual_skuid=#{skuid}
 		JOIN bs_item AS i ON src.virtual_skuid = i.skuid
-		WHERE i.sku=#{sku}  and   tar.virtual_skuid is null
+		WHERE i.sku=#{sku}  and   tar.virtual_skuid is null and src.skuid &lt; &gt; tar.skuid
 		);
 	</update>
 
