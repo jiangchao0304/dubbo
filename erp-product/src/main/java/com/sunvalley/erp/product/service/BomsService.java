@@ -227,7 +227,7 @@ public class BomsService {
             skuBaseInfoTO.setSkuId(0);
             skuBaseInfoTO.setSessionTO(sessionTO);
             //插入新的sku信息
-            PreSkuRelationTO relationTO =  prepareService.saveSkuBaseInfo(skuBaseInfoTO);
+            PreSkuRelationTO relationTO =  prepareService.saveSkuBaseInfo(skuBaseInfoTO,false);
             //添加生成的包材和当前bom的关系
             ItemVirtual itemVirtual = new ItemVirtual();
             itemVirtual.setVirtualSkuid(skuId);

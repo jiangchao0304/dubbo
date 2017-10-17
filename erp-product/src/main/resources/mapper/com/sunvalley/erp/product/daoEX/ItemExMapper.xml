@@ -76,31 +76,34 @@
 		item.sku,
 		item.skuid skuId,
 		item.line_state AS lineState,
-		model.main_category_id categoryId,
-		model.sub_category_id subCategortId,
+		item.categoryid categoryId,
+		item.subcategoryid subCategortId,
 		lc.product_line_name categoryStr,
 		ls.product_line_name subCategoryStr,
-		model.brand_id brandId,
+		item.brand_id brandId,
 		model.model_name model,
-		model.model_id modelId,
+		item.model_id modelId,
 		model.pm_id pmId,
-		CONCAT(sysu.firstname,'.',sysu.lastname) pmName,
-		model.battery,
-		model.rmacategoryid,
-		pre.region,
+		CONCAT(
+		sysu.firstname,
+		'.',
+		sysu.lastname
+		) pmName,
+		item.battery,
+		item.rmacategoryid,
+		item.region,
 		pre.pre_sku preSku,
-		pre.color color,
-		anrule.anruleStr anruleStr,
-		anrule.anrule anrule,
-		country.country country,
+		item.color,
+		GROUP_CONCAT(DISTINCT mapping.maping) anrule,
+		GROUP_CONCAT(DISTINCT mappings.maping) country,
 		item.is_package isPackage,
 		item.magnetic,
-		bom.combine_unit combineUnit,
+		item.combine_unit combineUnit,
 		model.warranty,
-		bom.purchase_property  purchaseProperty,
-		IFNULL(item.purspec,'')purSpec,
-		IFNULL(item.purdesc,'') purDesc,
-		bom.bom_desc bomDesc,
+		item.purchase_property purchaseProperty,
+		IFNULL(item.purspec, '') purSpec,
+		IFNULL(item.purdesc, '') purDesc,
+		item.remark bomDesc,
 		item.width,
 		item.height,
 		item.weight,
@@ -109,37 +112,24 @@
 		item.product_width productWidth,
 		item.product_height productHeight,
 		item.product_weight productWeight,
-		CONCAT(purchase.firstname, " ", purchase.lastname)AS purchaserName
-		FROM bs_item AS item
+		CONCAT(
+		purchase.firstname,
+		" ",
+		purchase.lastname
+		) AS purchaserName
+		FROM
+		bs_item AS item
 		LEFT JOIN bs_prepare_sku pre ON pre.skuid = item.skuid
-		LEFT JOIN bs_item_model AS model  ON pre.model_id = model.model_id
+		LEFT JOIN bs_item_model AS model ON item.model_id = model.model_id
 		LEFT JOIN bs_product_line_mapping mc ON mc.mapping_id = item.skuid AND mc.product_line_id = item.categoryid AND mc.type = 1
 		LEFT JOIN bs_product_line_mapping sc ON sc.mapping_id = item.skuid AND sc.product_line_id = item.subcategoryid AND sc.type = 1
-		LEFT JOIN bs_product_line lc ON lc.id = model.main_category_id
-		LEFT JOIN bs_product_line ls ON ls.id = model.sub_category_id
-		LEFT JOIN sys_user purchase  ON purchase.userid = item.purchaser_id
-		LEFT JOIN sys_user sysu ON sysu.userid = model.pm_id
-		LEFT JOIN (
-			SELECT
-				mapping.skuid skuid,
-				GROUP_CONCAT(basic.attribute) anruleStr,
-				GROUP_CONCAT(basic. VALUE) anrule
-			FROM
-				bs_item_mapping mapping
-			LEFT JOIN bs_item_basic_data basic ON mapping.maping = basic.`value`
-			WHERE
-				mapping.data_type = 1
-			AND basic.type = 2
-			GROUP BY
-				mapping.skuid
-		) anrule ON pre.id = anrule.skuid
-			LEFT JOIN (
-			SELECT mapping.skuid skuid, GROUP_CONCAT(mapping.maping) country
-			FROM bs_item_mapping mapping
-			WHERE mapping.data_type = 2
-			GROUP BY mapping.skuid
-		) country ON country.skuid = pre.id
-			LEFT JOIN  bs_bom AS bom ON bom.skuid=item.skuid
+		LEFT JOIN bs_product_line lc ON lc.id = item.categoryid
+		LEFT JOIN bs_product_line ls  ON ls.id = item.subcategoryid
+		LEFT JOIN sys_user purchase ON purchase.userid = item.purchaser_id
+		LEFT JOIN sys_user sysu ON sysu.userid = item.pmid
+		LEFT JOIN bs_item_mapping mapping ON mapping.skuid = item.skuid AND mapping.data_type = 1 AND mapping.data_origin = 1
+		LEFT JOIN bs_item_mapping mappings ON mappings.skuid = item.skuid AND mappings.data_type = 2  AND mapping.data_origin = 1
+		LEFT JOIN bs_bom AS bom ON bom.skuid = item.skuid
 		<if test="sku != null">
 			WHERE  item.sku=#{sku}
 		</if>

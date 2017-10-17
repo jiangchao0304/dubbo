@@ -376,8 +376,9 @@ public class PrepareService {
         item.setPurspec(dto.getPurSpec());
         item.setLineState(dto.getLineState());
         item.setMagnetic(dto.getMagnetic());
+        item.setCombineUnit(dto.getCombineUnit());
+        item.setPurchaseProperty(dto.getPurchaseProperty());
         itemMapper.updateByPrimaryKeySelective(item);
-
 
         BomExample bomExample = new BomExample();
         bomExample.createCriteria().andSkuidEqualTo(dto.getSkuId());
@@ -420,19 +421,22 @@ public class PrepareService {
      * @date : 2017/9/18:17:02
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto){
+    public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto,boolean checkPreSku){
 
-        if(Strings.isNullOrEmpty(dto.getPreSku()))
-            throw new ParameterException( "preSku不能为空！");
+        if(checkPreSku){
+            if(Strings.isNullOrEmpty(dto.getPreSku()))
+                throw new ParameterException( "preSku不能为空！");
 
-        //查询状态是否已转正
-       Integer status =  prepareSkuExMapper.getStatusByPreSku(dto.getPreSku());
+            //查询状态是否已转正
+            Integer status =  prepareSkuExMapper.getStatusByPreSku(dto.getPreSku());
 
-       if(status == null)
-           throw new ParameterException( String.format("preSku %s 不存在！",dto.getPreSku()));
+            if(status == null)
+                throw new ParameterException( String.format("preSku %s 不存在！",dto.getPreSku()));
 
-       if(status == 2)
-           throw new ParameterException( String.format("preSku %s 已转正！",dto.getPreSku()));
+            if(status == 2)
+                throw new ParameterException( String.format("preSku %s 已转正！",dto.getPreSku()));
+        }
+
 
         PreSkuRelationTO result = new PreSkuRelationTO();
         beforeSaveItem(dto);
@@ -484,8 +488,9 @@ public class PrepareService {
         item.setUpdatedate(TimeUtil.BeiJingTimeNow());
         item.setIsPackage(dto.getIsPackage());
         item.setRemark(dto.getBomDesc());
+        item.setPurchaseProperty(dto.getPurchaseProperty());
+        item.setCombineUnit(dto.getCombineUnit());
         item.setColor(Strings.isNullOrEmpty(dto.getColor())?0:Integer.parseInt(dto.getColor()));
-
 
         //其他默认值
         item.setActive((short)1);
@@ -568,6 +573,11 @@ public class PrepareService {
         }
 
         return result;
+    }
+
+    public PreSkuRelationTO saveSkuBaseInfo(SkuBaseInfoTO dto){
+        return saveSkuBaseInfo(dto,true);
+
     }
 
 

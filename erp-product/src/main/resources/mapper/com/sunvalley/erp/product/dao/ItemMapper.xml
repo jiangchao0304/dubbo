@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunvalley.erp.product.dao.ItemMapper">
-<!-- ================================代码生成开始=2017-10-13 02:11:30=========================================== -->
+<!-- ================================代码生成开始=2017-10-17 10:11:38=========================================== -->
 
     <resultMap  id="BaseResultMap" type="com.sunvalley.erp.product.model.Item">
         <result column="skuid" property="skuid" jdbcType="INTEGER"/>
@@ -68,6 +68,8 @@
         <result column="model_id" property="modelId" jdbcType="INTEGER"/>
         <result column="magnetic" property="magnetic" jdbcType="SMALLINT"/>
         <result column="sku_type" property="skuType" jdbcType="SMALLINT"/>
+        <result column="combine_unit" property="combineUnit" jdbcType="INTEGER"/>
+        <result column="purchase_property" property="purchaseProperty" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap extends="BaseResultMap" id="selectPageResult" type="com.sunvalley.erp.product.model.Item" />
@@ -136,7 +138,9 @@
             #{color,jdbcType=INTEGER },
             #{modelId,jdbcType=INTEGER },
             #{magnetic,jdbcType=SMALLINT },
-            #{skuType,jdbcType=SMALLINT }
+            #{skuType,jdbcType=SMALLINT },
+            #{combineUnit,jdbcType=INTEGER },
+            #{purchaseProperty,jdbcType=INTEGER }
     </sql>
 
     <sql id="ValuesBatch">
@@ -203,7 +207,9 @@
             #{item.color,jdbcType=INTEGER},
             #{item.modelId,jdbcType=INTEGER},
             #{item.magnetic,jdbcType=SMALLINT},
-            #{item.skuType,jdbcType=SMALLINT}
+            #{item.skuType,jdbcType=SMALLINT},
+            #{item.combineUnit,jdbcType=INTEGER},
+            #{item.purchaseProperty,jdbcType=INTEGER}
     </sql>
 
     <sql id="SetNotNull">
@@ -270,7 +276,9 @@
                 <if test="record.color != null">color= #{record.color,jdbcType=INTEGER },</if>
                 <if test="record.modelId != null">model_id= #{record.modelId,jdbcType=INTEGER },</if>
                 <if test="record.magnetic != null">magnetic= #{record.magnetic,jdbcType=SMALLINT },</if>
-                <if test="record.skuType != null">sku_type= #{record.skuType,jdbcType=SMALLINT }</if>
+                <if test="record.skuType != null">sku_type= #{record.skuType,jdbcType=SMALLINT },</if>
+                <if test="record.combineUnit != null">combine_unit= #{record.combineUnit,jdbcType=INTEGER },</if>
+                <if test="record.purchaseProperty != null">purchase_property= #{record.purchaseProperty,jdbcType=INTEGER }</if>
     </sql>
 
     <sql id="Example_Where_Clause">
@@ -398,7 +406,9 @@
             `color`,
             `model_id`,
             `magnetic`,
-            `sku_type`
+            `sku_type`,
+            `combine_unit`,
+            `purchase_property`
 	</sql>
 
 
@@ -537,7 +547,9 @@
          color= #{record.color,jdbcType=INTEGER },
          model_id= #{record.modelId,jdbcType=INTEGER },
          magnetic= #{record.magnetic,jdbcType=SMALLINT },
-         sku_type= #{record.skuType,jdbcType=SMALLINT }
+         sku_type= #{record.skuType,jdbcType=SMALLINT },
+         combine_unit= #{record.combineUnit,jdbcType=INTEGER },
+         purchase_property= #{record.purchaseProperty,jdbcType=INTEGER }
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause" />
@@ -620,7 +632,9 @@
                 color= #{color,jdbcType=INTEGER },
                 model_id= #{modelId,jdbcType=INTEGER },
                 magnetic= #{magnetic,jdbcType=SMALLINT },
-                sku_type= #{skuType,jdbcType=SMALLINT }
+                sku_type= #{skuType,jdbcType=SMALLINT },
+                combine_unit= #{combineUnit,jdbcType=INTEGER },
+                purchase_property= #{purchaseProperty,jdbcType=INTEGER }
         </set>
         WHERE skuid = #{skuid,jdbcType=INTEGER}
 
@@ -656,5 +670,5 @@
         DELETE FROM  bs_item
         WHERE skuid = #{skuid,jdbcType=INTEGER}
     </delete>
-    <!-- ================================代码生成结束=2017-10-13 02:11:30=========================================== -->
+    <!-- ================================代码生成结束=2017-10-17 10:11:38=========================================== -->
 </mapper>

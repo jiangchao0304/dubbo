@@ -93,6 +93,25 @@ public class ItemService {
             List<ItemLocaleTO> itemLocaleTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
             skuBaseInfoDTO.setItemLocaleTOList(itemLocaleTOList);
         }
+//else {
+//            throw  new  ParameterException(String.format("sku %d 不存在",skuId));
+//        }
+        return skuBaseInfoDTO;
+
+    }
+
+    public SkuBaseInfoTO getSkuBaseInfo(String sku){
+        Map<String,Object> param = new HashMap<>();
+        param.put("sku",sku);
+        SkuBaseInfoTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
+
+        if(skuBaseInfoDTO!=null){
+            List<ItemLocaleTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
+            skuBaseInfoDTO.setItemLocaleTOList(itemLocaleDTOList);
+        }
+        //else {
+//            throw  new  ParameterException(String.format("sku %s 不存在",sku));
+//        }
         return skuBaseInfoDTO;
 
     }
@@ -271,19 +290,7 @@ public class ItemService {
 
 
 
-    public SkuBaseInfoTO getSkuBaseInfo(String sku){
-        Map<String,Object> param = new HashMap<>();
-        param.put("sku",sku);
-        SkuBaseInfoTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
 
-        if(skuBaseInfoDTO!=null){
-            List<ItemLocaleTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
-            skuBaseInfoDTO.setItemLocaleTOList(itemLocaleDTOList);
-
-        }
-        return skuBaseInfoDTO;
-
-    }
 
 
     public List<ItemLocale> searchSkuCategoryName(String sku, int langId, int[] category,int limit,Integer companyid) {

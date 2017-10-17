@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
 * @Description: table:Item
 * @author
-* @date 2017-10-13 02:11:30
+* @date 2017-10-17 10:11:38
 */
 public class Item implements Serializable{
 
@@ -79,6 +79,8 @@ public class Item implements Serializable{
     private java.lang.Integer modelId;//模型ID
     private Short magnetic;//是否有磁性 0 未知 1 是 2 否
     private Short skuType;//0 未选（默认值） 1 裸机 2 配件 3 包材
+    private java.lang.Integer combineUnit;//组装方式 0 未选择 1供应商组装 2 SUNVALLEY组装 3不需要组装
+    private java.lang.Integer purchaseProperty;//采购属性 0 未选择 1甲方 2已方
 	//columns 结束
 
 
@@ -1107,6 +1109,38 @@ public class Item implements Serializable{
 		return this.skuType;
 	}
 
+  	/**
+     * 组装方式 0 未选择 1供应商组装 2 SUNVALLEY组装 3不需要组装
+     *
+     * @param value
+     */
+	public void setCombineUnit(java.lang.Integer value) {
+		this.combineUnit = value;
+	}
+	
+	/**
+     * 组装方式 0 未选择 1供应商组装 2 SUNVALLEY组装 3不需要组装
+     */
+	public java.lang.Integer getCombineUnit() {
+		return this.combineUnit;
+	}
+
+  	/**
+     * 采购属性 0 未选择 1甲方 2已方
+     *
+     * @param value
+     */
+	public void setPurchaseProperty(java.lang.Integer value) {
+		this.purchaseProperty = value;
+	}
+	
+	/**
+     * 采购属性 0 未选择 1甲方 2已方
+     */
+	public java.lang.Integer getPurchaseProperty() {
+		return this.purchaseProperty;
+	}
+
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 			.append("skuid",getSkuid())
@@ -1173,6 +1207,8 @@ public class Item implements Serializable{
 			.append("modelId",getModelId())
 			.append("magnetic",getMagnetic())
 			.append("skuType",getSkuType())
+			.append("combineUnit",getCombineUnit())
+			.append("purchaseProperty",getPurchaseProperty())
 			.toString();
 	}
 	//===========================================代码生成结束============================================

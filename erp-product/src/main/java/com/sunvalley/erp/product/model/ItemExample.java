@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
 * @Description: ItemExample
 * @author
-* @date 2017-10-13 02:11:30
+* @date 2017-10-17 10:11:38
 */
 public class ItemExample {
     protected String orderByClause;
@@ -4236,6 +4236,134 @@ public class ItemExample {
 
         public Criteria andSkuTypeNotBetween(Short value1, Short value2) {
             addCriterion("sku_type not between", value1, value2, "skuType");
+            return (Criteria) this;
+        }
+
+
+
+        public Criteria andCombineUnitIsNull() {
+            addCriterion("combineUnit is null");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andCombineUnitIsNotNull() {
+            addCriterion("combineUnit is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitEqualTo(java.lang.Integer value) {
+            addCriterion("combine_unit =", value, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitNotEqualTo(java.lang.Integer value) {
+            addCriterion("combine_unit <>", value, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitGreaterThan(java.lang.Integer value) {
+            addCriterion("combine_unit >", value, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitGreaterThanOrEqualTo(java.lang.Integer value) {
+            addCriterion("combine_unit >=", value, "combine_unit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitLessThan(java.lang.Integer value) {
+            addCriterion("combine_unit <", value, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitLessThanOrEqualTo(java.lang.Integer value) {
+            addCriterion("combine_unit <=", value, "combineUnit");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andCombineUnitIn(List<java.lang.Integer > values) {
+            addCriterion("combine_unit in", values, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitNotIn(List<java.lang.Integer> values) {
+            addCriterion("combine_unit not in", values, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitBetween(java.lang.Integer value1, java.lang.Integer value2) {
+            addCriterion("combine_unit between", value1, value2, "combineUnit");
+            return (Criteria) this;
+        }
+
+        public Criteria andCombineUnitNotBetween(java.lang.Integer value1, java.lang.Integer value2) {
+            addCriterion("combine_unit not between", value1, value2, "combineUnit");
+            return (Criteria) this;
+        }
+
+
+
+        public Criteria andPurchasePropertyIsNull() {
+            addCriterion("purchaseProperty is null");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andPurchasePropertyIsNotNull() {
+            addCriterion("purchaseProperty is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyEqualTo(java.lang.Integer value) {
+            addCriterion("purchase_property =", value, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyNotEqualTo(java.lang.Integer value) {
+            addCriterion("purchase_property <>", value, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyGreaterThan(java.lang.Integer value) {
+            addCriterion("purchase_property >", value, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyGreaterThanOrEqualTo(java.lang.Integer value) {
+            addCriterion("purchase_property >=", value, "purchase_property");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyLessThan(java.lang.Integer value) {
+            addCriterion("purchase_property <", value, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyLessThanOrEqualTo(java.lang.Integer value) {
+            addCriterion("purchase_property <=", value, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+
+        public Criteria andPurchasePropertyIn(List<java.lang.Integer > values) {
+            addCriterion("purchase_property in", values, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyNotIn(List<java.lang.Integer> values) {
+            addCriterion("purchase_property not in", values, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyBetween(java.lang.Integer value1, java.lang.Integer value2) {
+            addCriterion("purchase_property between", value1, value2, "purchaseProperty");
+            return (Criteria) this;
+        }
+
+        public Criteria andPurchasePropertyNotBetween(java.lang.Integer value1, java.lang.Integer value2) {
+            addCriterion("purchase_property not between", value1, value2, "purchaseProperty");
             return (Criteria) this;
         }
 

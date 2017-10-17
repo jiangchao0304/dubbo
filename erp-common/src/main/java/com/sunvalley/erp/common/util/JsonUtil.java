@@ -46,6 +46,9 @@ public class JsonUtil {
 	public static <T> List<T> fromJSONArray(String jsonStr, String fieldName, Class<T> elementClass) {
 		try {
 			JsonNode node = objectMapper.readTree(jsonStr);
+			JsonNode jsonNode = node.get(fieldName);
+			if(jsonNode==null)
+				return null;
 			String  fieldJson = node.get(fieldName).toString();
 			JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, elementClass);
 			return (List<T>) objectMapper.readValue(fieldJson, javaType);
