@@ -515,7 +515,6 @@ public class PrepareService {
         item.setUpdateuserid(dto.getSessionTO().getUserId());
         item.setHaspic(false);
         item.setPsid(0);
-        item.setRemark("");
         item.setLeadtime(0);
         item.setPurpkg("");
         item.setStopkg("");
@@ -549,7 +548,7 @@ public class PrepareService {
                 updatePreSkuStatus(item.getSkuid(),item.getSku(),dto.getPreSku()); //更新预备SKU信息
 
                 if(!Strings.isNullOrEmpty(dto.getAnrule()) && !Strings.isNullOrEmpty(dto.getCountry())){
-                    itemService.saveItemMapping(item.getSkuid(), dto.getAnruleStr(), dto.getCountry(),dto.getSessionTO().getUserId());
+                    itemService.saveItemMapping(item.getSkuid(), dto.getAnrule(), dto.getCountry(),dto.getSessionTO().getUserId());
                 }
                //添加SKU与安规、安国国家关系
             }
