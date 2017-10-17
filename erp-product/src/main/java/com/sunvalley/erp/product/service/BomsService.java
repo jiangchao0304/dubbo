@@ -4,6 +4,7 @@
 package com.sunvalley.erp.product.service;
 
 import com.sunvalley.erp.common.constants.Constants;
+import com.sunvalley.erp.common.exception.BusinessException;
 import com.sunvalley.erp.common.exception.UniteException;
 import com.sunvalley.erp.product.dao.BomMapper;
 import com.sunvalley.erp.product.dao.ItemVirtualMapper;
@@ -73,57 +74,57 @@ public class BomsService {
         //判断sku 是否是最底层
         int totallevelChild=0;
         int totalLevelParent=0;
-//        if(bomId!=null){
-//            //校验当前sku 是否输入最高级别
-//            totallevelChild = bomExMapper.selectTotalChild(skuId);//查询子级
-//            totalLevelParent =bomExMapper.selectTotalParent(skuId);//查询父级
-//
-//            if(totallevelChild>0 && totalLevelParent>0){
-//                totallevelChild-=1;
-//            }
-//            if((totallevelChild+totalLevelParent)>3){
-//                throw new UniteException("SKU:"+sku+"总层大于3层！");
-//            }
-//            if(totalLevelParent==3 && bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
-//                throw new UniteException("SKU:"+sku+"总层大于3层！");
-//            }
-//
-//            if(bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
-//                HashMap< String, Object> param = new HashMap<String, Object>();
-//                for (BomEX tempBomEx  : bomEX.getBomOneSkuList()) {
-//                    param.clear();
-//                    List<Integer> skuIdList = new ArrayList<Integer>();
-//                    skuIdList.add(tempBomEx.getSkuid());
-//                    param.put("skuIdList", skuIdList);
-//                    List<BomEX> oneSkuList =  bomExMapper.selectSkuInfoBySKuid(param);
-//                    if(oneSkuList!=null && oneSkuList.size()>0){
-//                        for (BomEX twoBom : oneSkuList) {
-//                            if(twoBom.getSkuid().equals(bomEX.getSkuid())){
-//                                throw new UniteException("SKU:"+tempBomEx.getSku()+"总层大于三层");
-//                            }
-//                        }
-//                    }
-//                    if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
-//                        this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,totalLevelParent,bomEX.getSkuid());
-//                    }
-//                }
-//            }
-//
-//
-//        }else{
-//            totallevelChild = bomExMapper.selectTotalChild(bomEX.getSkuid());//查询子级
-//            if(totallevelChild<3){
-//                if(bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
-//                    for (BomEX tempBomEx  : bomEX.getBomOneSkuList()) {
-//                        if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
-//                            this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,1,bomEX.getSkuid());
-//                        }
-//                    }
-//                }
-//            }else{
-//                throw new UniteException("SKU:"+bomEX.getSku()+"总层大于3层！");
-//            }
-//        }
+        if(bomId!=null){
+            //校验当前sku 是否输入最高级别
+            totallevelChild = bomExMapper.selectTotalChild(skuId);//查询子级
+            totalLevelParent =bomExMapper.selectTotalParent(skuId);//查询父级
+
+            if(totallevelChild>0 && totalLevelParent>0){
+                totallevelChild-=1;
+            }
+            if((totallevelChild+totalLevelParent)>3){
+                throw new UniteException("SKU:"+sku+"总层大于3层！");
+            }
+            if(totalLevelParent==3 && bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
+                throw new UniteException("SKU:"+sku+"总层大于3层！");
+            }
+
+            if(bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
+                HashMap< String, Object> param = new HashMap<String, Object>();
+                for (BomEX tempBomEx  : bomEX.getBomOneSkuList()) {
+                    param.clear();
+                    List<Integer> skuIdList = new ArrayList<Integer>();
+                    skuIdList.add(tempBomEx.getSkuid());
+                    param.put("skuIdList", skuIdList);
+                    List<BomEX> oneSkuList =  bomExMapper.selectSkuInfoBySKuid(param);
+                    if(oneSkuList!=null && oneSkuList.size()>0){
+                        for (BomEX twoBom : oneSkuList) {
+                            if(twoBom.getSkuid().equals(bomEX.getSkuid())){
+                                throw new UniteException("SKU:"+tempBomEx.getSku()+"总层大于三层");
+                            }
+                        }
+                    }
+                    if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
+                        this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,totalLevelParent,bomEX.getSkuid());
+                    }
+                }
+            }
+
+
+        }else{
+            totallevelChild = bomExMapper.selectTotalChild(bomEX.getSkuid());//查询子级
+            if(totallevelChild<3){
+                if(bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
+                    for (BomEX tempBomEx  : bomEX.getBomOneSkuList()) {
+                        if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
+                            this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,1,bomEX.getSkuid());
+                        }
+                    }
+                }
+            }else{
+                throw new UniteException("SKU:"+bomEX.getSku()+"总层大于3层！");
+            }
+        }
         return true;
     }
 
@@ -276,75 +277,125 @@ public class BomsService {
         return  result;
     }
 
-    public boolean checkBom(int skuId){
 
+    /**
+     * 方法的功能描述:TODO
+     * @param [skuId ,目标skuId, bomOneSkuTOList]
+     * @return boolean
+     * @exception
+     * @author: PXMWJCH
+     * @since : 2017-10-17:23:59
+     */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public boolean checkBom(int skuId,String sku ,Integer bomId,List<BomOneSkuTO> bomOneSkuTOList){
 
+        //校验bom skuid 是否存在
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("skuid", skuId);
         BomTO tempBom = bomExMapper.selectById(map);
-        if(tempBom==null ) {
-            return false;
+        if(tempBom!=null && tempBom.getId()!=null && !tempBom.getId().equals(bomId)){
+            throw new BusinessException("sku的BOM信息存在！");
         }
-
-
         //判断sku 是否是最底层
-//        int totallevelChild=0;
-//        int totalLevelParent=0;
-//        if(tempBom.getId()!=null){
-//            //校验当前sku 是否输入最高级别
-//            totallevelChild = bomExMapper.selectTotalChild(tempBom.getSkuid());//查询子级
-//            totalLevelParent =bomExMapper.selectTotalParent(tempBom.getSkuid());//查询父级
-//            if(totallevelChild>0 && totalLevelParent>0){
-//                totallevelChild-=1;
-//            }
-//            if((totallevelChild+totalLevelParent)>3){
-//                throw new UniteException("SKU:"+tempBom.getSku()+"总层大于3层！");
-//            }
-//            if(totalLevelParent==3 && tempBom.getBomOneSkuList()!=null && tempBom.getBomOneSkuList().size()>0){
-//                throw new UniteException("SKU:"+tempBom.getSku()+"总层大于3层！");
-//            }
-//
-//            if(tempBom.getBomOneSkuList()!=null && tempBom.getBomOneSkuList().size()>0){
-//                HashMap< String, Object> param = new HashMap<String, Object>();
-//                for (BomTO tempBomEx  : tempBom.getBomOneSkuList()) {
-//                    param.clear();
-//                    List<Integer> skuIdList = new ArrayList<Integer>();
-//                    skuIdList.add(tempBomEx.getSkuid());
-//                    param.put("skuIdList", skuIdList);
-//                    List<BomTO> oneSkuList =  bomExMapper.selectSkuInfoBySKuid(param);
-//                    if(oneSkuList!=null && oneSkuList.size()>0){
-//                        for (BomTO twoBom : oneSkuList) {
-//                            if(twoBom.getSkuid().equals(tempBom.getSkuid())){
-//                                throw new UniteException("SKU:"+tempBomEx.getSku()+"总层大于三层");
-//                            }
-//                        }
-//                    }
-//                    if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
-//                        this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,totalLevelParent,bomEX.getSkuid());
-//                    }
-//                }
-//            }
-//
-//
-//        }else{
-//            totallevelChild = bomExMapper.selectTotalChild(bomEX.getSkuid());//查询子级
-//            if(totallevelChild<3){
-//                if(bomEX.getBomOneSkuList()!=null && bomEX.getBomOneSkuList().size()>0){
-//                    for (BomEX tempBomEx  : bomEX.getBomOneSkuList()) {
-//                        if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
-//                            this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,1,bomEX.getSkuid());
-//                        }
-//                    }
-//                }
-//            }else{
-//                throw new UniteException("SKU:"+bomEX.getSku()+"总层大于3层！");
-//            }
-//        }
+        int totallevelChild=0;
+        int totalLevelParent=0;
+        if(bomId!=null){
+            //校验当前sku 是否输入最高级别
+            totallevelChild = bomExMapper.selectTotalChild(skuId);//查询子级
+            totalLevelParent =bomExMapper.selectTotalParent(skuId);//查询父级
+            if(totallevelChild>0 && totalLevelParent>0){
+                totallevelChild-=1;
+            }
+            if((totallevelChild+totalLevelParent)>3){
+                throw new BusinessException("SKU:"+sku+"总层大于3层！");
+            }
+            if(totalLevelParent==3 && bomOneSkuTOList!=null && bomOneSkuTOList.size()>0){
+                throw new BusinessException("SKU:"+sku+"总层大于3层！");
+            }
+
+            if(bomOneSkuTOList!=null && bomOneSkuTOList.size()>0){
+                HashMap< String, Object> param = new HashMap<String, Object>();
+                for (BomOneSkuTO tempBomEx  : bomOneSkuTOList) {
+                    param.clear();
+                    List<Integer> skuIdList = new ArrayList<Integer>();
+                    skuIdList.add(tempBomEx.getSkuid());
+                    param.put("skuIdList", skuIdList);
+                    List<BomTO> oneSkuList =  bomExMapper.selectSkuInfoBySKuid(param);
+                    if(oneSkuList!=null && oneSkuList.size()>0){
+                        for (BomTO twoBom : oneSkuList) {
+                            if(twoBom.getSkuid().equals(skuId)){
+                                throw new BusinessException("SKU:"+tempBomEx.getSku()+"总层大于三层");
+                            }
+                        }
+                    }
+                    if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
+                        this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,totalLevelParent,skuId);
+                    }
+                }
+            }
+
+
+        }else{
+            totallevelChild = bomExMapper.selectTotalChild(skuId);//查询子级
+            if(totallevelChild<3){
+                if(bomOneSkuTOList!=null && bomOneSkuTOList.size()>0){
+                    for (BomOneSkuTO tempBomEx  : bomOneSkuTOList) {
+                        if(tempBomEx.getRowState() != Constants.RowStateType.DELETE){
+                            this.checkSkuLevel(tempBomEx.getSkuid(),tempBomEx.getSku(),3,1,skuId);
+                        }
+                    }
+                }
+            }else{
+                throw new BusinessException("SKU:"+sku+"总层大于3层！");
+            }
+        }
         return true;
+    }
 
+    /**
+     *
+     * @param skuid
+     * @param sku
+     * @param 'level不能超过层数'
+     * @param 'hearLevel 主sku属于第几层'
+     * @param 'isExRelation 是否与主sku存在关联'
+     */
+    public void checkSkuLevel(int skuid,String sku,int level,int headLevel,int parentSkuid){
+        int totallevelChild = bomExMapper.selectTotalChild(skuid);//查询子级
+        int totalLevelParent =bomExMapper.selectTotalParent(skuid);//查询父级
 
+        if(totallevelChild>0&&totalLevelParent>0){
+            totallevelChild-=1;
+        }
+        if(totallevelChild == 3 && totalLevelParent == 0 && headLevel == 0){//表示子sku 已经有三级并且没有父级。表示没有和当前的主sku 建立关系
+            throw new UniteException("BOM二层SKU:"+sku+"大于二层！");
+        }
+        int totlLevel = totallevelChild +totalLevelParent;
+        if(totallevelChild +totalLevelParent>level){
+            throw new UniteException("BOM二层SKU:"+sku+"大于二层！");
+        }
+        if(totallevelChild>0){
+            if(totlLevel==level &&headLevel==1){
+                //查询父sku
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                List<Integer> skuIdList = new ArrayList<Integer>();
+                skuIdList.add(skuid);
+                map.put("actualSkuList",skuIdList);
+                List<BomTO> list =  bomExMapper.selectSkuInfoBySKuid(map);
+                for (BomTO bomEX : list) {
+                    if(bomEX.getVirtualSkuid() == parentSkuid ){
+                        if(headLevel+totlLevel>level){
+                            throw new UniteException("BOM二层SKU:"+sku+"大于二层！");
+                        }
+                    }
+                }
+            }else{
+                if(headLevel+totlLevel>level){
+                    throw new UniteException("BOM二层SKU:"+sku+"大于二层！");
+                }
+            }
 
-
+        }
     }
 
 

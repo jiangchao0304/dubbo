@@ -50,7 +50,8 @@ where v1.virtual_skuid =#{skuid}
  </select>
 
 	<select id="selectSkuInfoBySKuid" resultType="com.sunvalley.erp.to.product.BomTO" parameterType="MAP">
-		select virtual.virtual_skuid virtualSkuid,
+		select
+		virtual.virtual_skuid virtualSkuid,
 		virtalItem.sku virtualSku,
 		item.sku,
 		item.skuid,

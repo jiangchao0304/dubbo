@@ -18,6 +18,7 @@ public class BomTO implements Serializable{
     private  Integer id;
     private String bomDesc;
     private String virtualSku;
+    private Integer virtualSkuid;
     private Integer purchaseProperty;
     private Date createDate;
     private Integer createUserId;
@@ -31,6 +32,7 @@ public class BomTO implements Serializable{
     private String purspec;
     private int skuType; //0 未选（默认值） 1 裸机 2 配件 3 包材
     private int qty;
+    private int rowState;
 
     private int pageSize=10;
     private int rowCount=0;
@@ -42,6 +44,22 @@ public class BomTO implements Serializable{
     private List<BomSupplierTO> bomSupplierList;
 
     private List<BomLogTO> bomLogExList;
+
+    public int getRowState() {
+        return rowState;
+    }
+
+    public void setRowState(int rowState) {
+        this.rowState = rowState;
+    }
+
+    public Integer getVirtualSkuid() {
+        return virtualSkuid;
+    }
+
+    public void setVirtualSkuid(Integer virtualSkuid) {
+        this.virtualSkuid = virtualSkuid;
+    }
 
     public String getVirtualSku() {
         return virtualSku;
