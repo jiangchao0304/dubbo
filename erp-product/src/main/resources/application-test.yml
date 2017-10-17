@@ -4,7 +4,7 @@ eureka:
                defaultZone : http://10.20.0.131:8761/eureka/
 debug: false
 server:
-       port: 8990
+       port: 8081
 dubbo:
       application:
               name : erp-service-product-test

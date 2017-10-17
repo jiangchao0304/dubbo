@@ -1,17 +1,6 @@
 debug: false
 server:
        port: 8081
-dubbo:
-      application:
-              name : erp-service-product-dev
-      registry:
-              protocol : zookeeper
-              address : 10.20.0.137:2181
-      protocol:
-              name : dubbo
-              port : 2281
-      owner :
-              douglas.jiang
 
 spring:
       datasource:

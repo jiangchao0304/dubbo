@@ -15,7 +15,7 @@
             FROM `bs_item_custom_detail`  AS d
             JOIN `bs_item_custom`  AS c ON d.`bsitemcustomid` = c.`id`
             LEFT JOIN `sys_zone_country`  AS s ON s.`zoneshort` = d.`stateid`
-            WHERE c.`skuid`=#{skuId}
+            WHERE c.`skuid`=#{skuId} AND c.stateid='CN'
             ORDER BY id ASC
     </select>
 </mapper>
