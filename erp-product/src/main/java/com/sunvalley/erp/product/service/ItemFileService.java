@@ -16,6 +16,7 @@ import com.sunvalley.erp.to.product.ItemFileTO;
 import com.sunvalley.erp.to.product.ItemImageTO;
 import com.sunvalley.erp.to.product.ItemVideoTO;
 
+import com.sunvalley.erp.to.product.SkuImagesTO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +53,7 @@ public class ItemFileService {
     @Autowired
     private SystemprofileMapper systemprofileMapper;
     
-	private String fileName;
-    private String fPath="";
+	//private String fileName;
     
 	private static final String common = "common";
 	
@@ -89,8 +89,8 @@ public class ItemFileService {
     }
     
     public ItemImageTO listItemImages(String sku, int sellerId){
-    	fPath  = this.initPath();
-    	fileName=sku;
+    	String fPath  = getfPath();
+    	String fileName = sku;
     	List<String> categoryList = getCategoryList();
     	String sku_33 = getSku(sku);
     	File dir = new File(fPath);
@@ -153,7 +153,7 @@ public class ItemFileService {
 			List <Integer>catgfolderList = indexMap.get(key); 
 			Collections.sort(catgfolderList);
 			for(int type : catgfolderList) { // 生成key路径
-				File file = new File(getSmallPath()+sku_33+"$"+key+(type>0?type:"")+".jpg");
+				File file = new File(getSmallPath(fileName)+sku_33+"$"+key+(type>0?type:"")+".jpg");
 				if(file.exists()) {
 					String[] str = new String[5];
 					str[0] = key+(type>0?type:"");
@@ -170,7 +170,7 @@ public class ItemFileService {
 		}	
 		
 		for(int type : bigpicfolderlist) { // 生成big_pic路径
-			File file = new File(getSmallPath()+sku_33+"$big_pic"+(type>0?type:"")+".jpg");
+			File file = new File(getSmallPath(fileName)+sku_33+"$big_pic"+(type>0?type:"")+".jpg");
 			if(file.exists()) {
 				String[] str = new String[5];
 				str[0] = "big_pic"+(type>0?type:"");
@@ -182,7 +182,7 @@ public class ItemFileService {
 			}
 		}
 		for(int type : gypicfolderlist) { // 生成gy路径
-			File file = new File(getSmallPath()+sku_33+"$gy"+type+".jpg");
+			File file = new File(getSmallPath(fileName)+sku_33+"$gy"+type+".jpg");
 			if(file.exists()) {
 				String[] str = new String[4];
 				str[0] = "gy"+type;
@@ -196,7 +196,7 @@ public class ItemFileService {
 			}
 		}
 		for(int type : rppicsfolderlist) { // 生成rp路径
-			File file = new File(getSmallPath()+sku_33+"$rp"+(type>0?type:"")+".jpg");
+			File file = new File(getSmallPath(fileName)+sku_33+"$rp"+(type>0?type:"")+".jpg");
 			if(file.exists()) {
 				String[] str = new String[5];
 				str[0] = "rp"+(type>0?type:"");
@@ -215,6 +215,59 @@ public class ItemFileService {
 			itemImageTO.getGypType().addAll(categoryList);
 		return itemImageTO;
     }
+
+    public SkuImagesTO getRfImages(String sku, int sellerId){
+
+		List<String[]> rppicslist = new ArrayList<String[]>();
+		List<Integer> rppicsfolderlist = new ArrayList<Integer>();
+
+		String fPath  = getfPath();
+		String fileName = sku;
+		List<String> categoryList = getCategoryList();
+		String sku_33 = getSku(sku);
+		File dir = new File(fPath);
+		File[] files = dir.listFiles();
+		int l = files.length;
+		for (int i = 0; i < l; i++) {
+			if (files[i].isDirectory()) {
+				String foldername = files[i].getName();
+				if(foldername.contains("rp")) { // rp类型
+					String s = foldername.substring(2, foldername.length());
+					int foldernum = s.equals("")?0:Integer.parseInt(s);
+					rppicsfolderlist.add(foldernum);
+				}
+			}
+		}
+
+		Collections.sort(rppicsfolderlist);
+
+		SkuImagesTO skuImagesTO = new SkuImagesTO();
+		for(int type : rppicsfolderlist) { // 生成rp路径
+			File file = new File(getSmallPath(fileName)+sku_33+"$rp"+(type>0?type:"")+".jpg");
+			if(file.exists()) {
+
+
+				String[] str = new String[5];
+				str[0] = "rp"+(type>0?type:"");
+				str[1] = sku_33+"$"+str[0];
+				str[2] = getSmallImgUrl(sku, str[0]);
+				str[3] = getImgUrl(sku, str[0], sellerId);
+				str[4] = getOBImgUrl(sku, ""+(type>0?type:"0"), sellerId);
+
+				skuImagesTO.setImgUrl(getImgUrl(sku, str[0], sellerId));
+				skuImagesTO.setSmallImgUrl(getSmallImgUrl(sku, str[0]));
+				skuImagesTO.setObImgUrl(getOBImgUrl(sku, ""+(type>0?type:"0"), sellerId));
+				return  skuImagesTO;
+			}
+		}
+
+		return skuImagesTO;
+
+	}
+
+
+
+
     private void mkDirImgPath(String path) {
 		File dir = new File(path);
 		if(!dir.exists()) { // 先判断文件夹是否存在，不存在就创建
@@ -224,6 +277,7 @@ public class ItemFileService {
     
 	// 加水印原大图url
 	public String getOBImgUrl(String sku, String pic_type,String type, int seller_id) {
+    	String fPath= getfPath();
 		String sku_33 = getSku(sku);
 		sku_33="bic_pic".equals(pic_type)?sku_33:(sku_33+pic_type);
     	String[] skus = sku.split("-"); // 通过sku分割文件夹
@@ -260,7 +314,8 @@ public class ItemFileService {
      	return "small/" + skus[0] + "/" + skus[1] + "/";
  	}
 	// 产生small文件夹
-	private String getSmallPath() {
+	private String getSmallPath(String fileName) {
+    	String fPath= getfPath();
 		String[] skus = fileName.split("-"); // 通过sku分割文件夹
     	String smallpath = fPath + "small" + System.getProperty("file.separator") + skus[0] + System.getProperty("file.separator");
     	mkDirImgPath(smallpath);
@@ -271,6 +326,7 @@ public class ItemFileService {
  // 小图url
  	public String getSmallImgUrl(String sku, String type) {
  		String sku_33 = getSku(sku);
+ 		String fPath=getfPath();
  		File smallfile = new File(fPath + getSmallUrl(sku) + sku_33 + "$"+type+".jpg");
  		if(smallfile.exists()) {
  			long time = System.currentTimeMillis();
@@ -283,6 +339,7 @@ public class ItemFileService {
  	// 小图流
  	public InputStream getSmallImg(String sku, String type) throws IOException {
  		String sku_33 = getSku(sku);
+ 		String fPath= getfPath();
  		File smallfile = new File(fPath + getSmallUrl(sku) + sku_33 + "$"+type+".jpg");
  		if(smallfile.exists()) {
  			return new FileInputStream(smallfile);
@@ -295,6 +352,7 @@ public class ItemFileService {
  // 加水印原大图url
  	public String getOBImgUrl(String sku, String type, int seller_id) {
  		String sku_33 = getSku(sku);
+ 		String fPath = getfPath();
      	String[] skus = sku.split("-"); // 通过sku分割文件夹
      	String origpath = fPath + "orig" + System.getProperty("file.separator") + skus[0] + System.getProperty("file.separator");
      	origpath += skus[1] + System.getProperty("file.separator")+sku_33+("0".equals(type)?"":" ("+type+")")+".jpg";
@@ -324,6 +382,7 @@ public class ItemFileService {
  	// 加水印大图url
  	public String getImgUrl(String sku, String type, int seller_id) {
  		String sku_33 = getSku(sku);
+ 		String fPath =getfPath();
  		String filepath = fPath+type+System.getProperty("file.separator")+sku_33+".jpg";
  		File file = new File(filepath);
  		
@@ -354,26 +413,12 @@ public class ItemFileService {
     /**
      * 初始化图片路径
      */
-    public String initPath(){
+    public String getfPath(){
     	if(System.getProperty("os.name").toLowerCase().contains("window")) {
-			fPath = ConfigUtil.getProperty("uploadimage.windowspath");
+			return ConfigUtil.getProperty("uploadimage.windowspath");
 		} else {
-			fPath = ConfigUtil.getProperty("uploadimage.linuxpath");
+			return ConfigUtil.getProperty("uploadimage.linuxpath");
 		}
-    	File dir = new File(fPath);
-		if(!dir.exists()) { // 文件夹不存在就创建
-			dir.mkdir();
-			//throw new UniteException("", "noexistimgfolder");
-		}
-		File dirSmall = new File(fPath + "small/");
-		if(!dirSmall.exists()) { // 文件夹不存在就创建
-			dirSmall.mkdir();
-		}
-		File dirOrig = new File(fPath + "orig/");
-		if(!dirOrig.exists()) { // 文件夹不存在就创建
-			dirOrig.mkdir();
-		}
-		return fPath;
     }
 
 

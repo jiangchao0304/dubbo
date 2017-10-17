@@ -80,6 +80,9 @@ public class ItemService {
     @Autowired
     private ItemCustomDetailExMapper itemCustomDetailExMapper;
 
+    @Autowired
+    private ItemFileService itemFileService;
+
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
 
@@ -92,10 +95,13 @@ public class ItemService {
         if(skuBaseInfoDTO!=null){
             List<ItemLocaleTO> itemLocaleTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
             skuBaseInfoDTO.setItemLocaleTOList(itemLocaleTOList);
+            if(skuBaseInfoDTO.getHaspic()){
+                SkuImagesTO rfImages = itemFileService.getRfImages(skuBaseInfoDTO.getSku(),0);
+                skuBaseInfoDTO.setRfImages(rfImages);
+            }
+
         }
-//else {
-//            throw  new  ParameterException(String.format("sku %d 不存在",skuId));
-//        }
+
         return skuBaseInfoDTO;
 
     }
@@ -108,7 +114,14 @@ public class ItemService {
         if(skuBaseInfoDTO!=null){
             List<ItemLocaleTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
             skuBaseInfoDTO.setItemLocaleTOList(itemLocaleDTOList);
+            if(skuBaseInfoDTO.getHaspic()){
+                SkuImagesTO rfImages = itemFileService.getRfImages(sku,0);
+                skuBaseInfoDTO.setRfImages(rfImages);
+            }
+
         }
+
+
         //else {
 //            throw  new  ParameterException(String.format("sku %s 不存在",sku));
 //        }

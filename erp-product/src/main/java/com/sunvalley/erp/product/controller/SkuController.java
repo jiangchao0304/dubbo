@@ -49,6 +49,7 @@ public class SkuController {
         }else {
             result =  itemService.getSkuBaseInfo(sku);
         }
+
         return new BaseReturnVO(result);
     }
 

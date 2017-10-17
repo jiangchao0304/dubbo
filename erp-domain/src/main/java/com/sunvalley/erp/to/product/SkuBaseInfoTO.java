@@ -29,6 +29,7 @@ public class SkuBaseInfoTO implements Serializable {
     private Integer modelId;
     private Integer pmId;
     private String pmName;
+    private Boolean haspic;
     private Integer battery;
     private Integer rmacategoryid;
     private Integer region;
@@ -58,6 +59,23 @@ public class SkuBaseInfoTO implements Serializable {
     private SysSessionTO sessionTO;
     private String purchaserName;
     private List<ItemLocaleTO> itemLocaleTOList;
+    private SkuImagesTO rfImages;
+
+    public Boolean getHaspic() {
+        return haspic;
+    }
+
+    public void setHaspic(Boolean haspic) {
+        this.haspic = haspic;
+    }
+
+    public SkuImagesTO getRfImages() {
+        return rfImages;
+    }
+
+    public void setRfImages(SkuImagesTO rfImages) {
+        this.rfImages = rfImages;
+    }
 
     public String getPurchaserName() {
         return purchaserName;

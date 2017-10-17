@@ -89,6 +89,7 @@
 		'.',
 		sysu.lastname
 		) pmName,
+		item.haspic,
 		item.battery,
 		item.rmacategoryid,
 		item.region,
@@ -276,7 +277,8 @@
 	</select>
 
 	<select id="listBySameModel" parameterType="int" resultType="com.sunvalley.erp.to.product.SkuDescTO">
-		SELECT skuid skuId,sku, IFNULL(purdesc,"") purDesc, IFNULL(purspec,"") purSpec FROM  `bs_item` WHERE  model_id = (SELECT model_id FROM  `bs_item` WHERE skuid=#{skuid}) AND model_id IS NOT NULL
+		SELECT skuid skuId,sku, IFNULL(purdesc,"") purDesc, IFNULL(purspec,"") purSpec FROM  `bs_item`
+		WHERE  model_id = (SELECT model_id FROM  `bs_item` WHERE skuid=#{skuid}) AND model_id IS NOT NULL limit 5;
 	</select>
 
 
@@ -340,7 +342,7 @@
 		SELECT #{skuid},src.actual_skuid,src.qty from  `bs_item_virtual` src
 		LEFT JOIN bs_item_virtual tar  ON src.actual_skuid=tar.actual_skuid AND tar.virtual_skuid=#{skuid}
 		JOIN bs_item AS i ON src.virtual_skuid = i.skuid
-		WHERE i.sku=#{sku}  and   tar.virtual_skuid is null and src.skuid &lt; &gt; tar.skuid
+		WHERE i.sku=#{sku}  and   tar.virtual_skuid is null
 		);
 	</update>
 
