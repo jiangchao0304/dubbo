@@ -92,7 +92,7 @@ public class ItemService {
         param.put("skuId",skuId);
 
         SkuBaseInfoTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
-        if(skuBaseInfoDTO!=null){
+        if(skuBaseInfoDTO!=null && skuBaseInfoDTO.getSkuId()>0){
             List<ItemLocaleTO> itemLocaleTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
             skuBaseInfoDTO.setItemLocaleTOList(itemLocaleTOList);
             if(skuBaseInfoDTO.getHaspic()){
