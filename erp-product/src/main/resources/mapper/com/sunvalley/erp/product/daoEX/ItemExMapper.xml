@@ -167,6 +167,8 @@
 			anrule.anruleStr anruleStr,
 			country.country country,
 			s.pre_sku preSku,
+			IFNULL(anrule.anruleStr,'') attributes,
+			IFNULL(country.country,'') countrys,
 		</if>
 		m.magnetic,
 		m.warranty,
