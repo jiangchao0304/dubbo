@@ -37,7 +37,7 @@ public class ItemLogService {
             itemLog.setOpnote(getOpnoteByItem(item, oldItem, type));
             itemLog.setOpterator(userName);
             itemLog.setOpteratorid(userId);
-            itemLog.setOpdate(TimeUtil.Now());
+            itemLog.setOpdate(TimeUtil.BeiJingTimeNow());
             result = itemLogMapper.insert(itemLog);
         }
         return result;
