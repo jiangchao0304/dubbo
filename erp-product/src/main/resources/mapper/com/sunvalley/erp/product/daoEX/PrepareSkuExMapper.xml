@@ -173,67 +173,56 @@
 		LEFT JOIN  so_rma_reason_category AS rma on rma.id=model.rmacategoryid
 		LEFT JOIN bs_prepare_sku b ON model.model_id = b.model_id
 		LEFT JOIN(
-		SELECT
-		a.skuid skuid,
-		group_concat(basic.attribute)anruleStr,
-		group_concat(basic. VALUE)anrule
-		FROM
-		bs_item_mapping a
+			SELECT
+			a.skuid skuid,
+			group_concat(basic.attribute)anruleStr,
+			group_concat(basic. VALUE)anrule
+			FROM
+			bs_item_mapping a
 		LEFT JOIN(
-		SELECT
-		maping.skuid skuid
-		FROM
-		bs_item_mapping maping
-		WHERE
-		maping.data_type = 1
-		<if test="sql!=null">
-			${sql}
-		</if>
-		GROUP BY
-		maping.skuid
+			SELECT
+			maping.skuid skuid
+			FROM
+			bs_item_mapping maping
+			WHERE
+			maping.data_type = 1
+			<if test="sql!=null">
+				${sql}
+			</if>
+			GROUP BY
+			maping.skuid
 		)b ON b.skuid = a.skuid
-		LEFT JOIN bs_item_basic_data basic ON a.maping = basic.`value`
-		WHERE
-		a.data_type = 1
-		AND basic.type = 2
-		GROUP BY
-		b.skuid
+		LEFT JOIN bs_item_basic_data basic ON a.maping = basic.`value` WHERE a.data_type = 1 AND basic.type = 2 GROUP BY b.skuid
 		)anrule ON b.id = anrule.skuid
-
-
-
 		left join (SELECT
-		a.skuid skuid,
-		group_concat(a.maping) country
-		FROM
-		bs_item_mapping a
-		LEFT JOIN (
-		SELECT
-		mapping.skuid skuid
-		FROM
-		bs_item_mapping mapping
-		WHERE
-		mapping.data_type = 2
-		<if test="filsql!=null">
-			${filsql}
-		</if>
-		GROUP BY
-		mapping.skuid
-		) b ON a.skuid = b.skuid
+				a.skuid skuid,
+				group_concat(a.maping) country
+				FROM
+				bs_item_mapping a
+				LEFT JOIN (
+				SELECT
+				mapping.skuid skuid
+				FROM
+				bs_item_mapping mapping
+				WHERE
+				mapping.data_type = 2
+				<if test="filsql!=null">
+					${filsql}
+				</if>
+				GROUP BY
+				mapping.skuid
+				) b ON a.skuid = b.skuid
 		AND a.data_type = 2
 		where a.data_type = 2
 		GROUP BY a.skuid)country on country.skuid=b.id
 
-
-		LEFT JOIN bs_item_basic_data d ON d.`value` = b.color
-		AND d.type = 1
+		LEFT JOIN bs_item_basic_data d ON d.`value` = b.color AND d.type = 1
 		LEFT JOIN sys_user users ON users.userid = b.create_user_id
 		LEFT JOIN bs_item_brand brand ON brand.brand_id = model.brand_id
-		LEFT JOIN bs_product_line line ON line.id = model.main_category_id
-		AND line.product_type = 2
-		LEFT JOIN bs_product_line l ON l.id = model.sub_category_id
-		AND l.product_type = 3
+		LEFT JOIN bs_product_line line ON line.id = model.main_category_id AND line.product_type = 2
+		LEFT JOIN bs_product_line l ON l.id = model.sub_category_id AND l.product_type = 3
 		LEFT JOIN sys_user u ON u.userid = model.pm_id
+		LEFT JOIN sys_user Creator ON Creator.userid = model.create_user
 		WHERE
 		1 = 1
 		<if test="filtersql != null">
@@ -312,6 +301,7 @@
 		LEFT JOIN bs_product_line l ON l.id = model.sub_category_id
 		AND l.product_type = 3
 		LEFT JOIN sys_user u ON u.userid = model.pm_id
+		LEFT JOIN sys_user Creator ON Creator.userid = model.create_user
 		WHERE
 		1 = 1
 		<if test="filtersql != null">
