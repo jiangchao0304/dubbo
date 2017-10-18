@@ -4,7 +4,9 @@
 package com.sunvalley.erp.product.controller;
 
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
+import com.sunvalley.erp.common.exception.ParameterException;
 import com.sunvalley.erp.common.util.JsonUtil;
+import com.sunvalley.erp.common.util.RegEx;
 import com.sunvalley.erp.product.service.ItemFileService;
 import com.sunvalley.erp.product.service.ItemService;
 import com.sunvalley.erp.product.service.PrepareService;
@@ -12,6 +14,8 @@ import com.sunvalley.erp.product.vo.BaseReturnVO;
 import com.sunvalley.erp.to.common.PagerTO;
 import com.sunvalley.erp.to.product.*;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -39,17 +43,24 @@ public class SkuController {
     @Autowired
     private ItemFileService itemFileService;
 
+    private static Logger logger = LoggerFactory.getLogger(SkuController.class);
+
     @RequestMapping(value = "/getSkuBaseInfo/{sku}",method = RequestMethod.GET)
     @ResponseBody
     public BaseReturnVO getSkuBaseInfo(@PathVariable  String sku) {
-        SkuBaseInfoTO result;
-        if (StringUtils.isNumeric(sku)) {
-            int skuId=  Integer.parseInt(sku);
-            result =  itemService.getSkuBaseInfo(skuId);
-        }else {
-            result =  itemService.getSkuBaseInfo(sku);
-        }
+        SkuBaseInfoTO result = new SkuBaseInfoTO();
+            try {
+                if(RegEx.checkSku(sku)){
+                    result =  itemService.getSkuBaseInfo(sku);
+                }else {
+                    int skuId=  Integer.parseInt(sku);
+                    result =  itemService.getSkuBaseInfo(skuId);
+                }
+            }catch (Exception ex){
+                logger.error("获取sku baseInfo异常" +ex);
+            }finally {
 
+            }
         return new BaseReturnVO(result);
     }
 
