@@ -220,7 +220,7 @@ public class ItemService {
                 throw  new ParameterException("Product Requirements 超过最大长度2000限制!");
 
             if(item.getPurchaseReq().length()>2000)
-                throw  new ParameterException("Product getPurchaseReq 超过最大长度2000限制!");
+                throw  new ParameterException("Purchase Package Requirements 超过最大长度2000限制!");
 
              ItemRequirementsExample itemRequirementsExample = new ItemRequirementsExample();
              itemRequirementsExample.createCriteria().andSkuidEqualTo(skuId).andTypeIdEqualTo(item.getTypeId());
