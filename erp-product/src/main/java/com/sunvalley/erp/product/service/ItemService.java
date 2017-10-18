@@ -83,6 +83,10 @@ public class ItemService {
     @Autowired
     private ItemVirtualExMapper itemVirtualExMapper;
 
+
+    @Autowired
+    private BomsService bomsService;
+
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
 
@@ -640,10 +644,28 @@ public class ItemService {
         param.put("sku", sourceSku);
         param.put("skuid", targetSkuId);
 
-        //检查自己是否超过三层
+//        //检查自己是否超过三层
         Integer qty = itemVirtualExMapper.checkSubSkuLevel(sourceSku);
        if(qty !=null)
            throw new BusinessException("SKU BOM结构超过三层");
+
+       //检测目标sku 是否超过三层
+        Integer srcSkuId = getSkuId(sourceSku);
+        if(srcSkuId==null || srcSkuId==0)
+            throw new ParameterException("SKU 不存在:" + sourceSku);
+
+
+        int srcLevel =  bomsService.getBomLevel(srcSkuId);
+         if(srcLevel>3)
+             throw new BusinessException("SKU BOM结构超过三层");
+
+
+        int tagLevel = bomsService.getBomLevel(targetSkuId);
+        if(tagLevel>3)
+            throw new BusinessException("SKU BOM结构超过三层");
+
+        if(srcLevel+tagLevel >=3)
+            throw new BusinessException("SKU BOM结构超过三层");
 
         return itemVirtualExMapper.copyVirtualFromSku(param);
     }
@@ -651,6 +673,10 @@ public class ItemService {
     public List<SkuDescTO> listBySameModel(String sku){
         return itemExMapper.listBySameModel(sku);
 
+    }
+
+    public Integer getSkuId(String sku){
+        return  itemExMapper.getSkuId(sku);
     }
 
 }

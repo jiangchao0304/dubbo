@@ -71,7 +71,7 @@ public class BusinessException  extends RuntimeException implements SunvalleyExc
 
     //if there has extra message for this exception code, add it.
     private void setExtraMsg(String extraMsg) {
-        this.detailMsg += Constants.EXTRA_EXCEPTION_MSG_SPLITER + extraMsg;
+        this.detailMsg  +=extraMsg;
     }
 
     //override the super class method getMessage()

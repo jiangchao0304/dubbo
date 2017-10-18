@@ -142,27 +142,31 @@ public class BomsService {
         //查询sku信息
         SkuBaseInfoTO skuBaseInfoTO = itemService.getSkuBaseInfo(skuId);
 
-        for (ImportPackageTO item : packageTOList) {
-            skuBaseInfoTO.setPurSpec(item.getPurSpec());
-            skuBaseInfoTO.setPurDesc(item.getPurDesc());
-            skuBaseInfoTO.setSkuType(item.getSkuType());
-            skuBaseInfoTO.setPurchaseProperty(item.getPurchaseProperty());
-            skuBaseInfoTO.setBomDesc(item.getRemark());
-            skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.isPackage);
-            skuBaseInfoTO.setSku("");
-            skuBaseInfoTO.setPreSku("");
-            skuBaseInfoTO.setSkuId(0);
-            skuBaseInfoTO.setSessionTO(sessionTO);
-            //插入新的sku信息
-            PreSkuRelationTO relationTO =  prepareService.saveSkuBaseInfo(skuBaseInfoTO,false);
-            //添加生成的包材和当前bom的关系
-            ItemVirtual itemVirtual = new ItemVirtual();
-            itemVirtual.setVirtualSkuid(skuId);
-            itemVirtual.setActualSkuid(relationTO.getSkuId());
-            itemVirtual.setQty((short) item.getQty());
-            itemVirtualMapper.insert(itemVirtual);
+        int level = getBomLevel(skuId);
+        if(level>=3)
+            throw new BusinessException("SKU BOM结构超过三层");
 
-        }
+            for (ImportPackageTO item : packageTOList) {
+                skuBaseInfoTO.setPurSpec(item.getPurSpec());
+                skuBaseInfoTO.setPurDesc(item.getPurDesc());
+                skuBaseInfoTO.setSkuType(item.getSkuType());
+                skuBaseInfoTO.setPurchaseProperty(item.getPurchaseProperty());
+                skuBaseInfoTO.setBomDesc(item.getRemark());
+                skuBaseInfoTO.setIsPackage(Constants.IsPackageSku.isPackage);
+                skuBaseInfoTO.setSku("");
+                skuBaseInfoTO.setPreSku("");
+                skuBaseInfoTO.setSkuId(0);
+                skuBaseInfoTO.setSessionTO(sessionTO);
+                //插入新的sku信息
+                PreSkuRelationTO relationTO =  prepareService.saveSkuBaseInfo(skuBaseInfoTO,false);
+                //添加生成的包材和当前bom的关系
+                ItemVirtual itemVirtual = new ItemVirtual();
+                itemVirtual.setVirtualSkuid(skuId);
+                itemVirtual.setActualSkuid(relationTO.getSkuId());
+                itemVirtual.setQty((short) item.getQty());
+                itemVirtualMapper.insert(itemVirtual);
+
+            }
         return true;
 
     }
@@ -288,6 +292,25 @@ public class BomsService {
             }
         }
         return true;
+    }
+
+
+    /**
+     * checkBom 检查bom三层.
+     * @param skuId
+     *         [skuId]
+     * @return boolean
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/18:18:54
+     */
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public int getBomLevel(int skuId){
+
+        int totallevelChild= bomExMapper.selectTotalChild(skuId);//查询子级
+        int totalLevelParent =bomExMapper.selectTotalParent(skuId);//查询父级
+        return totallevelChild+totalLevelParent;
+
     }
 
     /**

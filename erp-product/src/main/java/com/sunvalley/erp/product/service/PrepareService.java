@@ -378,6 +378,7 @@ public class PrepareService {
         item.setMagnetic(dto.getMagnetic());
         item.setCombineUnit(dto.getCombineUnit());
         item.setPurchaseProperty(dto.getPurchaseProperty());
+        item.setRemark(dto.getBomDesc());
         itemMapper.updateByPrimaryKeySelective(item);
 
         BomExample bomExample = new BomExample();

@@ -360,4 +360,8 @@
 		WHERE A.actual_skuid=#{skuId} AND B.virtual_skuid IS NOT NULL LIMIT 1;
 	</select>
 
+	<select id="getSkuId" parameterType="string" resultType="integer">
+		SELECT skuid FROM bs_item WHERE sku=#{sku}
+	</select>
+
 </mapper>
