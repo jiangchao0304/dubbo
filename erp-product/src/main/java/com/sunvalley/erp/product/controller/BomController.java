@@ -51,6 +51,7 @@ public class BomController {
     public BaseReturnVO saveBomOneSkuList(@RequestBody String jsonData) {
 
         Integer skuId= JsonUtil.getInteger(jsonData,"skuid");
+        //String sku = JsonUtil.getString(jsonData,"sku");
 
         List<BomOneSkuTO> bomOneSkuTOList =JsonUtil.fromJSONArray(jsonData,"bomOneSkuList",BomOneSkuTO.class);
 

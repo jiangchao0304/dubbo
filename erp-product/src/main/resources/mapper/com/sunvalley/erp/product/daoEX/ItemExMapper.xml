@@ -95,6 +95,9 @@
 		item.region,
 		pre.pre_sku preSku,
 		item.color,
+		IFNULL(GROUP_CONCAT(DISTINCT mapping.maping),'') attributes,
+		IFNULL(GROUP_CONCAT(DISTINCT mappings.maping),'') countrys,
+		IFNULL(GROUP_CONCAT(DISTINCT anruleBasic.attribute),'') anruleStr,
 		IFNULL(GROUP_CONCAT(DISTINCT mapping.maping),'') anrule,
 		IFNULL(GROUP_CONCAT(DISTINCT mappings.maping),'') country,
 		item.is_package isPackage,
@@ -130,6 +133,7 @@
 		LEFT JOIN sys_user sysu ON sysu.userid = item.pmid
 		LEFT JOIN bs_item_mapping mapping ON mapping.skuid = item.skuid AND mapping.data_type = 1 AND mapping.data_origin = 1
 		LEFT JOIN bs_item_mapping mappings ON mappings.skuid = item.skuid AND mappings.data_type = 2  AND mappings.data_origin = 1
+		LEFT JOIN bs_item_basic_data anruleBasic  ON   mapping.maping = anruleBasic.`value` AND anruleBasic.`type`=2
 		LEFT JOIN bs_bom AS bom ON bom.skuid = item.skuid
 		<if test="sku != null">
 			WHERE  item.sku=#{sku}

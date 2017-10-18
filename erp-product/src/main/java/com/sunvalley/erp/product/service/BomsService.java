@@ -169,18 +169,22 @@ public class BomsService {
 
 
     /**
-     * saveBomOneSkuList .保存第二层bom信息
+     * saveBomOneSkuList .保存第二层bom信息.
      * @param skuId
      *         [skuId]
+     * @param sku
+     *         [sku]
      * @param bomOneSkuTOList
      *         [bomOneSkuTOList]
-     * @return boolean
+     * @return int
      * @throws
      * @author: douglas.jiang
-     * @date : 2017/10/13:16:05
+     * @date : 2017/10/18:11:57
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public int saveBomOneSkuList(int skuId,List<BomOneSkuTO> bomOneSkuTOList){
+
+
 
          //验证是否超过三层
         ItemVirtualExample itemVirtualExample = new ItemVirtualExample();

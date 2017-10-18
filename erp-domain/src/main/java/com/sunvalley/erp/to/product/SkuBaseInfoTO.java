@@ -35,9 +35,29 @@ public class SkuBaseInfoTO implements Serializable {
     private Integer region;
     private String preSku;
     private String color;
-    private String anruleStr;
-    private String anrule;
-    private String country;
+    private String anruleStr; //安规
+    private String anrule; //安规code
+    private String country; //国家 code
+
+    private String attributes; //安规
+    private String countrys; //国家
+
+    public String getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(String attributes) {
+        this.attributes = attributes;
+    }
+
+    public String getCountrys() {
+        return countrys;
+    }
+
+    public void setCountrys(String countrys) {
+        this.countrys = countrys;
+    }
+
     private Integer isPackage;
     private Short magnetic;
     private Integer combineUnit;
