@@ -182,41 +182,50 @@ public class BomsService {
      * @date : 2017/10/18:11:57
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public int saveBomOneSkuList(int skuId,List<BomOneSkuTO> bomOneSkuTOList){
-
-
-
-         //验证是否超过三层
-        ItemVirtualExample itemVirtualExample = new ItemVirtualExample();
-        itemVirtualExample.createCriteria().andVirtualSkuidEqualTo(skuId);
-        itemVirtualMapper.deleteByExample(itemVirtualExample);
+    public int saveBomOneSkuList(int skuId,String sku,Integer bomId ,List<BomOneSkuTO> bomOneSkuTOList){
         int result = 0;
-        if(bomOneSkuTOList==null || bomOneSkuTOList.size()==0)
-            return 0;
-        for (BomOneSkuTO bomOneSkuTO : bomOneSkuTOList) {
-            if(bomOneSkuTO.getRowState()==4)
-                continue;
-            ItemVirtual model = new ItemVirtual();
-            model.setQty((short) bomOneSkuTO.getQty());
-            model.setVirtualSkuid(skuId);
-            model.setActualSkuid(bomOneSkuTO.getSkuid());
-            itemVirtualMapper.insert(model);
-            result++;
-        }
+       if(checkBom(skuId,sku,bomId,bomOneSkuTOList)){
+           //验证是否超过三层
+           ItemVirtualExample itemVirtualExample = new ItemVirtualExample();
+           itemVirtualExample.createCriteria().andVirtualSkuidEqualTo(skuId);
+           itemVirtualMapper.deleteByExample(itemVirtualExample);
+
+           if(bomOneSkuTOList==null || bomOneSkuTOList.size()==0)
+               return 0;
+           for (BomOneSkuTO bomOneSkuTO : bomOneSkuTOList) {
+               if(bomOneSkuTO.getRowState()==4)
+                   continue;
+               ItemVirtual model = new ItemVirtual();
+               model.setQty((short) bomOneSkuTO.getQty());
+               model.setVirtualSkuid(skuId);
+               model.setActualSkuid(bomOneSkuTO.getSkuid());
+               itemVirtualMapper.insert(model);
+               result++;
+           }
+       }
+
         return  result;
     }
 
 
     /**
-     * 方法的功能描述:TODO
-     * @param [skuId ,目标skuId, bomOneSkuTOList]
+     * checkBom .检查bom三层
+     * @param skuId
+     *         [skuId]
+     * @param sku
+     *         [sku]
+     * @param bomId
+     *         [bomId]
+     * @param bomOneSkuTOList
+     *         [bomOneSkuTOList]
      * @return boolean
-     * @exception
-     * @author: PXMWJCH
-     * @since : 2017-10-17:23:59
+     * @throws
+     * @author: douglas.jiang
+     * @date : 2017/10/18:12:12
      */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public boolean checkBom(int skuId,String sku ,Integer bomId,List<BomOneSkuTO> bomOneSkuTOList){
+
 
         //校验bom skuid 是否存在
         HashMap<String, Object> map = new HashMap<String, Object>();
