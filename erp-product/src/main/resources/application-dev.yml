@@ -1,10 +1,9 @@
-debug: false
+debug: true
 server:
        port: 8081
 
 spring:
       datasource:
-         driver-class-name : com.mysql.jdbc.Driver
          url : jdbc:mysql://10.20.0.151:3306/dev_nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
          username : dev_express
          password : Devdb201707
