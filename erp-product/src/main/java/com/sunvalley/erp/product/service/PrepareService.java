@@ -494,7 +494,8 @@ public class PrepareService {
 
         //其他默认值
         item.setActive((short)1);
-        item.setVolweight((short)-1);
+        item.setVolweight((short)0);
+        item.setProductVolweight((short)0);
         item.setIsdrop(false);
         item.setDropDef(false);
         item.setIsvirtual(0);
@@ -520,7 +521,6 @@ public class PrepareService {
         item.setStopkg("");
         item.setProFeatures("");
         item.setDescSourc("");
-        item.setProductVolweight((short)-1);
         item.setPurchaserId(dto.getPurchaseProperty());
         itemMapper.insert(item);
         if(item.getSkuid()>0){
