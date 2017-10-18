@@ -2,8 +2,9 @@
 * Copyright (c) 2017 sunvalley. All Rights Reserved.
 */
 package com.sunvalley.erp.product.service;
-import com.sunvalley.erp.common.component.filtersql.FilterOP;
+
 import com.sunvalley.erp.common.component.filtersql.FilterModel;
+import com.sunvalley.erp.common.component.filtersql.FilterOP;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.exception.BusinessException;
 import com.sunvalley.erp.common.exception.ParameterException;
@@ -19,7 +20,6 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
