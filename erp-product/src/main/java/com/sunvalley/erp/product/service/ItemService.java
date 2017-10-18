@@ -111,7 +111,7 @@ public class ItemService {
         param.put("sku",sku);
         SkuBaseInfoTO skuBaseInfoDTO =  itemExMapper.getSkuBaseInfo(param);
 
-        if(skuBaseInfoDTO!=null){
+        if(skuBaseInfoDTO!=null && skuBaseInfoDTO.getSkuId()>0){
             List<ItemLocaleTO> itemLocaleDTOList =listItemLocale(skuBaseInfoDTO.getSkuId());
             skuBaseInfoDTO.setItemLocaleTOList(itemLocaleDTOList);
             if(skuBaseInfoDTO.getHaspic()){
@@ -120,9 +120,7 @@ public class ItemService {
             }
 
         }
-
-
-        //else {
+// else {
 //            throw  new  ParameterException(String.format("sku %s 不存在",sku));
 //        }
         return skuBaseInfoDTO;
