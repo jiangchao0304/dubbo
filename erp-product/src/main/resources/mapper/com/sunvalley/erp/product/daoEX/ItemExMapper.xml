@@ -364,4 +364,9 @@
 		SELECT skuid FROM bs_item WHERE sku=#{sku}
 	</select>
 
+
+	<select id="getSku" parameterType="int" resultType="string">
+		SELECT sku FROM bs_item WHERE skuid=#{skuId}
+	</select>
+
 </mapper>

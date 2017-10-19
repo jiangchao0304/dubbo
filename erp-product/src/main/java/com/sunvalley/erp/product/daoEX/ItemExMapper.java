@@ -30,6 +30,8 @@ public interface ItemExMapper {
 
 	Integer getSkuId(String sku);
 
+	String getSku(int skuId);
+
 	SkuSimpleInfoTO getSkuSimpleInfo(Map<String, Object> param);
 
 	List<SkuDescTO> listBySameModel(String sku);

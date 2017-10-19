@@ -18,6 +18,6 @@ import java.util.Map;
 @Repository
 public interface ItemVirtualExMapper {
     int copyVirtualFromSku(Map<String, Object> param);
-    Integer checkSubSkuLevel(String sku);
+    Integer checkSubSkuLevel(int skuId);
 }
 

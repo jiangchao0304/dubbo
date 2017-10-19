@@ -5,18 +5,6 @@ eureka:
 debug: false
 server:
        port: 8081
-dubbo:
-      application:
-              name : erp-service-product-test
-      registry:
-              protocol : zookeeper
-              address : 10.20.0.137:2181
-      protocol:
-              name : dubbo
-              port : 2281
-      owner :
-              douglas.jiang
-
 spring:
       application:
               name : product-Service
@@ -31,3 +19,13 @@ spring:
 log:
     path:  logs
     level: info
+
+
+#自定义配置
+uploadimage :
+    windowspath : D:\\upload\\
+    linuxpath : /home/pic/public_html/upload/
+
+driver:
+     download:
+        domain: http://sunvalley.test.com

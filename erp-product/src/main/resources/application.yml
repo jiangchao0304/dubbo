@@ -71,12 +71,11 @@ log:
     level: info
 
 
-#logging:
-#    config: classpath:logback-spring.xml
+#自定义配置
+uploadimage :
+    windowspath : D:\\upload\\
+    linuxpath : /home/pic/public_html/upload/
 
-
-
-
-#barker.url:tcp://10.20.0.137:61616
-#dubbo.url:zookeeper://10.20.0.137:2181
-#sserver.name:ERPBS
+driver:
+     download:
+        domain: http://sunvalley.test.com

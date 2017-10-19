@@ -12,12 +12,18 @@
         );
     </update>
 
+    <select id="checkSubSkuLevel"  parameterType="Integer" resultType="Integer">
+         SELECT  A.actual_skuid FROM bs_item_virtual A
+		LEFT JOIN bs_item_virtual B ON A.virtual_skuid=B.actual_skuid
+		WHERE A.actual_skuid=#{skuId}  AND B.virtual_skuid IS NOT NULL LIMIT 1;
 
-    <select id="checkSubSkuLevel"  parameterType="string" resultType="Integer">
-        SELECT A.actual_skuid FROM bs_item_virtual A
-        LEFT JOIN bs_item_virtual B ON A.virtual_skuid=B.actual_skuid
-        JOIN bs_item item ON item.`skuid`=#{skuId}
-        WHERE  item.sku=#{sku} and A.actual_skuid= item.`skuid` AND B.virtual_skuid IS NOT NULL LIMIT 1 ;
     </select>
+
+    <!--<select id="checkSubSkuLevel"  parameterType="string" resultType="Integer">-->
+        <!--SELECT A.actual_skuid FROM bs_item_virtual A-->
+        <!--LEFT JOIN bs_item_virtual B ON A.virtual_skuid=B.actual_skuid-->
+        <!--JOIN bs_item item ON item.`skuid`=#{skuId}-->
+        <!--WHERE  item.sku=#{sku} and A.actual_skuid= item.`skuid` AND B.virtual_skuid IS NOT NULL LIMIT 1 ;-->
+    <!--</select>-->
 
 </mapper>

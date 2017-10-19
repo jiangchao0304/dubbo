@@ -10,11 +10,8 @@ import com.sunvalley.erp.product.dao.BomMapper;
 import com.sunvalley.erp.product.dao.ItemVirtualMapper;
 import com.sunvalley.erp.product.daoEX.BomExMapper;
 import com.sunvalley.erp.product.daoEX.BomLogExMapper;
-import com.sunvalley.erp.product.model.Bom;
-import com.sunvalley.erp.product.model.BomExample;
 import com.sunvalley.erp.product.model.ItemVirtual;
 import com.sunvalley.erp.product.model.ItemVirtualExample;
-import com.sunvalley.erp.product.modelEX.BomEX;
 import com.sunvalley.erp.to.common.SysSessionTO;
 import com.sunvalley.erp.to.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +20,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
