@@ -19,6 +19,7 @@ import com.sunvalley.erp.to.product.ItemVideoTO;
 import com.sunvalley.erp.to.product.SkuImagesTO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.awt.Image;
@@ -58,7 +59,15 @@ public class ItemFileService {
 	private static final String common = "common";
 	
 	private String fileSeparator = System.getProperty("file.separator");;
-  
+
+	@Value("${uploadimage.windowspath}")
+    private String  uploadimage_windowspath;
+
+	@Value("${uploadimage.linuxpath}")
+	private String  uploadimage_linuxpath;
+
+	@Value("${driver.download.domain}")
+	private String driver_download_domain;
 
     public List<ItemFileTO> listItemFile(int skuId){
 
@@ -415,9 +424,9 @@ public class ItemFileService {
      */
     public String getfPath(){
     	if(System.getProperty("os.name").toLowerCase().contains("window")) {
-			return ConfigUtil.getProperty("uploadimage.windowspath");
+			return uploadimage_windowspath;
 		} else {
-			return ConfigUtil.getProperty("uploadimage.linuxpath");
+			return uploadimage_linuxpath;
 		}
     }
 
@@ -426,7 +435,7 @@ public class ItemFileService {
 		String formatUrl="sku=%s&file=%s";
 		String _url= String.format(formatUrl,sku,fileName);
 		try {
-			_url=  ConfigUtil.getProperty("driver.download.domain")+"/?"+Base64.getEncoder().encodeToString(_url.getBytes("utf-8"));
+			_url=  driver_download_domain+"/?"+Base64.getEncoder().encodeToString(_url.getBytes("utf-8"));
 			return _url;
 		}catch (Exception ex){
 		}

@@ -1,0 +1,31 @@
+eureka:
+        client:
+           service-url:
+               defaultZone : http://127.0.0.1:8761/eureka/
+debug: false
+server:
+       port: 8081
+spring:
+      application:
+              name : product-Service
+      datasource:
+         driver-class-name : com.mysql.jdbc.Driver
+         url : jdbc:mysql://216.75.6.187:3306/nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+         username : eshoponline
+         password : gE1$7n^kPO
+      jackson:
+          date-format: "yyyy-MM-dd HH:mm:ss"
+          time-zone: "GMT-07"
+log:
+    path:  logs
+    level: info
+
+
+#自定义配置
+uploadimage :
+    windowspath : D:\\upload\\
+    linuxpath : /home/pic/public_html/upload/
+
+driver:
+     download:
+        domain: http://sunvalley.test.com

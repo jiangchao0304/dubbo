@@ -5,6 +5,7 @@ import com.sunvalley.erp.product.model.Sequence;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -23,10 +24,8 @@ public class ProductServiceApplication {
 	public static void main(String[] args) {
 
 
-
 		ConfigurableApplicationContext cac = SpringApplication.run(ProductServiceApplication.class, args);
 
-		String ss =  ConfigUtil.getProperty("uploadimage.windowspath");
 
 		logger.info("server start");
 
