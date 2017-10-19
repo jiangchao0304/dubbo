@@ -650,22 +650,22 @@ public class ItemService {
            throw new BusinessException("SKU BOM结构超过三层");
 
        //检测目标sku 是否超过三层
-        Integer srcSkuId = getSkuId(sourceSku);
-        if(srcSkuId==null || srcSkuId==0)
-            throw new ParameterException("SKU 不存在:" + sourceSku);
-
-
-        int srcLevel =  bomsService.getBomLevel(srcSkuId);
-         if(srcLevel>3)
-             throw new BusinessException("SKU BOM结构超过三层");
-
-
-        int tagLevel = bomsService.getBomLevel(targetSkuId);
-        if(tagLevel>3)
-            throw new BusinessException("SKU BOM结构超过三层");
-
-        if(srcLevel+tagLevel >=3)
-            throw new BusinessException("SKU BOM结构超过三层");
+//        Integer srcSkuId = getSkuId(sourceSku);
+//        if(srcSkuId==null || srcSkuId==0)
+//            throw new ParameterException("SKU 不存在:" + sourceSku);
+//
+//
+//        int srcLevel =  bomsService.getBomLevel(srcSkuId);
+//         if(srcLevel>3)
+//             throw new BusinessException("SKU BOM结构超过三层");
+//
+//
+//        int tagLevel = bomsService.getBomLevel(targetSkuId);
+//        if(tagLevel>3)
+//            throw new BusinessException("SKU BOM结构超过三层");
+//
+//        if(srcLevel+tagLevel >=3)
+//            throw new BusinessException("SKU BOM结构超过三层");
 
         return itemVirtualExMapper.copyVirtualFromSku(param);
     }
