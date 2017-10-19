@@ -1,6 +1,10 @@
 debug: true
 server:
        port: 8081
+eureka:
+        client:
+           service-url:
+               defaultZone : http://10.20.0.152:8761/eureka/
 
 spring:
       datasource:
@@ -8,7 +12,7 @@ spring:
          username : dev_express
          password : Devdb201707
 log:
-    path:  logs
+    path:  d://logs
     level: info
 
 #自定义配置

@@ -53,7 +53,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logPath}/warn.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--日志文件保留天数-->
-            <maxHistory>30</maxHistory>
+            <maxHistory>7</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!--日志文件大小限制在100MB以内，否则就触发滚动-->
                 <maxFileSize>100MB</maxFileSize>
@@ -78,7 +78,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logPath}/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--日志文件保留天数-->
-            <maxHistory>30</maxHistory>
+            <maxHistory>7</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!--日志文件大小限制在100MB以内，否则就触发滚动-->
                 <maxFileSize>100MB</maxFileSize>
@@ -103,7 +103,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logPath}/debug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--日志文件保留天数-->
-            <maxHistory>30</maxHistory>
+            <maxHistory>7</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!--日志文件大小限制在100MB以内，否则就触发滚动-->
                 <maxFileSize>100MB</maxFileSize>
@@ -127,7 +127,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logPath}/trace.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!--日志文件保留天数-->
-            <maxHistory>30</maxHistory>
+            <maxHistory>7</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!--日志文件大小限制在100MB以内，否则就触发滚动-->
                 <maxFileSize>100MB</maxFileSize>
