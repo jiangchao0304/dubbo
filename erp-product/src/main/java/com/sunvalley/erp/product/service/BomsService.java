@@ -303,9 +303,10 @@ public class BomsService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public int getBomLevel(int skuId){
 
-        int totallevelChild= bomExMapper.selectTotalChild(skuId);//查询子级
+        //int totallevelChild= bomExMapper.selectTotalChild(skuId);//查询子级
         int totalLevelParent =bomExMapper.selectTotalParent(skuId);//查询父级
-        return totallevelChild+totalLevelParent;
+         return totalLevelParent;
+        //return totallevelChild+totalLevelParent;
 
     }
 
