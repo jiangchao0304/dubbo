@@ -66,9 +66,8 @@ mybatis:
 debug: false
 
 log:
-    path:  e:\\logs
+    path:  logs
     level: info
-
 
 #自定义配置
 uploadimage :
