@@ -593,6 +593,19 @@ public class PrepareService {
     }
 
     private void beforeSaveItem(SkuBaseInfoTO item){
+
+        if(item.getBattery()==null)
+            throw new ParameterException("battery不能为空!");
+
+        if(item.getCombineUnit()==null || item.getCombineUnit()==0)
+            throw new ParameterException("CombineUnit不能为空!");
+
+        if(item.getPurchaseProperty()==null || item.getPurchaseProperty()==0)
+            throw new ParameterException("采购属性不能为空!");
+
+        if(item.getMagnetic()==null || item.getMagnetic()==0)
+            throw new ParameterException("是否有磁性不能为空!");
+
         if(item.getLen()==null)
             throw new ParameterException("Packaged Length can not be empty!");
         if(item.getLen()<0||item.getLen()>32767)
