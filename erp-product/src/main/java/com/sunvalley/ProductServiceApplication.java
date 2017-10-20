@@ -2,6 +2,8 @@ package com.sunvalley;
 import com.sunvalley.erp.common.util.ConfigUtil;
 import com.sunvalley.erp.product.daoEX.SequenceExMapper;
 import com.sunvalley.erp.product.model.Sequence;
+import com.sunvalley.erp.product.service.BomsService;
+import com.sunvalley.erp.product.service.SequenceService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,15 +28,9 @@ public class ProductServiceApplication {
 
 		ConfigurableApplicationContext cac = SpringApplication.run(ProductServiceApplication.class, args);
 
-
 		logger.info("server start");
-
-//		SequenceExMapper sequenceExMapper = (SequenceExMapper)cac.getBean("sequenceExMapper");
-//
-//		Sequence sq = new Sequence();
-//		sq.setName("test");
-//
-//		int ss = sequenceExMapper.getSeq(sq);
+//		BomsService sequence = (BomsService)cac.getBean("bomsService");
+//		sequence.test();
 
 
 

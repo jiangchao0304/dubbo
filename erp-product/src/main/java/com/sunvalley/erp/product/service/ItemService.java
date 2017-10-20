@@ -35,8 +35,20 @@ import java.util.*;
 @Service
 public class ItemService {
 
+    //#region Autowired
     @Autowired
     private ItemLocaleMapper itemLocaleMapper;
+    @Autowired
+    private ItemModelMapper itemModelMapper;
+
+    @Autowired
+    private PrepareSkuMapper prepareSkuMapper;
+
+    @Autowired
+    private ItemMapper itemMapper;
+
+    @Autowired
+    private ItemBrandMapper itemBrandMapper;
 
     @Autowired
     private ItemExMapper itemExMapper;
@@ -83,9 +95,12 @@ public class ItemService {
     @Autowired
     private ItemVirtualExMapper itemVirtualExMapper;
 
+    @Autowired
+    private  ProductLineMapper productLineMapper;
 
     @Autowired
-    private BomsService bomsService;
+    private  SequenceService sequenceService;
+    //#endregion
 
     private static Logger logger = LoggerFactory.getLogger(PrepareService.class);
 
@@ -302,10 +317,6 @@ public class ItemService {
         result.setItemRequirements(itemRequirements);
         return result;
     }
-
-
-
-
 
 
     public List<ItemLocale> searchSkuCategoryName(String sku, int langId, int[] category,int limit,Integer companyid) {
@@ -644,10 +655,28 @@ public class ItemService {
         param.put("sku", sourceSku);
         param.put("skuid", targetSkuId);
 
+
         Integer qty = itemVirtualExMapper.checkSubSkuLevel(targetSkuId);
        if(qty !=null)
            throw new BusinessException("SKU BOM结构超过三层");
 
+       //检测目标sku 是否超过三层
+        Integer srcSkuId = getSkuId(sourceSku);
+//        if(srcSkuId==null || srcSkuId==0)
+//            throw new ParameterException("SKU 不存在:" + sourceSku);
+//
+//
+//        int srcLevel =  bomsService.getBomLevel(srcSkuId);
+//         if(srcLevel>3)
+//             throw new BusinessException("SKU BOM结构超过三层");
+//
+//
+//        int tagLevel = bomsService.getBomLevel(targetSkuId);
+//        if(tagLevel>3)
+//            throw new BusinessException("SKU BOM结构超过三层");
+//
+//        if(srcLevel+tagLevel >=3)
+//            throw new BusinessException("SKU BOM结构超过三层");
 
         return itemVirtualExMapper.copyVirtualFromSku(param);
     }
@@ -663,6 +692,120 @@ public class ItemService {
 
     public String getSku(int skuId){
         return  itemExMapper.getSku(skuId);
+    }
+
+
+
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public String generationNo(Integer mainCategoryId,Integer subCategoryId,Integer brandId,int type,Integer isPackage,Integer modelId){
+        //查询大小类的编码
+        int retries =0;
+        ProductLineExample lineExample = new ProductLineExample();
+        List<Integer> idList = new ArrayList<Integer>();
+        idList.add(mainCategoryId);
+        idList.add(subCategoryId);
+        lineExample.createCriteria().andIdIn(idList);
+        String skuCode ="";
+        boolean bl = false;
+        if(type== Constants.skuCodeType.skuCode){//sku生产规则
+            List<ProductLine> productLineList = productLineMapper.selectByExample(lineExample);
+            if(productLineList!=null && productLineList.size()==2){
+                String mainCategoryCode = "";
+                String subCategoryCode ="";
+                for (ProductLine productLine : productLineList) {
+                    if(productLine.getId().equals(mainCategoryId)){
+                        mainCategoryCode = productLine.getProductCode();
+                    }
+                    if(productLine.getId().equals(subCategoryId)){
+                        subCategoryCode = productLine.getProductCode();
+                    }
+                }
+                if(isPackage== Constants.IsPackageSku.isPackage){
+                    mainCategoryCode ="85-"+mainCategoryCode;
+                }else{
+                    mainCategoryCode = mainCategoryCode+"-"+subCategoryCode;
+                }
+                do {
+                    skuCode = getNextIdSkuCodeY6(mainCategoryCode);
+                    //校验sku是否存在
+                    ItemExample itemExample = new ItemExample();
+                    itemExample.createCriteria().andSkuEqualTo(skuCode);
+                    List<Item> items =  itemMapper.selectByExample(itemExample);
+                    if(items==null || items.size()==0){
+                        bl = true;
+                    }else{
+                        logger.info("skuCode {} 重复,重新生成！",skuCode);
+                        retries++;
+                        if(retries>=20)
+                            throw  new BusinessException(skuCode+" :生成序列号重复查过20次!请联系管理员！");
+                        bl = false;
+                    }
+                }while(!bl);
+
+            }
+        }else if(type==Constants.skuCodeType.preskuCode){//预备sku规则
+            //查询model编码 预备sku规则 :model编码-三位流水号
+            ItemModel itemModel = itemModelMapper.selectByPrimaryKey(modelId);
+            if(itemModel==null){
+                throw new BusinessException("Model不存在，请检查数据！");
+            }
+            do {
+                skuCode = getNextIdSkuCodeY3(itemModel.getModelName()+"-");
+                //校验sku是否存在
+                PrepareSkuExample prepareSkuExample = new PrepareSkuExample();
+                prepareSkuExample.createCriteria().andPreSkuEqualTo(skuCode);
+                List<PrepareSku> prepareSkuList = prepareSkuMapper.selectByExample(prepareSkuExample);
+                if(prepareSkuList==null || prepareSkuList.size()==0){
+                    bl = true;
+                }else{
+                    bl = false;
+                }
+            }while(!bl);
+
+        }else{//model 生产规则
+//		model 的编码规则：品牌简称-小类型号-三位流水号
+            ItemBrand itemBrand = itemBrandMapper.selectByPrimaryKey(brandId);
+            //小类型号
+            ProductLine productLine = productLineMapper.selectByPrimaryKey(subCategoryId);
+            if(itemBrand==null){
+                throw new BusinessException("品牌信息不存在，请检查数据！");
+            }
+            if(productLine==null){
+                throw new BusinessException("小类产品线不存在，请检查数据！");
+            }
+            do {
+                skuCode = itemBrand.getBrandCode()+"-"+productLine.getModelNo();
+                skuCode = getNextIdSkuCodeY3(skuCode);
+                ItemModelExample itemmodelExample = new ItemModelExample();
+                itemmodelExample.createCriteria().andModelNameEqualTo(skuCode);
+                List<ItemModel> itemModelList = itemModelMapper.selectByExample(itemmodelExample);
+                if(itemModelList==null || itemModelList.size() == 0){
+                    bl = true;
+                }else{
+                    bl = false;
+                }
+            }while(!bl);
+        }
+
+        return skuCode;
+    }
+
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public  String getNextIdSkuCodeY6(String name){
+        int value = sequenceService.getSeq(name);
+        String suffixCode =  String.format("%06d", value);
+        String skuCode = name+suffixCode.substring(0, 3)+"-"+suffixCode.substring(3, suffixCode.length());
+        return skuCode;
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    public  String getNextIdSkuCodeY3(String name){
+        int value = sequenceService.getSeq(name);
+        String suffixCode =  String.format("%03d", value);
+        String skuCode = name+suffixCode;
+        return skuCode;
     }
 
 }

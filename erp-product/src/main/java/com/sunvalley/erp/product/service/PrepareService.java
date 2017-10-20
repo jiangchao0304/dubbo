@@ -323,12 +323,12 @@ public class PrepareService {
             ItemModel itemModel = itemModelMapper.selectByPrimaryKey(prepareSkuEx.getModelId());
             if(!prepareSkuEx.getMainCategoryId().equals(itemModel.getMainCategoryId()) ||
                     !prepareSkuEx.getSubCategoryId().equals(itemModel.getSubCategoryId())){
-                String modelName = sequenceService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
+                String modelName = itemService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
                 model.setModelName(modelName);
             }
             itemModelMapper.updateByPrimaryKeySelective(model);
         }else{
-            String modelName = sequenceService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
+            String modelName = itemService.generationNo(prepareSkuEx.getMainCategoryId(),prepareSkuEx.getSubCategoryId(), prepareSkuEx.getBrandId(), Constants.skuCodeType.modeCode, null, null);
             model.setModelName(modelName);
             model.setCreateUser(prepareSkuEx.getSessionId());
             model.setCreateDate(TimeUtil.BeiJingTimeNow());
@@ -443,7 +443,7 @@ public class PrepareService {
         beforeSaveItem(dto);
         // 在sku编码没有输入的情况下,系统根据类别自动产生编码
         if(Strings.isNullOrEmpty(dto.getSku())){
-            String sku= sequenceService.generationNo(dto.getCategoryId(),dto.getSubCategortId(),null,
+            String sku= itemService.generationNo(dto.getCategoryId(),dto.getSubCategortId(),null,
                     Constants.skuCodeType.skuCode,dto.getIsPackage(),null);
             dto.setSku(sku);
         }

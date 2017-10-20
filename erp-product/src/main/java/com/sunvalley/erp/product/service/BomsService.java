@@ -12,8 +12,11 @@ import com.sunvalley.erp.product.daoEX.BomExMapper;
 import com.sunvalley.erp.product.daoEX.BomLogExMapper;
 import com.sunvalley.erp.product.model.ItemVirtual;
 import com.sunvalley.erp.product.model.ItemVirtualExample;
+import com.sunvalley.erp.product.model.Sequence;
 import com.sunvalley.erp.to.common.SysSessionTO;
 import com.sunvalley.erp.to.product.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -49,6 +52,9 @@ public class BomsService {
 
     @Autowired
     private ItemVirtualMapper itemVirtualMapper;
+
+    private static Logger logger = LoggerFactory.getLogger(BomsService.class);
+
 
     public BomTO getBom(Integer bomId, Integer skuid){
         HashMap<String, Object> map = new HashMap<String, Object>();
