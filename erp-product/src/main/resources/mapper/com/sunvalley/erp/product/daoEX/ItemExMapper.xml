@@ -163,9 +163,9 @@
 		s.region,
 		<if test="preskuId!=null">
 			s.color,
-			anrule.anrule anrule,
-			anrule.anruleStr anruleStr,
-			country.country country,
+			IFNULL(anrule.anrule,'') anrule,
+			IFNULL(anrule.anruleStr,'') anruleStr,
+			IFNULL(country.country,'') country,
 			s.pre_sku preSku,
 			IFNULL(anrule.anrule,'') attributes,
 			IFNULL(country.country,'') countrys,
@@ -178,7 +178,7 @@
 		bs_item_model m
 		LEFT JOIN bs_prepare_sku s ON m.model_id = s.model_id
 		LEFT JOIN bs_item_mapping a ON a.skuid = s.id
-		JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=m.brand_id
+		LEFT JOIN bs_item_brand ItemBrand on ItemBrand.brand_id=m.brand_id
 		AND a.data_type = 1
 		AND a.data_origin = 2
 		LEFT JOIN (
