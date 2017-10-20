@@ -1,4 +1,4 @@
-debug: true
+debug: false
 server:
        port: 8081
 eureka:
@@ -12,7 +12,7 @@ spring:
          username : dev_express
          password : Devdb201707
 log:
-    path:  d://logs
+    path:  logs
     level: info
 
 #自定义配置
