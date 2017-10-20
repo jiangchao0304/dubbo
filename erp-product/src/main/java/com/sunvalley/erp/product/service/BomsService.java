@@ -3,6 +3,7 @@
 */
 package com.sunvalley.erp.product.service;
 
+import com.google.common.base.Strings;
 import com.sunvalley.erp.common.constants.Constants;
 import com.sunvalley.erp.common.exception.BusinessException;
 import com.sunvalley.erp.common.exception.UniteException;
@@ -149,6 +150,12 @@ public class BomsService {
             throw new BusinessException("SKU BOM结构超过三层");
 
             for (ImportPackageTO item : packageTOList) {
+                if(item.getQty()==0)
+                    item.setQty(1);
+                if(item.getPurchaseProperty()==0 || item.getSkuType()==0 || Strings.isNullOrEmpty(item.getPurDesc())
+                        || Strings.isNullOrEmpty(item.getPurSpec()))
+                    continue;
+
                 skuBaseInfoTO.setPurSpec(item.getPurSpec());
                 skuBaseInfoTO.setPurDesc(item.getPurDesc());
                 skuBaseInfoTO.setSkuType(item.getSkuType());
