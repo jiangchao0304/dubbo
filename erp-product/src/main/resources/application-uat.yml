@@ -10,9 +10,9 @@ spring:
               name : product-Service
       datasource:
          driver-class-name : com.mysql.jdbc.Driver
-         url : jdbc:mysql://216.75.6.187:3306/nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
-         username : eshoponline
-         password : gE1$7n^kPO
+         url : jdbc:mysql://127.0.0.1:3306/nearbyexpress?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+         username : 111
+         password : 2222
       jackson:
           date-format: "yyyy-MM-dd HH:mm:ss"
           time-zone: "GMT-07"
